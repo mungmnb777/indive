@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/InDive/AOS/InDive/app/src/main/res/drawable/btn_circle_main_color.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/drawable/btn_circle_white_color.xml" value="0.1235" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/drawable/btn_round_white_grey_border.xml" value="0.1235" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/drawable/btn_stroke_lightgrey.xml" value="0.1235" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/drawable/dialog_top.xml" value="0.1235" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_add_reward.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_add_song_first.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_add_song_second.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_add_song_third.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_box.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_box_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_donate.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_donate_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_edit_profile.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_genre.xml" value="0.25" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_genrelist.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_join.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_join_sns.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_musicchart.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_my_studio.xml" value="0.25" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_my_wallet.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_player.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_playerlist.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_qr.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_ranking.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_reward_list.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_reward_store.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_search.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_songdetail.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_user_studio.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/layout/fragment_wallet.xml" value="0.1" />
+        <entry key="..\:/Users/multicampus/Desktop/init/InDive/app/src/main/res/menu/menu_bottom_nav.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
