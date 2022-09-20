@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_myStudioFragment_to_rewardStoreFragment"
             app:destination="@id/rewardStoreFragment" />
+        <action
+            android:id="@+id/action_myStudioFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
     </fragment>
     <fragment
         android:id="@+id/rewardStoreFragment"
@@ -94,7 +97,11 @@
     <fragment
         android:id="@+id/addSongThirdFragment"
         android:name="com.ssafy.indive.view.mystudio.addsong.AddSongThirdFragment"
-        android:label="AddSongThirdFragment" />
+        android:label="AddSongThirdFragment" >
+        <action
+            android:id="@+id/action_addSongThirdFragment_to_myStudioFragment"
+            app:destination="@id/myStudioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.ssafy.indive.view.mystudio.editprofile.EditProfileFragment"
@@ -130,11 +137,25 @@
     <fragment
         android:id="@+id/musicChartFragment"
         android:name="com.ssafy.indive.view.home.musicchart.MusicChartFragment"
-        android:label="MusicChartFragment" />
+        android:label="MusicChartFragment" >
+        <action
+            android:id="@+id/action_musicChartFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_musicChartFragment_to_userStudioFragment"
+            app:destination="@id/userStudioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.ssafy.indive.view.home.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_userStudioFragment"
+            app:destination="@id/userStudioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/QRFragment"
         android:name="com.ssafy.indive.view.home.qr.QRFragment"
@@ -175,6 +196,12 @@
         <action
             android:id="@+id/action_userStudioFragment_to_donateFragment"
             app:destination="@id/donateFragment" />
+        <action
+            android:id="@+id/action_userStudioFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_userStudioFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
     </fragment>
     <fragment
         android:id="@+id/donateFragment"
