@@ -1,3 +1,10 @@
+import android.util.Log
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.ssafy.indive.model.dto.Song
+import com.ssafy.indive.view.home.RecentMusicAdapter
+
 //
 //import CrewUserRankingAdapter
 //import android.util.Log
@@ -22,9 +29,11 @@
 //object RecyclerViewBinding {
 //
 //    // 페이징 하지 않는 리사이클러뷰 아이템 바인딩
-//    @JvmStatic
+
 //    @BindingAdapter("submitList")
-//    fun bindSubmitList(view: RecyclerView, result: Result<*>) {
+//    @JvmStatic
+//    fun bindSubmitList(view: RecyclerView, result: MutableList<*>) {
+
 //        Log.d("test5", "bindSubmitList: ${result}")
 //        if (result is Result.Success) {
 //            if(result.data is BaseResponse<*>) {
