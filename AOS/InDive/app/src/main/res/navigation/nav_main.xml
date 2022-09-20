@@ -7,17 +7,191 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ssafy.indive.view.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_musicChartFragment"
+            app:destination="@id/musicChartFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_QRFragment"
+            app:destination="@id/QRFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/genreFragment"
         android:name="com.ssafy.indive.view.genre.GenreFragment"
-        android:label="GenreFragment" />
+        android:label="GenreFragment" >
+        <action
+            android:id="@+id/action_genreFragment_to_genreListFragment"
+            app:destination="@id/genreListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/moreFragment"
         android:name="com.ssafy.indive.view.more.MoreFragment"
-        android:label="MoreFragment" />
+        android:label="MoreFragment" >
+        <action
+            android:id="@+id/action_moreFragment_to_myWalletFragment"
+            app:destination="@id/myWalletFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_boxFragment"
+            app:destination="@id/boxFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_donateListFragment"
+            app:destination="@id/donateListFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_rewardListFragment"
+            app:destination="@id/rewardListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myStudioFragment"
         android:name="com.ssafy.indive.view.mystudio.MyStudioFragment"
-        android:label="MyStudioFragment" />
+        android:label="MyStudioFragment" >
+        <action
+            android:id="@+id/action_myStudioFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_myStudioFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_myStudioFragment_to_addSongFirstFragment"
+            app:destination="@id/addSongFirstFragment" />
+        <action
+            android:id="@+id/action_myStudioFragment_to_rewardStoreFragment"
+            app:destination="@id/rewardStoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rewardStoreFragment"
+        android:name="com.ssafy.indive.view.rewardstore.RewardStoreFragment"
+        android:label="RewardStoreFragment" >
+        <action
+            android:id="@+id/action_rewardStoreFragment_to_addRewardFragment"
+            app:destination="@id/addRewardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addRewardFragment"
+        android:name="com.ssafy.indive.view.rewardstore.addreward.AddRewardFragment"
+        android:label="AddRewardFragment" />
+    <fragment
+        android:id="@+id/addSongFirstFragment"
+        android:name="com.ssafy.indive.view.mystudio.addsong.AddSongFirstFragment"
+        android:label="AddSongFirstFragment" >
+        <action
+            android:id="@+id/action_addSongFirstFragment_to_addSongSecondFragment"
+            app:destination="@id/addSongSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSongSecondFragment"
+        android:name="com.ssafy.indive.view.mystudio.addsong.AddSongSecondFragment"
+        android:label="AddSongSecondFragment" >
+        <action
+            android:id="@+id/action_addSongSecondFragment_to_addSongThirdFragment"
+            app:destination="@id/addSongThirdFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSongThirdFragment"
+        android:name="com.ssafy.indive.view.mystudio.addsong.AddSongThirdFragment"
+        android:label="AddSongThirdFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.ssafy.indive.view.mystudio.editprofile.EditProfileFragment"
+        android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.ssafy.indive.view.mystudio.ranking.RankingFragment"
+        android:label="RankingFragment" />
+    <fragment
+        android:id="@+id/myWalletFragment"
+        android:name="com.ssafy.indive.view.more.mywallet.MyWalletFragment"
+        android:label="MyWalletFragment" />
+    <fragment
+        android:id="@+id/donateListFragment"
+        android:name="com.ssafy.indive.view.more.donatelist.DonateListFragment"
+        android:label="DonateListFragment" />
+    <fragment
+        android:id="@+id/rewardListFragment"
+        android:name="com.ssafy.indive.view.more.rewardlist.RewardListFragment"
+        android:label="RewardListFragment" />
+    <fragment
+        android:id="@+id/boxFragment"
+        android:name="com.ssafy.indive.view.more.box.BoxFragment"
+        android:label="BoxFragment" >
+        <action
+            android:id="@+id/action_boxFragment_to_boxListFragment"
+            app:destination="@id/boxListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boxListFragment"
+        android:name="com.ssafy.indive.view.more.box.list.BoxListFragment"
+        android:label="BoxListFragment" />
+    <fragment
+        android:id="@+id/musicChartFragment"
+        android:name="com.ssafy.indive.view.home.musicchart.MusicChartFragment"
+        android:label="MusicChartFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.ssafy.indive.view.home.search.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/QRFragment"
+        android:name="com.ssafy.indive.view.home.qr.QRFragment"
+        android:label="QRFragment" />
+    <fragment
+        android:id="@+id/playerFragment"
+        android:name="com.ssafy.indive.view.player.PlayerFragment"
+        android:label="PlayerFragment" >
+        <action
+            android:id="@+id/action_playerFragment_to_playerListFragment"
+            app:destination="@id/playerListFragment" />
+        <action
+            android:id="@+id/action_playerFragment_to_songDetailFragment"
+            app:destination="@id/songDetailFragment" />
+        <action
+            android:id="@+id/action_playerFragment_to_userStudioFragment"
+            app:destination="@id/userStudioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerListFragment"
+        android:name="com.ssafy.indive.view.player.playerlist.PlayerListFragment"
+        android:label="PlayerListFragment" >
+        <action
+            android:id="@+id/action_playerListFragment_to_songDetailFragment"
+            app:destination="@id/songDetailFragment" />
+        <action
+            android:id="@+id/action_playerListFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songDetailFragment"
+        android:name="com.ssafy.indive.view.songdetail.SongDetailFragment"
+        android:label="SongDetailFragment" />
+    <fragment
+        android:id="@+id/userStudioFragment"
+        android:name="com.ssafy.indive.view.userstudio.UserStudioFragment"
+        android:label="UserStudioFragment" >
+        <action
+            android:id="@+id/action_userStudioFragment_to_donateFragment"
+            app:destination="@id/donateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/donateFragment"
+        android:name="com.ssafy.indive.view.userstudio.donate.DonateFragment"
+        android:label="DonateFragment" />
+    <fragment
+        android:id="@+id/genreListFragment"
+        android:name="com.ssafy.indive.view.genre.genrelist.GenreListFragment"
+        android:label="GenreListFragment" >
+        <action
+            android:id="@+id/action_genreListFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+        <action
+            android:id="@+id/action_genreListFragment_to_songDetailFragment"
+            app:destination="@id/songDetailFragment" />
+        <action
+            android:id="@+id/action_genreListFragment_to_userStudioFragment"
+            app:destination="@id/userStudioFragment" />
+    </fragment>
 </navigation>
