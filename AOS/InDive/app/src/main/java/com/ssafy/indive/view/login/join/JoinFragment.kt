@@ -11,7 +11,7 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join){
     }
 
     fun initClickListener(){
-        binding.tvJoinFragment.setOnClickListener {
+        binding.btnJoin.setOnClickListener {
             findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
         }
     }
