@@ -2,16 +2,14 @@ package com.ssafy.indive.domain.box.entity;
 
 import com.ssafy.indive.domain.box.entity.key.BoxMusicCompositeKey;
 import com.ssafy.indive.domain.music.entity.Music;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@IdClass(BoxMusicCompositeKey.class)
 @Getter
+@Generated
+@IdClass(BoxMusicCompositeKey.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoxMusic {
 

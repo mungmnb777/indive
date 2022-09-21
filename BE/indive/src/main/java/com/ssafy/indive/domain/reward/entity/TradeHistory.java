@@ -2,15 +2,13 @@ package com.ssafy.indive.domain.reward.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.reward.entity.enumeration.ProductionState;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TradeHistory {
 

@@ -1,10 +1,7 @@
 package com.ssafy.indive.domain.box.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Box {
     @Id @GeneratedValue

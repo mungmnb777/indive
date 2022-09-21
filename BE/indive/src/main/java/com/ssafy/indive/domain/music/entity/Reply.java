@@ -1,15 +1,13 @@
 package com.ssafy.indive.domain.music.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reply {
 
