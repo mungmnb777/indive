@@ -116,4 +116,7 @@ dependencies {
     //Indicator
     implementation 'me.relex:circleindicator:2.1.6'
 
+    //ExoPlayer
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
+
 }

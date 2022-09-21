@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
+import com.ssafy.indive.view.player.PlayerBottomSheetFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mainViewModel: MainViewModel by viewModels()
@@ -18,6 +19,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         initNavigation()
         initObserve()
+        initClickListener()
+    }
+
+    private fun initClickListener() {
+        binding.exoPlayer.setOnClickListener {
+            val bottomSheet = PlayerBottomSheetFragment()
+            bottomSheet.show(supportFragmentManager, PlayerBottomSheetFragment.TAG)
+        }
     }
 
     private fun initObserve() {
@@ -25,9 +34,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             Log.d("MainActivity_", "initObserve: $it")
             if(mainViewModel.nowPlaying.value != null){
                 if(mainViewModel.nowPlaying.value!!){
-                    binding.tvTest.visibility = View.VISIBLE
+                    binding.playerGroup.visibility = View.VISIBLE
                 }else{
-                    binding.tvTest.visibility = View.GONE
+                    binding.playerGroup.visibility = View.GONE
 
                 }
             }
