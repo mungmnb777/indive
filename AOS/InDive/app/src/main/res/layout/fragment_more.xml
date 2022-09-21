@@ -1,20 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="InDive"
+                android:textStyle="bold"
+                android:textColor="@color/main_blue"
+                android:textSize="@dimen/toolbar_title" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <View
+            android:id="@+id/toolbar_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/main_grey"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <TextView
-            android:id="@+id/tv_more"
-            android:text="more 프래그먼트"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="보유 토큰"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintVertical_bias="0.1"/>
 
+        <TextView
+            android:id="@+id/tv_token"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="1,000 SSF"
+            android:textSize="24dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            />
+
+        <Button
+            android:id="@+id/btn_my_wallet"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_round_white_grey_border"
+            android:text="내 지갑 보기"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/main_grey"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_token"
+            />
+
+        <Button
+            android:id="@+id/btn_box"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_round_white_grey_border"
+            android:text="보관함"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/main_grey"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_my_wallet"
+            />
+
+        <Button
+            android:id="@+id/btn_donate_list"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_round_main_color"
+            android:text="후원목록"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_box"
+            />
+
+        <Button
+            android:id="@+id/btn_reward_list"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_round_white_grey_border"
+            android:text="리워드"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/main_grey"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_donate_list"
+            />
+
+        <TextView
+            android:id="@+id/tv_setting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="설정"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/btn_reward_list"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            />
+
+
+        <ImageView
+            android:id="@+id/img_setting_notice"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting"
+            android:src="@drawable/img_setting_notice"/>
+
+        <TextView
+            android:id="@+id/tv_setting_notice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:text="알림 끄기"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting"
+            app:layout_constraintStart_toEndOf="@id/img_setting_notice"
+            />
+
+        <ImageView
+            android:id="@+id/btn_settring_notice"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting"
+            android:src="@drawable/btn_setting"/>
+
+        <ImageView
+            android:id="@+id/img_setting_msg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/img_setting_notice"
+            android:src="@drawable/img_setting_msg"/>
+
+        <TextView
+            android:id="@+id/tv_setting_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:text="고객센터 문의"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_notice"
+            app:layout_constraintStart_toEndOf="@id/img_setting_msg"
+            />
+
+        <ImageView
+            android:id="@+id/btn_settring_msg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_settring_notice"
+            android:src="@drawable/btn_setting"/>
+
+        <ImageView
+            android:id="@+id/img_setting_shield"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/img_setting_msg"
+            android:src="@drawable/img_setting_shield"/>
+
+        <TextView
+            android:id="@+id/tv_setting_shield"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:text="개인정보 처리방침"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_msg"
+            app:layout_constraintStart_toEndOf="@id/img_setting_shield"
+            />
+
+        <ImageView
+            android:id="@+id/btn_settring_shield"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_settring_msg"
+            android:src="@drawable/btn_setting"/>
+
+        <ImageView
+            android:id="@+id/img_setting_version"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/img_setting_shield"
+            android:src="@drawable/img_setting_version"/>
+
+        <TextView
+            android:id="@+id/tv_setting_version"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:text="서비스 버전"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_shield"
+            app:layout_constraintStart_toEndOf="@id/img_setting_version"
+            />
+
+        <ImageView
+            android:id="@+id/btn_settring_version"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_settring_shield"
+            android:src="@drawable/btn_setting"/>
+
+        <ImageView
+            android:id="@+id/img_setting_logout"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/img_setting_version"
+            android:src="@drawable/img_setting_logout"/>
+
+        <TextView
+            android:id="@+id/tv_setting_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="8dp"
+            android:text="로그아웃"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_setting_version"
+            app:layout_constraintStart_toEndOf="@id/img_setting_logout"
+            />
+
+        <ImageView
+            android:id="@+id/btn_settring_logout"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/btn_settring_version"
+            android:src="@drawable/btn_setting"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

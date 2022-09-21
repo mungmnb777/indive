@@ -16,13 +16,19 @@
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/drawable/image_round.xml" value="0.358" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_edit_profile.xml" value="0.22" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_add_song_first.xml" value="0.22" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_add_song_second.xml" value="0.25" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_add_song_third.xml" value="0.1875" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_edit_profile.xml" value="0.2" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_genre.xml" value="0.22" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_genre_list.xml" value="0.1875" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_join.xml" value="0.22" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_join_sns.xml" value="0.22" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_more.xml" value="0.33" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_my_studio.xml" value="0.22" />
+        <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_ranking.xml" value="0.33" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/fragment_wallet.xml" value="0.33" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/layout/item_music_chart.xml" value="0.1875" />
         <entry key="..\:/Users/82103/Desktop/Indive/AOS/InDive/app/src/main/res/menu/menu_bottom_nav.xml" value="0.36614583333333334" />
