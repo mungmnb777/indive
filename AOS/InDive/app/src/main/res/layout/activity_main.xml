@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:itemIconSize="28dp"
-            android:background="@color/white"
             app:itemIconTint="@color/black"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
