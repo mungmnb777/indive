@@ -6,16 +6,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemMusicChartBinding
-import com.ssafy.indive.databinding.ItemRecentMusicBinding
 import com.ssafy.indive.model.dto.Song
 
-class MusicChartAdapter :  ListAdapter<Song, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
+class MusicChartAdapter(private val playListener : (Song) -> (Unit)) :  ListAdapter<Song, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
 
     inner class MusicChartViewHolder(var binding: ItemMusicChartBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
             binding.song = song
             binding.tvMusicRanking.text = "${position + 1}"
+
+        }
+
+        fun click(song: Song){
+            binding.ivPlay.setOnClickListener {
+                playListener(song)
+            }
 
         }
     }
@@ -33,6 +39,7 @@ class MusicChartAdapter :  ListAdapter<Song, MusicChartAdapter.MusicChartViewHol
 
     override fun onBindViewHolder(holder: MusicChartViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.click(getItem(position))
     }
 
 
