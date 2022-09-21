@@ -12,6 +12,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -53,22 +54,22 @@
             android:id="@+id/img_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationY="-40dp"
+            android:translationY="-60dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_background">
 
             <!-- 배경 투명화된 이미지가 입력됐을 때, 테두리 유지용 -->
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
                 android:src="@color/white" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civ_profile"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center"
                 tools:src="@drawable/ic_launcher_foreground" />
         </FrameLayout>
