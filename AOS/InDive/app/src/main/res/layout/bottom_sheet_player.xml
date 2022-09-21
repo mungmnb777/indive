@@ -261,10 +261,11 @@
 
             <ImageView
                 android:id="@+id/iv_cycle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginEnd="20dp"
-                android:src="@drawable/btn_cycle"
+                android:background="@drawable/ic_baseline_autorenew_24"
+                android:backgroundTint="@color/main_black"
                 app:layout_constraintBottom_toBottomOf="@id/iv_play"
                 app:layout_constraintEnd_toStartOf="@id/iv_prev"
                 app:layout_constraintTop_toTopOf="@id/iv_play" />
@@ -305,11 +306,13 @@
                 app:layout_constraintTop_toTopOf="@id/iv_play" />
 
             <ImageView
+
                 android:id="@+id/iv_shuffle"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="20dp"
-                android:background="@drawable/btn_shuffle"
+                android:background="@drawable/ic_baseline_shuffle_24"
+                android:backgroundTint="@color/main_black"
                 app:layout_constraintBottom_toBottomOf="@id/iv_play"
                 app:layout_constraintStart_toEndOf="@id/iv_next"
                 app:layout_constraintTop_toTopOf="@id/iv_play" />
