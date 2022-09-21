@@ -2,6 +2,11 @@ plugins {
 	id 'org.springframework.boot' version '2.7.3'
 	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
+	id 'jacoco'
+}
+
+jacoco {
+	toolVersion = '0.8.8'
 }
 
 group = 'com.ssafy'
@@ -23,6 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -31,5 +37,29 @@ dependencies {
 }
 
 tasks.named('test') {
+	jacoco {
+		destinationFile = file("$buildDir/jacoco/jacoco.exec")
+		includes = ["*.domain.*"]
+		excludes = ["*.domain.*.dto.*",
+					"*.domain.*.exception.*"]
+	}
+
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	reports {
+		html.enabled true
+		xml.enabled false
+		csv.enabled false
+	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it,
+					include: 'com/ssafy/indive/domain/**',
+					exclude: ['com/ssafy/indive/domain/**/dto/**',
+							  'com/ssafy/indive/domain/**/exception/**'])
+		}))
+	}
 }
