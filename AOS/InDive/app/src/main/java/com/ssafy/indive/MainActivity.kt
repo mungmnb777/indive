@@ -1,21 +1,37 @@
 package com.ssafy.indive
 
+import android.util.Log
 import android.view.View
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.navigation.NavController
-import com.ssafy.indive.base.BaseActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
+import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+    private val mainViewModel: MainViewModel by viewModels()
 
     lateinit var navController: NavController
 
     override fun init() {
 
         initNavigation()
+        initObserve()
+    }
+
+    private fun initObserve() {
+        mainViewModel.nowPlaying.observe(this){
+            Log.d("MainActivity_", "initObserve: $it")
+            if(mainViewModel.nowPlaying.value != null){
+                if(mainViewModel.nowPlaying.value!!){
+                    binding.tvTest.visibility = View.VISIBLE
+                }else{
+                    binding.tvTest.visibility = View.GONE
+
+                }
+            }
+        }
     }
 
     private fun initNavigation() {

@@ -22,6 +22,16 @@
 
         </androidx.fragment.app.FragmentContainerView>
 
+        <TextView
+            android:id="@+id/tv_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="가나다라마바사"
+            android:textSize="30dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav"
+            tools:visibility="visible" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
             android:layout_width="match_parent"
