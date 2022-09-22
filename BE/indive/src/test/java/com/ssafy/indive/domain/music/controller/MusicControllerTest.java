@@ -1,7 +1,9 @@
 package com.ssafy.indive.domain.music.controller;
 
 import com.ssafy.indive.domain.music.service.MusicAddService;
+import com.ssafy.indive.domain.music.service.MusicModifyService;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
+import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -19,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -35,6 +38,9 @@ class MusicControllerTest {
 
     @MockBean
     private MusicAddService musicAddService;
+
+    @MockBean
+    private MusicModifyService musicModifyService;
 
     @Test
     @DisplayName("[음원 등록] 사용자는 음원을 등록할 수 있어야 한다.")
@@ -65,6 +71,40 @@ class MusicControllerTest {
 
         // then
         verify(musicAddService, times(1)).addMusic(any(ServiceMusicAddRequestDto.class));
+
+        actions.andExpect(content().string("true"));
+        actions.andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("[음원 수정] 사용자는 음원을 수정할 수 있어야 한다.")
+    public void modifyMusic() throws Exception {
+        // given
+        MockMultipartFile image = new MockMultipartFile("file", "image.png", "image/png", Files.newInputStream(Paths.get(ClassLoader.getSystemResource("image.png").toURI())));
+        MockMultipartFile musicFile = new MockMultipartFile("file", "musicFile.mp3", "audio/mpeg", Files.newInputStream(Paths.get(ClassLoader.getSystemResource("musicFile.mp3").toURI())));
+
+        given(musicModifyService.modifyMusic(eq(1L), any(ServiceMusicModifyRequestDto.class))).willReturn(true);
+
+        // when
+        ResultActions actions = mockMvc.perform(MockMvcRequestBuilders.multipart("/music/1")
+                .file(image)
+                .file(musicFile)
+                .param("title", "제목")
+                .param("lyricist", "작사가")
+                .param("composer", "작곡가")
+                .param("genre", "장르")
+                .param("description", "설명")
+                .param("lyrics", "가사")
+                .param("releaseDateTime", "2022-09-20 12:00:00")
+                .param("reservationDateTime", "2022-09-20 12:10:00")
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+                .with(request -> {
+                    request.setMethod("PUT");
+                    return request;
+                }));
+
+        // then
+        verify(musicModifyService, times(1)).modifyMusic(eq(1L), any(ServiceMusicModifyRequestDto.class));
 
         actions.andExpect(content().string("true"));
         actions.andExpect(status().isOk());

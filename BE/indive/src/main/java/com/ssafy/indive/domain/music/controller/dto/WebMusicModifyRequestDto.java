@@ -1,6 +1,6 @@
 package com.ssafy.indive.domain.music.controller.dto;
 
-import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
+import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
 import com.ssafy.indive.global.constant.DatetimeConst;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class WebMusicAddRequestDto {
+public class WebMusicModifyRequestDto {
 
     @NotBlank
     private String title;
@@ -41,7 +41,7 @@ public class WebMusicAddRequestDto {
     private MultipartFile musicFile;
 
     @Builder
-    public WebMusicAddRequestDto(String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, MultipartFile image, MultipartFile musicFile) {
+    public WebMusicModifyRequestDto(String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, MultipartFile image, MultipartFile musicFile) {
         this.title = title;
         this.lyricist = lyricist;
         this.composer = composer;
@@ -54,8 +54,8 @@ public class WebMusicAddRequestDto {
         this.musicFile = musicFile;
     }
 
-    public ServiceMusicAddRequestDto convertToServiceDto() {
-        return ServiceMusicAddRequestDto.builder()
+    public ServiceMusicModifyRequestDto convertToServiceDto() {
+        return ServiceMusicModifyRequestDto.builder()
                 .title(title)
                 .lyricist(lyricist)
                 .composer(composer)
