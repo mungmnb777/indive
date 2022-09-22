@@ -15,10 +15,11 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
         binding.btnEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_myStudioFragment_to_editProfileFragment)
         }
-        binding.imgAddsong.setOnClickListener {
+        binding.btnAddsong.setOnClickListener {
             findNavController().navigate(R.id.action_myStudioFragment_to_addSongFirstFragment)
         }
-
-
+        binding.btnRanking.setOnClickListener {
+            findNavController().navigate(R.id.action_myStudioFragment_to_rankingFragment)
+        }
     }
 }

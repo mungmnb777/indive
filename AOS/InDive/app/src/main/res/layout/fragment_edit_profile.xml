@@ -50,44 +50,31 @@
             app:layout_constraintBottom_toBottomOf="@id/img_background"
             />
 
-        <FrameLayout
-            android:id="@+id/img_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:translationY="-60dp"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_launcher_foreground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_background">
-
-            <!-- 배경 투명화된 이미지가 입력됐을 때, 테두리 유지용 -->
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:src="@color/white" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/civ_profile"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                tools:src="@drawable/ic_launcher_foreground" />
-        </FrameLayout>
+            app:layout_constraintTop_toBottomOf="@id/img_background"
+            app:layout_constraintBottom_toBottomOf="@id/img_background"/>
 
         <ImageView
             android:id="@+id/btn_edit_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/btn_edit"
-            app:layout_constraintTop_toTopOf="@id/img_profile"
-            app:layout_constraintBottom_toBottomOf="@id/img_profile"
-            app:layout_constraintEnd_toEndOf="@id/img_profile" />
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/civ_profile"
+            app:layout_constraintEnd_toEndOf="@id/civ_profile" />
 
         <TextView
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/img_profile"
+            app:layout_constraintTop_toBottomOf="@+id/civ_profile"
             android:text="닉네임"
             android:textSize="16dp"
             android:textColor="@color/main_black"
