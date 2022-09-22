@@ -1,29 +1,27 @@
 package com.ssafy.indive.view.songdetail
 
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.indive.R
-import com.ssafy.indive.base.BaseFragment
-import com.ssafy.indive.databinding.FragmentSongDetailBinding
+import com.ssafy.indive.base.BaseActivity
+import com.ssafy.indive.databinding.ActivitySongDetailBinding
 import com.ssafy.indive.model.dto.Comment
-import com.ssafy.indive.view.home.RecentMusicAdapter
 
-class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.fragment_song_detail) {
-
+class SongDetailActivity : BaseActivity<ActivitySongDetailBinding>(R.layout.activity_song_detail) {
     private val songDetailViewModel: SongDetailViewModel by viewModels()
 
     override fun init() {
+        overridePendingTransition(R.anim.translate_left,R.anim.none)
         binding.songdetailVM = songDetailViewModel
         initCommentList()
         initClickListener()
-
     }
 
     private fun initCommentList() {
         songDetailViewModel.getComments()
         binding.rvComment.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvComment.adapter = CommentAdapter(object : CommentAdapter.CommentCLickListener {
             override fun clickEdit(comment: Comment) {
                 showToast("수정")

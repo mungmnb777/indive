@@ -171,9 +171,6 @@
             android:id="@+id/action_playerFragment_to_playerListFragment"
             app:destination="@id/playerListFragment" />
         <action
-            android:id="@+id/action_playerFragment_to_songDetailFragment"
-            app:destination="@id/songDetailFragment" />
-        <action
             android:id="@+id/action_playerFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
     </fragment>
@@ -182,16 +179,9 @@
         android:name="com.ssafy.indive.view.player.playerlist.PlayerListFragment"
         android:label="PlayerListFragment" >
         <action
-            android:id="@+id/action_playerListFragment_to_songDetailFragment"
-            app:destination="@id/songDetailFragment" />
-        <action
             android:id="@+id/action_playerListFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/songDetailFragment"
-        android:name="com.ssafy.indive.view.songdetail.SongDetailFragment"
-        android:label="SongDetailFragment" />
     <fragment
         android:id="@+id/userStudioFragment"
         android:name="com.ssafy.indive.view.userstudio.UserStudioFragment"
@@ -217,9 +207,6 @@
         <action
             android:id="@+id/action_genreListFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
-        <action
-            android:id="@+id/action_genreListFragment_to_songDetailFragment"
-            app:destination="@id/songDetailFragment" />
         <action
             android:id="@+id/action_genreListFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />

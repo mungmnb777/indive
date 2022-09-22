@@ -12,8 +12,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-
         </activity>
 
         <activity
@@ -25,5 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.songdetail.SongDetailActivity"
+            android:exported="false"/>
     </application>
 </manifest>

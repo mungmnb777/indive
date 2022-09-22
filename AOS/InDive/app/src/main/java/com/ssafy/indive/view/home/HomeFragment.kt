@@ -1,5 +1,6 @@
 package com.ssafy.indive.view.home
 
+import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -11,6 +12,9 @@ import com.ssafy.indive.databinding.FragmentHomeBinding
 import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.utils.TAG
 import com.ssafy.indive.MainViewModel
+import com.ssafy.indive.MoreDialogFragment
+import com.ssafy.indive.model.dto.Song
+import com.ssafy.indive.view.songdetail.SongDetailActivity
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
@@ -69,11 +73,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.initPopularSongList()
         binding.rvMusicChart.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.rvMusicChart.adapter = MusicChartAdapter{
-            Log.d(TAG, "initPopularMusic: $it")
-            mainViewModel.play()
 
+        val playListener: (Song) -> (Unit) = {
+            mainViewModel.play()
         }
+
+        val moreListener: (Song) -> (Unit) = {
+            MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
+                override fun clickDetail() {
+                    val intent = Intent(context, SongDetailActivity::class.java)
+                    startActivity(intent)
+                }
+
+                override fun clickStudio() {
+                    findNavController().navigate(R.id.action_homeFragment_to_userStudioFragment)
+                }
+
+                override fun clickReport() {
+
+                }
+
+            }).show(requireActivity().supportFragmentManager, "MoreDialog")
+        }
+
+        binding.rvMusicChart.adapter = MusicChartAdapter(playListener,moreListener)
 
 
     }

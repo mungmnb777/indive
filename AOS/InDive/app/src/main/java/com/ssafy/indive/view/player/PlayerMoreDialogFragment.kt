@@ -1,4 +1,4 @@
-package com.ssafy.indive
+package com.ssafy.indive.view.player
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import com.ssafy.indive.databinding.FragmentMoreDialogBinding
+import com.ssafy.indive.R
+import com.ssafy.indive.databinding.FragmentPlayerMoreDialogBinding
 
-class MoreDialogFragment(
-    private val moreDialogClickListener: MoreDialogClickListener
+class PlayerMoreDialogFragment(
+    private val moreDialogClickListener: PlayerMoreDialogClickListener
 ) : DialogFragment() {
 
-    private lateinit var binding: FragmentMoreDialogBinding
+    private lateinit var binding: FragmentPlayerMoreDialogBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class MoreDialogFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_more_dialog, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_player_more_dialog, container, false)
         return binding.root
 
     }
@@ -37,19 +38,15 @@ class MoreDialogFragment(
             moreDialogClickListener.clickDetail()
             dismiss()
         }
-        binding.cvGoStudio.setOnClickListener {
-            moreDialogClickListener.clickStudio()
-            dismiss()
-        }
+
         binding.cvReport.setOnClickListener {
             moreDialogClickListener.clickReport()
         }
 
     }
 
-    interface MoreDialogClickListener {
+    interface PlayerMoreDialogClickListener {
         fun clickDetail()
-        fun clickStudio()
         fun clickReport()
     }
 }

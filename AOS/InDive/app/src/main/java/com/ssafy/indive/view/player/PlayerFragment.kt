@@ -1,6 +1,7 @@
 package com.ssafy.indive.view.player
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.ssafy.indive.R
 import com.ssafy.indive.databinding.FragmentPlayerBinding
 import com.ssafy.indive.utils.PLAYER
 import com.ssafy.indive.utils.PLAY_LIST
+import com.ssafy.indive.view.songdetail.SongDetailActivity
 
 
 class PlayerFragment : BottomSheetDialogFragment() {
@@ -55,13 +57,10 @@ class PlayerFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnSongMore.setOnClickListener {
-            MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
+            PlayerMoreDialogFragment(object : PlayerMoreDialogFragment.PlayerMoreDialogClickListener {
                 override fun clickDetail() {
-                    findNavController().navigate(R.id.action_homeFragment_to_userStudioFragment)
-                }
-
-                override fun clickStudio() {
-                    findNavController().navigate(R.id.action_homeFragment_to_userStudioFragment)
+                    val intent = Intent(context,SongDetailActivity::class.java)
+                    startActivity(intent)
                 }
 
                 override fun clickReport() {

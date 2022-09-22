@@ -1,24 +1,26 @@
-package com.ssafy.indive.view.home
+package com.ssafy.indive.view.genre.genrelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ssafy.indive.databinding.ItemMusicChartBinding
+import com.ssafy.indive.databinding.ItemMusicListBinding
 import com.ssafy.indive.model.dto.Song
 
-class MusicChartAdapter(private val playListener : (Song) -> (Unit),private val moreListener : (Song) -> (Unit)) :  ListAdapter<Song, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
 
-    inner class MusicChartViewHolder(var binding: ItemMusicChartBinding) :
+class GenreListAdapter(
+    private val playListener: (Song) -> (Unit),
+    private val moreListener: (Song) -> (Unit)
+) : ListAdapter<Song, GenreListAdapter.GenreListViewHolder>(diffUtil) {
+    inner class GenreListViewHolder(val binding: ItemMusicListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
             binding.song = song
-            binding.tvMusicRanking.text = "${position + 1}"
 
         }
 
-        fun click(song: Song){
+        fun click(song: Song) {
             binding.ivPlay.setOnClickListener {
                 playListener(song)
             }
@@ -29,22 +31,16 @@ class MusicChartAdapter(private val playListener : (Song) -> (Unit),private val 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicChartViewHolder {
-
-        val binding = ItemMusicChartBinding.inflate(
-            LayoutInflater.from(parent.context), parent,
-            false
-        )
-
-        return MusicChartViewHolder(binding)
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreListViewHolder {
+        val binding =
+            ItemMusicListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return GenreListViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MusicChartViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GenreListViewHolder, position: Int) {
         holder.bind(getItem(position))
         holder.click(getItem(position))
     }
-
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Song>() {
@@ -55,4 +51,5 @@ class MusicChartAdapter(private val playListener : (Song) -> (Unit),private val 
                 oldItem.musicSeq == newItem.musicSeq
         }
     }
+
 }
