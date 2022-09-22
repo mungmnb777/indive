@@ -99,19 +99,6 @@
             app:layout_constraintTop_toBottomOf="@id/btn_box"
             />
 
-        <Button
-            android:id="@+id/btn_reward_list"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:background="@drawable/btn_round_white_grey_border"
-            android:text="리워드"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/main_grey"
-            app:layout_constraintStart_toStartOf="@id/tv_title"
-            app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/btn_donate_list"
-            />
-
         <TextView
             android:id="@+id/tv_setting"
             android:layout_width="0dp"
@@ -120,7 +107,7 @@
             android:text="설정"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/btn_reward_list"
+            app:layout_constraintTop_toBottomOf="@id/btn_donate_list"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             />
 
@@ -140,21 +127,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="8dp"
-            android:text="알림 끄기"
+            android:text="알림"
             android:textSize="18dp"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/tv_setting"
             app:layout_constraintStart_toEndOf="@id/img_setting_notice"
             />
 
-        <ImageView
-            android:id="@+id/btn_settring_notice"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="20dp"
+        <Switch
+            android:id="@+id/switch_setting_notice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:track="@drawable/switch_track_selector"
+            android:thumb="@drawable/switch_thumb_selector"
+            android:checked="false"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_setting"
-            android:src="@drawable/btn_setting"/>
+            app:layout_constraintTop_toTopOf="@id/tv_setting_notice"
+            app:layout_constraintBottom_toBottomOf="@id/tv_setting_notice"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
 
         <ImageView
             android:id="@+id/img_setting_msg"
@@ -184,7 +174,8 @@
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/btn_settring_notice"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
+            app:layout_constraintTop_toBottomOf="@id/switch_setting_notice"
             android:src="@drawable/btn_setting"/>
 
         <ImageView
@@ -215,6 +206,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_msg"
             android:src="@drawable/btn_setting"/>
 
@@ -240,12 +232,16 @@
             app:layout_constraintStart_toEndOf="@id/img_setting_version"
             />
 
-        <ImageView
+        <TextView
             android:id="@+id/btn_settring_version"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
+            android:text="1.0"
+            android:textSize="16dp"
+            android:textColor="@color/main_black"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_shield"
             android:src="@drawable/btn_setting"/>
 
@@ -277,6 +273,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_version"
             android:src="@drawable/btn_setting"/>
 

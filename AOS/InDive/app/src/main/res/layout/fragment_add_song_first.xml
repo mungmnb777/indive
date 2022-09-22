@@ -59,7 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1" />
+                app:layout_constraintVertical_bias="0.14" />
 
             <TextView
                 android:id="@+id/tv_songname"
@@ -160,15 +160,17 @@
                 app:layout_constraintStart_toStartOf="@id/tv_title"
                 app:layout_constraintTop_toBottomOf="@id/cv_song_introduce" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_song_genre"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_song_genre" />
+            <Button
+                android:id="@+id/btn_song_genre"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_round_lightgrey"
+                android:layout_marginLeft="20dp"
+                android:text="장르 선택 +"
+                app:layout_constraintTop_toTopOf="@id/tv_song_genre"
+                app:layout_constraintStart_toEndOf="@id/tv_song_genre"
+                app:layout_constraintBottom_toBottomOf="@id/tv_song_genre"
+                />
 
 
             <Button
@@ -182,7 +184,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_song_genre"/>
+                app:layout_constraintTop_toBottomOf="@id/tv_song_genre"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
