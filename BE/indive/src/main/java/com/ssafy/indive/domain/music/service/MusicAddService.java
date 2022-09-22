@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.music.service;
 
 import com.ssafy.indive.domain.music.entity.Music;
+import com.ssafy.indive.domain.music.exception.MusicFileNotFoundException;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
 import com.ssafy.indive.global.utils.FileUtils;
@@ -21,12 +22,15 @@ public class MusicAddService {
         MultipartFile image = dto.getImage();
         MultipartFile musicFile = dto.getMusicFile();
 
-        // 파일 실제 이름
-        String imageOrigin = image.getOriginalFilename();
-        String musicFileOrigin = musicFile.getOriginalFilename();
+        // 앨범 커버
+        String imageOrigin = image == null ? null : image.getOriginalFilename();
+        String imageUuid = image == null ? null : FileUtils.saveFile(image);
 
-        // 파일 저장된 이름 (이 때 파일을 파일 시스템에 저장한다.)
-        String imageUuid = FileUtils.saveFile(image);
+        // mp3 파일이 null일 경우 예외 처리
+        if (musicFile == null) throw new MusicFileNotFoundException("음악 파일은 항상 첨부해야 합니다!");
+
+        // mp3 파일
+        String musicFileOrigin = musicFile.getOriginalFilename();
         String musicFileUuid = FileUtils.saveFile(musicFile);
 
         Music music = Music.builder()
