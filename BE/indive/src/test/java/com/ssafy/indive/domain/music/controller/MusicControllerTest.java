@@ -1,12 +1,12 @@
 package com.ssafy.indive.domain.music.controller;
 
 import com.ssafy.indive.domain.music.service.MusicAddService;
+import com.ssafy.indive.domain.music.service.MusicDeleteService;
 import com.ssafy.indive.domain.music.service.MusicModifyService;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -41,6 +41,9 @@ class MusicControllerTest {
 
     @MockBean
     private MusicModifyService musicModifyService;
+
+    @MockBean
+    private MusicDeleteService musicDeleteService;
 
     @Test
     @DisplayName("[음원 등록] 사용자는 음원을 등록할 수 있어야 한다.")
@@ -105,6 +108,22 @@ class MusicControllerTest {
 
         // then
         verify(musicModifyService, times(1)).modifyMusic(eq(1L), any(ServiceMusicModifyRequestDto.class));
+
+        actions.andExpect(content().string("true"));
+        actions.andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("[음원 삭제] 사용자는 음원을 삭제할 수 있어야 한다.")
+    public void deleteMusic() throws Exception {
+        // given
+        given(musicDeleteService.deleteMusic(eq(1L))).willReturn(true);
+
+        // when
+        ResultActions actions = mockMvc.perform(MockMvcRequestBuilders.delete("/music/1"));
+
+        // then
+        verify(musicDeleteService, times(1)).deleteMusic(eq(1L));
 
         actions.andExpect(content().string("true"));
         actions.andExpect(status().isOk());
