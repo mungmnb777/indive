@@ -1,12 +1,12 @@
 package com.ssafy.indive.domain.music.controller.dto;
 
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
+import com.ssafy.indive.global.constant.DatetimeConst;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -30,10 +30,10 @@ public class WebMusicAddRequestDto {
 
     private String lyrics;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = DatetimeConst.FORMAT)
     private LocalDateTime releaseDateTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = DatetimeConst.FORMAT)
     private LocalDateTime reservationDateTime;
 
     private MultipartFile image;
