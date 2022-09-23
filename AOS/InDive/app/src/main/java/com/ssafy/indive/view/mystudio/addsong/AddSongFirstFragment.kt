@@ -23,9 +23,9 @@ class AddSongFirstFragment : BaseFragment<FragmentAddSongFirstBinding>(R.layout.
                     it.onDismissDialogListener = object : GenreDialog.OnDismissDialogListener{
                         @SuppressLint("ResourceAsColor")
                         override fun onDismiss(Genre: String) {
-                            btnSongGenre.setTextColor(R.color.purple_200)
-                            btnSongGenre.setBackgroundResource(R.drawable.btn_round_main_color)
+                            btnSongGenre.setBackgroundResource(R.drawable.btn_round_border_main_color)
                             btnSongGenre.text = Genre
+                            btnSongGenre.setTextColor(R.color.white)
                         }
 
                     }
