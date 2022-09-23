@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.reward.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
+import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RewardItem {
+public class RewardItem extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "ri_seq")

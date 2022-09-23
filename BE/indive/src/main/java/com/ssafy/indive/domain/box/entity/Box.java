@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.box.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
+import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 @Getter
 @Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Box {
+public class Box extends BaseEntity {
     @Id @GeneratedValue
     @Column(name="box_seq")
     private Long seq;

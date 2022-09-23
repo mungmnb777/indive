@@ -2,6 +2,7 @@ package com.ssafy.indive.domain.reward.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.reward.entity.enumeration.ProductionState;
+import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TradeHistory {
+public class TradeHistory extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "th_seq")
