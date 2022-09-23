@@ -47,4 +47,9 @@ public class MusicController {
     public ResponseEntity<?> getMusic(@ModelAttribute WebMusicGetCondition condition) {
         return new ResponseEntity<>(musicReadService.getMusic(condition), HttpStatus.OK);
     }
+
+    @GetMapping("/{musicSeq}")
+    public ResponseEntity<?> getMusicDetails(@PathVariable("musicSeq") long musicSeq) {
+        return new ResponseEntity<>(musicReadService.getMusicDetails(musicSeq), HttpStatus.OK);
+    }
 }
