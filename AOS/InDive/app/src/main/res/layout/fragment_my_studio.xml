@@ -24,6 +24,14 @@
                 android:textSize="@dimen/toolbar_title"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/iv_add_nft"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/nft"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="12dp"/>
+
         </com.google.android.material.appbar.MaterialToolbar>
 
         <View
