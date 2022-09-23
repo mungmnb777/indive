@@ -27,6 +27,7 @@ public class MusicAddService {
                 .lyrics(dto.getLyrics())
                 .releaseDatetime(dto.getReleaseDateTime())
                 .reservationDatetime(dto.getReservationDateTime())
+                .likeCount(0)
                 .build();
 
         music.uploadFiles(dto.getImage(), dto.getMusicFile());
