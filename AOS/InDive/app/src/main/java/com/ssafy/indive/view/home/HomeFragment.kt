@@ -14,8 +14,11 @@ import com.ssafy.indive.MainViewModel
 import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.view.songdetail.SongDetailActivity
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -50,9 +53,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         homeViewModel.getMusics(null, null, null, null)
 
-        homeViewModel.successMsgEvent.observe(viewLifecycleOwner){
-            showToast(it)
-        }
+//        homeViewModel.successMsgEvent.observe(viewLifecycleOwner){
+//            showToast(it)
+//        }
 
     }
 
@@ -72,7 +75,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecentMusic() {
 
-        homeViewModel.initRecentSongList()
+//        homeViewModel.initRecentSongList()
         binding.rvRecentMusic.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRecentMusic.adapter = RecentMusicAdapter()
@@ -82,7 +85,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initPopularMusic() {
 
-        homeViewModel.initPopularSongList()
+//        homeViewModel.initPopularSongList()
         binding.rvMusicChart.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 

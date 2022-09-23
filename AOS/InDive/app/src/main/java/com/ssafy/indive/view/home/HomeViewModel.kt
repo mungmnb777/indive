@@ -23,6 +23,9 @@ class HomeViewModel @Inject constructor(
     private val _musicList : MutableStateFlow<Result<List<Music>>> = MutableStateFlow(Result.Unintialized)
     val musicList get() = _musicList
 
+    private val _str : MutableStateFlow<String> = MutableStateFlow("")
+    val str get() = _str
+
     private val _successMsgEvent = SingleLiveEvent<String>()
     val successMsgEvent get() = _successMsgEvent
 

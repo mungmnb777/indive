@@ -3,6 +3,7 @@ package com.ssafy.indive.utils
 // JWT
 const val JWT = "JWT-AUTHENTICATION"
 
+
 // 유저 정보
 const val USER = "user_seq"
 

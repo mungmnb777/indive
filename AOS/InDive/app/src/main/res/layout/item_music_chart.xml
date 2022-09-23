@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{song.title}"
+
             android:textColor="@color/main_black"
             android:textSize="14dp"
             app:layout_constraintBottom_toTopOf="@id/tv_item_artist"

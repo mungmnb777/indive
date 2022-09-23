@@ -35,7 +35,7 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(R.layout.fragme
 
     private fun initGenreList() {
 
-        genreListViewModel.getGenres()
+//        genreListViewModel.getGenres()
         val playListener: (Music) -> (Unit) = {
             mainViewModel.play()
         }

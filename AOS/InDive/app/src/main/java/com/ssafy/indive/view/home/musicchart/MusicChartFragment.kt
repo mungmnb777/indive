@@ -14,7 +14,9 @@ import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.view.home.HomeViewModel
 import com.ssafy.indive.view.home.MusicChartAdapter
 import com.ssafy.indive.view.songdetail.SongDetailActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.fragment_musicchart) {
     private val homeViewModel: HomeViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
@@ -29,7 +31,7 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
     }
 
     private fun initPopularMusic() {
-        homeViewModel.initPopularSongList()
+//        homeViewModel.initPopularSongList()
         binding.rvMusicChartDetail.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.VERTICAL, false

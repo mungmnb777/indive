@@ -93,7 +93,6 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_recent_music"
-                submitList="@{homeVM.recentMusicList}"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginHorizontal="10dp"
