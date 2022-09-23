@@ -1,7 +1,11 @@
 package com.ssafy.indive.model.dto
 
-data class Song(
-    val musicSeq: String,
+data class Music(
+    val musicSeq: Long,
+    val artistSeq: Long,
+    val artistName: String,
+    val artistImgSeq: Long,
+    val coverImgSeq: Long,
     val title: String,
     val lyricist: String,
     val composer: String,
@@ -11,5 +15,5 @@ data class Song(
     val releaseDateTime: String,
     val reservationDateTime: String,
     val createDate: String,
-    val updateDate: String
+    val updateDate: String,
 )

@@ -1,10 +1,3 @@
-import android.util.Log
-import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.ssafy.indive.model.dto.Song
-import com.ssafy.indive.view.home.RecentMusicAdapter
-
 //
 //import CrewUserRankingAdapter
 //import android.util.Log

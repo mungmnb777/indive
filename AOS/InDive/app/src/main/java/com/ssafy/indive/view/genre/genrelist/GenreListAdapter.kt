@@ -6,26 +6,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemMusicListBinding
-import com.ssafy.indive.model.dto.Song
+import com.ssafy.indive.model.dto.Music
 
 
 class GenreListAdapter(
-    private val playListener: (Song) -> (Unit),
-    private val moreListener: (Song) -> (Unit)
-) : ListAdapter<Song, GenreListAdapter.GenreListViewHolder>(diffUtil) {
+    private val playListener: (Music) -> (Unit),
+    private val moreListener: (Music) -> (Unit)
+) : ListAdapter<Music, GenreListAdapter.GenreListViewHolder>(diffUtil) {
     inner class GenreListViewHolder(val binding: ItemMusicListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(song: Song) {
-            binding.song = song
+        fun bind(music: Music) {
+            binding.song = music
 
         }
 
-        fun click(song: Song) {
+        fun click(music: Music) {
             binding.ivPlay.setOnClickListener {
-                playListener(song)
+                playListener(music)
             }
             binding.ivItemMore.setOnClickListener {
-                moreListener(song)
+                moreListener(music)
             }
 
         }
@@ -43,11 +43,11 @@ class GenreListAdapter(
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Song>() {
-            override fun areContentsTheSame(oldItem: Song, newItem: Song) =
+        val diffUtil = object : DiffUtil.ItemCallback<Music>() {
+            override fun areContentsTheSame(oldItem: Music, newItem: Music) =
                 oldItem.hashCode() == newItem.hashCode()
 
-            override fun areItemsTheSame(oldItem: Song, newItem: Song) =
+            override fun areItemsTheSame(oldItem: Music, newItem: Music) =
                 oldItem.musicSeq == newItem.musicSeq
         }
     }

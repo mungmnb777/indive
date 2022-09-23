@@ -3,7 +3,7 @@ package com.ssafy.indive.utils
 import java.io.IOException
 
 sealed class Result<out T> {
-    object Uninitialized : Result<Nothing>()
+    object Unintialized : Result<Nothing>()
 
     object Loading : Result<Nothing>()
 
@@ -16,4 +16,5 @@ sealed class Result<out T> {
     data class Error(val exception: Throwable) : Result<Nothing>() {
         val isNetworkError = exception is IOException
     }
+
 }

@@ -6,7 +6,7 @@
 
         <variable
             name="song"
-            type="com.ssafy.indive.model.dto.Song" />
+            type="com.ssafy.indive.model.dto.Music" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

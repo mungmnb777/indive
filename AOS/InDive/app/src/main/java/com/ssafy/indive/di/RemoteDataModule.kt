@@ -1,3 +1,9 @@
+import com.ssafy.indive.api.SongManagerApi
+import dagger.Provides
+import retrofit2.Retrofit
+import javax.inject.Named
+import javax.inject.Singleton
+
 //
 //import android.content.Context
 //import com.google.gson.Gson
@@ -106,6 +112,12 @@
 //            .build()
 //    }
 //
+//    @Provides
+//    @Singleton
+//    fun provideSongManagerApi(@Named("mainRetrofit") retrofit: Retrofit): SongManagerApi {
+//        return retrofit.create(SongManagerApi::class.java)
+//    }
+
 //    @Provides
 //    @Singleton
 //    fun provideWeatherApi(@Named("weatherRetrofit") retrofit : Retrofit) : WeatherApi {

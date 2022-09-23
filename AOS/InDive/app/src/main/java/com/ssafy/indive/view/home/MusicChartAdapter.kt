@@ -6,24 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemMusicChartBinding
-import com.ssafy.indive.model.dto.Song
+import com.ssafy.indive.model.dto.Music
 
-class MusicChartAdapter(private val playListener : (Song) -> (Unit),private val moreListener : (Song) -> (Unit)) :  ListAdapter<Song, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
+class MusicChartAdapter(private val playListener : (Music) -> (Unit), private val moreListener : (Music) -> (Unit)) :  ListAdapter<Music, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
 
     inner class MusicChartViewHolder(var binding: ItemMusicChartBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(song: Song) {
-            binding.song = song
+        fun bind(music: Music) {
+            binding.song = music
             binding.tvMusicRanking.text = "${position + 1}"
 
         }
 
-        fun click(song: Song){
+        fun click(music: Music){
             binding.ivPlay.setOnClickListener {
-                playListener(song)
+                playListener(music)
             }
             binding.ivItemMore.setOnClickListener {
-                moreListener(song)
+                moreListener(music)
             }
 
         }
@@ -47,11 +47,11 @@ class MusicChartAdapter(private val playListener : (Song) -> (Unit),private val 
 
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Song>() {
-            override fun areContentsTheSame(oldItem: Song, newItem: Song) =
+        val diffUtil = object : DiffUtil.ItemCallback<Music>() {
+            override fun areContentsTheSame(oldItem: Music, newItem: Music) =
                 oldItem.hashCode() == newItem.hashCode()
 
-            override fun areItemsTheSame(oldItem: Song, newItem: Song) =
+            override fun areItemsTheSame(oldItem: Music, newItem: Music) =
                 oldItem.musicSeq == newItem.musicSeq
         }
     }

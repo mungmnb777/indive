@@ -93,7 +93,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_recent_music"
-                submitList="@{homeVM.recentSongList}"
+                submitList="@{homeVM.recentMusicList}"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginHorizontal="10dp"
@@ -138,7 +138,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_music_chart"
-                    submitList="@{homeVM.popularSongList}"
+                    submitList="@{homeVM.popularMusicList}"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     tools:listitem="@layout/item_music_chart" />
