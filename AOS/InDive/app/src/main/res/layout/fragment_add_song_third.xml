@@ -46,31 +46,29 @@
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:text="출시일과 발매 예약일자를
-            입력해주세요."
+            android:layout_marginHorizontal="20dp"
+            android:text="출시일과 발매 예약일자를\n입력해주세요."
             android:textColor="@color/black"
             android:textSize="24dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.15" />
-
-
+            app:layout_constraintVertical_bias="0.152" />
 
         <Button
             android:id="@+id/btn_addsong_third"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_round_main_color"
             android:text="등록"
             android:textColor="@color/white"
             android:layout_marginVertical="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintVertical_bias="0.9"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join){
         initClickListener()
     }
 
-    fun initClickListener(){
+    private fun initClickListener(){
         binding.btnJoin.setOnClickListener {
             findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
         }
