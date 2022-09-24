@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.member.entity;
 
 import com.ssafy.indive.domain.member.entity.enumeration.Role;
+import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name="member_seq")

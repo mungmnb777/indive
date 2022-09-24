@@ -2,6 +2,7 @@ package com.ssafy.indive.domain.box.entity;
 
 import com.ssafy.indive.domain.box.entity.key.BoxMusicCompositeKey;
 import com.ssafy.indive.domain.music.entity.Music;
+import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Generated
 @IdClass(BoxMusicCompositeKey.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class BoxMusic {
+public class BoxMusic extends BaseEntity {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)

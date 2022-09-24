@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.music.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
+import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reply {
+public class Reply extends BaseEntity {
 
     @Id
     @GeneratedValue
