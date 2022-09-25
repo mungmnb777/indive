@@ -1,9 +1,13 @@
 package com.ssafy.indive.domain.music.service;
 
+import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.music.entity.Music;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
+import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,11 +18,16 @@ public class MusicAddService {
 
     private final MusicRepository musicRepository;
 
-    // TODO: 멤버 정보가 현재 null이 들어갑니다. 추후에 시큐리티가 구현되고 추가할 예정입니다.
     public boolean addMusic(ServiceMusicAddRequestDto dto) {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
+        Member loginMember = principal.getMember();
+
         Music music = Music.builder()
-                .author(null)
+                .author(loginMember)
                 .title(dto.getTitle())
                 .lyricist(dto.getLyricist())
                 .composer(dto.getComposer())
