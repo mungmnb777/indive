@@ -27,10 +27,10 @@ public class RewardItem extends BaseEntity {
     private String content;
 
     @Column(name = "ri_point")
-    private String point;
+    private int point;
 
     @Column(name = "ri_stock")
-    private String stock;
+    private int stock;
 
     @Column(name = "ri_image_origin")
     private String imageOrigin;
@@ -39,7 +39,7 @@ public class RewardItem extends BaseEntity {
     private String imageUuid;
 
     @Builder
-    public RewardItem(Long seq, Member artist, String title, String content, String point, String stock, String imageOrigin, String imageUuid) {
+    public RewardItem(Long seq, Member artist, String title, String content, int point, int stock, String imageOrigin, String imageUuid) {
         this.seq = seq;
         this.artist = artist;
         this.title = title;
