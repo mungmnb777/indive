@@ -1,7 +1,6 @@
 package com.ssafy.indive
 
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -10,7 +9,6 @@ import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
 import com.ssafy.indive.model.dto.PlayListMusic
 import com.ssafy.indive.utils.mapper
-import com.ssafy.indive.view.player.PlayerFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
