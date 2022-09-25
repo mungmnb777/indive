@@ -1,19 +1,27 @@
 package com.ssafy.indive
 
+import android.Manifest
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.gun0912.tedpermission.coroutine.TedPermission
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
 import com.ssafy.indive.model.dto.PlayListMusic
 import com.ssafy.indive.utils.mapper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mainViewModel: MainViewModel by viewModels()
+
+    private var READ_EXTERNAL_STORAGE = 0
 
     lateinit var navController: NavController
 
@@ -25,11 +33,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         playList = mutableListOf()
         initNavigation()
         initObserve()
-        initClickListener()
+        checkMediaPermission()
     }
 
-    private fun initClickListener() {
+    private fun checkMediaPermission() {
 
+        CoroutineScope(Dispatchers.Main).launch {
+            TedPermission.create()
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .setDeniedMessage("[설정] -> [권한] -> [파일 및 미디어] -> 허용")
+                .check()
+
+        }
     }
 
     private fun initObserve() {

@@ -13,12 +13,14 @@ import android.util.Log
 import android.view.View
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.ssafy.indive.MainActivity
+import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityPlayerBinding
@@ -26,6 +28,7 @@ import com.ssafy.indive.model.dto.PlayListMusic
 import com.ssafy.indive.model.dto.formatDuration
 import com.ssafy.indive.model.dto.setSongPosition
 import com.ssafy.indive.service.MusicService
+import com.ssafy.indive.view.songdetail.SongDetailActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -141,6 +144,20 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(R.layout.activity_pla
             initViews()
             createExoPlayer()
         }
+
+        binding.btnSongMore.setOnClickListener {
+            PlayerMoreDialogFragment(object : PlayerMoreDialogFragment.PlayerMoreDialogClickListener {
+                override fun clickDetail() {
+                    val intent = Intent(context, SongDetailActivity::class.java)
+                    startActivity(intent)
+                }
+
+                override fun clickReport() {
+
+                }
+
+            }).show(this.supportFragmentManager, "MoreDialog")
+        }
     }
 
     private fun initViews() {
@@ -218,7 +235,6 @@ class PlayerActivity : BaseActivity<ActivityPlayerBinding>(R.layout.activity_pla
         Log.d("PlayerActivity_", "updateSeekBar: ${musicService!!.exoPlayer!!.duration}")
 
         playerBinding.tvStartTime.text = playT
-
 
         playerBinding.playerSeekbar.progress = 0
         playerBinding.playerSeekbar.max = (musicService!!.exoPlayer!!.duration / 1000).toInt()

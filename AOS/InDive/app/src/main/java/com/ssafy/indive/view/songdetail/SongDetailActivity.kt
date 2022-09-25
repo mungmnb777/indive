@@ -7,6 +7,7 @@ import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivitySongDetailBinding
 import com.ssafy.indive.model.dto.Comment
+import com.ssafy.indive.view.player.AddCommentFragment
 
 class SongDetailActivity : BaseActivity<ActivitySongDetailBinding>(R.layout.activity_song_detail) {
     private val songDetailViewModel: SongDetailViewModel by viewModels()
@@ -49,6 +50,11 @@ class SongDetailActivity : BaseActivity<ActivitySongDetailBinding>(R.layout.acti
         binding.tvDetailLyricsFold.setOnClickListener {
             binding.clSongLyricsChild.visibility = View.GONE
             binding.tvDetailLyricsExpand.visibility = View.VISIBLE
+        }
+
+        binding.tvAddComment.setOnClickListener {
+            val bottomSheet = AddCommentFragment()
+            bottomSheet.show(supportFragmentManager, AddCommentFragment.TAG)
         }
     }
 }
