@@ -66,8 +66,8 @@ class MusicService : Service() {
         val notification = NotificationCompat.Builder(baseContext, ApplicationClass.CHANNEL_ID)
             .setContentTitle(PlayerActivity.musicList[PlayerActivity.songPosition].track)
             .setContentText(PlayerActivity.musicList[PlayerActivity.songPosition].artist)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.img_ive_cover))
+            .setSmallIcon(R.drawable.album_default_image)
+            .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.album_default_image))
             .setStyle(
                 androidx.media.app.NotificationCompat.MediaStyle()
                     .setMediaSession(mediaSession.sessionToken)
