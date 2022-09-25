@@ -41,7 +41,6 @@
             android:background="@color/white"
             app:itemIconSize="28dp"
             app:itemIconTint="@color/black"
-            app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

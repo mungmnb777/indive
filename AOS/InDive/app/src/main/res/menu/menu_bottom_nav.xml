@@ -3,18 +3,18 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/bottom_home"
-        android:title="홈" />
+        android:title="" />
     <item
         android:id="@+id/genreFragment"
         android:icon="@drawable/bottom_genre"
-        android:title="둘러보기" />
+        android:title="" />
     <item
         android:id="@+id/myStudioFragment"
         android:icon="@drawable/bottom_studio"
-        android:title="스튜디오" />
+        android:title="" />
 
     <item
         android:id="@+id/moreFragment"
         android:icon="@drawable/bottom_more"
-        android:title="더보기" />
+        android:title="" />
 </menu>
