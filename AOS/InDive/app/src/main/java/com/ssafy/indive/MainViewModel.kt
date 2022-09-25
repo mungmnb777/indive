@@ -21,6 +21,7 @@ class MainViewModel @Inject constructor(
         get() = _playList
 
 
+
     fun insert() {
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -41,7 +42,7 @@ class MainViewModel @Inject constructor(
 
             playListRepository.insertPlayList(song1)
             playListRepository.insertPlayList(song2)
-
+            getAll()
         }
 
     }

@@ -39,7 +39,7 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>(R.layout.frag
             binding.root.visibility = View.VISIBLE
             binding.tvNowPlayingTitle.isSelected = true
 
-            Glide.with(this).load(PlayerActivity.musicList[PlayerActivity.songPosition].coverUrl)
+            Glide.with(this).load(PlayerActivity.musicList[PlayerActivity.songPosition].coverUrl).centerCrop()
                 .into(binding.ivNowPlayingCover)
             binding.tvNowPlayingTitle.text = PlayerActivity.musicList[PlayerActivity.songPosition].track
 

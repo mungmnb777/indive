@@ -12,6 +12,7 @@ import android.os.Looper
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -71,13 +72,12 @@ class MusicService : Service() {
                 androidx.media.app.NotificationCompat.MediaStyle()
                     .setMediaSession(mediaSession.sessionToken)
             )
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setOnlyAlertOnce(true)
             .addAction(R.drawable.ic_baseline_skip_previous_24, "Prev", prevPendingIntent)
             .addAction(playPauseBtn, "Play", playPendingIntent)
             .addAction(R.drawable.ic_baseline_skip_next_24, "Next", nextPendingIntent)
             .build()
+
 
         startForeground(13, notification)
     }

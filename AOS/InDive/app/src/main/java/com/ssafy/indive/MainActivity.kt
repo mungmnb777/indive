@@ -24,7 +24,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun init() {
-
+        playList = mutableListOf()
         initNavigation()
         initObserve()
         initClickListener()
