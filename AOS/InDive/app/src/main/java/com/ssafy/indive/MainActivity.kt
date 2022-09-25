@@ -2,6 +2,7 @@ package com.ssafy.indive
 
 import android.Manifest
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -70,29 +71,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.bottomNav, navController)
 
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            // 바텀 네비게이션이 표시되는 Fragment
-//            if(destination.id == R.id.HomeFragment || destination.id == R.id.MyPageFragment){
-//                if(binding.expandableBottomBar.visibility == View.GONE) {
-//                    binding.apply {
-//                        expandableBottomBar.visibility = View.VISIBLE
-//                        bottomAppBar.visibility = View.VISIBLE
-//                        floatingActionButton.visibility = View.VISIBLE
-//                        view.visibility = View.VISIBLE
-//                    }
-//                }
-//            }
-//            // 바텀 네비게이션이 표시되지 않는 Fragment
-//            else{
-//                if(binding.expandableBottomBar.visibility == View.VISIBLE) {
-//                    binding.apply {
-//                        expandableBottomBar.visibility = View.GONE
-//                        bottomAppBar.visibility = View.GONE
-//                        floatingActionButton.visibility = View.GONE
-//                        view.visibility = View.GONE
-//                    }
-//                }
-//            }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            // 바텀 네비게이션이 표시되는 Fragment
+            if (destination.id == R.id.homeFragment || destination.id == R.id.genreFragment
+                || destination.id == R.id.myStudioFragment ||destination.id == R.id.moreFragment
+                ) {
+                if (binding.bottomNav.visibility == View.GONE) {
+                    binding.apply {
+                        bottomNav.visibility = View.VISIBLE
+                        nowPlayingContainer.visibility = View.VISIBLE
+                    }
+                }
+            }
+            // 바텀 네비게이션이 표시되지 않는 Fragment
+            else {
+                if (binding.bottomNav.visibility == View.VISIBLE) {
+                    binding.apply {
+                        bottomNav.visibility = View.GONE
+                        nowPlayingContainer.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
 
     //     홈 화면에서 뒤로가기 2번 클릭 시 종료
