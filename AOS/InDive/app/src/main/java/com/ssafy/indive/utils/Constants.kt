@@ -21,3 +21,7 @@ const val FCM_ID = 2 // 채널 ID는 0이면 안됨
 //플레이어화면, 재생화면 상태 구분
 const val PLAYER = "player"
 const val PLAY_LIST = "play_list"
+
+// 날짜 Flag
+const val START_DAY = 0
+const val RESERVATION_DAY = 1
