@@ -60,25 +60,27 @@ class AddSongThirdFragment : BaseFragment<FragmentAddSongThirdBinding>(R.layout.
                 initDatePickerDialog(START_DAY)
             }
             btnStartTime.setOnClickListener {
-                val startTimeDialogListener: StartTimeDialogListener = object: StartTimeDialogListener{
-                    override fun onItemClick(hour: String, minute: String) {
-                        binding.btnStartTime.text = "${hour} : ${minute}"
-                    }
-                }
-                StartTimeDialog(requireContext(), startTimeDialogListener).show()
+                initTimeDialog(START_DAY)
             }
             btnReservationDay.setOnClickListener {
                 initDatePickerDialog(RESERVATION_DAY)
             }
             btnReservationTime.setOnClickListener {
-                val startTimeDialogListener: StartTimeDialogListener = object: StartTimeDialogListener{
-                    override fun onItemClick(hour: String, minute: String) {
-                        binding.btnReservationTime.text = "${hour} : ${minute}"
-                    }
-                }
-                StartTimeDialog(requireContext(), startTimeDialogListener).show()
+                initTimeDialog(RESERVATION_DAY)
             }
         }
+    }
+    private fun initTimeDialog(flag: Int) {
+        val startTimeDialogListener: StartTimeDialogListener = object: StartTimeDialogListener{
+            override fun onItemClick(hour: String, minute: String) {
+                if (flag == START_DAY){
+                    binding.btnStartTime.text = "${hour} : ${minute}"
+                } else{
+                    binding.btnReservationTime.text = "${hour} : ${minute}"
+                }
+            }
+        }
+        StartTimeDialog(requireContext(), startTimeDialogListener).show()
     }
 
     private fun initDatePickerDialog(flag: Int) {
@@ -105,7 +107,7 @@ class AddSongThirdFragment : BaseFragment<FragmentAddSongThirdBinding>(R.layout.
                 dayOfMonth = "0" + dayOfMonth
             }
 
-            if(flag == 0){
+            if(flag == START_DAY){
                 binding.btnStartDay.text = "${year}.${month}.${dayOfMonth}"
             } else{
                 binding.btnReservationDay.text = "${year}.${month}.${dayOfMonth}"
