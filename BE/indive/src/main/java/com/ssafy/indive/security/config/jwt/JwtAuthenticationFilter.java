@@ -48,12 +48,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		ObjectMapper om = new ObjectMapper();
 		try {
 			//*로그인으로 패스워드나 비밀번호를 보냈을 때 여기에 정보가 들어 있음.
+
 			Member member = om.readValue(request.getInputStream(),Member.class);
 			System.out.println("jwtA : " +member);
 
 			//*manager 가 인증을 할 때 이 정보를 이용해서 인증을 하게 됨
 			UsernamePasswordAuthenticationToken authenticationToken =
-					new UsernamePasswordAuthenticationToken(member.getSeq(),member.getPassword());
+					new UsernamePasswordAuthenticationToken(member.getEmail(),member.getPassword());
 
 			//PrincipalDetailsService 의 loadUserByUsername()함수가 실행됨
 			//인증이되면 authentication 에 내 로그인한 정보가 담깁니다.
@@ -72,7 +73,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			//넣기 직전에 JWT 토큰을 만들어 줌
 			return authentication;
 
-		} catch (IOException e) {
+		} catch (Exception e) {
+
 			e.printStackTrace();
 		}
 
@@ -97,7 +99,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.withExpiresAt(new Date(System.currentTimeMillis()+120000*10))
 				//id 랑 username 같은건 내가 넣고싶은거 넣음됨
 				.withClaim("seq",principalDetails.getMember().getSeq())
-				.withClaim("nickname", principalDetails.getMember().getNickname())
+				.withClaim("username", principalDetails.getMember().getNickname())
 				.sign(Algorithm.HMAC512("INDIVE")); // 서버만 알고 있는 secret 값
 
 		//헤더에 넣겠다(Bearer 에 한칸 띄울것)

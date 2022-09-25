@@ -6,8 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
-import com.ssafy.indive.security.model.User;
-import com.ssafy.indive.security.repository.UserRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
