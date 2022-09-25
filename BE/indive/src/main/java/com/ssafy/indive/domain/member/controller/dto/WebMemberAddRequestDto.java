@@ -1,7 +1,6 @@
 package com.ssafy.indive.domain.member.controller.dto;
 
-import com.ssafy.indive.domain.member.service.ServiceMemberAddRequestDto;
-import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
+import com.ssafy.indive.domain.member.service.dto.ServiceMemberAddRequestDto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;

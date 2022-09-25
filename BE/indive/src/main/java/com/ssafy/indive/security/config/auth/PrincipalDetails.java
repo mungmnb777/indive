@@ -1,7 +1,7 @@
 package com.ssafy.indive.security.config.auth;
 
 import com.ssafy.indive.domain.member.entity.Member;
-import com.ssafy.indive.security.model.User;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

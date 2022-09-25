@@ -1,4 +1,4 @@
-package com.ssafy.indive.domain.member.service;
+package com.ssafy.indive.domain.member.service.dto;
 
 import lombok.*;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
