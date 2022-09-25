@@ -22,13 +22,19 @@ public class MemberController {
     private final MemberReadService memberReadService;
 
     @PostMapping("join")
-    public ResponseEntity<?> addMember(@Validated @ModelAttribute WebMemberAddRequestDto dto) {
+    public ResponseEntity<?> addMember(@Validated @RequestBody WebMemberAddRequestDto dto) {
         return new ResponseEntity<>(memberAddService.addMember(dto.convertToServiceDto()), HttpStatus.OK);
     }
 
     @GetMapping("duplicated-email")
     public ResponseEntity<?> isDuplicated(@Validated @ModelAttribute WebDuplicatedEmail dto) {
         return new ResponseEntity<>(memberReadService.isDuplicated(dto.convertToServiceDto()), HttpStatus.OK);
+    }
+
+    @GetMapping("/{memberSeq}")
+    public ResponseEntity<?> getMemberDetails(@PathVariable("memberSeq") long Seq) {
+        System.out.println("들어옴");
+        return new ResponseEntity<>(memberReadService.getMemberDetails(Seq), HttpStatus.OK);
     }
 
 
