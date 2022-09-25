@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.reward.entity;
 
 import com.ssafy.indive.domain.member.entity.Member;
+import com.ssafy.indive.domain.reward.service.dto.ServiceItemModifyRequestDto;
 import com.ssafy.indive.global.common.entity.BaseEntity;
 import lombok.*;
 
@@ -48,5 +49,11 @@ public class RewardItem extends BaseEntity {
         this.stock = stock;
         this.imageOrigin = imageOrigin;
         this.imageUuid = imageUuid;
+    }
+
+    public void update(ServiceItemModifyRequestDto dto) {
+        content = dto.getContent();
+        point = dto.getPoint();
+        content = dto.getContent();
     }
 }
