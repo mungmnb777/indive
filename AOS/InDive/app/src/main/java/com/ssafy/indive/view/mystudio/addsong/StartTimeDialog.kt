@@ -4,17 +4,21 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.NumberPicker
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import com.ssafy.indive.R
 import com.ssafy.indive.databinding.DialogStartTimeBinding
+import java.time.LocalDateTime
 
 class StartTimeDialog(context: Context, private val listener : StartTimeDialogListener): Dialog(context) {
     private lateinit var binding: DialogStartTimeBinding
     private lateinit var startTimeValues : Array<String>
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,9 +33,13 @@ class StartTimeDialog(context: Context, private val listener : StartTimeDialogLi
         startTimeValues = arrayOf("00", "30")
 
         binding.apply {
+            val now = LocalDateTime.now()
+
+            val startDateHour = now.hour
+
             numberpickerHour.minValue = 0
             numberpickerHour.maxValue = 23
-            numberpickerHour.value = 20
+            numberpickerHour.value = startDateHour
             //순환 안되게 막기
             numberpickerHour.wrapSelectorWheel = false
 
