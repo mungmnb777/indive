@@ -13,6 +13,7 @@ import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.MainViewModel
 import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.model.dto.Music
+import com.ssafy.indive.view.player.PlayerActivity
 import com.ssafy.indive.view.songdetail.SongDetailActivity
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun init() {
 
+        mainViewModel.getAll()
         binding.apply {
             homeVM = homeViewModel
         }
@@ -75,7 +77,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecentMusic() {
 
-//        homeViewModel.initRecentSongList()
+        homeViewModel.initRecentSongList()
         binding.rvRecentMusic.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRecentMusic.adapter = RecentMusicAdapter()
@@ -85,12 +87,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initPopularMusic() {
 
-//        homeViewModel.initPopularSongList()
+        homeViewModel.initPopularSongList()
         binding.rvMusicChart.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val playListener: (Music) -> (Unit) = {
-            mainViewModel.play()
+            mainViewModel.insert()
+            mainViewModel.getAll()
+            val intent = Intent(context, PlayerActivity::class.java)
+            intent.putExtra("class","HomeFragment")
+            startActivity(intent)
         }
 
         val moreListener: (Music) -> (Unit) = {

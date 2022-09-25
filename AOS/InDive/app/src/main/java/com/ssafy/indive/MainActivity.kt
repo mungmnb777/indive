@@ -8,6 +8,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
+import com.ssafy.indive.model.dto.PlayListMusic
+import com.ssafy.indive.utils.mapper
 import com.ssafy.indive.view.player.PlayerFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +19,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     lateinit var navController: NavController
 
+    companion object {
+        lateinit var playList: MutableList<PlayListMusic>
+    }
+
     override fun init() {
 
         initNavigation()
@@ -25,21 +31,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initClickListener() {
-        binding.exoPlayer.setOnClickListener {
-            val bottomSheet = PlayerFragment()
-            bottomSheet.show(supportFragmentManager, PlayerFragment.TAG)
-        }
 
     }
 
     private fun initObserve() {
-        mainViewModel.nowPlaying.observe(this){
-            Log.d("MainActivity_", "initObserve: $it")
-            if(mainViewModel.nowPlaying.value != null){
-                if(mainViewModel.nowPlaying.value!!){
-                    binding.playerGroup.visibility = View.VISIBLE
-                }else{
-                    binding.playerGroup.visibility = View.GONE
+        mainViewModel.playList.observe(this) { playListEntity ->
+            Log.d("MainActivity_", "initObserve: $playListEntity")
+            if (mainViewModel.playList.value != null) {
+                if (mainViewModel.playList.value!!.isNotEmpty()) {
+                    playList = mutableListOf()
+                    playListEntity.forEach {
+                        playList.add(it.mapper())
+                    }
+                } else {
+                    playList = mutableListOf()
 
                 }
             }

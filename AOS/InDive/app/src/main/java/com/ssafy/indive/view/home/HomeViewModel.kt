@@ -20,10 +20,11 @@ class HomeViewModel @Inject constructor(
     private val musicManagerRepository: MusicManagerRepository
 ) : ViewModel() {
 
-    private val _musicList : MutableStateFlow<Result<List<Music>>> = MutableStateFlow(Result.Unintialized)
+    private val _musicList: MutableStateFlow<Result<List<Music>>> =
+        MutableStateFlow(Result.Unintialized)
     val musicList get() = _musicList
 
-    private val _str : MutableStateFlow<String> = MutableStateFlow("")
+    private val _str: MutableStateFlow<String> = MutableStateFlow("")
     val str get() = _str
 
     private val _successMsgEvent = SingleLiveEvent<String>()
@@ -38,7 +39,7 @@ class HomeViewModel @Inject constructor(
         get() = _popularSongList
 
 
-    fun getMusics(title: String?, artistName: String?, sort: String?, genre: String?){
+    fun getMusics(title: String?, artistName: String?, sort: String?, genre: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.getMusics(title, artistName, sort, genre).collectLatest {
                 _musicList.value = it
@@ -48,35 +49,32 @@ class HomeViewModel @Inject constructor(
     }
 
 
-//    fun initRecentSongList(){
-//        val songList = mutableListOf(
-//            Music("1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"),
-//            Music("1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "3", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "4", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "5", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "6", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "7", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "8", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//        )
-//
-//        _recentSongList.postValue(songList)
-//    }
-//
-//    fun initPopularSongList(){
-//        val songList = mutableListOf(
-//            Music("1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"),
-//            Music("1", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "3", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "4", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "5", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "6", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//            ,Music("1", "7", "1", "1", "1", "1", "1", "1", "1", "1", "1")
-//        )
-//
-//        _popularSongList.postValue(songList)
-//    }
+    fun initRecentSongList() {
+        val songList = mutableListOf(
+            Music(0, 0, "가수1", 0, 0, "제목1", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수2", 0, 0, "제목2", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수3", 0, 0, "제목3", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수4", 0, 0, "제목4", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수5", 0, 0, "제목5", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수6", 0, 0, "제목6", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수7", 0, 0, "제목7", "", "", "", "", "", "", "", "", ""),
+        )
 
+        _recentSongList.postValue(songList)
+    }
+
+    fun initPopularSongList() {
+        val songList = mutableListOf(
+            Music(0, 0, "가수1", 0, 0, "제목1", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수2", 0, 0, "제목2", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수3", 0, 0, "제목3", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수4", 0, 0, "제목4", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수5", 0, 0, "제목5", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수6", 0, 0, "제목6", "", "", "", "", "", "", "", "", ""),
+            Music(0, 0, "가수7", 0, 0, "제목7", "", "", "", "", "", "", "", "", ""),
+        )
+        _popularSongList.postValue(songList)
+    }
 
 
 }

@@ -13,6 +13,7 @@ import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.view.home.HomeViewModel
 import com.ssafy.indive.view.home.MusicChartAdapter
+import com.ssafy.indive.view.player.PlayerActivity
 import com.ssafy.indive.view.songdetail.SongDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +39,11 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
         )
 
         val playListener: (Music) -> (Unit) = {
-            mainViewModel.play()
+            mainViewModel.insert()
+            mainViewModel.getAll()
+            val intent = Intent(context, PlayerActivity::class.java)
+            intent.putExtra("class","HomeFragment")
+            startActivity(intent)
         }
 
         val moreListener: (Music) -> (Unit) = {

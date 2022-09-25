@@ -10,6 +10,7 @@ import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentGenreListBinding
 import com.ssafy.indive.model.dto.Music
+import com.ssafy.indive.view.player.PlayerActivity
 import com.ssafy.indive.view.songdetail.SongDetailActivity
 
 class GenreListFragment : BaseFragment<FragmentGenreListBinding>(R.layout.fragment_genre_list) {
@@ -37,7 +38,11 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(R.layout.fragme
 
 //        genreListViewModel.getGenres()
         val playListener: (Music) -> (Unit) = {
-            mainViewModel.play()
+            mainViewModel.insert()
+            mainViewModel.getAll()
+            val intent = Intent(context, PlayerActivity::class.java)
+            intent.putExtra("class","HomeFragment")
+            startActivity(intent)
         }
 
         val moreListener: (Music) -> (Unit) = {

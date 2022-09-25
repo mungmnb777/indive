@@ -1,109 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MainActivity">
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/nav_main">
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:defaultNavHost="true"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNav"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navGraph="@navigation/nav_main">
+        </androidx.fragment.app.FragmentContainerView>
 
-            </androidx.fragment.app.FragmentContainerView>
-
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/player_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="exoPlayer,iv_exo_img,iv_exo_play,iv_exo_play_list,cl_exo_background,seekbar_exo"
-                tools:visibility="visible" />
-
-            <com.google.android.exoplayer2.ui.PlayerView
-                android:id="@+id/exoPlayer"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:alpha="0"
-                app:layout_constraintBottom_toTopOf="@id/bottomNav"
-                app:use_controller="false" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_exo_background"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/main_blue"
-                app:layout_constraintBottom_toBottomOf="@id/exoPlayer"
-                app:layout_constraintTop_toTopOf="@id/exoPlayer" />
-
-            <ImageView
-                android:id="@+id/iv_exo_img"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/ic_launcher_foreground"
-                app:layout_constraintBottom_toBottomOf="@id/exoPlayer"
-                app:layout_constraintStart_toStartOf="@id/exoPlayer"
-                app:layout_constraintTop_toTopOf="@id/exoPlayer" />
-
-            <ImageView
-                android:id="@+id/iv_exo_play_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_baseline_playlist_play_24"
-                app:layout_constraintBottom_toBottomOf="@id/exoPlayer"
-                app:layout_constraintEnd_toEndOf="@id/exoPlayer"
-                app:layout_constraintTop_toTopOf="@id/exoPlayer" />
-
-            <ImageView
-                android:id="@+id/iv_exo_play"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_baseline_play_arrow_24"
-                app:layout_constraintBottom_toBottomOf="@id/exoPlayer"
-                app:layout_constraintEnd_toStartOf="@id/iv_exo_play_list"
-                app:layout_constraintTop_toTopOf="@id/exoPlayer" />
-
-            <SeekBar
-                android:id="@+id/seekbar_exo"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:progress="40"
-                app:layout_constraintBottom_toBottomOf="@id/exoPlayer" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nowPlaying_container"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:name="com.ssafy.indive.view.player.NowPlayingFragment"
+            tools:layout = "@layout/fragment_now_playing"
+            />
 
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:itemIconSize="28dp"
-                android:background="@color/white"
-                app:itemIconTint="@color/black"
-                app:labelVisibilityMode="unlabeled"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/menu_bottom_nav">
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:itemIconSize="28dp"
+            app:itemIconTint="@color/black"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/menu_bottom_nav">
 
-            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

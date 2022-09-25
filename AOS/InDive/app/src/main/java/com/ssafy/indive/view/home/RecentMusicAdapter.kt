@@ -15,7 +15,7 @@ class RecentMusicAdapter : ListAdapter<Music, RecentMusicAdapter.RecentMusicView
     inner class RecentMusicViewHolder(var binding: ItemRecentMusicBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: Music) {
-            binding.song = music
+            binding.music = music
 
 
         }
