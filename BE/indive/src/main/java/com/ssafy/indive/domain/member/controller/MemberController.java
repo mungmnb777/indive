@@ -31,4 +31,6 @@ public class MemberController {
         return new ResponseEntity<>(memberReadService.isDuplicated(dto.convertToServiceDto()), HttpStatus.OK);
     }
 
+
+
 }
