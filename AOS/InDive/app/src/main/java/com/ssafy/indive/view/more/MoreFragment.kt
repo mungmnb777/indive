@@ -8,14 +8,14 @@ import com.ssafy.indive.databinding.FragmentMoreBinding
 class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
 
     override fun init() {
-        clickListener()
+        initClickListener()
     }
 
-    private fun clickListener() {
+    private fun initClickListener() {
         binding.btnMyWallet.setOnClickListener {
             findNavController().navigate(R.id.action_moreFragment_to_myWalletFragment)
         }
-        binding.btnDonateList.setOnClickListener {
+        binding.btnNftList.setOnClickListener {
             findNavController().navigate(R.id.action_moreFragment_to_donateListFragment)
         }
     }

@@ -15,7 +15,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
-import com.gun0912.tedpermission.coroutine.TedPermission
+import com.gun0912.tedpermission.normal.TedPermission
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentAddSongFirstBinding
@@ -36,7 +36,7 @@ class AddSongFirstFragment :
 
     lateinit var imgFile : MultipartBody.Part
     override fun init() {
-        clickListnener()
+        initClickListener()
         checkMediaPermission()
 
     }
@@ -52,7 +52,7 @@ class AddSongFirstFragment :
         }
     }
 
-    private fun clickListnener() {
+    private fun initClickListener() {
         binding.apply {
             btnAddsongFirst.setOnClickListener {
                 findNavController().navigate(R.id.action_addSongFirstFragment_to_addSongSecondFragment)

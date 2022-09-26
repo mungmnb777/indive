@@ -21,5 +21,9 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
         binding.btnRanking.setOnClickListener {
             findNavController().navigate(R.id.action_myStudioFragment_to_rankingFragment)
         }
+        binding.ivAddNft.setOnClickListener {
+            val action = MyStudioFragmentDirections.actionMyStudioFragmentToAddRewardFragment(0)
+            findNavController().navigate(action)
+        }
     }
 }

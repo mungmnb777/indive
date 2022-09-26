@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_myStudioFragment_to_rewardStoreFragment"
             app:destination="@id/rewardStoreFragment" />
+        <action
+            android:id="@+id/action_myStudioFragment_to_addRewardFragment"
+            app:destination="@id/addRewardFragment" />
 
     </fragment>
     <fragment
@@ -76,7 +79,11 @@
     <fragment
         android:id="@+id/addRewardFragment"
         android:name="com.ssafy.indive.view.rewardstore.addreward.AddRewardFragment"
-        android:label="AddRewardFragment" />
+        android:label="AddRewardFragment" >
+        <argument
+            android:name="memberSeq"
+            app:argType="long" />
+    </fragment>
     <fragment
         android:id="@+id/addSongFirstFragment"
         android:name="com.ssafy.indive.view.mystudio.addsong.AddSongFirstFragment"
