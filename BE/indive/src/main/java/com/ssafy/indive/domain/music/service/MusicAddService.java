@@ -3,9 +3,12 @@ package com.ssafy.indive.domain.music.service;
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.music.entity.Music;
 import com.ssafy.indive.domain.music.entity.MusicLike;
+import com.ssafy.indive.domain.music.entity.Reply;
 import com.ssafy.indive.domain.music.repository.MusicLikeRepository;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
+import com.ssafy.indive.domain.music.repository.ReplyRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicAddRequestDto;
+import com.ssafy.indive.domain.music.service.dto.ServiceReplyAddRequestDto;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -23,6 +26,8 @@ public class MusicAddService {
     private final MusicRepository musicRepository;
 
     private final MusicLikeRepository musicLikeRepository;
+
+    private final ReplyRepository replyRepository;
 
     public boolean addMusic(ServiceMusicAddRequestDto dto) {
 
@@ -75,6 +80,27 @@ public class MusicAddService {
         musicLikeRepository.save(like);
 
         findMusic.plusLikeCount();
+
+        return true;
+    }
+
+    public boolean addMusicReply(long musicSeq, ServiceReplyAddRequestDto dto) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
+        Member loginMember = principal.getMember();
+
+        Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
+
+        Reply reply = Reply.builder()
+                .author(loginMember)
+                .music(findMusic)
+                .content(dto.getContent())
+                .build();
+
+        replyRepository.save(reply);
 
         return true;
     }
