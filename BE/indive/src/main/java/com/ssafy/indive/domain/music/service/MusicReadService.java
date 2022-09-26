@@ -1,11 +1,16 @@
 package com.ssafy.indive.domain.music.service;
 
+import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.music.controller.dto.WebMusicGetCondition;
 import com.ssafy.indive.domain.music.entity.Music;
+import com.ssafy.indive.domain.music.repository.MusicLikeRepository;
 import com.ssafy.indive.domain.music.repository.MusicQueryRepository;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicGetResponseDto;
+import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MusicReadService {
 
     private final MusicRepository musicRepository;
     private final MusicQueryRepository musicQueryRepository;
+
+    private final MusicLikeRepository musicLikeRepository;
 
     // TODO : 테스트 코드 작성해야함
     public List<ServiceMusicGetResponseDto> getMusic(WebMusicGetCondition condition) {
@@ -67,5 +74,25 @@ public class MusicReadService {
                 .updateDate(m.getUpdateDate())
                 .likeCount(m.getLikeCount())
                 .build();
+    }
+
+    public boolean isLike(long musicSeq) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
+        Member loginMember = principal.getMember();
+
+        Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
+
+        musicLikeRepository.findByMusicAndLiker(findMusic, loginMember).orElseThrow(IllegalArgumentException::new);
+
+        return true;
+    }
+
+    public int getLikeCount(long musicSeq) {
+        Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
+
+        return findMusic.getLikeCount();
     }
 }

@@ -1,5 +1,6 @@
 package com.ssafy.indive.domain.music.controller;
 
+import com.ssafy.indive.domain.member.exception.NotMatchMemberException;
 import com.ssafy.indive.domain.music.controller.dto.WebMusicAddRequestDto;
 import com.ssafy.indive.domain.music.controller.dto.WebMusicGetCondition;
 import com.ssafy.indive.domain.music.controller.dto.WebMusicModifyRequestDto;
@@ -34,12 +35,24 @@ public class MusicController {
 
     @PutMapping(value = "/{musicSeq}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> modifyMusic(@Validated @ModelAttribute WebMusicModifyRequestDto dto, @PathVariable("musicSeq") long musicSeq) {
-        return new ResponseEntity<>(musicModifyService.modifyMusic(musicSeq, dto.convertToServiceDto()), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(musicModifyService.modifyMusic(musicSeq, dto.convertToServiceDto()), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        } catch (NotMatchMemberException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{musicSeq}")
     public ResponseEntity<?> deleteMusic(@PathVariable("musicSeq") long musicSeq) {
-        return new ResponseEntity<>(musicDeleteService.deleteMusic(musicSeq), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(musicDeleteService.deleteMusic(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        } catch (NotMatchMemberException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     // TODO : 테스트 코드 작성 해야함
@@ -51,5 +64,45 @@ public class MusicController {
     @GetMapping("/{musicSeq}")
     public ResponseEntity<?> getMusicDetails(@PathVariable("musicSeq") long musicSeq) {
         return new ResponseEntity<>(musicReadService.getMusicDetails(musicSeq), HttpStatus.OK);
+    }
+
+    @PostMapping("/{musicSeq}/like")
+    public ResponseEntity<?> likeMusic(@PathVariable("musicSeq") long musicSeq) {
+        try {
+            return new ResponseEntity<>(musicAddService.likeMusic(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>("이미 좋아요를 누른 회원입니다.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{musicSeq}/like")
+    public ResponseEntity<?> isLike(@PathVariable("musicSeq") long musicSeq) {
+        try {
+            return new ResponseEntity<>(musicReadService.isLike(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+    }
+
+    @DeleteMapping("/{musicSeq}/like")
+    public ResponseEntity<?> deleteLike(@PathVariable("musicSeq") long musicSeq) {
+        try {
+            return new ResponseEntity<>(musicDeleteService.deleteLike(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>("아직 좋아요를 누르지 않은 회원입니다.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{musicSeq}/like/count")
+    public ResponseEntity<?> getLikeCount(@PathVariable("musicSeq") long musicSeq) {
+        try {
+            return new ResponseEntity<>(musicReadService.getLikeCount(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        }
     }
 }
