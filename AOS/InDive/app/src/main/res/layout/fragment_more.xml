@@ -120,7 +120,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_setting"
-            android:src="@drawable/img_setting_notice"/>
+            android:src="@drawable/ic_fingerprint"/>
 
         <TextView
             android:id="@+id/tv_setting_notice"
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="8dp"
-            android:text="알림"
+            android:text="지문 인증"
             android:textSize="18dp"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/tv_setting"
@@ -136,7 +136,7 @@
             />
 
         <Switch
-            android:id="@+id/switch_setting_notice"
+            android:id="@+id/switch_setting_finger"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:track="@drawable/switch_track_selector"
@@ -175,8 +175,8 @@
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
-            app:layout_constraintTop_toBottomOf="@id/switch_setting_notice"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_finger"
+            app:layout_constraintTop_toBottomOf="@id/switch_setting_finger"
             android:src="@drawable/btn_setting"/>
 
         <ImageView
@@ -207,7 +207,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_finger"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_msg"
             android:src="@drawable/btn_setting"/>
 
@@ -242,7 +242,7 @@
             android:textSize="16dp"
             android:textColor="@color/main_black"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_finger"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_shield"
             android:src="@drawable/btn_setting"/>
 
@@ -274,7 +274,7 @@
             android:layout_height="24dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="@id/switch_setting_notice"
+            app:layout_constraintStart_toStartOf="@id/switch_setting_finger"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_version"
             android:src="@drawable/btn_setting"/>
 
