@@ -55,13 +55,13 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 		String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
 		//서명
 		//*토큰 주인의 유저네임이 뭔지 판별
-		String username = JWT.require(Algorithm.HMAC512("cos")).build().verify(jwtToken).getClaim("username").asString();
+		String username = JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(jwtToken).getClaim("username").asString();
 
 		//*유저네임이 있다면 아래 메소드를 실행시킴
 		//서명이 정상적으로 됨
 		if(username!=null){
 			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+username);
-			Member member  = memberRepository.findByNickname(username);
+			Member member  = memberRepository.findByEmail(username).orElseThrow(IllegalArgumentException::new);
 
 			//*유저 정보 들어 있음
 			PrincipalDetails principalDetails = new PrincipalDetails(member);

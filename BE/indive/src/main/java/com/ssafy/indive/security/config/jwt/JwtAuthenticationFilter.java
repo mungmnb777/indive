@@ -94,7 +94,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		//그리고 토큰을 만듬
 		//RSA 아니고 Hash 방식임
 		String jwtToken = JWT.create()
-				.withSubject("INDIVE토큰")
+				.withSubject("INDIVE")
 				//토큰만료시간
 				.withExpiresAt(new Date(System.currentTimeMillis()+120000*10))
 				//id 랑 username 같은건 내가 넣고싶은거 넣음됨
