@@ -3,7 +3,6 @@ package com.ssafy.indive.view.home
 import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.indive.base.BaseFragment
@@ -15,9 +14,7 @@ import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.view.player.PlayerActivity
 import com.ssafy.indive.view.songdetail.SongDetailActivity
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -70,7 +67,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
         binding.ivQr.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_QRFragment)
+//            findNavController().navigate(R.id.action_homeFragment_to_QRFragment)
+            val intent = Intent(requireActivity(),PlayerActivity::class.java)
+            startActivity(intent)
         }
 
     }

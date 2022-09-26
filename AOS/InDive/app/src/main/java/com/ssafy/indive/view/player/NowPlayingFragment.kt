@@ -1,10 +1,10 @@
 package com.ssafy.indive.view.player
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.google.android.exoplayer2.Player
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentNowPlayingBinding
@@ -14,20 +14,22 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>(R.layout.frag
     companion object{
 
         lateinit var nowPlayingBinding: FragmentNowPlayingBinding
-
+        @SuppressLint("StaticFieldLeak")
+        var mContext: Context? = null
 
     }
     override fun init() {
+        mContext = context
         nowPlayingBinding = binding
         binding.root.visibility = View.INVISIBLE
 
         binding.ivNowPlayingPlay.setOnClickListener {
-            if(PlayerActivity.isPlaying) pauseMusic() else playMusic()
+            if(PlayerFragment.isPlaying) pauseMusic() else playMusic()
         }
 
         binding.root.setOnClickListener {
             val intent = Intent(requireContext(),PlayerActivity::class.java)
-            intent.putExtra("index",PlayerActivity.songPosition)
+            intent.putExtra("index",PlayerFragment.songPosition)
             intent.putExtra("class","NowPlaying")
             startActivity(intent)
         }
@@ -35,31 +37,31 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>(R.layout.frag
 
     override fun onResume() {
         super.onResume()
-        if(PlayerActivity.musicService!=null){
+        if(PlayerFragment.musicService!=null){
             binding.root.visibility = View.VISIBLE
             binding.tvNowPlayingTitle.isSelected = true
 
-            Glide.with(this).load(PlayerActivity.musicList[PlayerActivity.songPosition].coverUrl).centerCrop()
+            Glide.with(this).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl).centerCrop()
                 .into(binding.ivNowPlayingCover)
-            binding.tvNowPlayingTitle.text = PlayerActivity.musicList[PlayerActivity.songPosition].track
+            binding.tvNowPlayingTitle.text = PlayerFragment.musicList[PlayerFragment.songPosition].track
 
-            if(PlayerActivity.isPlaying) binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
+            if(PlayerFragment.isPlaying) binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
             else binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
 
         }
     }
 
     private fun playMusic(){
-        PlayerActivity.musicService!!.exoPlayer!!.play()
+        PlayerFragment.musicService!!.exoPlayer!!.play()
         binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
-        PlayerActivity.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
-        PlayerActivity.isPlaying = true
+        PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
+        PlayerFragment.isPlaying = true
     }
     private fun pauseMusic(){
-        PlayerActivity.musicService!!.exoPlayer!!.pause()
+        PlayerFragment.musicService!!.exoPlayer!!.pause()
         binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
-        PlayerActivity.musicService!!.showNotification(R.drawable.ic_baseline_play_arrow_24)
-        PlayerActivity.isPlaying = false
+        PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_play_arrow_24)
+        PlayerFragment.isPlaying = false
     }
 
 }

@@ -35,7 +35,7 @@
         android:id="@+id/tv_item_artist"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@{music.artistName}"
+        android:text="@{music.memberName}"
         android:textColor="@color/main_grey"
         android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@id/tv_item_title"

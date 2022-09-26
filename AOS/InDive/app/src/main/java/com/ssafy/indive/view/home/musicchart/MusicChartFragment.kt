@@ -40,7 +40,6 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
 
         val playListener: (Music) -> (Unit) = {
             mainViewModel.insert()
-            mainViewModel.getAll()
             val intent = Intent(context, PlayerActivity::class.java)
             intent.putExtra("class","HomeFragment")
             startActivity(intent)

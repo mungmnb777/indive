@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.dto.Music
+import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,10 +24,10 @@ class HomeViewModel @Inject constructor(
 
     private val _musicList: MutableStateFlow<Result<List<Music>>> =
         MutableStateFlow(Result.Unintialized)
-    val musicList get() = _musicList
+    val musicList get() = _musicList.asStateFlow()
 
     private val _str: MutableStateFlow<String> = MutableStateFlow("")
-    val str get() = _str
+    val str get() = _str.asStateFlow()
 
     private val _successMsgEvent = SingleLiveEvent<String>()
     val successMsgEvent get() = _successMsgEvent
@@ -50,30 +52,13 @@ class HomeViewModel @Inject constructor(
 
 
     fun initRecentSongList() {
-        val songList = mutableListOf(
-            Music(0, 0, "가수1", 0, 0, "제목1", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수2", 0, 0, "제목2", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수3", 0, 0, "제목3", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수4", 0, 0, "제목4", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수5", 0, 0, "제목5", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수6", 0, 0, "제목6", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수7", 0, 0, "제목7", "", "", "", "", "", "", "", "", ""),
-        )
 
-        _recentSongList.postValue(songList)
     }
 
     fun initPopularSongList() {
-        val songList = mutableListOf(
-            Music(0, 0, "가수1", 0, 0, "제목1", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수2", 0, 0, "제목2", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수3", 0, 0, "제목3", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수4", 0, 0, "제목4", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수5", 0, 0, "제목5", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수6", 0, 0, "제목6", "", "", "", "", "", "", "", "", ""),
-            Music(0, 0, "가수7", 0, 0, "제목7", "", "", "", "", "", "", "", "", ""),
-        )
-        _popularSongList.postValue(songList)
+
+        val popularList = mutableListOf(Music(0,"제목","","","","","","","",null,null,"가수"))
+        _popularSongList.postValue(popularList)
     }
 
 

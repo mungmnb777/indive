@@ -2,6 +2,7 @@ package com.ssafy.indive.model.dto
 
 import android.util.Log
 import com.ssafy.indive.view.player.PlayerActivity
+import com.ssafy.indive.view.player.PlayerFragment
 import java.util.concurrent.TimeUnit
 
 data class PlayListMusic(
@@ -23,20 +24,20 @@ fun formatDuration(duration : Long) : String{
 
 fun setSongPosition(increment: Boolean){
 
-    Log.d("setSongPosition", "increment: $increment ")
-    Log.d("setSongPosition", "PlayerActivity.songPosition: ${PlayerActivity.songPosition} ")
-    Log.d("setSongPosition", "PlayerActivity.musicList.size: ${PlayerActivity.musicList.size} ")
+    Log.d("setSongPosition2", "increment: $increment ")
+    Log.d("setSongPosition2", "PlayerActivity.songPosition: ${PlayerFragment.songPosition} ")
+    Log.d("setSongPosition2", "PlayerActivity.musicList.size: ${PlayerFragment.musicList.size} ")
     if(increment){
-        if(PlayerActivity.musicList.size -1 == PlayerActivity.songPosition){
-            PlayerActivity.songPosition = 0
+        if(PlayerFragment.musicList.size -1 == PlayerFragment.songPosition){
+            PlayerFragment.songPosition = 0
         }else{
-            ++PlayerActivity.songPosition
+            ++PlayerFragment.songPosition
         }
     }else{
-        if(PlayerActivity.songPosition == 0){
-            PlayerActivity.songPosition = PlayerActivity.musicList.size-1
+        if(PlayerFragment.songPosition == 0){
+            PlayerFragment.songPosition = PlayerFragment.musicList.size-1
         }else{
-            --PlayerActivity.songPosition
+            --PlayerFragment.songPosition
         }
     }
 }
