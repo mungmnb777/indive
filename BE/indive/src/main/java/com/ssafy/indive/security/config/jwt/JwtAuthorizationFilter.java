@@ -8,6 +8,7 @@ import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +28,7 @@ import java.util.Date;
 // 인가
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	//TODO : 이건왜있는걸까
+	@Autowired
 	private MemberRepository memberRepository;
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, MemberRepository memberRepository) {
 		super(authenticationManager);
