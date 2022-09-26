@@ -37,7 +37,8 @@ class MemberViewModel @Inject constructor(
                 _login.value = it
                 Log.d(TAG, "memberLogin: ${it}")
                 if(it is Result.Success){
-                    Log.d(TAG, "memberLogin: ${it.data}")
+                    Log.d(TAG, "memberLogin: ${it.data.body()}")
+                    Log.d(TAG, "memberJoin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
                 }
             }
         }
@@ -50,7 +51,7 @@ class MemberViewModel @Inject constructor(
                 Log.d(TAG, "memberJoin: ${it}")
                 if(it is Result.Success){
                     Log.d(TAG, "memberJoin: ${it.data.body()}")
-                    Log.d(TAG, "memberJoin: ${it.data.headers()["Authorization"]}")
+
             } }
         }
     }
