@@ -9,14 +9,15 @@ import com.bumptech.glide.Glide
 import com.ssafy.indive.di.ApplicationClass
 import com.ssafy.indive.model.dto.setSongPosition
 import com.ssafy.indive.view.player.NowPlayingFragment
-import com.ssafy.indive.view.player.PlayerActivity
+import com.ssafy.indive.view.player.PlayerFragment
 
 class NotificationReceiver : BroadcastReceiver() {
     override fun onReceive(p0: Context?, p1: Intent?) {
 
         when (p1?.action) {
             ApplicationClass.PLAY -> {
-                if (PlayerActivity.isPlaying) pauseMusic() else playMusic()
+                Log.d("NotificationReceiver2", "onReceive:${PlayerFragment.isPlaying} ")
+                if (PlayerFragment.isPlaying) pauseMusic() else playMusic()
             }
             ApplicationClass.PREV -> {
                 prevNextMusic(false, context = p0!!)
@@ -29,37 +30,41 @@ class NotificationReceiver : BroadcastReceiver() {
     }
 
     private fun playMusic() {
-        PlayerActivity.isPlaying = true
-        PlayerActivity.musicList[PlayerActivity.songPosition].isPlaying = true
-
-        PlayerActivity.musicService!!.exoPlayer!!.play()
-        PlayerActivity.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
-        PlayerActivity.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerActivity.context!!,R.drawable.ic_baseline_pause_24)
+        PlayerFragment.isPlaying = true
+        PlayerFragment.musicList[PlayerFragment.songPosition].isPlaying = true
+        PlayerFragment.musicService!!.exoPlayer!!.play()
+        PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
+        PlayerFragment.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerFragment.mContext!!,R.drawable.ic_baseline_pause_24)
         NowPlayingFragment.nowPlayingBinding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
+        Glide.with(NowPlayingFragment.mContext!!).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl).centerCrop()
+            .into(NowPlayingFragment.nowPlayingBinding.ivNowPlayingCover)
+        NowPlayingFragment.nowPlayingBinding.tvNowPlayingTitle.text = PlayerFragment.musicList[PlayerFragment.songPosition].track
+
+
     }
 
     private fun pauseMusic() {
-        PlayerActivity.isPlaying = false
-        PlayerActivity.musicService!!.exoPlayer!!.pause()
-        PlayerActivity.musicService!!.showNotification(R.drawable.ic_baseline_play_arrow_24)
-        PlayerActivity.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerActivity.context!!,R.drawable.ic_baseline_play_arrow_24)
+        PlayerFragment.isPlaying = false
+        PlayerFragment.musicService!!.exoPlayer!!.pause()
+        PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_play_arrow_24)
+        PlayerFragment.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerFragment.mContext!!,R.drawable.ic_baseline_play_arrow_24)
         NowPlayingFragment.nowPlayingBinding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
     }
 
     private fun prevNextMusic(increment: Boolean, context: Context) {
-        PlayerActivity.musicList[PlayerActivity.songPosition].isPlaying = false
+        PlayerFragment.musicList[PlayerFragment.songPosition].isPlaying = false
         setSongPosition(increment = increment)
-        PlayerActivity.musicService!!.createExoPlayer()
-        Log.d("setSongPosition", "prevNextMusic: ${PlayerActivity.songPosition}")
+        PlayerFragment.musicService!!.createExoPlayer()
+        Log.d("setSongPosition2", "prevNextMusic: ${PlayerFragment.songPosition}")
 
-        Glide.with(context).load(PlayerActivity.musicList[PlayerActivity.songPosition].coverUrl)
-            .into(PlayerActivity.playerBinding.ivCoverImg)
-        Glide.with(context).load(PlayerActivity.musicList[PlayerActivity.songPosition].coverUrl)
-            .into(PlayerActivity.playerBinding.ivBackground)
-        PlayerActivity.playerBinding.tvSongTitle.text =
-            PlayerActivity.musicList[PlayerActivity.songPosition].track
-        PlayerActivity.playerBinding.tvSongArtist.text =
-            PlayerActivity.musicList[PlayerActivity.songPosition].artist
+        Glide.with(context).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl)
+            .into(PlayerFragment.playerBinding.ivCoverImg)
+        Glide.with(context).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl)
+            .into(PlayerFragment.playerBinding.ivBackground)
+        PlayerFragment.playerBinding.tvSongTitle.text =
+            PlayerFragment.musicList[PlayerFragment.songPosition].track
+        PlayerFragment.playerBinding.tvSongArtist.text =
+            PlayerFragment.musicList[PlayerFragment.songPosition].artist
 
         playMusic()
     }
