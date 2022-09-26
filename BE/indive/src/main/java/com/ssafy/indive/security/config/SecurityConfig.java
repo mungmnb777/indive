@@ -30,7 +30,7 @@ public class SecurityConfig {
     @Autowired
     private CorsConfig corsConfig;
 
-
+    @Autowired
     private MemberRepository memberRepository;
 
     //필드 주입은 권장되는 방법이 아님
