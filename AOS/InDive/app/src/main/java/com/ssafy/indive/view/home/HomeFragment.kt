@@ -91,7 +91,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         val playListener: (Music) -> (Unit) = {
-            mainViewModel.insert()
+            mainViewModel.insert(it.musicSeq)
             val intent = Intent(context, PlayerActivity::class.java)
             intent.putExtra("class","HomeFragment")
             startActivity(intent)
