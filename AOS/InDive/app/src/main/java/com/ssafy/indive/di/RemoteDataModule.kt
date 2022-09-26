@@ -2,6 +2,7 @@ package com.ssafy.indive.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.ssafy.indive.api.MemberManagerApi
 import com.ssafy.indive.api.MusicManagerApi
 import com.ssafy.indive.utils.BASE_URL
 import com.ssafy.indive.utils.XAccessTokenInterceptor
@@ -60,8 +61,14 @@ object RemoteDataModule {
 
     @Provides
     @Singleton
-    fun provideSongManagerApi(@Named("mainRetrofit") retrofit: Retrofit): MusicManagerApi {
+    fun provideMusicManagerApi(@Named("mainRetrofit") retrofit: Retrofit): MusicManagerApi {
         return retrofit.create(MusicManagerApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMemberManagerApi(@Named("mainRetrofit") retrofit: Retrofit): MemberManagerApi {
+        return retrofit.create(MemberManagerApi::class.java)
     }
 
 }

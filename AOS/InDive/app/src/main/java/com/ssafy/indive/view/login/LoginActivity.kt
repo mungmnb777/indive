@@ -14,7 +14,7 @@ import com.ssafy.indive.utils.JWT
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class LoginActivity : com.ssafy.indive.base.BaseActivity<ActivityMainBinding>(R.layout.activity_login) {
 
 //    @Inject
