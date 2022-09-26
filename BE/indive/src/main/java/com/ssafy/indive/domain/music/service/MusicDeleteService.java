@@ -4,8 +4,10 @@ import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.exception.NotMatchMemberException;
 import com.ssafy.indive.domain.music.entity.Music;
 import com.ssafy.indive.domain.music.entity.MusicLike;
+import com.ssafy.indive.domain.music.entity.Reply;
 import com.ssafy.indive.domain.music.repository.MusicLikeRepository;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
+import com.ssafy.indive.domain.music.repository.ReplyRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
 import com.ssafy.indive.global.utils.FileUtils;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
@@ -26,6 +28,8 @@ public class MusicDeleteService {
     private final MusicRepository musicRepository;
 
     private final MusicLikeRepository musicLikeRepository;
+
+    private final ReplyRepository replyRepository;
 
     public boolean deleteMusic(long musicSeq) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -65,6 +69,23 @@ public class MusicDeleteService {
         musicLikeRepository.delete(optionalMusicLike.get());
 
         findMusic.minusLikeCount();
+
+        return true;
+    }
+
+    public boolean deleteMusicReply(long replySeq) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
+        Member loginMember = principal.getMember();
+
+        Reply findReply = replyRepository.findById(replySeq).orElseThrow(IllegalArgumentException::new);
+
+        if (!Objects.equals(loginMember.getSeq(), findReply.getAuthor().getSeq()))
+            throw new NotMatchMemberException("해당 댓글의 주인이 아닙니다.");
+
+        replyRepository.delete(findReply);
 
         return true;
     }
