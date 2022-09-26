@@ -27,7 +27,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-class AddSongFirstFragment :
+class AddMusicFirstFragment :
     BaseFragment<FragmentAddSongFirstBinding>(R.layout.fragment_add_song_first) {
 
     lateinit var imgFile : MultipartBody.Part

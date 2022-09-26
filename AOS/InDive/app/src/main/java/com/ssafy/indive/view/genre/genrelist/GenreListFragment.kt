@@ -38,7 +38,7 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(R.layout.fragme
 
 //        genreListViewModel.getGenres()
         val playListener: (Music) -> (Unit) = {
-            mainViewModel.insert()
+            mainViewModel.insert(it.musicSeq)
             val intent = Intent(context, PlayerActivity::class.java)
             intent.putExtra("class","HomeFragment")
             startActivity(intent)

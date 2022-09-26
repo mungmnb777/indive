@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/addSongFirstFragment"
-        android:name="com.ssafy.indive.view.mystudio.addsong.AddSongFirstFragment"
+        android:name="com.ssafy.indive.view.mystudio.addsong.AddMusicFirstFragment"
         android:label="AddSongFirstFragment" >
         <action
             android:id="@+id/action_addSongFirstFragment_to_addSongSecondFragment"
@@ -94,7 +94,7 @@
     </fragment>
     <fragment
         android:id="@+id/addSongSecondFragment"
-        android:name="com.ssafy.indive.view.mystudio.addsong.AddSongSecondFragment"
+        android:name="com.ssafy.indive.view.mystudio.addsong.AddMusicSecondFragment"
         android:label="AddSongSecondFragment" >
         <action
             android:id="@+id/action_addSongSecondFragment_to_addSongThirdFragment"
@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/addSongThirdFragment"
-        android:name="com.ssafy.indive.view.mystudio.addsong.AddSongThirdFragment"
+        android:name="com.ssafy.indive.view.mystudio.addsong.AddMusicThirdFragment"
         android:label="AddSongThirdFragment" >
         <action
             android:id="@+id/action_addSongThirdFragment_to_myStudioFragment"

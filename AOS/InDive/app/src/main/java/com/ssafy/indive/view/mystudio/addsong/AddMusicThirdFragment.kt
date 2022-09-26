@@ -14,7 +14,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
-class AddSongThirdFragment : BaseFragment<FragmentAddSongThirdBinding>(R.layout.fragment_add_song_third) {
+class AddMusicThirdFragment : BaseFragment<FragmentAddSongThirdBinding>(R.layout.fragment_add_song_third) {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun init() {
         initDate()
