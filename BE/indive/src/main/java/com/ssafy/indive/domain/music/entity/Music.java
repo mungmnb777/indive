@@ -113,4 +113,12 @@ public class Music extends BaseEntity {
         musicFileOrigin = musicFile.getOriginalFilename();
         musicFileUuid = FileUtils.saveFile(musicFile);
     }
+
+    public void plusLikeCount() {
+        likeCount++;
+    }
+
+    public void minusLikeCount() {
+        likeCount--;
+    }
 }

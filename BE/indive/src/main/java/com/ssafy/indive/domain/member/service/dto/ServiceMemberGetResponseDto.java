@@ -1,14 +1,14 @@
 package com.ssafy.indive.domain.member.service.dto;
 
+import com.ssafy.indive.domain.member.entity.enumeration.Role;
 import lombok.*;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ServiceMemberAddRequestDto {
+public class ServiceMemberGetResponseDto {
 
 
     @NotBlank
@@ -20,6 +20,8 @@ public class ServiceMemberAddRequestDto {
     @NotBlank
     private String nickname;
 
+    @NotBlank
+    private Role role;
 
     private String wallet;
 
@@ -27,12 +29,18 @@ public class ServiceMemberAddRequestDto {
     private String profileMessage;
 
 
+    private String notice;
+
+
     @Builder
-    public ServiceMemberAddRequestDto(String email, String password, String nickname, String wallet, String profileMessage) {
+
+    public ServiceMemberGetResponseDto(String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+        this.role = role;
         this.wallet = wallet;
         this.profileMessage = profileMessage;
+        this.notice = notice;
     }
 }
