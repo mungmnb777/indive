@@ -54,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="1,000 SSF"
+            tools:text="1,000 IVE"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -146,8 +146,8 @@
             android:id="@+id/tv_alert_nft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            tools:text="2,000 IVE 이상 후원 시 NFT를 받을 수 있습니다."
+            android:layout_marginTop="8dp"
+            android:text="2,000 IVE 이상 후원 시 NFT를 받을 수 있습니다."
             app:layout_constraintTop_toBottomOf="@id/btn_max"
             app:layout_constraintEnd_toEndOf="@id/btn_max"/>
 
@@ -160,7 +160,7 @@
             android:layout_marginTop="20dp"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/cv_donate_coin"
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_nft"
             app:layout_constraintStart_toStartOf="@id/tv_title"
             />
 

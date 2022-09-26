@@ -21,6 +21,7 @@ class LoginActivity : com.ssafy.indive.base.BaseActivity<ActivityMainBinding>(R.
 //    lateinit var sharedPref: SharedPreferences
 
     override fun init() {
+
 //        if(!sharedPref.getBoolean(PERMISSION_OK, false)){
 //            startActivity(Intent(this, PermissionActivity::class.java))
 //            finish()

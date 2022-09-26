@@ -25,3 +25,7 @@ const val PLAY_LIST = "play_list"
 // 날짜 Flag
 const val START_DAY = 0
 const val RESERVATION_DAY = 1
+
+const val FINGERPRINT_USE = "fingerprint_use"
+const val ABLE = 1
+const val DISABLE = 2

@@ -3,47 +3,43 @@ package com.ssafy.indive.utils
 import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
+import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.ssafy.indive.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 // 다이얼로그 사이즈 조절
-fun Context.dialogResize(dialog: Dialog, width: Float, height: Float){
+fun Context.dialogResize(dialogFragment: DialogFragment, width: Float, height: Float) {
     val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-    if (Build.VERSION.SDK_INT < 30){
-        val display = windowManager.defaultDisplay
-        val size = Point()
+    val display = windowManager.defaultDisplay
+    val size = Point()
 
-        display.getSize(size)
+    display.getSize(size)
 
-        val window = dialog.window
+    val params: ViewGroup.LayoutParams? = dialogFragment.dialog?.window?.attributes
+    val deviceWidth = size.x
+    val deviceHeight = size.y
 
-        val x = (size.x * width).toInt()
-        val y = (size.y * height).toInt()
+    params?.width = (deviceWidth * width).toInt()
+    params?.height = (deviceHeight * height).toInt()
+    dialogFragment.dialog?.window?.attributes = params as WindowManager.LayoutParams
+    dialogFragment.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        window?.setLayout(x, y)
-
-    }else{
-        val rect = windowManager.currentWindowMetrics.bounds
-
-        val window = dialog.window
-        val x = (rect.width() * width).toInt()
-        val y = (rect.height() * height).toInt()
-
-        window?.setLayout(x, y)
-    }
 }
 
 // 서버 시간 포매터
 fun timeFormatter(time: Long?): String {
-    if(time == null){
+    if (time == null) {
         return ""
     }
     val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -53,7 +49,7 @@ fun timeFormatter(time: Long?): String {
 
 // 러닝 제목 포매터
 fun timeNameFormatter(time: Long?): String {
-    if(time == null){
+    if (time == null) {
         return ""
     }
     val dateFormat = SimpleDateFormat("yyyy년 MM월 dd일 러닝")
