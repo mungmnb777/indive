@@ -38,23 +38,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		//3.Principaldetails 를 세션에 담고 -> 세션에 안 담으면 권한 관리가 안 됨
 		//4.jwt 토큰을 만ㄷ르어서 응답해주면 됨
 
-//안드는 xxx-form 으로 넘어올 것이다.
-//            BufferedReader br = request.getReader();
-//            String input = null;
-//            while((input=br.readLine())!=null){
-//                System.out.println(input);
 
 		//파싱해줌
 		ObjectMapper om = new ObjectMapper();
 		try {
 			//*로그인으로 패스워드나 비밀번호를 보냈을 때 여기에 정보가 들어 있음.
 
-			Member member = om.readValue(request.getInputStream(),Member.class);
-			System.out.println("jwtA : " +member);
+			LoginRequestDto loginRequestDto = om.readValue(request.getInputStream(),LoginRequestDto.class);
+			System.out.println("jwtA : " +loginRequestDto);
 
 			//*manager 가 인증을 할 때 이 정보를 이용해서 인증을 하게 됨
 			UsernamePasswordAuthenticationToken authenticationToken =
-					new UsernamePasswordAuthenticationToken(member.getEmail(),member.getPassword());
+					new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(),loginRequestDto.getPassword());
 
 			//PrincipalDetailsService 의 loadUserByUsername()함수가 실행됨
 			//인증이되면 authentication 에 내 로그인한 정보가 담깁니다.
@@ -99,7 +94,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.withExpiresAt(new Date(System.currentTimeMillis()+120000*10))
 				//id 랑 username 같은건 내가 넣고싶은거 넣음됨
 				.withClaim("seq",principalDetails.getMember().getSeq())
-				.withClaim("username", principalDetails.getMember().getNickname())
+				.withClaim("username", principalDetails.getMember().getEmail())
 				.sign(Algorithm.HMAC512("INDIVE")); // 서버만 알고 있는 secret 값
 
 		//헤더에 넣겠다(Bearer 에 한칸 띄울것)

@@ -50,6 +50,8 @@ public class SecurityConfig {
 
         // AuthenticationManager는 인증을 도와주는 친구..
         AuthenticationManager authenticationManagerObject = authenticationManagerBuilder.getObject();
+        JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManagerObject);
+        jwtAuthenticationFilter.setFilterProcessesUrl("/members/login");
 ////////////////
         http
                 .addFilter(corsConfig.corsFilter())
@@ -60,11 +62,12 @@ public class SecurityConfig {
 
                 .formLogin().disable()
                 .httpBasic().disable()
+                .addFilter(jwtAuthenticationFilter)
                 .addFilter(new JwtAuthenticationFilter(authenticationManagerObject))
                 .addFilter(new JwtAuthorizationFilter(authenticationManagerObject, memberRepository))
                 //.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()))
 
-                //TODO : 
+                //TODO :
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**")
                 .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
