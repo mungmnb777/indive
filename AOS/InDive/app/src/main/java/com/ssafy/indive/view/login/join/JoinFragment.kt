@@ -21,11 +21,10 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join){
     private fun initClickListener(){
         binding.apply {
             btnJoin.setOnClickListener {
+//                memberViewModel.memberJoin(MemberJoin("22@22", "22", "22", "22", "22" ))
                 findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
             }
-            btnJoin.setOnClickListener {
-                memberViewModel.memberJoin(MemberJoin("22@22", "22", "22", "22", "22" ))
-            }
+
         }
     }
 

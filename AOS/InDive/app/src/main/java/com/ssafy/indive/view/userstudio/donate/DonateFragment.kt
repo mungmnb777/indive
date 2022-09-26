@@ -1,6 +1,10 @@
 package com.ssafy.indive.view.userstudio.donate
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.provider.Settings
+import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
+import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 
@@ -61,6 +65,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
+
 
                     findNavController().popBackStack()
                 }
