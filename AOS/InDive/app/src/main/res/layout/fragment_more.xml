@@ -48,11 +48,12 @@
             app:layout_constraintVertical_bias="0.1"/>
 
         <TextView
+            android:text="1,000 IVE"
             android:id="@+id/tv_token"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="1,000 SSF"
+            tools:text="1,000 IVE"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:textStyle="bold"
