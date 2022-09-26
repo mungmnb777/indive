@@ -28,7 +28,7 @@ import java.util.Date;
 // 인가
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	//TODO : 이건왜있는걸까
-	@Autowired
+
 	private MemberRepository memberRepository;
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, MemberRepository memberRepository) {
 		super(authenticationManager);
