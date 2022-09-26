@@ -40,7 +40,7 @@ public class MusicDeleteService {
 
         Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
 
-        if (Objects.equals(loginMember.getSeq(), findMusic.getAuthor().getSeq()))
+        if (!Objects.equals(loginMember.getSeq(), findMusic.getAuthor().getSeq()))
             throw new NotMatchMemberException("해당 음원의 주인이 아닙니다.");
 
         FileUtils.deleteFile(findMusic.getImageUuid());

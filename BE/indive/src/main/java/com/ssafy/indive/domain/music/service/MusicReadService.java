@@ -10,8 +10,10 @@ import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicGetResponseDto;
 import com.ssafy.indive.domain.music.service.dto.ServiceReplyAddRequestDto;
 import com.ssafy.indive.domain.music.service.dto.ServiceReplyGetResponseDto;
+import com.ssafy.indive.global.utils.FileUtils;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -111,5 +113,17 @@ public class MusicReadService {
         }
 
         return dtos;
+    }
+
+    public UrlResource downloadMusic(long musicSeq) {
+        Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
+
+        return FileUtils.getUrlResource(findMusic.getMusicFileUuid());
+    }
+
+    public UrlResource downloadImage(long musicSeq) {
+        Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
+
+        return FileUtils.getUrlResource(findMusic.getImageUuid());
     }
 }

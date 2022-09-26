@@ -7,11 +7,14 @@ import com.ssafy.indive.domain.music.service.MusicDeleteService;
 import com.ssafy.indive.domain.music.service.MusicModifyService;
 import com.ssafy.indive.domain.music.service.MusicReadService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -142,6 +145,24 @@ public class MusicController {
             return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         } catch (NotMatchMemberException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/{musicSeq}/file-download", produces = "application/octet-stream")
+    public ResponseEntity<?> downloadMusic(@PathVariable("musicSeq") long musicSeq) {
+        try {
+            return new ResponseEntity<>(musicReadService.downloadMusic(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/{musicSeq}/image-download", produces = "application/octet-stream")
+    public ResponseEntity<?> downloadImage(@PathVariable("musicSeq") long musicSeq) {
+        try {
+            return new ResponseEntity<>(musicReadService.downloadImage(musicSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         }
     }
 }
