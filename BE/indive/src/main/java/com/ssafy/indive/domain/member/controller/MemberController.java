@@ -38,5 +38,6 @@ public class MemberController {
     }
 
 
-
+// TODO : 1. /members/login 으로 보내야 함. SecurityConfig 에 설정을 해 주면 된다.
+// TODO : 2. 로그인은 DTO 로 받아야 한다. JwtAuthenticationFilter에서 Member 로 받고 있는데 이거 dto 로 받아라. 냅다 바꾸면 된다.
 }
