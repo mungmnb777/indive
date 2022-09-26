@@ -99,5 +99,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 		//헤더에 넣겠다(Bearer 에 한칸 띄울것)
 		response.addHeader("Authorization","Bearer "+jwtToken);
+		response.getWriter().write("true");
 	}
 }

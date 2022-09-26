@@ -69,7 +69,9 @@ public class FileUtils {
         String originFilename = file.getOriginalFilename();
 
         // 확장자가 무엇인지 확인하기 위해 위치를 확인한다.
+
         int originExtensionIndex = originFilename.lastIndexOf(".");
+        System.out.println(originExtensionIndex);
 
         // 랜덤 UUID값을 서버에 저장한다.
         String uuid = String.valueOf(UUID.randomUUID());

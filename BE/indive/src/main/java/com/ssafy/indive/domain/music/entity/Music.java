@@ -70,6 +70,9 @@ public class Music extends BaseEntity {
     @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MusicLike> musicLikes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "music", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Reply> replies = new ArrayList<>();
+
     @Builder
     public Music(Long seq, Member author, String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDatetime, LocalDateTime reservationDatetime, String imageOrigin, String imageUuid, String musicFileOrigin, String musicFileUuid, int likeCount) {
         this.seq = seq;
@@ -112,5 +115,13 @@ public class Music extends BaseEntity {
         // mp3 파일
         musicFileOrigin = musicFile.getOriginalFilename();
         musicFileUuid = FileUtils.saveFile(musicFile);
+    }
+
+    public void plusLikeCount() {
+        likeCount++;
+    }
+
+    public void minusLikeCount() {
+        likeCount--;
     }
 }
