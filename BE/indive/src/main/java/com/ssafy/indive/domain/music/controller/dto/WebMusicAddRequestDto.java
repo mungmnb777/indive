@@ -36,12 +36,10 @@ public class WebMusicAddRequestDto {
     @DateTimeFormat(pattern = DatetimeConst.FORMAT)
     private LocalDateTime reservationDateTime;
 
-    private MultipartFile image;
 
-    private MultipartFile musicFile;
 
     @Builder
-    public WebMusicAddRequestDto(String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, MultipartFile image, MultipartFile musicFile) {
+    public WebMusicAddRequestDto(String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime) {
         this.title = title;
         this.lyricist = lyricist;
         this.composer = composer;
@@ -50,8 +48,8 @@ public class WebMusicAddRequestDto {
         this.lyrics = lyrics;
         this.releaseDateTime = releaseDateTime;
         this.reservationDateTime = reservationDateTime;
-        this.image = image;
-        this.musicFile = musicFile;
+//        this.image = image;
+//        this.musicFile = musicFile;
     }
 
     public ServiceMusicAddRequestDto convertToServiceDto() {
@@ -64,8 +62,8 @@ public class WebMusicAddRequestDto {
                 .lyrics(lyrics)
                 .releaseDateTime(releaseDateTime)
                 .reservationDateTime(reservationDateTime)
-                .image(image)
-                .musicFile(musicFile)
+//                .image(image)
+//                .musicFile(musicFile)
                 .build();
     }
 }
