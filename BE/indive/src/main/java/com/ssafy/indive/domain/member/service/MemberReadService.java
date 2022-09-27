@@ -51,7 +51,7 @@ public class MemberReadService {
     public  ServiceMemberGetResponseDto getLoginMemberDetails() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
+
         return ServiceMemberGetResponseDto.builder()
                 .email( ((PrincipalDetails) authentication.getPrincipal()).getMember().getEmail())
                 .nickname( ((PrincipalDetails) authentication.getPrincipal()).getMember().getNickname())
