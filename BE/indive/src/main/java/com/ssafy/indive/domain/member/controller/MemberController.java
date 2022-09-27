@@ -45,4 +45,9 @@ public class MemberController {
         return new ResponseEntity<>(memberModifyService.modifyMember(memberSeq, dto.convertToServiceDto()), HttpStatus.OK);
     }
 
+    @GetMapping("/my-account")
+    public ResponseEntity<?> getLoginMemberDetails() {
+        return new ResponseEntity<>(memberReadService.getLoginMemberDetails(), HttpStatus.OK);
+    }
+
 }

@@ -5,11 +5,20 @@ import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.dto.ServiceDuplicatedEmail;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberAddRequestDto;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberGetResponseDto;
+import com.ssafy.indive.security.config.auth.PrincipalDetails;
+import com.ssafy.indive.security.dto.LoginResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 @Transactional
@@ -17,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberReadService {
 
     private final MemberRepository memberRepository;
+
 
     public boolean isDuplicated(ServiceDuplicatedEmail convertToServiceDto) {
         System.out.println(convertToServiceDto.getEmail());
@@ -37,4 +47,20 @@ public class MemberReadService {
                 .notice(member.getNotice())
                 .build();
     }
+
+    public  ServiceMemberGetResponseDto getLoginMemberDetails() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        return ServiceMemberGetResponseDto.builder()
+                .email( ((PrincipalDetails) authentication.getPrincipal()).getMember().getEmail())
+                .nickname( ((PrincipalDetails) authentication.getPrincipal()).getMember().getNickname())
+                .role( ((PrincipalDetails) authentication.getPrincipal()).getMember().getRole())
+                .wallet( ((PrincipalDetails) authentication.getPrincipal()).getMember().getWallet())
+                .profileMessage( ((PrincipalDetails) authentication.getPrincipal()).getMember().getProfileMessage())
+                .notice( ((PrincipalDetails) authentication.getPrincipal()).getMember().getNotice())
+                .build();
+
+    }
+
 }
