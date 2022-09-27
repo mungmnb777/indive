@@ -3,6 +3,7 @@ package com.ssafy.indive.domain.member.controller;
 import com.ssafy.indive.domain.member.controller.dto.WebDuplicatedEmail;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberAddRequestDto;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberModifyRequestDto;
+import com.ssafy.indive.domain.member.controller.dto.WebMemberWriteNoticeRequestDto;
 import com.ssafy.indive.domain.member.service.MemberAddService;
 import com.ssafy.indive.domain.member.service.MemberModifyService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
@@ -26,7 +27,7 @@ public class MemberController {
     private final MemberModifyService memberModifyService;
 
     @PostMapping("join")
-    public ResponseEntity<?> addMember(@Validated @RequestBody WebMemberAddRequestDto dto) {
+    public ResponseEntity<?> addMember(@RequestBody WebMemberAddRequestDto dto) {
         return new ResponseEntity<>(memberAddService.addMember(dto.convertToServiceDto()), HttpStatus.OK);
     }
 
@@ -43,6 +44,16 @@ public class MemberController {
     @PutMapping("/{memberSeq}")
     public ResponseEntity<?> modifyMember(@Validated @ModelAttribute WebMemberModifyRequestDto dto, @PathVariable("memberSeq") long memberSeq) {
         return new ResponseEntity<>(memberModifyService.modifyMember(memberSeq, dto.convertToServiceDto()), HttpStatus.OK);
+    }
+
+    @GetMapping("/my-account")
+    public ResponseEntity<?> getLoginMemberDetails() {
+        return new ResponseEntity<>(memberReadService.getLoginMemberDetails(), HttpStatus.OK);
+    }
+
+    @PostMapping("{memberSeq}/notice")
+    public ResponseEntity<?> writeNotice(@RequestBody WebMemberWriteNoticeRequestDto dto ,@PathVariable("memberSeq") long memberSeq) {
+        return new ResponseEntity<>(memberAddService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);
     }
 
 }

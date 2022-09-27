@@ -71,6 +71,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		} catch (Exception e) {
 
 			e.printStackTrace();
+			try {
+				response.getWriter().write("false");
+			} catch (IOException ex) {
+				throw new RuntimeException(ex);
+			}
+
 		}
 
 		System.out.println("=====================================");
