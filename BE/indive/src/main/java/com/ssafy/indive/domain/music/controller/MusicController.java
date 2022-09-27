@@ -2,19 +2,18 @@ package com.ssafy.indive.domain.music.controller;
 
 import com.ssafy.indive.domain.member.exception.NotMatchMemberException;
 import com.ssafy.indive.domain.music.controller.dto.*;
+import com.ssafy.indive.domain.music.exception.MusicFileNotFoundException;
 import com.ssafy.indive.domain.music.service.MusicAddService;
 import com.ssafy.indive.domain.music.service.MusicDeleteService;
 import com.ssafy.indive.domain.music.service.MusicModifyService;
 import com.ssafy.indive.domain.music.service.MusicReadService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +30,11 @@ public class MusicController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> addMusic(@Validated @ModelAttribute WebMusicAddRequestDto dto) {
-        return new ResponseEntity<>(musicAddService.addMusic(dto.convertToServiceDto()), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(musicAddService.addMusic(dto.convertToServiceDto()), HttpStatus.OK);
+        } catch (MusicFileNotFoundException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping(value = "/{musicSeq}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -58,8 +61,8 @@ public class MusicController {
 
     // TODO : 테스트 코드 작성 해야함
     @GetMapping
-    public ResponseEntity<?> getMusic(@ModelAttribute WebMusicGetCondition condition) {
-        return new ResponseEntity<>(musicReadService.getMusic(condition), HttpStatus.OK);
+    public ResponseEntity<?> getMusic(@ModelAttribute WebMusicGetCondition condition, Pageable pageable) {
+        return new ResponseEntity<>(musicReadService.getMusic(condition, pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{musicSeq}")

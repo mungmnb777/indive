@@ -8,12 +8,12 @@ import com.ssafy.indive.domain.music.repository.MusicLikeRepository;
 import com.ssafy.indive.domain.music.repository.MusicQueryRepository;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicGetResponseDto;
-import com.ssafy.indive.domain.music.service.dto.ServiceReplyAddRequestDto;
 import com.ssafy.indive.domain.music.service.dto.ServiceReplyGetResponseDto;
 import com.ssafy.indive.global.utils.FileUtils;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -33,8 +33,8 @@ public class MusicReadService {
     private final MusicLikeRepository musicLikeRepository;
 
     // TODO : 테스트 코드 작성해야함
-    public List<ServiceMusicGetResponseDto> getMusic(WebMusicGetCondition condition) {
-        List<Music> music = musicQueryRepository.findAll(condition);
+    public List<ServiceMusicGetResponseDto> getMusic(WebMusicGetCondition condition, Pageable pageable) {
+        List<Music> music = musicQueryRepository.findAll(condition, pageable);
 
         List<ServiceMusicGetResponseDto> dtos = new ArrayList<>();
 
