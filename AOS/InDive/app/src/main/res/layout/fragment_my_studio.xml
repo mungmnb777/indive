@@ -107,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/civ_profile"
-            tools:text="닉네임" />
+            android:text="닉네임" />
 
         <TextView
             android:id="@+id/tv_introduce"
@@ -120,7 +120,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
-            tools:text="소개" />
+            android:text="소개란 입니다." />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/border_notice"
@@ -154,7 +154,7 @@
                 app:layout_constraintEnd_toStartOf="@id/iv_edit_notice"
                 app:layout_constraintStart_toEndOf="@id/iv_notice"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="공지사항" />
+                android:text="공지사항" />
 
             <ImageView
                 android:id="@+id/iv_edit_notice"

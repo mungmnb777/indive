@@ -2,6 +2,8 @@ package com.ssafy.indive.view.login
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.dto.MemberJoin
@@ -16,7 +18,6 @@ import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -34,22 +35,23 @@ class MemberViewModel @Inject constructor(
     val login get() = _login.asStateFlow()
 
     private val _loginSuccess = SingleLiveEvent<String>()
-    val loginSuccess
-        get() = _loginSuccess
+    val loginSuccess get() = _loginSuccess
 
     private val _loginFail = SingleLiveEvent<String>()
-    val loginFail
-        get() = _loginFail
+    val loginFail get() = _loginFail
 
     private val _join: MutableStateFlow<Result<Response<Boolean>>> =
         MutableStateFlow(Result.Unintialized)
     val join get() = _join.asStateFlow()
 
+    private val _emailCheck = SingleLiveEvent<Boolean>()
+    val emailCheck get() = _emailCheck
+
     fun memberLogin(memberLogin: MemberLogin) {
         viewModelScope.launch(Dispatchers.IO) {
             memberManagerRepository.login(memberLogin).collectLatest {
                 _login.value = it
-                Log.d(TAG, "memberLogin: ${it}")
+                Log.d(TAG, "memberLogin: $it")
                 if (it is Result.Success) {
                     val res = it.data.body()
                     if (res == "true") {
@@ -57,13 +59,11 @@ class MemberViewModel @Inject constructor(
                         sharedPreferences.edit()
                             .putString(JWT, it.data.headers()["Authorization"]!!.split(" ")[1])
                             .apply()
-
-                    } else {
-                        _loginFail.postValue("로그인 실패")
                     }
-
                     Log.d(TAG, "memberLogin: ${it.data.body()}")
                     Log.d(TAG, "memberLogin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
+                }else {
+                    _loginFail.postValue("로그인 실패")
                 }
             }
         }
@@ -76,7 +76,17 @@ class MemberViewModel @Inject constructor(
                 Log.d(TAG, "memberJoin: ${it}")
                 if (it is Result.Success) {
                     Log.d(TAG, "memberJoin: ${it.data.body()}")
+                }
+            }
+        }
+    }
 
+    fun memberEmailCheck(email: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            memberManagerRepository.emailcheck(email).collectLatest {
+                if(it is Result.Success){
+                    _emailCheck.postValue(it.data.body())
+                    Log.d(TAG, "memberEmailCheck: ${it.data.body()}")
                 }
             }
         }

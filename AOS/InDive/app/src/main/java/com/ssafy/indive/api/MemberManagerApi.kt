@@ -18,7 +18,7 @@ interface MemberManagerApi {
     suspend fun memberDetail(@Path("memberSeq") memberSeq: Long): Response<MemberDetailResponse>
     // 이메일 중복확인
     @GET("members/duplicated-email")
-    suspend fun emailCheck(@PartMap map: Map<String, String>): Response<Boolean>
+    suspend fun emailCheck(@Query("email") email: String): Response<Boolean>
 
 
 }
