@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public class MusicAddService {
 
     private final ReplyRepository replyRepository;
 
-    public boolean addMusic(ServiceMusicAddRequestDto dto, MultipartFile image, MultipartFile musicFile) {
+    public boolean addMusic(ServiceMusicAddRequestDto dto) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -51,7 +50,7 @@ public class MusicAddService {
                 .likeCount(0)
                 .build();
 
-        music.uploadFiles(image, musicFile);
+        music.uploadFiles(dto.getImage(), dto.getMusicFile());
 
         musicRepository.save(music);
 
