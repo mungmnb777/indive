@@ -22,12 +22,12 @@ import kotlinx.coroutines.launch
 
 
 private const val TAG = "MemberViewModel"
+
 @HiltViewModel
 class MemberViewModel @Inject constructor(
-    private val memberManagerRepository: MemberManagerRepository
-): ViewModel() {
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
+    private val memberManagerRepository: MemberManagerRepository,
+    private val sharedPreferences: SharedPreferences
+) : ViewModel() {
 
     private val _login: MutableStateFlow<Result<Response<String>>> =
         MutableStateFlow(Result.Unintialized)
@@ -37,18 +37,31 @@ class MemberViewModel @Inject constructor(
     val loginSuccess
         get() = _loginSuccess
 
+    private val _loginFail = SingleLiveEvent<String>()
+    val loginFail
+        get() = _loginFail
+
     private val _join: MutableStateFlow<Result<Response<Boolean>>> =
         MutableStateFlow(Result.Unintialized)
     val join get() = _join.asStateFlow()
 
-    fun memberLogin(memberLogin: MemberLogin){
+    fun memberLogin(memberLogin: MemberLogin) {
         viewModelScope.launch(Dispatchers.IO) {
             memberManagerRepository.login(memberLogin).collectLatest {
                 _login.value = it
                 Log.d(TAG, "memberLogin: ${it}")
-                if(it is Result.Success){
-                    _loginSuccess.postValue(it.data.body())
-                    sharedPreferences.edit().putString(JWT, it.data.headers()["Authorization"]!!.split(" ")[1]).apply()
+                if (it is Result.Success) {
+                    val res = it.data.body()
+                    if (res == "true") {
+                        _loginSuccess.postValue("로그인 성공")
+                        sharedPreferences.edit()
+                            .putString(JWT, it.data.headers()["Authorization"]!!.split(" ")[1])
+                            .apply()
+
+                    } else {
+                        _loginFail.postValue("로그인 실패")
+                    }
+
                     Log.d(TAG, "memberLogin: ${it.data.body()}")
                     Log.d(TAG, "memberLogin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
                 }
@@ -61,10 +74,11 @@ class MemberViewModel @Inject constructor(
             memberManagerRepository.join(memberJoin).collectLatest {
                 _join.value = it
                 Log.d(TAG, "memberJoin: ${it}")
-                if(it is Result.Success){
+                if (it is Result.Success) {
                     Log.d(TAG, "memberJoin: ${it.data.body()}")
 
-            } }
+                }
+            }
         }
     }
 

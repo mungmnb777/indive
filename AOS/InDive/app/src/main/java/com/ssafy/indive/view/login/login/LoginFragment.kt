@@ -17,27 +17,41 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 private const val TAG = "LoginFragment"
+
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     private val memberViewModel: MemberViewModel by viewModels()
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun init() {
+        autoLogin()
         initClickListener()
         initViewModelCallback()
     }
 
-    private fun initViewModelCallback() {
-        memberViewModel.loginSuccess.observe(viewLifecycleOwner) {
-            if(it == "true"){
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
-            }
+    private fun autoLogin() {
+        if (sharedPreferences.getString(JWT, "") != "") {
+            loginSuccess()
         }
     }
 
-    private fun initClickListener(){
+    private fun loginSuccess() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
+    }
+
+    private fun initViewModelCallback() {
+        memberViewModel.loginSuccess.observe(viewLifecycleOwner) {
+            showToast(it)
+            loginSuccess()
+        }
+    }
+
+    private fun initClickListener() {
         binding.apply {
             btnJoinSns.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_joinSnsFragment)

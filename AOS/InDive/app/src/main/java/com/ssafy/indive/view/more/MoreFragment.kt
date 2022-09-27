@@ -19,6 +19,8 @@ import com.ssafy.indive.databinding.FragmentMoreBinding
 import com.ssafy.indive.utils.ABLE
 import com.ssafy.indive.utils.DISABLE
 import com.ssafy.indive.utils.FINGERPRINT_USE
+import com.ssafy.indive.utils.JWT
+import com.ssafy.indive.view.login.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -85,12 +87,21 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
     }
 
     private fun initClickListener() {
-        binding.btnMyWallet.setOnClickListener {
-            findNavController().navigate(R.id.action_moreFragment_to_myWalletFragment)
+        binding.apply {
+            tvSettingLogout.setOnClickListener {
+                sharedPreferences.edit().putString(JWT, "").apply()
+                val intent = Intent(requireActivity(), LoginActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+            btnMyWallet.setOnClickListener {
+                findNavController().navigate(R.id.action_moreFragment_to_myWalletFragment)
+            }
+            btnNftList.setOnClickListener {
+                findNavController().navigate(R.id.action_moreFragment_to_donateListFragment)
+            }
         }
-        binding.btnNftList.setOnClickListener {
-            findNavController().navigate(R.id.action_moreFragment_to_donateListFragment)
-        }
+
 
     }
 
