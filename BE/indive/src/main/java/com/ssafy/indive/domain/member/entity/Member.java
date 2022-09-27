@@ -2,6 +2,7 @@ package com.ssafy.indive.domain.member.entity;
 
 import com.ssafy.indive.domain.member.entity.enumeration.Role;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberModifyRequestDto;
+import com.ssafy.indive.domain.member.service.dto.ServiceMemberWriteNoticeRequestDto;
 import com.ssafy.indive.domain.music.exception.MusicFileNotFoundException;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
 import com.ssafy.indive.global.common.entity.BaseEntity;
@@ -85,6 +86,10 @@ public class Member extends BaseEntity {
         backgroundOrigin = backgroundImage == null ? null : backgroundImage.getOriginalFilename();
         backgroundUuid = backgroundImage == null ? null : FileUtils.saveFile(backgroundImage);
 
+    }
+
+    public void update(ServiceMemberWriteNoticeRequestDto dto){
+        this.notice = dto.getNotice();
     }
 
 
