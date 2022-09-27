@@ -33,6 +33,20 @@
     </fragment>
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.ssafy.indive.view.login.join.WalletFragment"
-        android:label="WalletFragment" />
+        android:name="com.ssafy.indive.view.login.join.wallet.WalletFragment"
+        android:label="WalletFragment" >
+        <action
+            android:id="@+id/action_walletFragment_to_createWalletFragment"
+            app:destination="@id/createWalletFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createWalletFragment"
+        android:name="com.ssafy.indive.view.login.join.wallet.create.CreateWalletFragment"
+        android:label="CreateWalletFragment" >
+        <action
+            android:id="@+id/action_createWalletFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/loginFragment"/>
+    </fragment>
 </navigation>
