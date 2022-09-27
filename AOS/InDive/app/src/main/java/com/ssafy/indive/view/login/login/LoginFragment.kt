@@ -50,6 +50,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             showToast(it)
             loginSuccess()
         }
+        memberViewModel.loginFail.observe(viewLifecycleOwner) {
+            showToast(it)
+        }
     }
 
     private fun initClickListener() {
@@ -61,6 +64,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 findNavController().navigate(R.id.action_loginFragment_to_joinFragment)
             }
             btnLogin.setOnClickListener {
+                //memberViewModel.memberLogin(MemberLogin(etId.text.toString(), etPass.text.toString()))
                 memberViewModel.memberLogin(MemberLogin("1@1", "1"))
             }
         }

@@ -4,11 +4,13 @@ import android.app.Dialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.graphics.Insets
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.fragment.app.DialogFragment

@@ -24,6 +24,9 @@ class MemberManagerDataSource @Inject constructor(
     fun join(memberJoin: MemberJoin): Flow<Response<Boolean>> = flow {
         emit(memberManagerApi.join(memberJoin))
     }
+    fun emailcheck(email: String): Flow<Response<Boolean>> = flow {
+        emit(memberManagerApi.emailCheck(email))
+    }
 
     fun modifyMember(
         memberSeq: Long,

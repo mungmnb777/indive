@@ -22,7 +22,7 @@ interface MemberManagerApi {
 
     // 이메일 중복확인
     @GET("members/duplicated-email")
-    suspend fun emailCheck(@PartMap map: Map<String, String>): Response<Boolean>
+    suspend fun emailCheck(@Query("email") email: String): Response<Boolean>
 
     //13
     @Multipart

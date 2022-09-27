@@ -54,4 +54,12 @@ class MemberManagerRepository @Inject constructor(
             emit(Result.Success(it))
         }
     }
+    fun emailcheck(email: String): Flow<Result<Response<Boolean>>> = flow {
+        emit(Result.Loading)
+        memberManagerDataSource.emailcheck(email).collect {
+            emit(Result.Success(it))
+        }
+    }.catch { e ->
+        emit(Result.Error(e))
+    }
 }
