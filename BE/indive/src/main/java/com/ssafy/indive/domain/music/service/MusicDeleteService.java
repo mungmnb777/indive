@@ -8,7 +8,6 @@ import com.ssafy.indive.domain.music.entity.Reply;
 import com.ssafy.indive.domain.music.repository.MusicLikeRepository;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.repository.ReplyRepository;
-import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
 import com.ssafy.indive.global.utils.FileUtils;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -43,7 +43,7 @@ public class MusicDeleteService {
         if (!Objects.equals(loginMember.getSeq(), findMusic.getAuthor().getSeq()))
             throw new NotMatchMemberException("해당 음원의 주인이 아닙니다.");
 
-        FileUtils.deleteFile(findMusic.getImageUuid());
+        if (StringUtils.hasText(findMusic.getImageOrigin())) FileUtils.deleteFile(findMusic.getImageUuid());
         FileUtils.deleteFile(findMusic.getMusicFileUuid());
 
         musicRepository.delete(findMusic);
