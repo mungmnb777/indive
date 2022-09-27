@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,9 +29,9 @@ public class MusicController {
     private final MusicReadService musicReadService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> addMusic(@Validated @ModelAttribute WebMusicAddRequestDto dto, MultipartFile image, MultipartFile musicFile) {
+    public ResponseEntity<?> addMusic(@Validated @ModelAttribute WebMusicAddRequestDto dto) {
         try {
-            return new ResponseEntity<>(musicAddService.addMusic(dto.convertToServiceDto(), image, musicFile), HttpStatus.OK);
+            return new ResponseEntity<>(musicAddService.addMusic(dto.convertToServiceDto()), HttpStatus.OK);
         } catch (MusicFileNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
