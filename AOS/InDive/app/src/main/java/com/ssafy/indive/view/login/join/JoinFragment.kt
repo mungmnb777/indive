@@ -24,7 +24,6 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join){
 //                memberViewModel.memberJoin(MemberJoin("22@22", "22", "22", "22", "22" ))
                 findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
             }
-
         }
     }
 

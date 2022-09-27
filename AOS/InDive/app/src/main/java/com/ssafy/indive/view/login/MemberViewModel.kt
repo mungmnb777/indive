@@ -1,16 +1,19 @@
 package com.ssafy.indive.view.login
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.model.dto.MemberLogin
 import com.ssafy.indive.repository.MemberManagerRepository
+import com.ssafy.indive.utils.JWT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.Response
 import javax.inject.Inject
 import com.ssafy.indive.utils.Result
+import com.ssafy.indive.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
@@ -23,9 +26,16 @@ private const val TAG = "MemberViewModel"
 class MemberViewModel @Inject constructor(
     private val memberManagerRepository: MemberManagerRepository
 ): ViewModel() {
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     private val _login: MutableStateFlow<Result<Response<String>>> =
         MutableStateFlow(Result.Unintialized)
     val login get() = _login.asStateFlow()
+
+    private val _loginSuccess = SingleLiveEvent<String>()
+    val loginSuccess
+        get() = _loginSuccess
 
     private val _join: MutableStateFlow<Result<Response<Boolean>>> =
         MutableStateFlow(Result.Unintialized)
@@ -37,8 +47,10 @@ class MemberViewModel @Inject constructor(
                 _login.value = it
                 Log.d(TAG, "memberLogin: ${it}")
                 if(it is Result.Success){
+                    _loginSuccess.postValue(it.data.body())
+                    sharedPreferences.edit().putString(JWT, it.data.headers()["Authorization"]!!.split(" ")[1]).apply()
                     Log.d(TAG, "memberLogin: ${it.data.body()}")
-                    Log.d(TAG, "memberJoin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
+                    Log.d(TAG, "memberLogin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
                 }
             }
         }
