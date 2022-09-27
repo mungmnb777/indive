@@ -1,6 +1,7 @@
 package com.ssafy.indive.utils
 
 import android.content.SharedPreferences
+import android.util.Log
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -17,6 +18,8 @@ class XAccessTokenInterceptor @Inject constructor(
         val request = chain.request().newBuilder()
             .addHeader(JWT, token)
             .build()
+        Log.d(TAG, "intercept headers: ${request.headers} ")
+        Log.d(TAG, "intercept body : ${request.body} ")
         return chain.proceed(request)
     }
 }

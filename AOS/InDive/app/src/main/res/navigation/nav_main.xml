@@ -105,8 +105,10 @@
         android:name="com.ssafy.indive.view.mystudio.addsong.AddMusicThirdFragment"
         android:label="AddSongThirdFragment" >
         <action
-            android:id="@+id/action_addSongThirdFragment_to_myStudioFragment"
-            app:destination="@id/myStudioFragment" />
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_addSongThirdFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

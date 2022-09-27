@@ -1,11 +1,16 @@
 package com.ssafy.indive.datasource
 
+import android.util.Log
 import com.ssafy.indive.api.MusicManagerApi
+import com.ssafy.indive.model.dto.AddMusic
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.model.response.ReplyResponse
+import com.ssafy.indive.utils.TAG
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,6 +27,15 @@ class MusicManagerDataSource @Inject constructor(
         genre: String?
     ): Flow<List<Music>> = flow {
         emit(musicManagerApi.getMusics(title, artistName, sort, genre))
+    }
+
+    fun addMusic(
+        dto : Map<String,RequestBody>,
+        image : MultipartBody.Part?,
+        musicFile : MultipartBody.Part
+    ): Flow<Boolean> = flow {
+        Log.d(TAG, "MusicManagerDataSource: addMusic")
+        emit(musicManagerApi.addMusic(dto,image, musicFile))
     }
 
     fun getMusicDetails(musicSeq: Long): Flow<Response<MusicDetailResponse>> = flow {

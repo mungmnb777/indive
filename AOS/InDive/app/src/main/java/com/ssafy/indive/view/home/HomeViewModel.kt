@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.repository.MemberManagerRepository
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.SingleLiveEvent
@@ -19,6 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val memberManagerRepository: MemberManagerRepository,
     private val musicManagerRepository: MusicManagerRepository
 ) : ViewModel() {
 
@@ -49,6 +51,7 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
 
 
     fun initRecentSongList() {

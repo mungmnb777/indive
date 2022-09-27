@@ -55,7 +55,7 @@ class MemberViewModel @Inject constructor(
                     if (res == "true") {
                         _loginSuccess.postValue("로그인 성공")
                         sharedPreferences.edit()
-                            .putString(JWT, it.data.headers()["Authorization"]!!.split(" ")[1])
+                            .putString(JWT, it.data.headers()["Authorization"])
                             .apply()
 
                     } else {

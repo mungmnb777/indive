@@ -34,6 +34,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun autoLogin() {
         if (sharedPreferences.getString(JWT, "") != "") {
+            Log.d(TAG, "autoLogin: ${sharedPreferences.getString(JWT, "")}")
             loginSuccess()
         }
     }

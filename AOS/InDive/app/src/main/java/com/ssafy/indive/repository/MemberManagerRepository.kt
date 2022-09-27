@@ -11,10 +11,12 @@ import javax.inject.Singleton
 import com.ssafy.indive.utils.Result
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import okhttp3.MultipartBody
 
 @Singleton
 class MemberManagerRepository @Inject constructor(
-    private val memberManagerDataSource: MemberManagerDataSource){
+    private val memberManagerDataSource: MemberManagerDataSource
+) {
 
     fun login(memberLogin: MemberLogin): Flow<Result<Response<String>>> = flow {
         emit(Result.Loading)
@@ -32,5 +34,24 @@ class MemberManagerRepository @Inject constructor(
         }
     }.catch { e ->
         emit(Result.Error(e))
+    }
+
+    fun modifyMember(
+        memberSeq: Long,
+        nickname: String,
+        profileFile: MultipartBody.Part?,
+        backgroundFile: MultipartBody.Part?,
+        profileMessage: String?
+    ): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        memberManagerDataSource.modifyMember(
+            memberSeq,
+            nickname,
+            profileFile,
+            backgroundFile,
+            profileMessage
+        ).collect {
+            emit(Result.Success(it))
+        }
     }
 }

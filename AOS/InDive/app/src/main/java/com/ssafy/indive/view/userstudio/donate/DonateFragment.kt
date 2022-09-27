@@ -65,22 +65,12 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-
-
                     findNavController().popBackStack()
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     showToast("지문 인증 실패")
-//
-//                failCount++
-//
-//                if(failCount == 5){
-//                    biometricPrompt.cancelAuthentication()
-//
-//                }
-
 
                 }
             })

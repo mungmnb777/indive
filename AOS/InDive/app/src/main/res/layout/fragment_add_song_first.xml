@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="addMusicVM"
+            type="com.ssafy.indive.view.mystudio.addsong.AddMusicViewModel" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -77,7 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="곡 이름"
+                android:text="@={addMusicVM.title}"
                 android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="@id/tv_title"
                 app:layout_constraintStart_toStartOf="@id/tv_title"
@@ -194,8 +201,8 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:background="@null"
-                    android:hint="곡 설명"
                     android:maxLines="3"
+                    android:text="@={addMusicVM.description}"
                     android:textSize="16dp" />
             </androidx.cardview.widget.CardView>
 
@@ -216,11 +223,10 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="24dp"
                 android:background="@drawable/btn_round_lightgrey"
-                android:text="장르 선택 +"
+                android:text="@={addMusicVM.genre}"
                 app:layout_constraintBottom_toBottomOf="@id/tv_song_genre"
                 app:layout_constraintStart_toEndOf="@id/tv_song_genre"
                 app:layout_constraintTop_toTopOf="@id/tv_song_genre" />
-
 
             <Button
                 android:id="@+id/btn_addsong_first"

@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.flow
 import com.ssafy.indive.utils.Result
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -33,6 +35,17 @@ class MusicManagerRepository @Inject constructor(
     }.catch { e ->
         emit(Result.Error(e))
     }
+
+    fun addMusic(
+        dto : Map<String,RequestBody>,
+        image : MultipartBody.Part?,
+        musicFile : MultipartBody.Part
+    ): Flow<Result<Boolean>> = flow {
+        emit(Result.Loading)
+        musicManagerDataSource.addMusic(dto,image, musicFile).collect {
+            emit(Result.Success(it))
+        }
+    }.catch { e -> emit(Result.Error(e)) }
 
 
     fun getMusicDetails(musicSeq: Long): Flow<Result<Response<MusicDetailResponse>>> = flow {
