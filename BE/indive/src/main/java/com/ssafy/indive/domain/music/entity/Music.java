@@ -106,11 +106,11 @@ public class Music extends BaseEntity {
 
     public void uploadFiles(MultipartFile image, MultipartFile musicFile) {
         // 앨범 커버
-        imageOrigin = image == null ? null : image.getOriginalFilename();
-        imageUuid = image == null ? null : FileUtils.saveFile(image);
+        imageOrigin = image.isEmpty() ? null : image.getOriginalFilename();
+        imageUuid = image.isEmpty() ? "defaultAlbumCover.png" : FileUtils.saveFile(image);
 
         // mp3 파일이 null일 경우 예외 처리
-        if (musicFile == null) throw new MusicFileNotFoundException("음악 파일은 항상 첨부해야 합니다!");
+        if (musicFile.isEmpty()) throw new MusicFileNotFoundException("음악 파일은 항상 첨부해야 합니다!");
 
         // mp3 파일
         musicFileOrigin = musicFile.getOriginalFilename();
