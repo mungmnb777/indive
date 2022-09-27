@@ -14,7 +14,7 @@ interface MusicManagerApi {
     suspend fun getMusics(
         @Query("title") title: String?, @Query("artist") artistName: String?,
         @Query("sort") sort: String?, @Query("genre") genre: String?
-    ): List<Music>
+    ): List<MusicDetailResponse>
 
     @Multipart
     @POST("music")

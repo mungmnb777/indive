@@ -28,3 +28,5 @@ const val RESERVATION_DAY = 1
 const val FINGERPRINT_USE = "fingerprint_use"
 const val ABLE = 1
 const val DISABLE = 2
+
+

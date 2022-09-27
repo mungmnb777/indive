@@ -86,7 +86,11 @@ class AddMusicViewModel @Inject constructor(
 
     fun addMusic() {
         viewModelScope.launch(Dispatchers.IO) {
+            val releaseDateTime = "${starDate.value} ${startTime.value}:00"
+            val reservationDateTime = "${reservationDate.value} ${reservationTime.value}:00"
 
+            Log.d(TAG, "releaseDateTime: $releaseDateTime")
+            Log.d(TAG, "reservationDateTime: $reservationDateTime")
 
             val addTitle = RequestBody.create("text/plain".toMediaTypeOrNull(), title.value)
             val addlyricist = RequestBody.create("text/plain".toMediaTypeOrNull(), lyricist.value)
@@ -96,9 +100,9 @@ class AddMusicViewModel @Inject constructor(
                 RequestBody.create("text/plain".toMediaTypeOrNull(), description.value)
             val addlyrics = RequestBody.create("text/plain".toMediaTypeOrNull(), lyrics.value)
             val addreleaseDateTime =
-                RequestBody.create("text/plain".toMediaTypeOrNull(), "2022-01-01 09:00:00")
+                RequestBody.create("text/plain".toMediaTypeOrNull(), releaseDateTime)
             val addreservationDateTime =
-                RequestBody.create("text/plain".toMediaTypeOrNull(), "2022-01-01 09:00:00")
+                RequestBody.create("text/plain".toMediaTypeOrNull(), reservationDateTime)
 
             val map = HashMap<String, RequestBody>()
             map["title"] = addTitle
@@ -110,8 +114,7 @@ class AddMusicViewModel @Inject constructor(
             map["releaseDateTime"] = addreleaseDateTime
             map["reservationDateTime"] = addreservationDateTime
 
-            val releaseDateTime = "${starDate.value} ${startTime.value}"
-            val reservationDateTime = "${reservationDate.value} ${reservationTime.value}"
+
 //            val addMusic = AddMusic(
 //                title.value,
 //                lyricist.value,

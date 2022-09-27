@@ -31,7 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
-class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_player){
+class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_player) {
 
     companion object {
         @SuppressLint("StaticFieldLeak")
@@ -80,11 +80,17 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
             "HomeFragment" -> {
                 Log.d("PlayerFragment_", "init: ")
                 val intent = Intent(requireActivity(), MusicService::class.java)
-                requireActivity().bindService(intent, ServiceTest(), AppCompatActivity.BIND_AUTO_CREATE)
+                requireActivity().bindService(
+                    intent,
+                    ServiceTest(),
+                    AppCompatActivity.BIND_AUTO_CREATE
+                )
                 requireActivity().startService(intent)
                 musicList = mutableListOf()
                 musicList.addAll(MainActivity.playList)
-                initViews()
+                if (musicList.size != 0) {
+                    initViews()
+                }
             }
         }
 
@@ -312,10 +318,13 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
 
     override fun onPause() {
         super.onPause()
-        requireActivity().intent.putExtra("class","NowPlaying")
+        requireActivity().intent.putExtra("class", "NowPlaying")
     }
+
     override fun onResume() {
-        initViews()
+        if (musicList.size != 0) {
+            initViews()
+        }
         super.onResume()
     }
 

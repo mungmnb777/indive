@@ -37,6 +37,7 @@ class MainViewModel @Inject constructor(
 
 
         viewModelScope.launch(Dispatchers.IO) {
+
             musicManagerRepository.getMusicDetails(musicSeq).collectLatest {
                 if (it is Result.Success) {
                     _musicDetails.value = it
@@ -44,28 +45,21 @@ class MainViewModel @Inject constructor(
 
             }
 
-
             val song1 = PlayListEntity(
                 0,
                 "제목",
-                "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/186/would-you-be-waiting-1661508036-zZP2aUjM3n.mp3",
+                "https://j7d102.p.ssafy.io:8443/music/30/file-download",
                 "가수",
-                "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/186/100x100/1661851996_RswjEVwZaX_final.jpg"
-            )
-            val song2 = PlayListEntity(
-                0,
-                "제목3",
-                "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/182/caramel-1660903238-cWq7jpyG3h.mp3",
-                "가수3",
-                "https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/182/100x100/caramel-1660903236-noLU7SrAfr.jpg"
+                "https://j7d102.p.ssafy.io:8443/music/30/image-download"
             )
 
             playListRepository.insertPlayList(song1)
-            playListRepository.insertPlayList(song2)
             getAll()
         }
 
+
     }
+
 
     fun getAll() {
 

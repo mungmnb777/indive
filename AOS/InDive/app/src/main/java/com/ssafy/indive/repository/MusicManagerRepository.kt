@@ -27,7 +27,7 @@ class MusicManagerRepository @Inject constructor(
         artistName: String?,
         sort: String?,
         genre: String?
-    ): Flow<Result<List<Music>>> = flow {
+    ): Flow<Result<List<MusicDetailResponse>>> = flow {
         emit(Result.Loading)
         musicManagerDataSource.getMusics(title, artistName, sort, genre).collect {
             emit(Result.Success(it))

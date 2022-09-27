@@ -25,7 +25,7 @@ class MusicManagerDataSource @Inject constructor(
         artistName: String?,
         sort: String?,
         genre: String?
-    ): Flow<List<Music>> = flow {
+    ): Flow<List<MusicDetailResponse>> = flow {
         emit(musicManagerApi.getMusics(title, artistName, sort, genre))
     }
 

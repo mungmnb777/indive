@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemRecentMusicBinding
 import com.ssafy.indive.model.dto.Music
+import com.ssafy.indive.model.response.MusicDetailResponse
 
-class RecentMusicAdapter : ListAdapter<Music, RecentMusicAdapter.RecentMusicViewHolder>(diffUtil) {
+class RecentMusicAdapter : ListAdapter<MusicDetailResponse, RecentMusicAdapter.RecentMusicViewHolder>(diffUtil) {
 
 
     inner class RecentMusicViewHolder(var binding: ItemRecentMusicBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(music: Music) {
+        fun bind(music: MusicDetailResponse) {
             binding.music = music
 
 
@@ -38,11 +39,11 @@ class RecentMusicAdapter : ListAdapter<Music, RecentMusicAdapter.RecentMusicView
 
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Music>() {
-            override fun areContentsTheSame(oldItem: Music, newItem: Music) =
+        val diffUtil = object : DiffUtil.ItemCallback<MusicDetailResponse>() {
+            override fun areContentsTheSame(oldItem: MusicDetailResponse, newItem: MusicDetailResponse) =
                 oldItem.hashCode() == newItem.hashCode()
 
-            override fun areItemsTheSame(oldItem: Music, newItem: Music) =
+            override fun areItemsTheSame(oldItem: MusicDetailResponse, newItem: MusicDetailResponse) =
                 oldItem.musicSeq == newItem.musicSeq
         }
     }

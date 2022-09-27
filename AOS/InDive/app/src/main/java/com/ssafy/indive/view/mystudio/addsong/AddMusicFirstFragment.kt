@@ -113,9 +113,9 @@ class AddMusicFirstFragment :
                     "AddMusicFirstFragment",
                     "initClickListener: ${addMusicViewModel.title.value}"
                 )
-//                if (checkEmpty()) {
+                if (checkEmpty()) {
                 findNavController().navigate(R.id.action_addSongFirstFragment_to_addSongSecondFragment)
-//                }
+                }
             }
         }
     }

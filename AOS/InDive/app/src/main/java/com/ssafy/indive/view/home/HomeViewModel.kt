@@ -1,5 +1,6 @@
 package com.ssafy.indive.view.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.ssafy.indive.repository.MemberManagerRepository
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.SingleLiveEvent
+import com.ssafy.indive.utils.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,20 +40,36 @@ class HomeViewModel @Inject constructor(
     val recentMusicList: LiveData<MutableList<Music>>
         get() = _recentSongList
 
-    private val _popularSongList = MutableLiveData<MutableList<Music>>()
-    val popularMusicList: LiveData<MutableList<Music>>
-        get() = _popularSongList
+    private val _popularMusicList: MutableStateFlow<Result<List<MusicDetailResponse>>> =
+        MutableStateFlow(Result.Unintialized)
+    val popularMusicList get() = _popularMusicList
+
+
+    private val _successPopularMusicList = SingleLiveEvent<String>()
+    val successPopularMusicList get() = _successPopularMusicList
 
 
     fun getMusics(title: String?, artistName: String?, sort: String?, genre: String?) {
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.getMusics(title, artistName, sort, genre).collectLatest {
-                _musicList.value = it
-                _successMsgEvent.postValue("가져오기 성공")
+
+                Log.d(TAG, "getMusics: ")
+                if (it is Result.Success) {
+                    if (sort == "popular") {
+                        _popularMusicList.value = it
+                        Log.d(TAG, "getMusics: ${it.data}")
+                    }
+
+                } else if (it is Result.Error) {
+                    Log.d(TAG, "Error: ${it.exception}")
+                    Log.d(TAG, "Error: ${it.exception.message}")
+                    Log.d(TAG, "Error: ${it.exception.cause}")
+                }
+
+
             }
         }
     }
-
 
 
     fun initRecentSongList() {
@@ -60,8 +78,10 @@ class HomeViewModel @Inject constructor(
 
     fun initPopularSongList() {
 
-        val popularList = mutableListOf(Music(0,"제목","","","","","","","",null,null,"가수"))
-        _popularSongList.postValue(popularList)
+
+        val popularList =
+            mutableListOf(Music(0, "제목", "", "", "", "", "", "", "", null, null, "가수"))
+//        _popularSongList.postValue(popularList)
     }
 
 

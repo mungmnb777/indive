@@ -40,7 +40,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            submitList="@{genreVM.genreList}"
+
             android:id="@+id/rv_genre_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
