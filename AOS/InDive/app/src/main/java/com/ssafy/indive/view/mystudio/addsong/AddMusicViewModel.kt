@@ -85,6 +85,47 @@ class AddMusicViewModel @Inject constructor(
     }
 
     fun addMusic() {
+        var genreName = ""
+        when(genre.value){
+            "랩/힙합" -> {
+                genreName = "hiphop"
+            }
+            "발라드" -> {
+                genreName = "ballad"
+            }
+            "뉴에이지/연주곡" -> {
+                genreName = "new-age"
+            }
+            "R&B/소울" -> {
+                genreName = "rnb"
+            }
+            "재즈" -> {
+                genreName = "jazz"
+            }
+            "댄스" -> {
+                genreName = "dance"
+            }
+            "포크/블루스" -> {
+                genreName = "folk"
+            }
+            "어쿠스틱" -> {
+                genreName = "acoustic"
+            }
+            "락/메탈" -> {
+                genreName = "rock"
+            }
+            "락발라드" -> {
+                genreName = "rock-ballad"
+            }
+            "EDM" -> {
+                genreName = "edm"
+            }
+            "트로트" -> {
+                genreName = "trot"
+            }
+        }
+
+
         viewModelScope.launch(Dispatchers.IO) {
             val releaseDateTime = "${starDate.value} ${startTime.value}:00"
             val reservationDateTime = "${reservationDate.value} ${reservationTime.value}:00"
@@ -95,7 +136,7 @@ class AddMusicViewModel @Inject constructor(
             val addTitle = RequestBody.create("text/plain".toMediaTypeOrNull(), title.value)
             val addlyricist = RequestBody.create("text/plain".toMediaTypeOrNull(), lyricist.value)
             val addcomposer = RequestBody.create("text/plain".toMediaTypeOrNull(), composer.value)
-            val addgenre = RequestBody.create("text/plain".toMediaTypeOrNull(), genre.value)
+            val addgenre = RequestBody.create("text/plain".toMediaTypeOrNull(), genreName)
             val adddescription =
                 RequestBody.create("text/plain".toMediaTypeOrNull(), description.value)
             val addlyrics = RequestBody.create("text/plain".toMediaTypeOrNull(), lyrics.value)

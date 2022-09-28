@@ -17,52 +17,52 @@ class GenreFragment : BaseFragment<FragmentGenreBinding>(R.layout.fragment_genre
 
         binding.apply {
             cvRap.setOnClickListener {
-                val bundle = bundleOf("title" to "랩/힙합")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("hiphop")
+                findNavController().navigate(action)
             }
             cvBallad.setOnClickListener {
-                val bundle = bundleOf("title" to "발라드")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("ballad")
+                findNavController().navigate(action)
             }
             cvNewAge.setOnClickListener {
-                val bundle = bundleOf("title" to "뉴에이지/연주곡")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("new-age")
+                findNavController().navigate(action)
             }
             cvRAndB.setOnClickListener {
-                val bundle = bundleOf("title" to "R&B/소울")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("rnb")
+                findNavController().navigate(action)
             }
             cvJazz.setOnClickListener {
-                val bundle = bundleOf("title" to "재즈")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("jazz")
+                findNavController().navigate(action)
             }
             cvDance.setOnClickListener {
-                val bundle = bundleOf("title" to "댄스")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("dance")
+                findNavController().navigate(action)
             }
             cvFork.setOnClickListener {
-                val bundle = bundleOf("title" to "포크/블루스")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("folk")
+                findNavController().navigate(action)
             }
             cvAcoustic.setOnClickListener {
-                val bundle = bundleOf("title" to "어쿠스틱")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("acoustic")
+                findNavController().navigate(action)
             }
             cvRock.setOnClickListener {
-                val bundle = bundleOf("title" to "락/메탈")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("rock")
+                findNavController().navigate(action)
             }
             cvRockBallad.setOnClickListener {
-                val bundle = bundleOf("title" to "락발라드")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("rock-ballad")
+                findNavController().navigate(action)
             }
             cvEdm.setOnClickListener {
-                val bundle = bundleOf("title" to "EDM")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("edm")
+                findNavController().navigate(action)
             }
             cvTrot.setOnClickListener {
-                val bundle = bundleOf("title" to "트로트")
-                findNavController().navigate(R.id.action_genreFragment_to_genreListFragment, bundle)
+                val action = GenreFragmentDirections.actionGenreFragmentToGenreListFragment("trot")
+                findNavController().navigate(action)
             }
         }
 
