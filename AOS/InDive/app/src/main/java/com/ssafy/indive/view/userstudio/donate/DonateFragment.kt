@@ -9,6 +9,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentDonateBinding
@@ -29,12 +30,18 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
+    private val args by navArgs<DonateFragmentArgs>()
+    private var artistAddress = ""
+
 
     override fun init() {
+
         initBioMetric()
         initFingerPrintAuth()
         initClickListener()
 
+        artistAddress = args.artistaddress
+        showToast(artistAddress)
     }
 
     private fun initClickListener() {

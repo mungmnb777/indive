@@ -28,6 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     companion object {
         lateinit var playList: MutableList<PlayListMusic>
+        var successQRScanMsg = ""
     }
 
     override fun init() {

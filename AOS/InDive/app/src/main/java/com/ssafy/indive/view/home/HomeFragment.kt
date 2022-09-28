@@ -5,6 +5,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssafy.indive.MainActivity
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.R
 import com.ssafy.indive.databinding.FragmentHomeBinding
@@ -14,6 +15,7 @@ import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.view.player.PlayerActivity
+import com.ssafy.indive.view.qrscan.QrScanActivity
 import com.ssafy.indive.view.songdetail.SongDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -70,7 +72,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
         binding.ivQr.setOnClickListener {
 //            findNavController().navigate(R.id.action_homeFragment_to_QRFragment)
-            val intent = Intent(requireActivity(), PlayerActivity::class.java)
+//            val intent = Intent(requireActivity(),PlayerActivity::class.java)
+//            startActivity(intent)
+            val intent = Intent(requireActivity(), QrScanActivity::class.java)
             startActivity(intent)
         }
 
@@ -115,11 +119,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     }
 
+
     private val playListener: (MusicDetailResponse) -> (Unit) = {
         mainViewModel.insert(it.musicSeq)
         val intent = Intent(context, PlayerActivity::class.java)
         intent.putExtra("class", "HomeFragment")
         intent.putExtra("musicSeq", it.musicSeq)
         startActivity(intent)
+    }
+    fun scanQRSuccess(){
+        val action = HomeFragmentDirections.actionHomeFragmentToDonateFragment(MainActivity.successQRScanMsg)
+        MainActivity.successQRScanMsg = ""
+        findNavController().navigate(action)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(MainActivity.successQRScanMsg != ""){
+            scanQRSuccess()
+        }
+
     }
 }
