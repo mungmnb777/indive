@@ -26,7 +26,6 @@ import com.ssafy.indive.model.dto.formatDuration
 import com.ssafy.indive.model.dto.setSongPosition
 import com.ssafy.indive.service.MusicService
 import com.ssafy.indive.service.ServiceTest
-import com.ssafy.indive.view.songdetail.SongDetailActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

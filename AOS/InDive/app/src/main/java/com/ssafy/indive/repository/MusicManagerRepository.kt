@@ -26,10 +26,12 @@ class MusicManagerRepository @Inject constructor(
         title: String?,
         artistName: String?,
         sort: String?,
-        genre: String?
+        genre: String?,
+        page: Int?,
+        size: Int?
     ): Flow<Result<List<MusicDetailResponse>>> = flow {
         emit(Result.Loading)
-        musicManagerDataSource.getMusics(title, artistName, sort, genre).collect {
+        musicManagerDataSource.getMusics(title, artistName, sort, genre, page, size).collect {
             emit(Result.Success(it))
         }
     }.catch { e ->
@@ -37,12 +39,12 @@ class MusicManagerRepository @Inject constructor(
     }
 
     fun addMusic(
-        dto : Map<String,RequestBody>,
-        image : MultipartBody.Part?,
-        musicFile : MultipartBody.Part
+        dto: Map<String, RequestBody>,
+        image: MultipartBody.Part?,
+        musicFile: MultipartBody.Part
     ): Flow<Result<Boolean>> = flow {
         emit(Result.Loading)
-        musicManagerDataSource.addMusic(dto,image, musicFile).collect {
+        musicManagerDataSource.addMusic(dto, image, musicFile).collect {
             emit(Result.Success(it))
         }
     }.catch { e -> emit(Result.Error(e)) }

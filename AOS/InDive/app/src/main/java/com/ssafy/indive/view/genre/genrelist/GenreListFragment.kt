@@ -11,7 +11,6 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentGenreListBinding
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.view.player.PlayerActivity
-import com.ssafy.indive.view.songdetail.SongDetailActivity
 
 class GenreListFragment : BaseFragment<FragmentGenreListBinding>(R.layout.fragment_genre_list) {
     private val mainViewModel: MainViewModel by activityViewModels()
@@ -47,8 +46,8 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(R.layout.fragme
         val moreListener: (Music) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
                 override fun clickDetail() {
-                    val intent = Intent(context, SongDetailActivity::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(context, SongDetailActivity::class.java)
+//                    startActivity(intent)
 
                 }
 

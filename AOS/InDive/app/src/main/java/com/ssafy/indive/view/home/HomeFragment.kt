@@ -12,11 +12,8 @@ import com.ssafy.indive.databinding.FragmentHomeBinding
 import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.MainViewModel
 import com.ssafy.indive.MoreDialogFragment
-import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
-import com.ssafy.indive.view.player.PlayerActivity
 import com.ssafy.indive.view.qrscan.QrScanActivity
-import com.ssafy.indive.view.songdetail.SongDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,8 +30,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initBanner()
         initRecentMusic()
         initPopularMusic()
-        initViewModelCallback()
-        clickListener()
+        initClickListener()
     }
 
 
@@ -48,17 +44,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.circleIndicator.setViewPager(binding.vpBanner)
     }
 
-    private fun initViewModelCallback() {
 
-        homeViewModel.getMusics(null, null, null, null)
-
-//        homeViewModel.successMsgEvent.observe(viewLifecycleOwner){
-//            showToast(it)
-//        }
-
-    }
-
-    private fun clickListener() {
+    private fun initClickListener() {
         binding.tvMoreMusicChart.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_musicChartFragment)
         }
@@ -78,7 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecentMusic() {
 
-        homeViewModel.getMusics(null, null, "latest", null)
+        homeViewModel.getMusics(null, null, "latest", null,null,null)
         binding.rvRecentMusic.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRecentMusic.adapter = RecentMusicAdapter(playListener)
@@ -87,7 +74,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initPopularMusic() {
-        homeViewModel.getMusics(null, null, "popular", null)
+        homeViewModel.getMusics(null, null, "popular", null,0,4)
 
         binding.rvMusicChart.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -95,8 +82,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
                 override fun clickDetail() {
-                    val intent = Intent(context, SongDetailActivity::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(context, SongDetailActivity::class.java)
+//                    startActivity(intent)
                 }
 
                 override fun clickStudio() {

@@ -19,23 +19,24 @@ import javax.inject.Singleton
 class MusicManagerDataSource @Inject constructor(
     private val musicManagerApi: MusicManagerApi
 ) {
-
     fun getMusics(
         title: String?,
         artistName: String?,
         sort: String?,
-        genre: String?
+        genre: String?,
+        page: Int?,
+        size: Int?
     ): Flow<List<MusicDetailResponse>> = flow {
-        emit(musicManagerApi.getMusics(title, artistName, sort, genre))
+        emit(musicManagerApi.getMusics(title, artistName, sort, genre, page, size))
     }
 
     fun addMusic(
-        dto : Map<String,RequestBody>,
-        image : MultipartBody.Part?,
-        musicFile : MultipartBody.Part
+        dto: Map<String, RequestBody>,
+        image: MultipartBody.Part?,
+        musicFile: MultipartBody.Part
     ): Flow<Boolean> = flow {
         Log.d(TAG, "MusicManagerDataSource: addMusic")
-        emit(musicManagerApi.addMusic(dto,image, musicFile))
+        emit(musicManagerApi.addMusic(dto, image, musicFile))
     }
 
     fun getMusicDetails(musicSeq: Long): Flow<Response<MusicDetailResponse>> = flow {

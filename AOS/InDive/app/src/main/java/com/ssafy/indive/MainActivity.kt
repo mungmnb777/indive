@@ -82,21 +82,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         }
 
-
-//        { playListEntity ->
-//            Log.d("MainActivity_", "initObserve: $playListEntity")
-//            if (mainViewModel.playList.value != null) {
-//                if (mainViewModel.playList.value!!.isNotEmpty()) {
-//                    playList = mutableListOf()
-//                    playListEntity.forEach {
-//                        playList.add(it.mapper())
-//                    }
-//                } else {
-//                    playList = mutableListOf()
-//
-//                }
-//            }
-//        }
     }
 
     private fun initNavigation() {

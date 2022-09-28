@@ -12,17 +12,21 @@ interface MusicManagerApi {
 
     @GET("music")
     suspend fun getMusics(
-        @Query("title") title: String?, @Query("artist") artistName: String?,
-        @Query("sort") sort: String?, @Query("genre") genre: String?
+        @Query("title") title: String?,
+        @Query("artist") artistName: String?,
+        @Query("sort") sort: String?,
+        @Query("genre") genre: String?,
+        @Query("page") page: Int?,
+        @Query("size") size: Int?
     ): List<MusicDetailResponse>
 
     @Multipart
     @POST("music")
     @JvmSuppressWildcards
     suspend fun addMusic(
-        @PartMap dto : Map<String,RequestBody>,
-        @Part image : MultipartBody.Part?,
-        @Part musicFile : MultipartBody.Part
+        @PartMap dto: Map<String, RequestBody>,
+        @Part image: MultipartBody.Part?,
+        @Part musicFile: MultipartBody.Part
 
     ): Boolean
 

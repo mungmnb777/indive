@@ -38,7 +38,6 @@ class SongDetailViewModel @Inject constructor(
         MutableStateFlow(Result.Unintialized)
     val musicReplyList get() = _musicReplyList.asStateFlow()
 
-
     fun getMusicDetail(musicSeq: Long) {
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -55,7 +54,6 @@ class SongDetailViewModel @Inject constructor(
 
                 }
             }
-
         }
     }
 
@@ -65,6 +63,7 @@ class SongDetailViewModel @Inject constructor(
             musicManagerRepository.getMusicReply(musicSeq).collectLatest {
                 if (it is Result.Success) {
                     _musicReplyList.value = it
+                    Log.d(TAG, "getMusicReply: ${it.data}")
                 } else if (it is Result.Error) {
                     Log.d(TAG, "getMusicReplyError: ${it.exception}")
                 }

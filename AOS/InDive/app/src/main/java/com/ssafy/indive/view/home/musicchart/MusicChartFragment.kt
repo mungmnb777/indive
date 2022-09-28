@@ -10,12 +10,10 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentMusicchartBinding
 import com.ssafy.indive.MainViewModel
 import com.ssafy.indive.MoreDialogFragment
-import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.view.home.HomeViewModel
 import com.ssafy.indive.view.home.MusicChartAdapter
 import com.ssafy.indive.view.player.PlayerActivity
-import com.ssafy.indive.view.songdetail.SongDetailActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,8 +47,8 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
                 override fun clickDetail() {
-                    val intent = Intent(context, SongDetailActivity::class.java)
-                    startActivity(intent)
+//                    val intent = Intent(context, SongDetailActivity::class.java)
+//                    startActivity(intent)
 
                 }
 

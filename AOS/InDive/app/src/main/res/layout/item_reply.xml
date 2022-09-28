@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="comment"
-            type="com.ssafy.indive.model.dto.Comment" />
+            name="reply"
+            type="com.ssafy.indive.model.response.ReplyResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,10 +17,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_comment_profile_img"
+            setImageCircle="@{reply.member.memberSeq}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
-            setImage="@{comment.profileImg}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/img_ive_cover" />
@@ -30,24 +30,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{comment.nickname}"
+            android:text="@{reply.member.nickname}"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/tv_comment_date"
             app:layout_constraintStart_toEndOf="@id/iv_comment_profile_img"
             app:layout_constraintTop_toTopOf="@id/iv_comment_profile_img"
             tools:text="닉네임" />
-
-        <TextView
-            android:id="@+id/tv_comment_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{comment.regDate}"
-            android:textColor="@color/main_grey"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_comment_profile_img"
-            app:layout_constraintStart_toStartOf="@id/tv_comment_nickname"
-            app:layout_constraintTop_toBottomOf="@id/tv_comment_nickname"
-            tools:text="2022-04-05 12:33:44" />
 
         <FrameLayout
             android:id="@+id/fl_btn"
@@ -89,11 +76,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{comment.comment}"
+            android:text="@{reply.content}"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/fl_btn"
-            app:layout_constraintStart_toStartOf="@id/tv_comment_date"
-            app:layout_constraintTop_toBottomOf="@id/tv_comment_date"
+            app:layout_constraintStart_toStartOf="@id/iv_comment_profile_img"
+            app:layout_constraintTop_toBottomOf="@id/iv_comment_profile_img"
             tools:text="댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
