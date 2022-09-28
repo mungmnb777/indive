@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ssafy.indive">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -41,6 +42,12 @@
         <activity
             android:name=".view.player.PlayerActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".view.qrscan.QrScanActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation"/>
 
         <service android:name=".service.MusicService" />
 
