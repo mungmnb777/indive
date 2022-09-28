@@ -40,10 +40,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
+            submitList="@{genreVM.genreList}"
             android:id="@+id/rv_genre_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            tools:listitem="@layout/item_music_chart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
         </androidx.recyclerview.widget.RecyclerView>
