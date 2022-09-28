@@ -5,6 +5,8 @@ import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.dto.ServiceDuplicatedEmail;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberAddRequestDto;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberGetResponseDto;
+import com.ssafy.indive.domain.music.entity.Music;
+import com.ssafy.indive.global.utils.FileUtils;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import com.ssafy.indive.security.dto.LoginResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +30,10 @@ public class MemberReadService {
     private final MemberRepository memberRepository;
 
 
-    public boolean isDuplicated(ServiceDuplicatedEmail convertToServiceDto) {
-        System.out.println(convertToServiceDto.getEmail());
-        if(memberRepository.existsByEmail(convertToServiceDto.getEmail())) return true;
+    public boolean isDuplicated(ServiceDuplicatedEmail dto) {
+        System.out.println("isDuplicated S : "+dto.getEmail());
+        System.out.println("isDuplicated S : "+ memberRepository.existsByEmail(dto.getEmail()));
+        if(memberRepository.existsByEmail(dto.getEmail())) return true;
         else return false;
     }
 
@@ -63,4 +66,13 @@ public class MemberReadService {
                 .build();
     }
 
+    public Object downloadProfileImage(long memberSeq) {
+        Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
+        return FileUtils.getUrlResource(findMember.getImageUuid());
+    }
+
+    public Object downloaBackgroundImage(long memberSeq) {
+        Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
+        return FileUtils.getUrlResource(findMember.getBackgroundUuid());
+    }
 }

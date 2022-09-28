@@ -13,6 +13,7 @@ public class WebDuplicatedEmail {
     @NotBlank
     private String email;
 
+    @Builder
     public ServiceDuplicatedEmail convertToServiceDto() {
         return ServiceDuplicatedEmail.builder()
                 .email(email)

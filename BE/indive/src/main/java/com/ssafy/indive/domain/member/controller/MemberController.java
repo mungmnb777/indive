@@ -33,6 +33,7 @@ public class MemberController {
 
     @GetMapping("duplicated-email")
     public ResponseEntity<?> isDuplicated(@Validated @ModelAttribute WebDuplicatedEmail dto) {
+        System.out.println("duplicated 에 들어옴" + dto.getEmail());
         return new ResponseEntity<>(memberReadService.isDuplicated(dto.convertToServiceDto()), HttpStatus.OK);
     }
 
@@ -54,6 +55,24 @@ public class MemberController {
     @PostMapping("{memberSeq}/notice")
     public ResponseEntity<?> writeNotice(@RequestBody WebMemberWriteNoticeRequestDto dto ,@PathVariable("memberSeq") long memberSeq) {
         return new ResponseEntity<>(memberAddService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{memberSeq}/profileimg-download", produces = "application/octet-stream")
+    public ResponseEntity<?> downloadProfile(@PathVariable("memberSeq") long memberSeq) {
+        try {
+            return new ResponseEntity<>(memberReadService.downloadProfileImage(memberSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/{memberSeq}/backgroundimg-download", produces = "application/octet-stream")
+    public ResponseEntity<?> downloadBackground(@PathVariable("memberSeq") long memberSeq) {
+        try {
+            return new ResponseEntity<>(memberReadService.downloadProfileImage(memberSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
