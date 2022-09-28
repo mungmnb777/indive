@@ -33,6 +33,7 @@ public class MemberController {
 
     @GetMapping("duplicated-email")
     public ResponseEntity<?> isDuplicated(@Validated @ModelAttribute WebDuplicatedEmail dto) {
+        System.out.println("duplicated 에 들어옴" + dto.getEmail());
         return new ResponseEntity<>(memberReadService.isDuplicated(dto.convertToServiceDto()), HttpStatus.OK);
     }
 
