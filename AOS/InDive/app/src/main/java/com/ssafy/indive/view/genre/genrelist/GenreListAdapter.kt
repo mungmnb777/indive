@@ -16,7 +16,7 @@ class GenreListAdapter(
     inner class GenreListViewHolder(val binding: ItemMusicListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: Music) {
-            binding.song = music
+            binding.music = music
 
         }
 

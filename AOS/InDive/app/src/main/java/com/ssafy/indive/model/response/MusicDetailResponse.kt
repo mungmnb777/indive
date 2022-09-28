@@ -4,7 +4,7 @@ import com.ssafy.indive.model.dto.Member
 
 data class MusicDetailResponse(
     val musicSeq: Long,
-    val member: Member,
+    val artist: Member,
     val title: String,
     val lyricist: String,
     val composer: String,

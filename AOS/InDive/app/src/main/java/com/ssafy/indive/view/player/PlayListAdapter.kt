@@ -22,7 +22,8 @@ class PlayListAdapter(private val callback: (Int) -> Unit) :
 
         fun bind(item: PlayListMusic) {
 
-//            binding.music = Music(0,0,item.artist,0,0, item.track, "", "", "", "", "", "", "", "","")
+            binding.tvItemTitle.text = item.track
+            binding.tvItemArtist.text = item.artist
 
             Glide.with(binding.ivItemImg.context)
                 .load(item.coverUrl)

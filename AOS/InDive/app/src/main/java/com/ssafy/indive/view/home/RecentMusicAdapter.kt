@@ -1,6 +1,7 @@
 package com.ssafy.indive.view.home
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,15 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemRecentMusicBinding
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.utils.TAG
 
-class RecentMusicAdapter : ListAdapter<MusicDetailResponse, RecentMusicAdapter.RecentMusicViewHolder>(diffUtil) {
+class RecentMusicAdapter(private val playListener : (MusicDetailResponse) -> (Unit)) : ListAdapter<MusicDetailResponse, RecentMusicAdapter.RecentMusicViewHolder>(diffUtil) {
 
 
     inner class RecentMusicViewHolder(var binding: ItemRecentMusicBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: MusicDetailResponse) {
+
+            Log.d(TAG, "bind: $music")
             binding.music = music
 
+            binding.root.setOnClickListener {
+                playListener(music)
+            }
 
         }
     }

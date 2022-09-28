@@ -81,7 +81,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         homeViewModel.getMusics(null, null, "latest", null)
         binding.rvRecentMusic.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvRecentMusic.adapter = RecentMusicAdapter()
+        binding.rvRecentMusic.adapter = RecentMusicAdapter(playListener)
 
 
     }
@@ -91,13 +91,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         binding.rvMusicChart.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        val playListener: (MusicDetailResponse) -> (Unit) = {
-            mainViewModel.insert(it.musicSeq)
-            val intent = Intent(context, PlayerActivity::class.java)
-            intent.putExtra("class", "HomeFragment")
-            startActivity(intent)
-        }
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
@@ -120,5 +113,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.rvMusicChart.adapter = MusicChartAdapter(playListener, moreListener)
 
 
+    }
+
+    private val playListener: (MusicDetailResponse) -> (Unit) = {
+        mainViewModel.insert(it.musicSeq)
+        val intent = Intent(context, PlayerActivity::class.java)
+        intent.putExtra("class", "HomeFragment")
+        intent.putExtra("musicSeq", it.musicSeq)
+        startActivity(intent)
     }
 }

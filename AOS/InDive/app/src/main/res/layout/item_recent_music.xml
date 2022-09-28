@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
-
     <data>
-
         <variable
             name="music"
             type="com.ssafy.indive.model.response.MusicDetailResponse" />
@@ -17,6 +15,7 @@
 
         <ImageView
             android:id="@+id/iv_item_recent_music"
+            bindMusicImage="@{music.musicSeq}"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_launcher_foreground"
@@ -37,7 +36,7 @@
             android:id="@+id/tv_item_artist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{music.member.nickname}"
+            android:text="@{music.artist.nickname}"
             android:textColor="@color/main_grey"
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="@id/tv_item_title"

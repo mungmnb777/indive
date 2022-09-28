@@ -36,17 +36,13 @@ class HomeViewModel @Inject constructor(
     private val _successMsgEvent = SingleLiveEvent<String>()
     val successMsgEvent get() = _successMsgEvent
 
-    private val _recentSongList = MutableLiveData<MutableList<Music>>()
-    val recentMusicList: LiveData<MutableList<Music>>
-        get() = _recentSongList
+    private val _latestMusicList: MutableStateFlow<Result<List<MusicDetailResponse>>> =
+        MutableStateFlow(Result.Unintialized)
+    val latestMusicList get() = _latestMusicList
 
     private val _popularMusicList: MutableStateFlow<Result<List<MusicDetailResponse>>> =
         MutableStateFlow(Result.Unintialized)
     val popularMusicList get() = _popularMusicList
-
-
-    private val _successPopularMusicList = SingleLiveEvent<String>()
-    val successPopularMusicList get() = _successPopularMusicList
 
 
     fun getMusics(title: String?, artistName: String?, sort: String?, genre: String?) {
@@ -55,9 +51,15 @@ class HomeViewModel @Inject constructor(
 
                 Log.d(TAG, "getMusics: ")
                 if (it is Result.Success) {
-                    if (sort == "popular") {
-                        _popularMusicList.value = it
-                        Log.d(TAG, "getMusics: ${it.data}")
+                    when (sort) {
+                        "popular" -> {
+                            _popularMusicList.value = it
+                            Log.d(TAG, "getPopularMusics: ${it.data}")
+                        }
+                        "latest" -> {
+                            _latestMusicList.value = it
+                            Log.d("getLatestMusics", "getLatestMusics: ${it.data}")
+                        }
                     }
 
                 } else if (it is Result.Error) {
@@ -69,19 +71,6 @@ class HomeViewModel @Inject constructor(
 
             }
         }
-    }
-
-
-    fun initRecentSongList() {
-
-    }
-
-    fun initPopularSongList() {
-
-
-        val popularList =
-            mutableListOf(Music(0, "제목", "", "", "", "", "", "", "", null, null, "가수"))
-//        _popularSongList.postValue(popularList)
     }
 
 

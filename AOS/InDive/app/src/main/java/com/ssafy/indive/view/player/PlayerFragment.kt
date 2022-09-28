@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -46,11 +47,16 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
     private lateinit var updateSeekRunnable: Runnable
     private var isWatchingPlayList = false
     private lateinit var playListAdapter: PlayListAdapter
+
+    private var musicSeq = 0L
+
     override fun init() {
         mContext = context
 
         Log.d("PlayerFragment", "init: ")
         songPosition = requireActivity().intent.getIntExtra("index", 0)
+        musicSeq = requireActivity().intent.getLongExtra("musicSeq", 0)
+        Log.d("PlayerFragment_", "musicSeq: $musicSeq")
         when (requireActivity().intent.getStringExtra("class")) {
             "NowPlaying" -> {
                 initViews()
@@ -95,7 +101,6 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         }
 
         initClickListener()
-
 
         playerBinding = binding
 
@@ -160,8 +165,14 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
             PlayerMoreDialogFragment(object :
                 PlayerMoreDialogFragment.PlayerMoreDialogClickListener {
                 override fun clickDetail() {
-                    val intent = Intent(context, SongDetailActivity::class.java)
-                    startActivity(intent)
+                    val bundle = bundleOf("musicSeq" to musicSeq)
+                    findNavController().navigate(
+                        R.id.action_playerFragment_to_songDetailFragment,
+                        bundle
+                    )
+//                    val intent = Intent(context, SongDetailActivity::class.java)
+//                    intent.putExtra("musicSeq", musicSeq)
+//                    startActivity(intent)
                 }
 
                 override fun clickReport() {

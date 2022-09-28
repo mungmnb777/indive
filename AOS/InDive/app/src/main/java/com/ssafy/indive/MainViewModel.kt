@@ -1,5 +1,6 @@
 package com.ssafy.indive
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,13 +9,13 @@ import com.ssafy.indive.model.entity.PlayListEntity
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.repository.PlayListRepository
+import com.ssafy.indive.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.ssafy.indive.utils.Result
 import kotlinx.coroutines.flow.asStateFlow
 import retrofit2.Response
 
@@ -35,23 +36,29 @@ class MainViewModel @Inject constructor(
     fun insert(musicSeq: Long) {
 
         viewModelScope.launch(Dispatchers.IO) {
-
             musicManagerRepository.getMusicDetails(musicSeq).collectLatest {
                 if (it is Result.Success) {
                     _musicDetails.value = it
+                    Log.d("insert", "insert: ${it.data.body()}")
+                    val musicDetail = it.data.body()!!
+                    val title = musicDetail.title
+                    val artist = musicDetail.artist.nickname
+                    val song = PlayListEntity(
+                        0,
+                        title,
+                        "$MUSIC_HEADER$musicSeq$MUSIC_FOOTER",
+                        artist,
+                        "$COVER_HEADER$musicSeq$COVER_FOOTER"
+                    )
+
+                    playListRepository.insertPlayList(song)
+                    getAll()
+                } else if (it is Result.Error) {
+                    Log.d(TAG, "Error: ${it.exception}")
+
                 }
             }
 
-            val song1 = PlayListEntity(
-                0,
-                "제목",
-                "https://j7d102.p.ssafy.io:8443/music/30/file-download",
-                "가수",
-                "https://j7d102.p.ssafy.io:8443/music/30/image-download"
-            )
-
-            playListRepository.insertPlayList(song1)
-            getAll()
         }
 
 
@@ -62,7 +69,6 @@ class MainViewModel @Inject constructor(
 
         viewModelScope.launch(Dispatchers.IO) {
             val res = playListRepository.getAllPlayList()
-
             _playList.postValue(res)
         }
 

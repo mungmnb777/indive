@@ -2,7 +2,6 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="songdetailVM"
             type="com.ssafy.indive.view.songdetail.SongDetailViewModel" />
@@ -151,7 +150,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_song_info">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -228,6 +226,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_comment"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/view" />
