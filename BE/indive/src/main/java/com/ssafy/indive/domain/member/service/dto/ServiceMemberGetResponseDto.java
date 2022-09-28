@@ -42,6 +42,7 @@ public class ServiceMemberGetResponseDto {
         this.wallet = wallet;
         this.profileMessage = profileMessage;
         this.notice = notice;
+
     }
 
     public ServiceMemberGetResponseDto(Member member) {

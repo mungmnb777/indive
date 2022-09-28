@@ -36,7 +36,6 @@ public class WebMemberAddRequestDto {
                 .build();
     }
 
-
     @Builder
     public WebMemberAddRequestDto(String email, String password, String nickname, String wallet, String profileMessage) {
         this.email = email;

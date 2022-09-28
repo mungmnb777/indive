@@ -59,8 +59,8 @@ public class MemberReadService {
                 .wallet( ((PrincipalDetails) authentication.getPrincipal()).getMember().getWallet())
                 .profileMessage( ((PrincipalDetails) authentication.getPrincipal()).getMember().getProfileMessage())
                 .notice( ((PrincipalDetails) authentication.getPrincipal()).getMember().getNotice())
+                .memberSeq(((PrincipalDetails) authentication.getPrincipal()).getMember().getSeq())
                 .build();
-
     }
 
 }

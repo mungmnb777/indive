@@ -20,7 +20,6 @@ public class WebMemberWriteNoticeRequestDto {
         return ServiceMemberWriteNoticeRequestDto.builder()
             .notice(notice)
             .build();
-
     }
     @Builder
     public WebMemberWriteNoticeRequestDto(String notice) {
