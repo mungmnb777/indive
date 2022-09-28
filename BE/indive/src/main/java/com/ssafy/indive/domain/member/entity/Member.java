@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Generated
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseEntity {
+public class    Member extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name="member_seq")
