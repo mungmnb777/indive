@@ -48,6 +48,7 @@ class ReplyAdapter(private val replyCLickListener: ReplyCLickListener) :
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ReplyResponse>() {
+
             override fun areContentsTheSame(oldItem: ReplyResponse, newItem: ReplyResponse) =
                 oldItem.hashCode() == newItem.hashCode()
 

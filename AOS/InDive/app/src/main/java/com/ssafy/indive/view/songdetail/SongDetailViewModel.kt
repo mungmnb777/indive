@@ -34,9 +34,11 @@ class SongDetailViewModel @Inject constructor(
     private var _musicDetail = SingleLiveEvent<MusicDetailResponse>()
     val musicDetail get() = _musicDetail
 
-    private val _musicReplyList: MutableStateFlow<Result<List<ReplyResponse>>> =
-        MutableStateFlow(Result.Unintialized)
+    private val _musicReplyList: MutableStateFlow<List<ReplyResponse>> = MutableStateFlow(listOf())
     val musicReplyList get() = _musicReplyList.asStateFlow()
+
+    private val _addReplySuccess = SingleLiveEvent<String>()
+    val addReplySuccess get() = _addReplySuccess
 
     fun getMusicDetail(musicSeq: Long) {
 
@@ -62,7 +64,7 @@ class SongDetailViewModel @Inject constructor(
 
             musicManagerRepository.getMusicReply(musicSeq).collectLatest {
                 if (it is Result.Success) {
-                    _musicReplyList.value = it
+                    _musicReplyList.value = it.data
                     Log.d(TAG, "getMusicReply: ${it.data}")
                 } else if (it is Result.Error) {
                     Log.d(TAG, "getMusicReplyError: ${it.exception}")
@@ -72,5 +74,22 @@ class SongDetailViewModel @Inject constructor(
         }
     }
 
+    fun addReply(musicSeq: Long, content: String) {
 
+        viewModelScope.launch(Dispatchers.IO) {
+            musicManagerRepository.addMusicReply(musicSeq, content).collectLatest {
+                if (it is Result.Success) {
+                    Log.d(TAG, "addReply: $it")
+                    if (it.data.body()!!) {
+                        _musicReplyList.value = listOf()
+                        _addReplySuccess.postValue("등록 성공")
+                    }
+                } else if (it is Result.Error) {
+                    Log.d(TAG, "addReply: $it")
+                }
+            }
+
+
+        }
+    }
 }

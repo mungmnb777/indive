@@ -99,9 +99,9 @@ class MusicManagerRepository @Inject constructor(
         }
     }.catch { e -> emit(Result.Error(e)) }
 
-    fun addMusicReply(musicSeq: Long): Flow<Result<Response<Boolean>>> = flow {
+    fun addMusicReply(musicSeq: Long,content : String): Flow<Result<Response<Boolean>>> = flow {
         emit(Result.Loading)
-        musicManagerDataSource.addMusicReply(musicSeq).collect {
+        musicManagerDataSource.addMusicReply(musicSeq,content).collect {
             emit(Result.Success(it))
         }
     }.catch { e -> emit(Result.Error(e)) }
