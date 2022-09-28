@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         binding.circleIndicator.setViewPager(binding.vpBanner)
     }
 
-    private fun initViewModelCallback(){
+    private fun initViewModelCallback() {
 
         homeViewModel.getMusics(null, null, null, null)
 
@@ -70,7 +70,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
         binding.ivQr.setOnClickListener {
 //            findNavController().navigate(R.id.action_homeFragment_to_QRFragment)
-            val intent = Intent(requireActivity(),PlayerActivity::class.java)
+            val intent = Intent(requireActivity(), PlayerActivity::class.java)
             startActivity(intent)
         }
 
@@ -78,7 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecentMusic() {
 
-        homeViewModel.initRecentSongList()
+        homeViewModel.getMusics(null, null, "latest", null)
         binding.rvRecentMusic.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRecentMusic.adapter = RecentMusicAdapter()
@@ -95,7 +95,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val playListener: (MusicDetailResponse) -> (Unit) = {
             mainViewModel.insert(it.musicSeq)
             val intent = Intent(context, PlayerActivity::class.java)
-            intent.putExtra("class","HomeFragment")
+            intent.putExtra("class", "HomeFragment")
             startActivity(intent)
         }
 
@@ -117,7 +117,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }).show(requireActivity().supportFragmentManager, "MoreDialog")
         }
 
-        binding.rvMusicChart.adapter = MusicChartAdapter(playListener,moreListener)
+        binding.rvMusicChart.adapter = MusicChartAdapter(playListener, moreListener)
 
 
     }

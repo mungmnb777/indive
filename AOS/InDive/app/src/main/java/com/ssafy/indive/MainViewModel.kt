@@ -32,9 +32,7 @@ class MainViewModel @Inject constructor(
         MutableStateFlow(Result.Unintialized)
     val musicDetails get() = _musicDetails.asStateFlow()
 
-
     fun insert(musicSeq: Long) {
-
 
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -42,7 +40,6 @@ class MainViewModel @Inject constructor(
                 if (it is Result.Success) {
                     _musicDetails.value = it
                 }
-
             }
 
             val song1 = PlayListEntity(
