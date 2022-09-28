@@ -196,5 +196,20 @@
         <action
             android:id="@+id/action_genreListFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
+        <argument
+            android:name="genre"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_genreListFragment_to_songDetailFragment2"
+            app:destination="@id/songDetailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/songDetailFragment2"
+        android:name="com.ssafy.indive.view.songdetail.SongDetailFragment"
+        android:label="SongDetailFragment" >
+        <argument
+            android:name="musicSeq"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>

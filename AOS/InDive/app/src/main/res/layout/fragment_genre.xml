@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -73,11 +73,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_rap"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="랩/힙합" />
+                        android:text="랩/힙합"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -89,10 +100,20 @@
                     app:layout_constraintStart_toEndOf="@id/cv_rap"
                     app:layout_constraintTop_toTopOf="@id/cv_rap">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_ballad"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="발라드" />
                 </androidx.cardview.widget.CardView>
 
@@ -107,10 +128,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_rap">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_play"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="뉴에이지/연주곡" />
                 </androidx.cardview.widget.CardView>
 
@@ -123,10 +154,20 @@
                     app:layout_constraintStart_toEndOf="@id/cv_new_age"
                     app:layout_constraintTop_toTopOf="@id/cv_new_age">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_rnb"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="R&amp;B/소울" />
                 </androidx.cardview.widget.CardView>
 
@@ -141,10 +182,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_new_age">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_zazz"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="재즈" />
                 </androidx.cardview.widget.CardView>
 
@@ -157,10 +208,20 @@
                     app:layout_constraintStart_toEndOf="@id/cv_jazz"
                     app:layout_constraintTop_toTopOf="@id/cv_jazz">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_dance"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="댄스" />
                 </androidx.cardview.widget.CardView>
 
@@ -175,11 +236,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_jazz">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_blues"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="포크/블루스" />
+                        android:text="포크/블루스"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -191,10 +262,20 @@
                     app:layout_constraintStart_toEndOf="@id/cv_fork"
                     app:layout_constraintTop_toTopOf="@id/cv_fork">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_acoustic"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="어쿠스틱" />
                 </androidx.cardview.widget.CardView>
 
@@ -209,10 +290,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_fork">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_rock"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="락/메탈" />
                 </androidx.cardview.widget.CardView>
 
@@ -225,10 +316,20 @@
                     app:layout_constraintStart_toEndOf="@id/cv_rock"
                     app:layout_constraintTop_toTopOf="@id/cv_rock">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_rockballad"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="락발라드" />
                 </androidx.cardview.widget.CardView>
 
@@ -244,10 +345,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cv_rock">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_edm"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
                         android:text="EDM" />
                 </androidx.cardview.widget.CardView>
 
@@ -260,10 +371,20 @@
                     app:layout_constraintStart_toEndOf="@id/cv_edm"
                     app:layout_constraintTop_toTopOf="@id/cv_edm">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/genre_trot"
+                        android:scaleType="fitXY"
+                        android:alpha="0.7"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
                         android:text="트로트" />
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,22 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ssafy.indive.databinding.ItemMusicChartBinding
 import com.ssafy.indive.databinding.ItemMusicListBinding
 import com.ssafy.indive.model.dto.Music
+import com.ssafy.indive.model.response.MusicDetailResponse
 
 
 class GenreListAdapter(
-    private val playListener: (Music) -> (Unit),
-    private val moreListener: (Music) -> (Unit)
-) : ListAdapter<Music, GenreListAdapter.GenreListViewHolder>(diffUtil) {
-    inner class GenreListViewHolder(val binding: ItemMusicListBinding) :
+    private val playListener: (MusicDetailResponse) -> (Unit),
+    private val moreListener: (MusicDetailResponse) -> (Unit)
+) : ListAdapter<MusicDetailResponse, GenreListAdapter.GenreListViewHolder>(diffUtil) {
+    inner class GenreListViewHolder(val binding: ItemMusicChartBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(music: Music) {
+        fun bind(music: MusicDetailResponse) {
             binding.music = music
 
         }
 
-        fun click(music: Music) {
+        fun click(music: MusicDetailResponse) {
             binding.ivPlay.setOnClickListener {
                 playListener(music)
             }
@@ -33,7 +35,7 @@ class GenreListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreListViewHolder {
         val binding =
-            ItemMusicListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemMusicChartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GenreListViewHolder(binding)
     }
 
@@ -43,11 +45,11 @@ class GenreListAdapter(
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Music>() {
-            override fun areContentsTheSame(oldItem: Music, newItem: Music) =
+        val diffUtil = object : DiffUtil.ItemCallback<MusicDetailResponse>() {
+            override fun areContentsTheSame(oldItem: MusicDetailResponse, newItem: MusicDetailResponse) =
                 oldItem.hashCode() == newItem.hashCode()
 
-            override fun areItemsTheSame(oldItem: Music, newItem: Music) =
+            override fun areItemsTheSame(oldItem: MusicDetailResponse, newItem: MusicDetailResponse) =
                 oldItem.musicSeq == newItem.musicSeq
         }
     }

@@ -42,6 +42,10 @@ object RecyclerBinding {
                     Log.d("d102", "CommentAdapter")
                     (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<ReplyResponse>)
                 }
+
+                is GenreListAdapter -> {
+                    (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<MusicDetailResponse>)
+                }
 //
 //                is GenreListAdapter -> {
 //                    Log.d("d102", "CommentAdapter")
