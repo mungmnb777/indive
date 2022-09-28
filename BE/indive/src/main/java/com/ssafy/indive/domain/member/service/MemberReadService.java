@@ -42,6 +42,7 @@ public class MemberReadService {
         Member member = memberRepository.findBySeq(seq).orElseThrow(IllegalArgumentException::new);
 
         return ServiceMemberGetResponseDto.builder()
+                .memberSeq(member.getSeq())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
                 .role(member.getRole())
