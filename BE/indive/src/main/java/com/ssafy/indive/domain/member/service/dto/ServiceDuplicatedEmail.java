@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceDuplicatedEmail {
 
-
     @NotBlank
     private String email;
 
@@ -17,6 +16,5 @@ public class ServiceDuplicatedEmail {
     @Builder
     public ServiceDuplicatedEmail(String email) {
         this.email = email;
-
     }
 }

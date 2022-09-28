@@ -10,18 +10,14 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WebDuplicatedEmail {
-
     @NotBlank
     private String email;
-
 
     public ServiceDuplicatedEmail convertToServiceDto() {
         return ServiceDuplicatedEmail.builder()
                 .email(email)
                 .build();
-
     }
-
 
     @Builder
     public WebDuplicatedEmail(String email) {

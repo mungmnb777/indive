@@ -10,7 +10,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceMemberGetResponseDto {
 
-
+    @NotBlank
+    private long seq;
     @NotBlank
     private String email;
 
@@ -34,7 +35,8 @@ public class ServiceMemberGetResponseDto {
 
     @Builder
 
-    public ServiceMemberGetResponseDto(String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
+    public ServiceMemberGetResponseDto(long seq, String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
+        this.seq = seq;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
@@ -42,5 +44,6 @@ public class ServiceMemberGetResponseDto {
         this.wallet = wallet;
         this.profileMessage = profileMessage;
         this.notice = notice;
+
     }
 }
