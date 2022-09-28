@@ -213,60 +213,57 @@ class MainActivity : AppCompatActivity() {
 //        binding.tvAccounts.text = "${Numeric.toHexString(retval)}"
 //        recoverSign(hash, Numeric.toHexString(retval))
 //    }
+//
+//    val MESSAGE_PREFIX = "\u0019Ethereum Signed Message:\n";
+//
+//    private fun signMessage(privateKey: String, to: String, amount: Int, message: String) {
+//        val data = "$to$amount$message".toByteArray()
+//
+//        val prefix = (MESSAGE_PREFIX + data.size).toByteArray()
+//
+//        val result = ByteArray(prefix.size + data.size)
+//
+//        System.arraycopy(prefix, 0, result, 0, prefix.size)
+//        System.arraycopy(data, 0, result, prefix.size, data.size)
+//
+//        val signature = Hash.sha3(result)
+//
+//        val signMessage =
+//    }
 
-    val MESSAGE_PREFIX = "\u0019Ethereum Signed Message:\n";
-
-    private fun signMessage(privateKey: String, to: String, amount: Int, message: String) {
-        val data = "$to$amount$message".toByteArray()
-
-        val prefix = (MESSAGE_PREFIX + data.size).toByteArray()
-
-        val result = ByteArray(prefix.size + data.size)
-
-        System.arraycopy(prefix, 0, result, 0, prefix.size)
-        System.arraycopy(data, 0, result, prefix.size, data.size)
-
-        val signature = Hash.sha3(result)
-
-        val signMessage =
-    }
-
-
-
-
-    private fun recoverSign(hash: ByteArray, signature: String) {
-
-        val signatureBytes = Numeric.hexStringToByteArray(signature)
-
-        var v = signatureBytes[64]
-
-        if (v < 27) {
-            v = (v.toInt() + 27).toByte()
-        }
-
-        val sd = Sign.SignatureData(
-            v,
-            Arrays.copyOfRange(signatureBytes, 0, 32),
-            Arrays.copyOfRange(signatureBytes, 32, 64)
-        )
-
-        for (i in 0..3) {
-            val publicKey = Sign.recoverFromSignature(
-                i,
-                ECDSASignature(BigInteger(1, sd.r), BigInteger(1, sd.s)),
-                hash
-            )
-
-            if (publicKey != null) {
-                val recoveredAddress = "0x" + Keys.getAddress(publicKey)
-                Log.d(TAG, "recoverSign: ${recoveredAddress}")
-
-                if (recoveredAddress == address) {
-                    binding.tvRecovered.text = recoveredAddress
-                    break
-                }
-
-            }
-        }
-    }
+//    private fun recoverSign(hash: ByteArray, signature: String) {
+//
+//        val signatureBytes = Numeric.hexStringToByteArray(signature)
+//
+//        var v = signatureBytes[64]
+//
+//        if (v < 27) {
+//            v = (v.toInt() + 27).toByte()
+//        }
+//
+//        val sd = Sign.SignatureData(
+//            v,
+//            Arrays.copyOfRange(signatureBytes, 0, 32),
+//            Arrays.copyOfRange(signatureBytes, 32, 64)
+//        )
+//
+//        for (i in 0..3) {
+//            val publicKey = Sign.recoverFromSignature(
+//                i,
+//                ECDSASignature(BigInteger(1, sd.r), BigInteger(1, sd.s)),
+//                hash
+//            )
+//
+//            if (publicKey != null) {
+//                val recoveredAddress = "0x" + Keys.getAddress(publicKey)
+//                Log.d(TAG, "recoverSign: ${recoveredAddress}")
+//
+//                if (recoveredAddress == address) {
+//                    binding.tvRecovered.text = recoveredAddress
+//                    break
+//                }
+//
+//            }
+//        }
+//    }
 }
