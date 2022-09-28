@@ -3,6 +3,8 @@ package com.ssafy.indive.datasource
 import com.ssafy.indive.api.MemberManagerApi
 import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.model.dto.MemberLogin
+import com.ssafy.indive.model.dto.Notice
+import com.ssafy.indive.model.response.MemberDetailResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
@@ -24,26 +26,25 @@ class MemberManagerDataSource @Inject constructor(
     fun join(memberJoin: MemberJoin): Flow<Response<Boolean>> = flow {
         emit(memberManagerApi.join(memberJoin))
     }
+
     fun emailcheck(email: String): Flow<Response<Boolean>> = flow {
         emit(memberManagerApi.emailCheck(email))
     }
 
-    fun modifyMember(
-        memberSeq: Long,
-        nickname: String,
-        profileFile: MultipartBody.Part?,
-        backgroundFile: MultipartBody.Part?,
-        profileMessage: String?
-    ): Flow<Boolean> = flow {
-        emit(
-            memberManagerApi.modifyMember(
-                memberSeq,
-                nickname,
-                profileFile,
-                backgroundFile,
-                profileMessage
-            )
-        )
+    fun memberDetail(memberSeq: Long): Flow<Response<MemberDetailResponse>> = flow {
+        emit(memberManagerApi.memberDetail(memberSeq))
+    }
+
+    fun modifyMember(memberSeq: Long): Flow<Response<Boolean>> = flow {
+        emit(memberManagerApi.memberModify(memberSeq))
+    }
+
+    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Response<Boolean>> = flow{
+        emit(memberManagerApi.writeNotice(memberSeq, notice))
+    }
+
+    fun loginMemberDetail(): Flow<Response<MemberDetailResponse>> = flow {
+        emit(memberManagerApi.loginMemberDetail())
     }
 
 }

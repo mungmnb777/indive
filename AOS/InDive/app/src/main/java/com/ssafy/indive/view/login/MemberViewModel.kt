@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.model.dto.MemberLogin
+import com.ssafy.indive.model.dto.Notice
+import com.ssafy.indive.model.response.MemberDetailResponse
 import com.ssafy.indive.repository.MemberManagerRepository
 import com.ssafy.indive.utils.JWT
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +18,7 @@ import retrofit2.Response
 import javax.inject.Inject
 import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.SingleLiveEvent
+import com.ssafy.indive.utils.USER
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +50,12 @@ class MemberViewModel @Inject constructor(
     private val _emailCheck = SingleLiveEvent<Boolean>()
     val emailCheck get() = _emailCheck
 
+    private val _profile = SingleLiveEvent<MemberDetailResponse>()
+    val profile get() = _profile
+
+    private val _noticeSuccess = SingleLiveEvent<Boolean>()
+    val noticeSuccess get() = _noticeSuccess
+
     fun memberLogin(memberLogin: MemberLogin) {
         viewModelScope.launch(Dispatchers.IO) {
             memberManagerRepository.login(memberLogin).collectLatest {
@@ -73,7 +82,7 @@ class MemberViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             memberManagerRepository.join(memberJoin).collectLatest {
                 _join.value = it
-                Log.d(TAG, "memberJoin: ${it}")
+                Log.d(TAG, "memberJoin: $it")
                 if (it is Result.Success) {
                     Log.d(TAG, "memberJoin: ${it.data.body()}")
                 }
@@ -87,6 +96,45 @@ class MemberViewModel @Inject constructor(
                 if(it is Result.Success){
                     _emailCheck.postValue(it.data.body())
                     Log.d(TAG, "memberEmailCheck: ${it.data.body()}")
+                }
+            }
+        }
+    }
+
+    fun memberDetail(memberSeq: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            memberManagerRepository.memberDetail(memberSeq).collectLatest {
+                if(it is Result.Success) {
+                    Log.d(TAG, "memberDetail: ${it.data.body()}")
+                    _profile.postValue(it.data.body())
+                }
+            }
+        }
+    }
+
+    fun memberModify(){}
+    
+    fun writeNotice(memberSeq: Long, notice: Notice) {
+        viewModelScope.launch(Dispatchers.IO) { 
+            memberManagerRepository.writeNotice(memberSeq, notice).collectLatest {
+                Log.d(TAG, "writeNotice: ${it}")
+                if(it is Result.Success) {
+                    Log.d(TAG, "writeNotice: @@")
+                    noticeSuccess.postValue(it.data.body())
+                }
+            }
+        }
+    }
+    
+    fun loginMemberDetail() {
+        viewModelScope.launch(Dispatchers.IO) { 
+            memberManagerRepository.loginMemberDetail().collectLatest {
+                if(it is Result.Success){
+                    Log.d(TAG, "loginMemberDetail: ${it.data.body()}")
+                    val res = it.data.body() as MemberDetailResponse
+                    sharedPreferences.edit()
+                        .putLong(USER, res.memberSeq)
+                        .apply()
                 }
             }
         }

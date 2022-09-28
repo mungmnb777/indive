@@ -27,19 +27,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     lateinit var sharedPreferences: SharedPreferences
 
     override fun init() {
-        autoLogin()
         initClickListener()
         initViewModelCallback()
     }
 
-    private fun autoLogin() {
-        if (sharedPreferences.getString(JWT, "") != "") {
-            Log.d(TAG, "autoLogin: ${sharedPreferences.getString(JWT, "")}")
-            loginSuccess()
-        }
-    }
-
     private fun loginSuccess() {
+        memberViewModel.loginMemberDetail()
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
         activity?.finish()

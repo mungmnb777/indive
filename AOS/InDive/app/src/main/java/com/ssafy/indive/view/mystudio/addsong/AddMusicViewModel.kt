@@ -157,21 +157,6 @@ class AddMusicViewModel @Inject constructor(
         }
     }
 
-    fun modifyMember() {
-        viewModelScope.launch(Dispatchers.IO) {
-            memberManagerRepository.modifyMember(13, "변경 닉", coverImg, coverImg, null).collectLatest {
-                if(it is Result.Success){
-                    Log.d(TAG, "modifyMember: ${it.data}")
-                    if (it.data) {
-                        _successAddMusic.postValue("음원 등록 성공")
-                    } else {
-                        _failedAddMusic.postValue("음원 등록 실패")
-                    }
-                }
-            }
-        }
-    }
-
     fun setMusic(music: MultipartBody.Part) {
         this.music = music
     }
