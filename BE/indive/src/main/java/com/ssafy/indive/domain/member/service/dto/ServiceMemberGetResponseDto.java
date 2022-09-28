@@ -38,7 +38,6 @@ public class ServiceMemberGetResponseDto {
     public ServiceMemberGetResponseDto(long memberSeq, String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
         this.memberSeq = memberSeq;
         this.email = email;
-        this.password = password;
         this.nickname = nickname;
         this.role = role;
         this.wallet = wallet;
