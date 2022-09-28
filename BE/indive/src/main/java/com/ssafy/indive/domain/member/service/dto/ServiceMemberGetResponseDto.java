@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 public class ServiceMemberGetResponseDto {
 
     @NotBlank
-    private long seq;
+    private long memberSeq;
     @NotBlank
     private String email;
 
@@ -35,8 +35,8 @@ public class ServiceMemberGetResponseDto {
 
     @Builder
 
-    public ServiceMemberGetResponseDto(long seq, String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
-        this.seq = seq;
+    public ServiceMemberGetResponseDto(long memberSeq, String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
+        this.memberSeq = memberSeq;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
