@@ -27,7 +27,8 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
     private val memberViewModel: MemberViewModel by viewModels()
     private lateinit var key: String
     private var isEmailCheck: Boolean = false
-    private var isJoinCheck: Boolean = false
+    private var isPassCheck: Boolean = false
+    private var isEmailCodeCheck: Boolean = false
 
     override fun init() {
         binding.apply {
@@ -79,9 +80,9 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
             btnEmailCode.setOnClickListener {
                 if (etEmailCode.text.toString() == key) {
                     Toast.makeText(context, "인증이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    isEmailCodeCheck = true
                     etEmailCode.isEnabled = false
                     etEmail.isEnabled = false
-                    isJoinCheck = true
                 } else {
                     Toast.makeText(context, "인증코드를 확인해주세요.", Toast.LENGTH_SHORT).show()
                 }
@@ -90,8 +91,16 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
 
 
             btnJoin.setOnClickListener {
-                if(isJoinCheck){
-                    memberViewModel.memberJoin(MemberJoin(etEmail.text.toString(), etPass.text.toString(), etNickname.text.toString(), "1", "1" ))
+                if(isEmailCheck && isEmailCodeCheck && isPassCheck){
+                    memberViewModel.memberJoin(
+                        MemberJoin(
+                            etEmail.text.toString(),
+                            etPass.text.toString(),
+                            etNickname.text.toString(),
+                            "1",
+                            "1"
+                        )
+                    )
                     findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
                 } else{
                     Toast.makeText(context, "가입정보를 확인해주세요.", Toast.LENGTH_SHORT).show()
@@ -112,6 +121,7 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
     private val passChangeListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
         @SuppressLint("ResourceType")
         override fun afterTextChanged(p0: Editable?) {
             binding.tvPassMsg.visibility = View.VISIBLE
@@ -119,13 +129,13 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
                 binding.apply {
                     tvPassMsg.text = "비밀번호 일치"
                     tvPassMsg.setTextColor(ContextCompat.getColor(context!!, R.color.main_blue))
-                    isJoinCheck = true
+                    isPassCheck = true;
                 }
             } else {
                 binding.apply {
                     tvPassMsg.text = "비밀번호 불일치"
                     tvPassMsg.setTextColor(ContextCompat.getColor(context!!, R.color.red))
-                    isJoinCheck = false
+                    isPassCheck = false
                 }
             }
         }

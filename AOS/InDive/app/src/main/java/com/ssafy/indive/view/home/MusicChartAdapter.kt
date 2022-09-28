@@ -14,7 +14,7 @@ class MusicChartAdapter(private val playListener : (MusicDetailResponse) -> (Uni
     inner class MusicChartViewHolder(var binding: ItemMusicChartBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: MusicDetailResponse) {
-            binding.song = music
+            binding.music = music
             binding.tvMusicRanking.text = "${position + 1}"
 
         }
