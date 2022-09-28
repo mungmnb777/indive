@@ -57,16 +57,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun initObserve() {
         mainViewModel.getAll()
         lifecycleScope.launch {
-            Log.d(TAG, "initObserve: $this")
             mainViewModel.playList.collectLatest { playListEntity ->
-                Log.d("MainActivity_", "initObserve: $playListEntity")
                 if (playListEntity.isNotEmpty()) {
                     playList = mutableListOf()
                     playListEntity.forEach {
                         playList.add(it.mapper())
                     }
 
-                    Log.d("MainActivity_", "initObserve: $playList")
                     if (mainViewModel.successGetEvent != 0L) {
                         val musicSeq = mainViewModel.successGetEvent
                         mainViewModel.successGetEvent = 0L

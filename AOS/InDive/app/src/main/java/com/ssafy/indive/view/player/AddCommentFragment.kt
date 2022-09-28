@@ -14,7 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ssafy.indive.R
 import com.ssafy.indive.databinding.FragmentAddCommentBinding
 
-class AddCommentFragment : BottomSheetDialogFragment() {
+class AddCommentFragment(val clickListener : (String) -> (Unit) ) : BottomSheetDialogFragment() {
 
     private lateinit var binding : FragmentAddCommentBinding
 
@@ -48,6 +48,9 @@ class AddCommentFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvAddComment.setOnClickListener {
+
+
+
             dismiss()
         }
     }

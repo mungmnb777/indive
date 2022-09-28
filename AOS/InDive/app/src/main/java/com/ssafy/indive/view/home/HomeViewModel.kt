@@ -54,19 +54,14 @@ class HomeViewModel @Inject constructor(
                     when (sort) {
                         "popular" -> {
                             _popularMusicList.value = it
-
-                            Log.d(TAG, "getPopularMusics: ${it.data}")
                         }
                         "latest" -> {
                             _latestMusicList.value = it
-                            Log.d("getLatestMusics", "getLatestMusics: ${it.data}")
                         }
                     }
 
                 } else if (it is Result.Error) {
                     Log.d(TAG, "Error: ${it.exception}")
-                    Log.d(TAG, "Error: ${it.exception.message}")
-                    Log.d(TAG, "Error: ${it.exception.cause}")
                 }
 
 

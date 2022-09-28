@@ -11,6 +11,7 @@ import com.ssafy.indive.binding.RecyclerBinding.bindMusicImage
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.model.response.ReplyResponse
 import com.ssafy.indive.utils.*
+import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.home.MusicChartAdapter
 import com.ssafy.indive.view.home.RecentMusicAdapter
 import com.ssafy.indive.view.songdetail.ReplyAdapter
