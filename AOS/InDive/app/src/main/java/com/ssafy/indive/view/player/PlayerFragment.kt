@@ -94,6 +94,7 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                 requireActivity().startService(intent)
                 musicList = mutableListOf()
                 musicList.addAll(MainActivity.playList)
+                Log.d("PlayerFragment_", "init: ${musicList.size}")
                 if (musicList.size != 0) {
                     initViews()
                 }

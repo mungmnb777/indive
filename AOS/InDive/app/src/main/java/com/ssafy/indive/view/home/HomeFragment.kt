@@ -26,9 +26,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun init() {
-
-
-        mainViewModel.getAll()
         binding.apply {
             homeVM = homeViewModel
         }
@@ -36,11 +33,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initBanner()
         initRecentMusic()
         initPopularMusic()
-
         initViewModelCallback()
-
         clickListener()
     }
+
 
     private fun initBanner() {
         val bannerList = mutableListOf(
@@ -122,10 +118,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val playListener: (MusicDetailResponse) -> (Unit) = {
         mainViewModel.insert(it.musicSeq)
-        val intent = Intent(context, PlayerActivity::class.java)
-        intent.putExtra("class", "HomeFragment")
-        intent.putExtra("musicSeq", it.musicSeq)
-        startActivity(intent)
+        mainViewModel.successGetEvent=it.musicSeq
     }
     fun scanQRSuccess(){
         val action = HomeFragmentDirections.actionHomeFragmentToDonateFragment(MainActivity.successQRScanMsg)

@@ -20,7 +20,7 @@ class SongDetailActivity : BaseActivity<ActivitySongDetailBinding>(R.layout.acti
     }
 
     private fun initCommentList() {
-        songDetailViewModel.getComments()
+//        songDetailViewModel.getComments()
         binding.rvComment.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvComment.adapter = CommentAdapter(object : CommentAdapter.CommentCLickListener {

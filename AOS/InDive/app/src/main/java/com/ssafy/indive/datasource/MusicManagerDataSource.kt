@@ -71,7 +71,7 @@ class MusicManagerDataSource @Inject constructor(
         emit(musicManagerApi.addMusicReply(musicSeq))
     }
 
-    fun getMusicReply(musicSeq: Long): Flow<Response<List<ReplyResponse>>> = flow {
+    fun getMusicReply(musicSeq: Long): Flow<List<ReplyResponse>> = flow {
         emit(musicManagerApi.getMusicReply(musicSeq))
     }
 

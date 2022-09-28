@@ -27,7 +27,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     lateinit var sharedPreferences: SharedPreferences
 
     override fun init() {
-        autoLogin()
+//        autoLogin()
         initClickListener()
         initViewModelCallback()
     }

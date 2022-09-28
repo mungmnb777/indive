@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.ssafy.indive.R
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.model.response.ReplyResponse
 import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.home.MusicChartAdapter
@@ -37,10 +38,10 @@ object RecyclerBinding {
                     (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<MusicDetailResponse>)
                 }
 
-//                is CommentAdapter -> {
-//                    Log.d("d102", "CommentAdapter")
-//                    (view.adapter as ListAdapter<Any, *>).submitList(result)
-//                }
+                is CommentAdapter -> {
+                    Log.d("d102", "CommentAdapter")
+                    (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<ReplyResponse>)
+                }
 //
 //                is GenreListAdapter -> {
 //                    Log.d("d102", "CommentAdapter")

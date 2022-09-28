@@ -1,30 +1,76 @@
 package com.ssafy.indive.view.songdetail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.R
 import com.ssafy.indive.model.dto.Comment
+import com.ssafy.indive.model.entity.PlayListEntity
+import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.model.response.ReplyResponse
+import com.ssafy.indive.repository.MusicManagerRepository
+import com.ssafy.indive.utils.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import retrofit2.Response
+import javax.inject.Inject
 
-class SongDetailViewModel : ViewModel() {
+@HiltViewModel
+class SongDetailViewModel @Inject constructor(
+    private val musicManagerRepository: MusicManagerRepository
+) : ViewModel() {
 
-    private val _commentList = MutableLiveData<MutableList<Comment>>()
-    val commentList: LiveData<MutableList<Comment>>
-        get() = _commentList
 
-    fun getComments() {
+    private val _musicDetails: MutableStateFlow<Result<Response<MusicDetailResponse>>> =
+        MutableStateFlow(Result.Unintialized)
+    val musicDetails get() = _musicDetails.asStateFlow()
 
-        val commentList = mutableListOf(
-            Comment(0, 1, R.drawable.img_ive_cover, "닉네임 1", "1", "댓글 1"),
-            Comment(1, 2, R.drawable.ic_launcher_background, "닉네임 2", "2", "댓글 2"),
-            Comment(2, 3, R.drawable.ic_launcher_foreground, "닉네임 3", "3", "댓글 3"),
-            Comment(3, 4, R.drawable.img_ive_cover, "닉네임 4", "4", "댓글 4"),
-            Comment(4, 5, R.drawable.ic_launcher_background, "닉네임 5", "5", "댓글 5"),
-            Comment(5, 6, R.drawable.ic_launcher_foreground, "닉네임 6", "6", "댓글 6"),
-            Comment(6, 7, R.drawable.img_ive_cover, "닉네임 1", "7", "댓글 7"),
-        )
+    private var _musicDetail = SingleLiveEvent<MusicDetailResponse>()
+    val musicDetail get() = _musicDetail
 
-        _commentList.postValue(commentList)
+    private val _musicReplyList: MutableStateFlow<Result<List<ReplyResponse>>> =
+        MutableStateFlow(Result.Unintialized)
+    val musicReplyList get() = _musicReplyList.asStateFlow()
+
+
+    fun getMusicDetail(musicSeq: Long) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            musicManagerRepository.getMusicDetails(musicSeq).collectLatest {
+                if (it is Result.Success) {
+                    _musicDetails.value = it
+
+                    _musicDetail.postValue(it.data.body()!!)
+
+                    Log.d(TAG, "getMusicDetail: ${it.data.body()!!}")
+
+                } else if (it is Result.Error) {
+                    Log.d(TAG, "Error: ${it.exception}")
+
+                }
+            }
+
+        }
+    }
+
+    fun getMusicReply(musicSeq: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            musicManagerRepository.getMusicReply(musicSeq).collectLatest {
+                if (it is Result.Success) {
+                    _musicReplyList.value = it
+                } else if (it is Result.Error) {
+                    Log.d(TAG, "getMusicReplyError: ${it.exception}")
+                }
+            }
+
+        }
     }
 
 

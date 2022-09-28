@@ -51,7 +51,7 @@ interface MusicManagerApi {
     suspend fun addMusicReply(@Path("musicSeq") musicSeq: Long): Response<Boolean>
 
     @GET("music/{musicSeq}/reply")
-    suspend fun getMusicReply(@Path("musicSeq") musicSeq: Long): Response<List<ReplyResponse>>
+    suspend fun getMusicReply(@Path("musicSeq") musicSeq: Long): List<ReplyResponse>
 
     @PUT("music/{musicSeq}/reply/{replySeq}")
     suspend fun modifyMusicReply(

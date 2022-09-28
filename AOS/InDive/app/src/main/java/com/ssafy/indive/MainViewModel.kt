@@ -25,16 +25,17 @@ class MainViewModel @Inject constructor(
     private val musicManagerRepository: MusicManagerRepository
 ) : ViewModel() {
 
-    private val _playList = MutableLiveData<List<PlayListEntity>>()
-    val playList: LiveData<List<PlayListEntity>>
-        get() = _playList
+    private val _playList: MutableStateFlow<List<PlayListEntity>> = MutableStateFlow(listOf())
+    val playList get() = _playList.asStateFlow()
 
     private val _musicDetails: MutableStateFlow<Result<Response<MusicDetailResponse>>> =
         MutableStateFlow(Result.Unintialized)
     val musicDetails get() = _musicDetails.asStateFlow()
 
-    fun insert(musicSeq: Long) {
+    var successGetEvent = 0L
 
+
+    fun insert(musicSeq: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.getMusicDetails(musicSeq).collectLatest {
                 if (it is Result.Success) {
@@ -52,7 +53,6 @@ class MainViewModel @Inject constructor(
                     )
 
                     playListRepository.insertPlayList(song)
-                    getAll()
                 } else if (it is Result.Error) {
                     Log.d(TAG, "Error: ${it.exception}")
 
@@ -66,10 +66,22 @@ class MainViewModel @Inject constructor(
 
 
     fun getAll() {
-
         viewModelScope.launch(Dispatchers.IO) {
-            val res = playListRepository.getAllPlayList()
-            _playList.postValue(res)
+            Log.d(TAG, "initObserve: $this")
+            Log.d("MainViewModel", "getAll:")
+            playListRepository.getAllPlayList().collectLatest {
+                Log.d("MainViewModel", "getAllCollectLatest: ${it}")
+                if (it is Result.Success) {
+                    _playList.value = it.data
+                    Log.d("MainViewModel", "getAllSuccess: ${it.data}")
+                } else if (it is Result.Empty) {
+                    _playList.value = listOf()
+                } else if (it is Result.Error) {
+                    Log.d("MainViewModel", "getAllError: ${it}")
+                }
+
+            }
+
         }
 
     }

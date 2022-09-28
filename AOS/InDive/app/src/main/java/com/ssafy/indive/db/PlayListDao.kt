@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.ssafy.indive.model.entity.PlayListEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlayListDao{
@@ -13,6 +14,6 @@ interface PlayListDao{
     fun insertPlayList(playList : PlayListEntity)
 
     @Query("SELECT * FROM InDIve order by seq desc")
-    fun getAllPlayList() : List<PlayListEntity>
+    fun getAllPlayList() : Flow<List<PlayListEntity>>
 
 }

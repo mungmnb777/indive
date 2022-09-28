@@ -1,9 +1,11 @@
 package com.ssafy.indive
 
 import android.Manifest
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -11,18 +13,21 @@ import com.gun0912.tedpermission.coroutine.TedPermission
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
 import com.ssafy.indive.model.dto.PlayListMusic
+import com.ssafy.indive.utils.Result
+import com.ssafy.indive.utils.TAG
 import com.ssafy.indive.utils.mapper
+import com.ssafy.indive.view.player.PlayerActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mainViewModel: MainViewModel by viewModels()
-
-    private var READ_EXTERNAL_STORAGE = 0
 
     lateinit var navController: NavController
 
@@ -50,20 +55,48 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initObserve() {
-        mainViewModel.playList.observe(this) { playListEntity ->
-            Log.d("MainActivity_", "initObserve: $playListEntity")
-            if (mainViewModel.playList.value != null) {
-                if (mainViewModel.playList.value!!.isNotEmpty()) {
+        mainViewModel.getAll()
+        lifecycleScope.launch {
+            Log.d(TAG, "initObserve: $this")
+            mainViewModel.playList.collectLatest { playListEntity ->
+                Log.d("MainActivity_", "initObserve: $playListEntity")
+                if (playListEntity.isNotEmpty()) {
                     playList = mutableListOf()
                     playListEntity.forEach {
                         playList.add(it.mapper())
                     }
-                } else {
-                    playList = mutableListOf()
 
+                    Log.d("MainActivity_", "initObserve: $playList")
+                    if (mainViewModel.successGetEvent != 0L) {
+                        val musicSeq = mainViewModel.successGetEvent
+                        mainViewModel.successGetEvent = 0L
+
+                        val intent = Intent(this@MainActivity, PlayerActivity::class.java)
+                        intent.putExtra("class", "HomeFragment")
+                        intent.putExtra("musicSeq", musicSeq)
+                        startActivity(intent)
+
+                    }
                 }
+
             }
         }
+
+
+//        { playListEntity ->
+//            Log.d("MainActivity_", "initObserve: $playListEntity")
+//            if (mainViewModel.playList.value != null) {
+//                if (mainViewModel.playList.value!!.isNotEmpty()) {
+//                    playList = mutableListOf()
+//                    playListEntity.forEach {
+//                        playList.add(it.mapper())
+//                    }
+//                } else {
+//                    playList = mutableListOf()
+//
+//                }
+//            }
+//        }
     }
 
     private fun initNavigation() {
@@ -75,8 +108,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             // 바텀 네비게이션이 표시되는 Fragment
             if (destination.id == R.id.homeFragment || destination.id == R.id.genreFragment
-                || destination.id == R.id.myStudioFragment ||destination.id == R.id.moreFragment
-                ) {
+                || destination.id == R.id.myStudioFragment || destination.id == R.id.moreFragment
+            ) {
                 if (binding.bottomNav.visibility == View.GONE) {
                     binding.apply {
                         bottomNav.visibility = View.VISIBLE
