@@ -77,12 +77,12 @@ object RecyclerBinding {
 
     }
 
-    @BindingAdapter("bindMemberImage")
+    @BindingAdapter("bindBackImage")
     @JvmStatic
-    fun ImageView.bindMemberImage(seq: Long) {
-        Glide.with(this.context).load("${MEMBER_HEADER}$seq${MEMBER_FOOTER}").centerCrop()
+    fun ImageView.bindBackImage(seq: Long) {
+        Glide.with(this.context).load("${BACKGROUND_HEADER}$seq${BACKGROUND_FOOTER}").centerCrop()
             .placeholder(
-                R.drawable.member_default_image
+                R.drawable.album_default_image
             ).into(this)
 
     }

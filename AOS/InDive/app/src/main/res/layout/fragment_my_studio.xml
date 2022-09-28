@@ -54,6 +54,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
+            bindBackImage="@{MemberVM.profile.memberSeq}"
             tools:layout_editor_absoluteX="0dp"
             android:background="@color/main_grey"
             tools:src="@drawable/ic_launcher_foreground" />
@@ -96,6 +97,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
+            setImageCircle="@{MemberVM.profile.memberSeq}"
             app:layout_constraintBottom_toBottomOf="@id/img_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

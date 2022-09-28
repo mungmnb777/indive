@@ -32,14 +32,12 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
     private fun initViewModel() {
         Log.d(TAG, "initViewModel: ${sharedPreferences.getLong(USER, 0)}")
         memberViewModel.memberDetail(sharedPreferences.getLong(USER, 0))
-        
+
         memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
-//            if(it){
-//                Log.d(TAG, "initViewModel: $it")
-//                memberViewModel.memberDetail(sharedPreferences.getLong(USER, 0))
-//            }
+            if(it){
+                memberViewModel.memberDetail(sharedPreferences.getLong(USER, 0))
+            }
         }
-        
     }
 
     private fun initClickListener() {

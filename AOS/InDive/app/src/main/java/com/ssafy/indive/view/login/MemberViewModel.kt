@@ -107,6 +107,7 @@ class MemberViewModel @Inject constructor(
                 if(it is Result.Success) {
                     Log.d(TAG, "memberDetail: ${it.data.body()}")
                     _profile.postValue(it.data.body())
+                    noticeSuccess.postValue(true)
                 }
             }
         }
@@ -120,7 +121,7 @@ class MemberViewModel @Inject constructor(
                 Log.d(TAG, "writeNotice: ${it}")
                 if(it is Result.Success) {
                     Log.d(TAG, "writeNotice: @@")
-                    noticeSuccess.postValue(it.data.body())
+                    //noticeSuccess.postValue(it.data.body())
                 }
             }
         }

@@ -13,6 +13,8 @@ const val COVER_FOOTER = "/image-download"
 
 //사용자 프로필사진
 const val MEMBER_HEADER = "${BASE_URL}/members/"
-const val MEMBER_FOOTER = "/file-download"
+const val MEMBER_FOOTER = "/profileimg-download"
 
 //스튜디오 백그라운드 사진
+const val BACKGROUND_HEADER = "${BASE_URL}/members/"
+const val BACKGROUND_FOOTER = "/backgroundimg-download"
