@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="MemberVM"
+            type="com.ssafy.indive.view.login.MemberViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -100,27 +106,32 @@
 
         <TextView
             android:id="@+id/tv_nickname"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="24dp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/civ_profile"
-            android:text="닉네임" />
+            tools:text="닉네임"
+            android:gravity="center"
+            android:text="@{MemberVM.profile.nickname}"/>
 
         <TextView
             android:id="@+id/tv_introduce"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/main_grey"
-            android:textSize="20dp"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
-            android:text="소개란 입니다." />
+            tools:text="소개란 입니다."
+            android:singleLine="true"
+            android:text="@{MemberVM.profile.profileMessage}"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/border_notice"
@@ -154,7 +165,8 @@
                 app:layout_constraintEnd_toStartOf="@id/iv_edit_notice"
                 app:layout_constraintStart_toEndOf="@id/iv_notice"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="공지사항" />
+                tools:text="공지사항"
+                android:text="@{MemberVM.profile.notice}"/>
 
             <ImageView
                 android:id="@+id/iv_edit_notice"
