@@ -37,10 +37,6 @@ public class MemberAddService {
                 .backgroundUuid("default_background")
                 .build();
 
-
-
-        //TODO : 프로필 사진 추가해야 합니다
-
         memberRepository.save(member);
 
         return true;
@@ -50,7 +46,6 @@ public class MemberAddService {
     public boolean writeNotice(ServiceMemberWriteNoticeRequestDto dto, long memberSeq) {
 
         Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
-        
         findMember.update(dto);
 
         return true;
