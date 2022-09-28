@@ -1,6 +1,7 @@
 package com.ssafy.indive.domain.music.service.dto;
 
 import com.ssafy.indive.domain.member.entity.Member;
+import com.ssafy.indive.domain.member.service.dto.ServiceMemberGetResponseDto;
 import com.ssafy.indive.global.utils.DateTimeUtils;
 import lombok.*;
 
@@ -11,9 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceMusicGetResponseDto {
 
-    private Long seq;
+    private Long musicSeq;
 
-    private Member artist;
+    private ServiceMemberGetResponseDto artist;
 
     private String title;
 
@@ -38,9 +39,9 @@ public class ServiceMusicGetResponseDto {
     private int likeCount;
 
     @Builder
-    public ServiceMusicGetResponseDto(Long seq, Member artist, String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, LocalDateTime createDate, LocalDateTime updateDate, int likeCount) {
-        this.seq = seq;
-        this.artist = artist;
+    public ServiceMusicGetResponseDto(Long musicSeq, Member artist, String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, LocalDateTime createDate, LocalDateTime updateDate, int likeCount) {
+        this.musicSeq = musicSeq;
+        this.artist = new ServiceMemberGetResponseDto(artist);
         this.title = title;
         this.lyricist = lyricist;
         this.composer = composer;

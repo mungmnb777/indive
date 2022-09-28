@@ -1,5 +1,6 @@
 package com.ssafy.indive.domain.member.service.dto;
 
+import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.entity.enumeration.Role;
 import lombok.*;
 
@@ -10,13 +11,11 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceMemberGetResponseDto {
 
-    @NotBlank
+
     private long memberSeq;
-    @NotBlank
-    private String email;
 
     @NotBlank
-    private String password;
+    private String email;
 
     @NotBlank
     private String nickname;
@@ -35,7 +34,7 @@ public class ServiceMemberGetResponseDto {
 
     @Builder
 
-    public ServiceMemberGetResponseDto(long memberSeq, String email, String password, String nickname, Role role, String wallet, String profileMessage, String notice) {
+    public ServiceMemberGetResponseDto(long memberSeq, String email, String nickname, Role role, String wallet, String profileMessage, String notice) {
         this.memberSeq = memberSeq;
         this.email = email;
         this.nickname = nickname;
@@ -44,5 +43,15 @@ public class ServiceMemberGetResponseDto {
         this.profileMessage = profileMessage;
         this.notice = notice;
 
+    }
+
+    public ServiceMemberGetResponseDto(Member member) {
+        this.memberSeq = member.getSeq();
+        this.email = member.getEmail();
+        this.nickname = member.getNickname();
+        this.role = member.getRole();
+        this.wallet = member.getWallet();
+        this.profileMessage = member.getProfileMessage();
+        this.notice = member.getNotice();
     }
 }
