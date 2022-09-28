@@ -1,9 +1,10 @@
-package com.ssafy.indive.view.player
+package com.ssafy.indive.view.songdetail
 
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ssafy.indive.R
 import com.ssafy.indive.databinding.FragmentAddCommentBinding
 
-class AddCommentFragment : BottomSheetDialogFragment() {
+class AddCommentFragment(val clickListener: (String) -> (Unit)) : BottomSheetDialogFragment() {
 
-    private lateinit var binding : FragmentAddCommentBinding
+    private lateinit var binding: FragmentAddCommentBinding
 
-    companion object{
+    companion object {
         const val TAG = "AddCommentFragment"
     }
 
@@ -28,7 +29,7 @@ class AddCommentFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_comment,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_comment, container, false)
         return binding.root
 
     }
@@ -48,12 +49,18 @@ class AddCommentFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvAddComment.setOnClickListener {
+
+            if (binding.etReply.text.toString() != "") {
+                clickListener(binding.etReply.text.toString())
+            }
+
             dismiss()
         }
     }
 
     private fun setUpRatio(bottomSheetDialog: BottomSheetDialog) {
-        val bottomSheet = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as View
+        val bottomSheet =
+            bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as View
         val behavior = BottomSheetBehavior.from<View>(bottomSheet)
         val layoutParams = bottomSheet.layoutParams
         layoutParams.height = getBottomSheetDialogDefaultHeight()

@@ -52,7 +52,10 @@ interface MusicManagerApi {
     suspend fun getLikeCount(@Path("musicSeq") musicSeq: Long): Response<Int>
 
     @POST("music/{musicSeq}/reply")
-    suspend fun addMusicReply(@Path("musicSeq") musicSeq: Long): Response<Boolean>
+    suspend fun addMusicReply(
+        @Path("musicSeq") musicSeq: Long,
+        @Body content: String
+    ): Response<Boolean>
 
     @GET("music/{musicSeq}/reply")
     suspend fun getMusicReply(@Path("musicSeq") musicSeq: Long): List<ReplyResponse>

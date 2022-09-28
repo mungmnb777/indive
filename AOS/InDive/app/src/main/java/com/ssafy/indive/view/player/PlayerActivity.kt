@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PlayerActivity : BaseActivity<ActivityPlayer2Binding>(R.layout.activity_player2) {
 
     override fun init() {
+
     }
 
 

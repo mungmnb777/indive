@@ -68,8 +68,8 @@ class MusicManagerDataSource @Inject constructor(
         emit(musicManagerApi.getLikeCount(musicSeq))
     }
 
-    fun addMusicReply(musicSeq: Long): Flow<Response<Boolean>> = flow {
-        emit(musicManagerApi.addMusicReply(musicSeq))
+    fun addMusicReply(musicSeq: Long, content: String): Flow<Response<Boolean>> = flow {
+        emit(musicManagerApi.addMusicReply(musicSeq, content))
     }
 
     fun getMusicReply(musicSeq: Long): Flow<List<ReplyResponse>> = flow {

@@ -40,7 +40,6 @@ class MainViewModel @Inject constructor(
             musicManagerRepository.getMusicDetails(musicSeq).collectLatest {
                 if (it is Result.Success) {
                     _musicDetails.value = it
-                    Log.d("insert", "insert: ${it.data.body()}")
                     val musicDetail = it.data.body()!!
                     val title = musicDetail.title
                     val artist = musicDetail.artist.nickname
@@ -68,13 +67,9 @@ class MainViewModel @Inject constructor(
 
     fun getAll() {
         viewModelScope.launch(Dispatchers.IO) {
-            Log.d(TAG, "initObserve: $this")
-            Log.d("MainViewModel", "getAll:")
             playListRepository.getAllPlayList().collectLatest {
-                Log.d("MainViewModel", "getAllCollectLatest: ${it}")
                 if (it is Result.Success) {
                     _playList.value = it.data
-                    Log.d("MainViewModel", "getAllSuccess: ${it.data}")
                 } else if (it is Result.Empty) {
                     _playList.value = listOf()
                 } else if (it is Result.Error) {
