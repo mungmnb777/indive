@@ -59,11 +59,11 @@ class MemberViewModel @Inject constructor(
                         sharedPreferences.edit()
                             .putString(JWT, it.data.headers()["Authorization"])
                             .apply()
+                    } else{
+                        _loginFail.postValue("로그인 실패")
                     }
                     Log.d(TAG, "memberLogin: ${it.data.body()}")
-                    Log.d(TAG, "memberLogin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
-                }else {
-                    _loginFail.postValue("로그인 실패")
+                    //Log.d(TAG, "memberLogin: ${it.data.headers()["Authorization"]!!.split(" ")[1]}")
                 }
             }
         }
