@@ -6,12 +6,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.indive.MainActivity
-import com.ssafy.indive.base.BaseFragment
-import com.ssafy.indive.R
-import com.ssafy.indive.databinding.FragmentHomeBinding
-import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.MainViewModel
 import com.ssafy.indive.MoreDialogFragment
+import com.ssafy.indive.R
+import com.ssafy.indive.base.BaseFragment
+import com.ssafy.indive.databinding.FragmentHomeBinding
+import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.view.qrscan.QrScanActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,9 +54,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
         binding.ivQr.setOnClickListener {
-//            findNavController().navigate(R.id.action_homeFragment_to_QRFragment)
-//            val intent = Intent(requireActivity(),PlayerActivity::class.java)
-//            startActivity(intent)
             val intent = Intent(requireActivity(), QrScanActivity::class.java)
             startActivity(intent)
         }
@@ -99,9 +96,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         binding.rvMusicChart.adapter = MusicChartAdapter(playListener, moreListener)
 
-
     }
-
 
     private val playListener: (MusicDetailResponse) -> (Unit) = {
         mainViewModel.insert(it.musicSeq)

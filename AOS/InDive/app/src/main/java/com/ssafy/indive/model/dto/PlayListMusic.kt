@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit
 data class PlayListMusic(
 
     val id : String,
+    val musicSeq : Long,
     val track: String,
     val streamUrl: String,
     val artist: String,
@@ -24,9 +25,9 @@ fun formatDuration(duration : Long) : String{
 
 fun setSongPosition(increment: Boolean){
 
-    Log.d("setSongPosition2", "increment: $increment ")
-    Log.d("setSongPosition2", "PlayerActivity.songPosition: ${PlayerFragment.songPosition} ")
-    Log.d("setSongPosition2", "PlayerActivity.musicList.size: ${PlayerFragment.musicList.size} ")
+    Log.d("PlayerFragment_", "increment: $increment ")
+    Log.d("PlayerFragment_", "PlayerActivity.songPosition: ${PlayerFragment.songPosition} ")
+    Log.d("PlayerFragment_", "PlayerActivity.musicList.size: ${PlayerFragment.musicList.size} ")
     if(increment){
         if(PlayerFragment.musicList.size -1 == PlayerFragment.songPosition){
             PlayerFragment.songPosition = 0

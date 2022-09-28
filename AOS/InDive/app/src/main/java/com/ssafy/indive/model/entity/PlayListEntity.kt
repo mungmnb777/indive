@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "InDIve")
 data class PlayListEntity(
     @PrimaryKey(autoGenerate = true)
-    var seq : Int = 0,
+    var seq: Int = 0,
+    val musicSeq: Long,
     val title: String,
     val streamUrl: String,
     val artist: String,
