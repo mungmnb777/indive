@@ -36,9 +36,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initBanner() {
         val bannerList = mutableListOf(
-            Banner(0, R.drawable.ic_launcher_foreground),
-            Banner(0, R.drawable.ic_launcher_background),
-            Banner(0, R.drawable.ic_launcher_foreground)
+            Banner(0, R.drawable.banner1),
+            Banner(0, R.drawable.banner2),
+            Banner(0, R.drawable.banner3)
         )
         binding.vpBanner.adapter = BannerAdapter(bannerList)
         binding.circleIndicator.setViewPager(binding.vpBanner)

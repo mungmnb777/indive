@@ -11,7 +11,12 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentAddSongThirdBinding
 import com.ssafy.indive.utils.RESERVATION_DAY
 import com.ssafy.indive.utils.START_DAY
+import com.ssafy.indive.view.loading.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -22,12 +27,16 @@ class AddMusicThirdFragment :
     BaseFragment<FragmentAddSongThirdBinding>(R.layout.fragment_add_song_third) {
 
     private val addMusicViewModel: AddMusicViewModel by activityViewModels()
+    private lateinit var loadingDialog: LoadingDialog
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun init() {
         binding.apply {
             addMusicVM = addMusicViewModel
         }
+
+        loadingDialog = LoadingDialog(requireContext())
+
         initViewModelCallback()
         clickListener()
     }
@@ -46,11 +55,23 @@ class AddMusicThirdFragment :
         }
     }
 
+    private fun loading(){
+        loadingDialog.show()
+        // 로딩이 진행되지 않았을 경우
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(2000)
+            if(loadingDialog.isShowing){
+                loadingDialog.dismiss()
+            }
+        }
+    }
+
 
     private fun clickListener() {
         binding.apply {
             btnAddsongThird.setOnClickListener {
                 addMusicViewModel.addMusic()
+                loading()
             }
             btnStartDay.setOnClickListener {
                 initDatePickerDialog(START_DAY)
