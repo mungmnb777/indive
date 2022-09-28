@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_donateFragment"
+            app:destination="@id/donateFragment" />
     </fragment>
     <fragment
         android:id="@+id/genreFragment"
@@ -180,7 +183,11 @@
     <fragment
         android:id="@+id/donateFragment"
         android:name="com.ssafy.indive.view.userstudio.donate.DonateFragment"
-        android:label="DonateFragment" />
+        android:label="DonateFragment" >
+        <argument
+            android:name="artistaddress"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/genreListFragment"
         android:name="com.ssafy.indive.view.genre.genrelist.GenreListFragment"

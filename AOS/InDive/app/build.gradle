@@ -130,4 +130,7 @@ dependencies {
     implementation files('lib/activation.jar')
     implementation files('lib/additionnal.jar')
     implementation files('lib/mail.jar')
+
+    // zxing qr scan
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }

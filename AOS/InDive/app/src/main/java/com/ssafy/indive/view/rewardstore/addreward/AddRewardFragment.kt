@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentAddRewardBinding
@@ -23,6 +24,7 @@ class AddRewardFragment : BaseFragment<FragmentAddRewardBinding>(R.layout.fragme
 
     lateinit var imgFile : MultipartBody.Part
     private val addRewardViewModel by viewModels<AddRewardViewModel>()
+    private val args by navArgs<AddRewardFragmentArgs>()
 
     override fun init() {
         initClickListener()
