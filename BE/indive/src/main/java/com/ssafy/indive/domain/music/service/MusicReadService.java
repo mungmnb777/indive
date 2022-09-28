@@ -40,7 +40,7 @@ public class MusicReadService {
 
         for (Music m : music) {
             ServiceMusicGetResponseDto dto = ServiceMusicGetResponseDto.builder()
-                    .seq(m.getSeq())
+                    .musicSeq(m.getSeq())
                     .title(m.getTitle())
                     .artist(m.getAuthor())
                     .composer(m.getComposer())
@@ -65,7 +65,7 @@ public class MusicReadService {
         Music m = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
 
         return ServiceMusicGetResponseDto.builder()
-                .seq(m.getSeq())
+                .musicSeq(m.getSeq())
                 .title(m.getTitle())
                 .artist(m.getAuthor())
                 .composer(m.getComposer())

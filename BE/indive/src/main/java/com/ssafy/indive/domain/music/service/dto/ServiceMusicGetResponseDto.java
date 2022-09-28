@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceMusicGetResponseDto {
 
-    private Long seq;
+    private Long musicSeq;
 
     private ServiceMemberGetResponseDto artist;
 
@@ -39,8 +39,8 @@ public class ServiceMusicGetResponseDto {
     private int likeCount;
 
     @Builder
-    public ServiceMusicGetResponseDto(Long seq, Member artist, String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, LocalDateTime createDate, LocalDateTime updateDate, int likeCount) {
-        this.seq = seq;
+    public ServiceMusicGetResponseDto(Long musicSeq, Member artist, String title, String lyricist, String composer, String genre, String description, String lyrics, LocalDateTime releaseDateTime, LocalDateTime reservationDateTime, LocalDateTime createDate, LocalDateTime updateDate, int likeCount) {
+        this.musicSeq = musicSeq;
         this.artist = new ServiceMemberGetResponseDto(artist);
         this.title = title;
         this.lyricist = lyricist;

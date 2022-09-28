@@ -12,14 +12,14 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceReplyGetResponseDto {
 
-    private long seq;
+    private long replySeq;
 
     private ServiceMemberGetResponseDto member;
 
     private String content;
 
-    public ServiceReplyGetResponseDto(long seq, Member member, String content) {
-        this.seq = seq;
+    public ServiceReplyGetResponseDto(long replySeq, Member member, String content) {
+        this.replySeq = replySeq;
         this.member = new ServiceMemberGetResponseDto(member);
         this.content = content;
     }
