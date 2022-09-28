@@ -3,6 +3,7 @@ package com.ssafy.indive.view.songdetail
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
@@ -17,16 +18,18 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
 
     private val songDetailViewModel: SongDetailViewModel by viewModels()
 
+
+    private val args by navArgs<SongDetailFragmentArgs>()
     var musicSeq = 0L
 
     override fun init() {
 
-        musicSeq = arguments?.getLong("musicSeq")!!
-
-        initMusicDetails()
         binding.apply {
             songdetailVM = songDetailViewModel
         }
+        musicSeq = args.musicSeq
+
+        initMusicDetails()
         initReplyList()
         initClickListener()
 

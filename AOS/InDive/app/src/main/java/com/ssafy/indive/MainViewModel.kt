@@ -46,6 +46,7 @@ class MainViewModel @Inject constructor(
                     val artist = musicDetail.artist.nickname
                     val song = PlayListEntity(
                         0,
+                        musicSeq,
                         title,
                         "$MUSIC_HEADER$musicSeq$MUSIC_FOOTER",
                         artist,

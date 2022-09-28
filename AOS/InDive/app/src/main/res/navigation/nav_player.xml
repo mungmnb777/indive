@@ -22,5 +22,10 @@
     <fragment
         android:id="@+id/songDetailFragment"
         android:name="com.ssafy.indive.view.songdetail.SongDetailFragment"
-        android:label="SongDetailFragment" />
+        android:label="SongDetailFragment" >
+        <argument
+            android:name="musicSeq"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 </navigation>
