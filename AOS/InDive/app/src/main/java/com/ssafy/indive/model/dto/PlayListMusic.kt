@@ -32,13 +32,13 @@ fun setSongPosition(increment: Boolean){
         if(PlayerFragment.musicList.size -1 == PlayerFragment.songPosition){
             PlayerFragment.songPosition = 0
         }else{
-            ++PlayerFragment.songPosition
+            PlayerFragment.songPosition++
         }
     }else{
         if(PlayerFragment.songPosition == 0){
             PlayerFragment.songPosition = PlayerFragment.musicList.size-1
         }else{
-            --PlayerFragment.songPosition
+            PlayerFragment.songPosition--
         }
     }
 }

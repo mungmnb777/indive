@@ -56,9 +56,10 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         Log.d("PlayerFragment", "init: ")
         songPosition = requireActivity().intent.getIntExtra("index", 0)
 
-
         when (requireActivity().intent.getStringExtra("class")) {
             "NowPlaying" -> {
+                Log.d("PlayerFragment_", "init: musicSeq -  ${musicList[songPosition].musicSeq}")
+                Log.d("PlayerFragment_", "init: position -  $songPosition")
                 initViews()
                 if (isPlaying) {
                     binding.ivPlay.background =
@@ -80,7 +81,7 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                     formatDuration(musicService!!.exoPlayer!!.duration)
                 binding.playerSeekbar.progress = musicService!!.exoPlayer!!.currentPosition.toInt()
                 binding.playerSeekbar.max = musicService!!.exoPlayer!!.duration.toInt()
-                Log.d("PlayerFragment", "init: ${musicService!!.exoPlayer!!.currentPosition}")
+                Log.d("PlayerFragment_", "init: ${musicService!!.exoPlayer!!.currentPosition}")
             }
 
             "HomeFragment" -> {
@@ -190,7 +191,8 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
 
     private fun initViews() {
         musicSeq = musicList[songPosition].musicSeq
-        Log.d("PlayerFragment_", "musicSeqRoom: $musicSeq")
+        Log.d("PlayerFragment_", "initViews: $musicSeq")
+        Log.d("PlayerFragment_", "initViews: $songPosition")
         Glide.with(this).load(musicList[songPosition].coverUrl).centerCrop()
             .into(binding.ivCoverImg)
         Glide.with(this).load(musicList[songPosition].coverUrl).centerCrop()
@@ -332,7 +334,11 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
 
     override fun onPause() {
         super.onPause()
+
+        Log.d("PlayerFragment_", "onPause: musicSeq -  ${musicList[songPosition].musicSeq}")
+        Log.d("PlayerFragment_", "onPause: position -  $songPosition")
         requireActivity().intent.putExtra("class", "NowPlaying")
+        requireActivity().intent.putExtra("index", songPosition)
     }
 
     override fun onResume() {
