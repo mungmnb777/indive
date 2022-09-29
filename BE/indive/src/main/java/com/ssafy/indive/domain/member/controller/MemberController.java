@@ -4,6 +4,7 @@ import com.ssafy.indive.domain.member.controller.dto.WebDuplicatedEmail;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberAddRequestDto;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberModifyRequestDto;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberWriteNoticeRequestDto;
+import com.ssafy.indive.domain.member.exception.NotMatchMemberException;
 import com.ssafy.indive.domain.member.service.MemberAddService;
 import com.ssafy.indive.domain.member.service.MemberModifyService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
@@ -44,7 +45,13 @@ public class MemberController {
 
     @PutMapping("/{memberSeq}")
     public ResponseEntity<?> modifyMember(@Validated @ModelAttribute WebMemberModifyRequestDto dto, @PathVariable("memberSeq") long memberSeq) {
+        try {
         return new ResponseEntity<>(memberModifyService.modifyMember(memberSeq, dto.convertToServiceDto()), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        } catch (NotMatchMemberException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/my-account")

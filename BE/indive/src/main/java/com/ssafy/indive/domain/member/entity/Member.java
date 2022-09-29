@@ -92,5 +92,13 @@ public class    Member extends BaseEntity {
         this.notice = dto.getNotice();
     }
 
+    public void updateProfileImage(){
+        imageOrigin = "default_profile.png";
+        imageUuid="default_profile.png";
+    }
 
+    public void updateBackgroundImage(){
+        backgroundOrigin="default_background.png";
+        backgroundUuid="default_background.png";
+    }
 }

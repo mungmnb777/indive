@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -50,6 +51,7 @@ class MemberControllerTest {
     private MemberModifyService memberModifyService;
 
     @Test
+    @WithMockUser
     @DisplayName("[멤버 등록] 사용자는 멤버를 등록할 수 있어야 한다.")
     public void addMember() throws Exception {
 
