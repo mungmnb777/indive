@@ -15,16 +15,16 @@ public class ServiceMemberModifyRequestDto {
 
     private String profileMessage;
 
-    private MultipartFile profileFile;
+    private MultipartFile image;
 
-    private MultipartFile backgroundFile;
+    private MultipartFile background;
 
 
     @Builder
-    public ServiceMemberModifyRequestDto(String nickname, String profileMessage, MultipartFile profileFile, MultipartFile backgroundFile) {
+    public ServiceMemberModifyRequestDto(String nickname, String profileMessage, MultipartFile image, MultipartFile background) {
         this.nickname = nickname;
         this.profileMessage = profileMessage;
-        this.profileFile = profileFile;
-        this.backgroundFile = backgroundFile;
+        this.image = image;
+        this.background = background;
     }
 }
