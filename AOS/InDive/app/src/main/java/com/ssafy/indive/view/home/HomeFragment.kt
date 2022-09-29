@@ -34,7 +34,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initClickListener()
     }
 
-
     private fun initBanner() {
         val bannerList = mutableListOf(
             Banner(0, R.drawable.banner1),
@@ -64,18 +63,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun initRecentMusic() {
 
         homeViewModel.getMusics(null, null, "latest", null,null,null)
-        binding.rvRecentMusic.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRecentMusic.adapter = RecentMusicAdapter(playListener)
-
 
     }
 
     private fun initPopularMusic() {
-        homeViewModel.getMusics(null, null, "popular", null,0,4)
 
-        binding.rvMusicChart.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        homeViewModel.getMusics(null, null, "popular", null,0,4)
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {

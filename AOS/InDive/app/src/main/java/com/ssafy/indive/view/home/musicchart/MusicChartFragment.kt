@@ -1,19 +1,16 @@
 package com.ssafy.indive.view.home.musicchart
 
-import android.content.Intent
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssafy.indive.MainViewModel
+import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentMusicchartBinding
-import com.ssafy.indive.MainViewModel
-import com.ssafy.indive.MoreDialogFragment
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.view.home.HomeViewModel
 import com.ssafy.indive.view.home.MusicChartAdapter
-import com.ssafy.indive.view.player.PlayerActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,28 +24,23 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
         }
 
         initPopularMusic()
-
     }
 
     private fun initPopularMusic() {
-//        homeViewModel.initPopularSongList()
-        binding.rvMusicChartDetail.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL, false
-        )
+        homeViewModel.getMusics(null, null, "popular", null,0,0)
 
         val playListener: (MusicDetailResponse) -> (Unit) = {
             mainViewModel.insert(it.musicSeq)
-            val intent = Intent(context, PlayerActivity::class.java)
-            intent.putExtra("class","HomeFragment")
-            startActivity(intent)
+            mainViewModel.successGetEvent=it.musicSeq
         }
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
                 override fun clickDetail() {
-//                    val intent = Intent(context, SongDetailActivity::class.java)
-//                    startActivity(intent)
+                    val action =
+                        MusicChartFragmentDirections.actionMusicChartFragmentToSongDetailFragment2(it.musicSeq)
+
+                    findNavController().navigate(action)
 
                 }
 

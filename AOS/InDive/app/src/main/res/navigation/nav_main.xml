@@ -156,6 +156,9 @@
         <action
             android:id="@+id/action_musicChartFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
+        <action
+            android:id="@+id/action_musicChartFragment_to_songDetailFragment2"
+            app:destination="@id/songDetailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -165,6 +168,9 @@
         <action
             android:id="@+id/action_searchFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_songDetailFragment2"
+            app:destination="@id/songDetailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/QRFragment"

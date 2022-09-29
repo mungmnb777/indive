@@ -9,7 +9,10 @@ import com.ssafy.indive.databinding.ItemMusicChartBinding
 import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
 
-class MusicChartAdapter(private val playListener : (MusicDetailResponse) -> (Unit), private val moreListener : (MusicDetailResponse) -> (Unit)) :  ListAdapter<MusicDetailResponse, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
+class MusicChartAdapter(
+    private val playListener: (MusicDetailResponse) -> (Unit),
+    private val moreListener: (MusicDetailResponse) -> (Unit)
+) : ListAdapter<MusicDetailResponse, MusicChartAdapter.MusicChartViewHolder>(diffUtil) {
 
     inner class MusicChartViewHolder(var binding: ItemMusicChartBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -19,7 +22,7 @@ class MusicChartAdapter(private val playListener : (MusicDetailResponse) -> (Uni
 
         }
 
-        fun click(music: MusicDetailResponse){
+        fun click(music: MusicDetailResponse) {
             binding.ivPlay.setOnClickListener {
                 playListener(music)
             }
@@ -49,10 +52,16 @@ class MusicChartAdapter(private val playListener : (MusicDetailResponse) -> (Uni
 
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<MusicDetailResponse>() {
-            override fun areContentsTheSame(oldItem: MusicDetailResponse, newItem: MusicDetailResponse) =
+            override fun areContentsTheSame(
+                oldItem: MusicDetailResponse,
+                newItem: MusicDetailResponse
+            ) =
                 oldItem.hashCode() == newItem.hashCode()
 
-            override fun areItemsTheSame(oldItem: MusicDetailResponse, newItem: MusicDetailResponse) =
+            override fun areItemsTheSame(
+                oldItem: MusicDetailResponse,
+                newItem: MusicDetailResponse
+            ) =
                 oldItem.musicSeq == newItem.musicSeq
         }
     }

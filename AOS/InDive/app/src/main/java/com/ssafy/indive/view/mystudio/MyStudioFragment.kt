@@ -42,7 +42,10 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
 
     private fun initViewModelCallback() {
         memberViewModel.notice.observe(viewLifecycleOwner) {
-            notice = it
+            if(it != null){
+                notice = it
+            }
+
         }
         memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
             initViewModel()

@@ -14,6 +14,7 @@ import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.home.MusicChartAdapter
 import com.ssafy.indive.view.home.RecentMusicAdapter
+import com.ssafy.indive.view.home.search.SearchArtistAdapter
 import com.ssafy.indive.view.songdetail.ReplyAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -40,11 +41,10 @@ object RecyclerBinding {
                 is GenreListAdapter -> {
                     (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<MusicDetailResponse>)
                 }
-//
-//                is GenreListAdapter -> {
-//                    Log.d("d102", "CommentAdapter")
-//                    (view.adapter as ListAdapter<Any, *>).submitList(result)
-//                }
+
+                is SearchArtistAdapter -> {
+                    (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<MusicDetailResponse>)
+                }
 
                 else -> {
                     Log.d("d102", "else")
