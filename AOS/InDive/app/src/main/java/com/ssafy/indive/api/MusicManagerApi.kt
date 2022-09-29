@@ -63,11 +63,12 @@ interface MusicManagerApi {
     @PUT("music/{musicSeq}/reply/{replySeq}")
     suspend fun modifyMusicReply(
         @Path("musicSeq") musicSeq: Long,
+        @Body content: String,
         @Path("replySeq") replySeq: Long
     ): Response<Boolean>
 
-    @GET("music/{musicSeq}/reply")
-    suspend fun deleteMusicReply(@Path("musicSeq") musicSeq: Long): Response<Boolean>
+    @DELETE("music/{musicSeq}/reply/{replySeq}")
+    suspend fun deleteMusicReply(@Path("musicSeq") musicSeq: Long,@Path("replySeq") replySeq: Long): Response<Boolean>
 
 
 }

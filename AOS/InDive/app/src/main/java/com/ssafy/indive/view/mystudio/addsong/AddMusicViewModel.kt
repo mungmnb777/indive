@@ -130,6 +130,8 @@ class AddMusicViewModel @Inject constructor(
             val releaseDateTime = "${starDate.value} ${startTime.value}:00"
             val reservationDateTime = "${reservationDate.value} ${reservationTime.value}:00"
 
+
+            Log.d("lyrics.value", "lyrics.value:${lyrics.value} ")
             Log.d(TAG, "releaseDateTime: $releaseDateTime")
             Log.d(TAG, "reservationDateTime: $reservationDateTime")
 
@@ -144,6 +146,7 @@ class AddMusicViewModel @Inject constructor(
                 RequestBody.create("text/plain".toMediaTypeOrNull(), releaseDateTime)
             val addreservationDateTime =
                 RequestBody.create("text/plain".toMediaTypeOrNull(), reservationDateTime)
+
 
             val map = HashMap<String, RequestBody>()
             map["title"] = addTitle
@@ -177,7 +180,7 @@ class AddMusicViewModel @Inject constructor(
 //
 //            Log.d(TAG, "addMusicmusic: $music")
 
-            Log.d(TAG, "addMusic Map: $map")
+            Log.d("AddMusicViewModel_", "addMusic Map: $map")
             Log.d(TAG, "addMusic coverImg: $coverImg")
             Log.d(TAG, "addMusic music: $music")
 

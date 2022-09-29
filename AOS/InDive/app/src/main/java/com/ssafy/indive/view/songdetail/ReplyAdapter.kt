@@ -2,6 +2,7 @@ package com.ssafy.indive.view.songdetail
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,7 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemReplyBinding
 import com.ssafy.indive.model.response.ReplyResponse
 
-class ReplyAdapter(private val replyCLickListener: ReplyCLickListener) :
+
+class ReplyAdapter(
+    val replyCLickListener: ReplyCLickListener,
+    val memberSeq: Long
+) :
     ListAdapter<ReplyResponse, ReplyAdapter.CommentViewHolder>(diffUtil) {
 
     inner class CommentViewHolder(val binding: ItemReplyBinding) :
@@ -18,6 +23,20 @@ class ReplyAdapter(private val replyCLickListener: ReplyCLickListener) :
         fun bind(reply: ReplyResponse) {
             binding.apply {
                 this.reply = reply
+
+            }
+            if (memberSeq == reply.member.memberSeq) {
+                binding.apply {
+                    ivCommentEdit.visibility = View.VISIBLE
+                    ivCommentRemove.visibility = View.VISIBLE
+                    ivCommentReport.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    ivCommentEdit.visibility = View.GONE
+                    ivCommentRemove.visibility = View.GONE
+                    ivCommentReport.visibility = View.VISIBLE
+                }
 
             }
         }

@@ -13,6 +13,7 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentHomeBinding
 import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.view.player.PlayerFragmentDirections
 import com.ssafy.indive.view.qrscan.QrScanActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -79,8 +80,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
                 override fun clickDetail() {
-//                    val intent = Intent(context, SongDetailActivity::class.java)
-//                    startActivity(intent)
+                    val action =
+                        HomeFragmentDirections.actionHomeFragmentToSongDetailFragment2(it.musicSeq)
+
+                    findNavController().navigate(action)
                 }
 
                 override fun clickStudio() {

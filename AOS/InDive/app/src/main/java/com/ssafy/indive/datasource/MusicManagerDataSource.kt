@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Body
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -76,12 +77,12 @@ class MusicManagerDataSource @Inject constructor(
         emit(musicManagerApi.getMusicReply(musicSeq))
     }
 
-    fun modifyMusicReply(musicSeq: Long, replySeq: Long): Flow<Response<Boolean>> = flow {
-        emit(musicManagerApi.modifyMusicReply(musicSeq, replySeq))
+    fun modifyMusicReply(musicSeq: Long, content: String, replySeq: Long): Flow<Response<Boolean>> = flow {
+        emit(musicManagerApi.modifyMusicReply(musicSeq, content,replySeq))
     }
 
-    fun deleteMusicReply(musicSeq: Long): Flow<Response<Boolean>> = flow {
-        emit(musicManagerApi.deleteMusicReply(musicSeq))
+    fun deleteMusicReply(musicSeq: Long, replySeq: Long): Flow<Response<Boolean>> = flow {
+        emit(musicManagerApi.deleteMusicReply(musicSeq,replySeq))
     }
 
 }

@@ -91,11 +91,16 @@ class MemberViewModel @Inject constructor(
     }
 
     fun memberEmailCheck(email: String){
+        Log.d(TAG, "memberEmailCheck: $email")
         viewModelScope.launch(Dispatchers.IO) {
             memberManagerRepository.emailcheck(email).collectLatest {
                 if(it is Result.Success){
+                    Log.d(TAG, "memberEmailCheck: ${it}")
+                    Log.d(TAG, "memberEmailCheck data: ${it.data}")
                     _emailCheck.postValue(it.data.body())
-                    Log.d(TAG, "memberEmailCheck: ${it.data.body()}")
+                    Log.d(TAG, "memberEmailCheck body: ${it.data.body()}")
+                }else if(it is Result.Error){
+                    Log.d(TAG, "memberEmailCheckError: ${it}")
                 }
             }
         }

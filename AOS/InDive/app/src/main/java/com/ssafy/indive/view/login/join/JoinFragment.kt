@@ -40,7 +40,9 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
     }
 
     private fun initViewModelCallback() {
+
         memberViewModel.emailCheck.observe(viewLifecycleOwner) {
+            isEmailCheck = false
             if (it == null) {
                 binding.tvEmailCheck.visibility = View.GONE
             } else {

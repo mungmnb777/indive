@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.response.ReplyResponse
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.utils.Result
+import com.ssafy.indive.utils.SingleLiveEvent
 import com.ssafy.indive.utils.TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
 
+const val TAG1 = "PlayerPlayer_"
 @HiltViewModel
 class PlayerViewModel @Inject constructor(private val musicManagerRepository: MusicManagerRepository) :
     ViewModel() {
@@ -29,8 +31,10 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
     private val _replyListCnt = MutableStateFlow("")
     val replyListCnt get() = _replyListCnt.asStateFlow()
 
-    private val _isLike = MutableStateFlow(false)
-    val isLike get() = _isLike.asStateFlow()
+    private val _isLike = SingleLiveEvent<Boolean>()
+    val isLike get() = _isLike
+
+    var likeFlag = false
 
     private val _likeCnt = MutableStateFlow("0")
     val likeCnt get() = _likeCnt.asStateFlow()
@@ -40,11 +44,12 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.likeMusic(musicSeq).collectLatest {
                 if (it is Result.Success) {
-                    Log.d(TAG, "likeMusic: ${it.data.body()!!}")
+                    Log.d(TAG1, "PlayerViewModel likeMusic: ${it.data.body()!!}")
                     _likeSuccess.value = it.data.body()!!
-                    _isLike.value = true
+                    _isLike.postValue(true)
+                    likeFlag = true
                 } else if (it is Result.Error) {
-                    Log.d(TAG, "likeMusic: ${it.exception}")
+                    Log.d(TAG1, "PlayerViewModel likeMusicErr: ${it.exception}")
                 }
             }
 
@@ -55,11 +60,12 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.deleteLike(musicSeq).collectLatest {
                 if (it is Result.Success) {
-                    Log.d(TAG, "deleteLike: ${it.data.body()!!}")
+                    Log.d(TAG1, "PlayerViewModel deleteLike: ${it.data.body()!!}")
                     _deleteLikeSuccess.value = it.data.body()!!
-                    _isLike.value = false
+                    _isLike.postValue(false)
+                    likeFlag = false
                 } else if (it is Result.Error) {
-                    Log.d(TAG, "deleteLike: ${it.exception}")
+                    Log.d(TAG1, "PlayerViewModel deleteLikeErr: ${it.exception}")
                 }
             }
 
@@ -72,11 +78,11 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.getMusicReply(musicSeq).collectLatest {
                 if (it is Result.Success) {
-                    Log.d(TAG, "getMusicReplyError: ${it.data.size}")
+                    Log.d(TAG1, "PlayerViewModel:getMusicReply ${it.data.size}")
                     _replyListCnt.value = it.data.size.toString()
 
                 } else if (it is Result.Error) {
-                    Log.d(TAG, "getMusicReplyError: ${it.exception}")
+                    Log.d(TAG1, "PlayerViewModel:getMusicReplyError ${it.exception}")
                 }
             }
 
@@ -84,14 +90,13 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
     }
 
     fun isLike(musicSeq: Long) {
-
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.isLike(musicSeq).collectLatest {
                 if (it is Result.Success) {
-                    Log.d(TAG, "isLike: ${it.data.body()!!}")
-                    _isLike.value = it.data.body()!!
+                    Log.d(TAG1, "PlayerViewModel isLike: ${it.data.body()!!}")
+                    _isLike.postValue(it.data.body()!!)
                 } else if (it is Result.Error) {
-                    Log.d(TAG, "isLike: ${it.exception}")
+                    Log.d(TAG1, "PlayerViewModel isLikeError : ${it.exception}")
                 }
             }
 
@@ -103,10 +108,10 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.getLikeCount(musicSeq).collectLatest {
                 if (it is Result.Success) {
-                    Log.d(TAG, "likeCnt: ${it.data.body()!!}")
+                    Log.d(TAG1, "PlayerViewModel likeCnt: ${it.data.body()!!}")
                     _likeCnt.value = it.data.body()!!.toString()
                 } else if (it is Result.Error) {
-                    Log.d(TAG, "likeCnt: ${it.exception}")
+                    Log.d(TAG1, "PlayerViewModel likeCntError: ${it.exception}")
                 }
             }
 

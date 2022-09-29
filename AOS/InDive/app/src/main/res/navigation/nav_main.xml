@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_homeFragment_to_donateFragment"
             app:destination="@id/donateFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_songDetailFragment2"
+            app:destination="@id/songDetailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/genreFragment"

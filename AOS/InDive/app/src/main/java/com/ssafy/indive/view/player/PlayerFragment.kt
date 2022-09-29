@@ -29,6 +29,7 @@ import com.ssafy.indive.model.dto.setSongPosition
 import com.ssafy.indive.service.MusicService
 import com.ssafy.indive.service.ServiceTest
 import com.ssafy.indive.utils.Result
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -36,6 +37,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import kotlin.math.log
 
+@AndroidEntryPoint
 class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_player) {
 
     companion object {
@@ -58,6 +60,9 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
     override fun init() {
         mContext = context
         playerBinding = binding
+        binding.apply {
+            playerVM = playerViewModel
+        }
         songPosition = requireActivity().intent.getIntExtra("index", 0)
 
         checkIntent()
@@ -133,17 +138,16 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
     private fun initClickListener() {
 
         binding.ivSongLike.setOnClickListener {
-            lifecycleScope.launch {
-                playerViewModel.isLike.collectLatest { isLike ->
-                    if (isLike) {
-                        playerViewModel.deleteLike(musicSeq)
-                        initLike()
-                    } else {
-                        playerViewModel.likeMusic(musicSeq)
-                        initLike()
-                    }
-                }
+
+            if (playerViewModel.likeFlag) {
+                Log.d(TAG1, "isLike: ${playerViewModel.likeFlag}")
+                playerViewModel.deleteLike(musicSeq)
+
+            } else {
+                Log.d(TAG1, "!isLike: ${playerViewModel.likeFlag}")
+                playerViewModel.likeMusic(musicSeq)
             }
+
         }
 
         binding.btnPlayerList.setOnClickListener {
@@ -211,18 +215,19 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         playerViewModel.getLikeCnt(musicSeq)
         playerViewModel.isLike(musicSeq)
 
-        lifecycleScope.launch {
-            playerViewModel.isLike.collectLatest { isLike ->
-                if (isLike) {
-                    binding.ivSongLike.background =
-                        ContextCompat.getDrawable(requireContext(), R.drawable.img_filled_heart)
-                } else {
-                    binding.ivSongLike.background =
-                        ContextCompat.getDrawable(requireContext(), R.drawable.img_blank_heart)
-                }
+        playerViewModel.isLike.observe(viewLifecycleOwner) { isLike ->
+            if (isLike) {
+                binding.ivSongLike.setImageResource(R.drawable.img_filled_heart)
+                playerViewModel.likeFlag = true
+                playerViewModel.getLikeCnt(musicSeq)
+            } else {
+                binding.ivSongLike.setImageResource(R.drawable.img_blank_heart)
+                playerViewModel.likeFlag = false
+                playerViewModel.getLikeCnt(musicSeq)
             }
-
         }
+
+
     }
 
     private fun initViews() {

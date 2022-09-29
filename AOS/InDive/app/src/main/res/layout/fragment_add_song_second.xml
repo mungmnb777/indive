@@ -113,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@={addSongVM.lyrics}"
+            android:text="가사"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_title"
@@ -136,6 +136,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@null"
+                android:text="@={addSongVM.lyrics}"
                 android:gravity="center"
                 android:hint="가사 (없으면 공백)"
                 android:textSize="16dp" />

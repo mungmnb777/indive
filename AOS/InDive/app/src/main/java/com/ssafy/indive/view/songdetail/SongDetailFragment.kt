@@ -1,5 +1,6 @@
 package com.ssafy.indive.view.songdetail
 
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
@@ -12,10 +13,12 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentSongDetailBinding
 import com.ssafy.indive.model.response.ReplyResponse
 import com.ssafy.indive.utils.TAG
+import com.ssafy.indive.utils.USER
 import com.ssafy.indive.view.loading.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.fragment_song_detail) {
@@ -23,7 +26,10 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
     private val songDetailViewModel: SongDetailViewModel by viewModels()
     private val args by navArgs<SongDetailFragmentArgs>()
     private lateinit var loadingDialog: LoadingDialog
-    lateinit var replyAdapter : ReplyAdapter
+    lateinit var replyAdapter: ReplyAdapter
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     var musicSeq = 0L
 
@@ -51,6 +57,22 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
             }
         }
 
+        songDetailViewModel.modifySuccess.observe(viewLifecycleOwner) {
+            if (it == "수정 성공") {
+                songDetailViewModel.getMusicReply(musicSeq)
+                loading()
+                showToast("댓글이 수정되었습니다.")
+            }
+        }
+
+        songDetailViewModel.deleteSuccess.observe(viewLifecycleOwner) {
+            if (it == "삭제 성공") {
+                songDetailViewModel.getMusicReply(musicSeq)
+                loading()
+                showToast("댓글이 삭제되었습니다.")
+            }
+        }
+
         lifecycleScope.launch {
             songDetailViewModel.musicReplyList.collectLatest {
                 Log.d(TAG, "initObserver: $it ")
@@ -66,22 +88,29 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
     private fun initReplyList() {
 
         songDetailViewModel.getMusicReply(musicSeq)
-        binding.rvComment.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        replyAdapter = ReplyAdapter(object : ReplyAdapter.ReplyCLickListener {
+        val listener = object : ReplyAdapter.ReplyCLickListener {
             override fun clickEdit(reply: ReplyResponse) {
-                showToast("수정")
+
+                val bottomSheet = AddCommentFragment {
+                    songDetailViewModel.modifyReply(musicSeq, it, reply.replySeq)
+                }
+                bottomSheet.content = reply.content
+                bottomSheet.show(parentFragmentManager, AddCommentFragment.TAG)
+
             }
 
             override fun clickRemove(replySeq: Long) {
-                showToast("삭제")
+                songDetailViewModel.deleteMusicReply(musicSeq, replySeq)
             }
 
             override fun clickReport(replySeq: Long) {
                 showToast("신고")
             }
-        })
+
+        }
+        replyAdapter = ReplyAdapter(listener, sharedPreferences.getLong(USER, 0L))
+
         binding.rvComment.adapter = replyAdapter
     }
 

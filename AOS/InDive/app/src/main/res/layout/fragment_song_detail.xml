@@ -88,7 +88,7 @@
                     android:id="@+id/tv_song_lyrics_parent"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="@{songdetailVM.musicDetail.lyrics}"
+                    android:text="@{songdetailVM.firstLyrics}"
                     app:layout_constraintBottom_toTopOf="@id/tv_detail_lyrics_expand"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="가사\n가사\n\n가사\n가사" />
@@ -118,7 +118,7 @@
                     android:id="@+id/tv_song_lyrics_child"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="d\ndd\ndd\nd"
+                    android:text="@{songdetailVM.secondLyrics}"
                     android:visibility="visible"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -241,6 +241,7 @@
                 android:id="@+id/rv_comment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

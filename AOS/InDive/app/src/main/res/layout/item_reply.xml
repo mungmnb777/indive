@@ -36,28 +36,28 @@
             app:layout_constraintTop_toTopOf="@id/iv_comment_profile_img"
             tools:text="닉네임" />
 
-        <FrameLayout
-            android:id="@+id/fl_btn"
+
+        <ImageView
+            android:id="@+id/iv_comment_remove"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="10dp"
-            android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_comment_profile_img"
+            android:padding="6dp"
+            android:src="@drawable/img_cancel"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comment_nickname"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_comment_profile_img">
+            app:layout_constraintTop_toTopOf="@id/tv_comment_nickname" />
 
-            <ImageView
-                android:id="@+id/iv_comment_remove"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/img_cancel" />
-
-            <ImageView
-                android:id="@+id/iv_comment_report"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/img_alert" />
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/iv_comment_report"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"
+            android:src="@drawable/img_alert"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comment_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_comment_nickname" />
 
 
         <ImageView
@@ -67,9 +67,9 @@
             android:layout_marginEnd="10dp"
             android:padding="4dp"
             android:src="@drawable/ic_baseline_edit_24"
-            app:layout_constraintBottom_toBottomOf="@id/iv_comment_profile_img"
-            app:layout_constraintEnd_toStartOf="@id/fl_btn"
-            app:layout_constraintTop_toTopOf="@id/iv_comment_profile_img" />
+            app:layout_constraintBottom_toBottomOf="@id/tv_comment_nickname"
+            app:layout_constraintEnd_toStartOf="@id/iv_comment_remove"
+            app:layout_constraintTop_toTopOf="@id/tv_comment_nickname" />
 
         <TextView
             android:id="@+id/tv_comment"
@@ -78,9 +78,10 @@
             android:layout_marginTop="10dp"
             android:text="@{reply.content}"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/fl_btn"
-            app:layout_constraintStart_toStartOf="@id/iv_comment_profile_img"
-            app:layout_constraintTop_toBottomOf="@id/iv_comment_profile_img"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_comment_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_comment_nickname"
             tools:text="댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

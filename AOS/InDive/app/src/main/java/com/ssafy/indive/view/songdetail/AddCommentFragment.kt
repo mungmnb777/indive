@@ -18,6 +18,7 @@ import com.ssafy.indive.databinding.FragmentAddCommentBinding
 class AddCommentFragment(val clickListener: (String) -> (Unit)) : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentAddCommentBinding
+    var content = ""
 
     companion object {
         const val TAG = "AddCommentFragment"
@@ -48,6 +49,10 @@ class AddCommentFragment(val clickListener: (String) -> (Unit)) : BottomSheetDia
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(content != ""){
+            binding.etReply.setText(content)
+        }
         binding.tvAddComment.setOnClickListener {
 
             if (binding.etReply.text.toString() != "") {
