@@ -33,6 +33,15 @@ class MemberViewModel @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
+    val email: MutableStateFlow<String> =
+        MutableStateFlow("")
+
+    val password: MutableStateFlow<String> =
+        MutableStateFlow("")
+
+    val nickname: MutableStateFlow<String> =
+        MutableStateFlow("")
+
     private val _login: MutableStateFlow<Result<Response<String>>> =
         MutableStateFlow(Result.Unintialized)
     val login get() = _login.asStateFlow()
