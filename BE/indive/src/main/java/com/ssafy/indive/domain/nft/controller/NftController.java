@@ -41,7 +41,7 @@ public class NftController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         } catch (NftNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
         }
     }
 
