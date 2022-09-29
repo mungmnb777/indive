@@ -96,13 +96,12 @@
             android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/civ_profile"
             android:text="닉네임"
             android:textSize="16dp"
             android:textColor="@color/main_black"
+            android:layout_marginTop="40dp"
             app:layout_constraintHorizontal_bias="0.1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/civ_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 

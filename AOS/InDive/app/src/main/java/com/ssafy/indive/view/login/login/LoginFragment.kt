@@ -58,7 +58,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
             btnLogin.setOnClickListener {
                 //memberViewModel.memberLogin(MemberLogin(etId.text.toString(), etPass.text.toString()))
-                memberViewModel.memberLogin(MemberLogin("1@1", "1"))
+                memberViewModel.memberLogin(MemberLogin("wkdrns3918@naver.com", "1"))
             }
         }
     }

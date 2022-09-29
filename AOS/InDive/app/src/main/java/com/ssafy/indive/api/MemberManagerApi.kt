@@ -31,7 +31,7 @@ interface MemberManagerApi {
 
     // 공지사항 작성
     @POST("members/{memberSeq}/notice")
-    suspend fun writeNotice(@Path("memberSeq") memberSeq: Long, @Body notice: Notice): Response<Boolean>
+    suspend fun writeNotice(@Path("memberSeq") memberSeq: Long, @Body notice: Notice): Boolean
 
     // 로그인 멤버 정보
     @GET("members/my-account")

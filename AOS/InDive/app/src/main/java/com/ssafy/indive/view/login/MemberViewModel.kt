@@ -53,6 +53,9 @@ class MemberViewModel @Inject constructor(
     private val _profile = SingleLiveEvent<MemberDetailResponse>()
     val profile get() = _profile
 
+    private val _notice = SingleLiveEvent<String>()
+    val notice get() = _notice
+
     private val _noticeSuccess = SingleLiveEvent<Boolean>()
     val noticeSuccess get() = _noticeSuccess
 
@@ -107,7 +110,7 @@ class MemberViewModel @Inject constructor(
                 if(it is Result.Success) {
                     Log.d(TAG, "memberDetail: ${it.data.body()}")
                     _profile.postValue(it.data.body())
-                    noticeSuccess.postValue(true)
+                    _notice.postValue(it.data.body()?.notice)
                 }
             }
         }
@@ -118,10 +121,8 @@ class MemberViewModel @Inject constructor(
     fun writeNotice(memberSeq: Long, notice: Notice) {
         viewModelScope.launch(Dispatchers.IO) { 
             memberManagerRepository.writeNotice(memberSeq, notice).collectLatest {
-                Log.d(TAG, "writeNotice: ${it}")
                 if(it is Result.Success) {
-                    Log.d(TAG, "writeNotice: @@")
-                    //noticeSuccess.postValue(it.data.body())
+                    _noticeSuccess.postValue(it.data)
                 }
             }
         }

@@ -20,11 +20,12 @@ import com.ssafy.indive.utils.USER
 import com.ssafy.indive.view.login.MemberViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
+private const val TAG = "NoticeDialog"
 @AndroidEntryPoint
-class NoticeDialog(): DialogFragment() {
+class NoticeDialog(str: String, var listener: (String) -> (Unit)): DialogFragment() {
     private lateinit var binding: DialogNoticeBinding
-    private val memberViewModel: MemberViewModel by viewModels()
-   // private var notice: String = str
+    private var notice: String = str
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
@@ -40,7 +41,7 @@ class NoticeDialog(): DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding.etConfirmText.setText(notice)
+        binding.etConfirmText.setText(notice)
         initClickListener()
     }
 
@@ -48,7 +49,8 @@ class NoticeDialog(): DialogFragment() {
         binding.apply {
             btnConfirm.setOnClickListener {
                 // 공지사항 변경
-                memberViewModel.writeNotice(sharedPreferences.getLong(USER, 0), Notice(etConfirmText.text.toString()))
+                Log.d(TAG, "initClickListener: ${sharedPreferences.getLong(USER, 0)}")
+                listener(etConfirmText.text.toString())
                 dismiss()
             }
             btnCancel.setOnClickListener {
@@ -56,5 +58,6 @@ class NoticeDialog(): DialogFragment() {
             }
         }
     }
+
 
 }
