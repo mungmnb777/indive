@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.R
 import com.ssafy.indive.databinding.FragmentMyStudioBinding
+import com.ssafy.indive.model.dto.Notice
 import com.ssafy.indive.utils.USER
 import com.ssafy.indive.view.login.MemberViewModel
 import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
@@ -16,22 +17,36 @@ import javax.inject.Inject
 private const val TAG = "MyStudioFragment"
 @AndroidEntryPoint
 class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment_my_studio) {
-
     private val memberViewModel: MemberViewModel by viewModels()
     @Inject
     lateinit var sharedPreferences: SharedPreferences
+
+    private var notice: String = ""
+    private var listener: (String) -> (Unit) = {
+        memberViewModel.writeNotice(sharedPreferences.getLong(USER, 0), Notice(it))
+    }
 
     override fun init() {
         binding.apply {
             memberVM = memberViewModel
         }
+
         initClickListener()
         initViewModel()
+        initViewModelCallback()
     }
 
     private fun initViewModel() {
-        Log.d(TAG, "initViewModel: ${sharedPreferences.getLong(USER, 0)}")
         memberViewModel.memberDetail(sharedPreferences.getLong(USER, 0))
+    }
+
+    private fun initViewModelCallback() {
+        memberViewModel.notice.observe(viewLifecycleOwner) {
+            notice = it
+        }
+        memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
+            initViewModel()
+        }
 
         memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
             if(it){
@@ -56,7 +71,7 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
                 findNavController().navigate(action)
             }
             ivEditNotice.setOnClickListener {
-                NoticeDialog().show(parentFragmentManager, "")
+                NoticeDialog(notice, listener).show(parentFragmentManager, "")
             }
         }
 
