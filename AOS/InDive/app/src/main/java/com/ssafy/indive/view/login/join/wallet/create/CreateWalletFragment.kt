@@ -19,7 +19,8 @@ class CreateWalletFragment: BaseFragment<FragmentCreateWalletBinding>(R.layout.f
     private fun initClickListener(){
         binding.apply {
             btnCreateWallet.setOnClickListener {
-                val action = CreateWalletFragmentDirections.actionCreateWalletFragmentToLoginFragment()
+                val password = etPasswd.text.toString()
+                val action = CreateWalletFragmentDirections.actionCreateWalletFragmentToWalletDetailFragment(password)
                 findNavController().navigate(action)
             }
         }
