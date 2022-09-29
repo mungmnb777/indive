@@ -1,5 +1,6 @@
 package com.ssafy.indive.repository
 
+import android.util.Log
 import com.ssafy.indive.datasource.MemberManagerDataSource
 import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.model.dto.MemberLogin
@@ -65,13 +66,16 @@ class MemberManagerRepository @Inject constructor(
         emit(Result.Error(e))
     }
 
-    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Result<Response<Boolean>>> = flow {
+    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Result<Boolean>> = flow {
         emit(Result.Loading)
+        Log.d("TAG", "writeNotice:@@@@@@loading  ${this}")
         memberManagerDataSource.writeNotice(memberSeq, notice).collect {
+            Log.d("TAG", "writeNotice:@@@@@@success ")
             emit(Result.Success(it))
         }
     }.catch { e ->
         emit(Result.Error(e))
+        Log.d("TAG", "writeNotice:@@@@@@error ")
     }
 
     fun loginMemberDetail(): Flow<Result<Response<MemberDetailResponse>>> = flow{

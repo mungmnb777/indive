@@ -6,6 +6,8 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import dagger.hilt.android.HiltAndroidApp
+import org.bouncycastle.jce.provider.BouncyCastleProvider
+import java.security.Security
 
 @HiltAndroidApp
 class ApplicationClass : Application() {
@@ -28,5 +30,9 @@ class ApplicationClass : Application() {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE)as NotificationManager
             notificationManager.createNotificationChannel(notificationChannel)
         }
+
+        // Provider 변경
+        Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME)
+        Security.insertProviderAt(BouncyCastleProvider(), 1)
     }
 }

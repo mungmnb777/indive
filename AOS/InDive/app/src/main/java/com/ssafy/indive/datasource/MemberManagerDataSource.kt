@@ -39,7 +39,7 @@ class MemberManagerDataSource @Inject constructor(
         emit(memberManagerApi.memberModify(memberSeq))
     }
 
-    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Response<Boolean>> = flow{
+    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Boolean> = flow{
         emit(memberManagerApi.writeNotice(memberSeq, notice))
     }
 

@@ -18,7 +18,7 @@ class WalletFragment : BaseFragment<FragmentWalletBinding>(R.layout.fragment_wal
 
     private fun initClickListener(){
         binding.apply {
-            tvWalletFragment.setOnClickListener {
+            cvCreateWallet.setOnClickListener {
                 findNavController().navigate(R.id.action_walletFragment_to_createWalletFragment)
             }
         }
