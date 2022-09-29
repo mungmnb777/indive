@@ -58,7 +58,7 @@ public class SecurityConfig {
                 .addFilter(new JwtAuthenticationFilter(authenticationManagerObject))
                 .addFilter(new JwtAuthorizationFilter(authenticationManagerObject, memberRepository))
 
-
+                //TODO : 수정필
                 .authorizeRequests()
                 .antMatchers("/api/v1/user/**")
                 .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")

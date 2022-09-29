@@ -72,7 +72,7 @@ public class MemberReadService {
         return FileUtils.getUrlResource(findMember.getImageUuid());
     }
 
-    public Object downloaBackgroundImage(long memberSeq) {
+    public Object downloadBackgroundImage(long memberSeq) {
         Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
         return FileUtils.getUrlResource(findMember.getBackgroundUuid());
     }

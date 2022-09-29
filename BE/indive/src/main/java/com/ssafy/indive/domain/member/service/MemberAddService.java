@@ -38,7 +38,7 @@ public class MemberAddService {
                     .imageOrigin("default_profile.png")
                     .imageUuid("default_profile")
                     .backgroundOrigin("default_background.png")
-                    .backgroundUuid("default_background")
+                    .backgroundUuid("default_background.png")
                     .build();
 
             memberRepository.save(member);
