@@ -52,7 +52,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 // 자동 생성된 Q클래스 gradle clean으로 제거
