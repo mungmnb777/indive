@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ssafy.indive.R
 import com.ssafy.indive.binding.RecyclerBinding.bindMusicImage
 import com.ssafy.indive.model.response.MusicDetailResponse
@@ -59,12 +60,17 @@ object RecyclerBinding {
 
     @BindingAdapter("setImageCircle")
     @JvmStatic
-    fun CircleImageView.bindImage(seq : Long) {
+    fun CircleImageView.bindImage(seq: Long) {
         Log.d("d102", "res: $seq")
+        Log.d("d102", "res: ${MEMBER_HEADER}$seq${MEMBER_FOOTER}")
         Glide.with(this.context).load("${MEMBER_HEADER}$seq${MEMBER_FOOTER}").centerCrop()
             .placeholder(
-                R.drawable.member_default_image
-            ).into(this)
+                R.drawable.album_default_image
+
+            ).skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .into(this)
+        Log.d("d102", "res: ${MEMBER_HEADER}$seq${MEMBER_FOOTER}")
     }
 
     @BindingAdapter("bindMusicImage")
@@ -83,7 +89,10 @@ object RecyclerBinding {
         Glide.with(this.context).load("${BACKGROUND_HEADER}$seq${BACKGROUND_FOOTER}").centerCrop()
             .placeholder(
                 R.drawable.album_default_image
-            ).into(this)
+            )
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .into(this)
 
     }
 

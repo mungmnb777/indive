@@ -4,10 +4,15 @@ import android.content.SharedPreferences
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.R
+import com.ssafy.indive.binding.RecyclerBinding.bindImage
 import com.ssafy.indive.databinding.FragmentMyStudioBinding
 import com.ssafy.indive.model.dto.Notice
+import com.ssafy.indive.utils.MEMBER_FOOTER
+import com.ssafy.indive.utils.MEMBER_HEADER
 import com.ssafy.indive.utils.USER
 import com.ssafy.indive.view.login.MemberViewModel
 import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
@@ -15,9 +20,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 private const val TAG = "MyStudioFragment"
+
 @AndroidEntryPoint
 class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment_my_studio) {
     private val memberViewModel: MemberViewModel by viewModels()
+
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
@@ -42,7 +49,7 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
 
     private fun initViewModelCallback() {
         memberViewModel.notice.observe(viewLifecycleOwner) {
-            if(it != null){
+            if (it != null) {
                 notice = it
             }
 
@@ -52,7 +59,7 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
         }
 
         memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
-            if(it){
+            if (it) {
                 memberViewModel.memberDetail(sharedPreferences.getLong(USER, 0))
             }
         }
