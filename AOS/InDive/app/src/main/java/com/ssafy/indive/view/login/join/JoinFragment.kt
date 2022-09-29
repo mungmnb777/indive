@@ -65,13 +65,18 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
                 if (isEmailCheck) {
                     key = createKey()
 
-                    val email = etEmail.text.toString()
-                    if (isEmail(email)) {
-                        GMailSender().sendEmail(email, key)
-                        Toast.makeText(context, "이메일을 성공적으로 보냈습니다.", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(context, "이메일 형식이 잘못되었습니다.", Toast.LENGTH_SHORT).show()
-                    }
+                    // test용
+                    etEmailCode.setText(key)
+                    
+
+//                    val email = etEmail.text.toString()
+//                    if (isEmail(email)) {
+//                        GMailSender().sendEmail(email, key)
+//                        etEmailCode.setText(key)
+//                        Toast.makeText(context, "이메일을 성공적으로 보냈습니다.", Toast.LENGTH_SHORT).show()
+//                    } else {
+//                        Toast.makeText(context, "이메일 형식이 잘못되었습니다.", Toast.LENGTH_SHORT).show()
+//                    }
                 } else {
                     Toast.makeText(context, "이메일 중복을 확인해주세요.", Toast.LENGTH_SHORT).show()
                 }

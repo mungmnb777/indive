@@ -60,7 +60,6 @@ object RecyclerBinding {
     @BindingAdapter("setImageCircle")
     @JvmStatic
     fun CircleImageView.bindImage(seq : Long) {
-        Log.d("d102", "res: $seq")
         Glide.with(this.context).load("${MEMBER_HEADER}$seq${MEMBER_FOOTER}").centerCrop()
             .placeholder(
                 R.drawable.member_default_image
