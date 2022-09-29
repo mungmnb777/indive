@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.indive.R
@@ -24,7 +25,7 @@ private const val TAG = "JoinFragment"
 @AndroidEntryPoint
 class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
 
-    private val memberViewModel: MemberViewModel by viewModels()
+    private val memberViewModel: MemberViewModel by activityViewModels()
     private lateinit var key: String
     private var isEmailCheck: Boolean = false
     private var isPassCheck: Boolean = false
@@ -93,15 +94,6 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
 
             btnJoin.setOnClickListener {
                 if(isEmailCheck && isEmailCodeCheck && isPassCheck){
-                    memberViewModel.memberJoin(
-                        MemberJoin(
-                            etEmail.text.toString(),
-                            etPass.text.toString(),
-                            etNickname.text.toString(),
-                            "1",
-                            "1"
-                        )
-                    )
                     findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
                 } else{
                     Toast.makeText(context, "가입정보를 확인해주세요.", Toast.LENGTH_SHORT).show()
