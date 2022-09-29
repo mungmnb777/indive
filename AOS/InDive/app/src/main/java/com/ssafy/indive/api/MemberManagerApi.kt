@@ -26,8 +26,15 @@ interface MemberManagerApi {
     suspend fun emailCheck(@Query("email") email: String): Response<Boolean>
 
     // 멤버 정보 수정
+    @Multipart
     @PUT("members/{memberSeq}")
-    suspend fun memberModify(@Path("memberSeq") memberSeq: Long) : Response<Boolean>
+    suspend fun memberModify(
+        @Path("memberSeq") memberSeq: Long,
+        @Query("nickname") nickname: String,
+        @Part image: MultipartBody.Part?,
+        @Part background: MultipartBody.Part?,
+        @Query("profileMessage") profileMessage: String?
+    ): Response<Boolean>
 
     // 공지사항 작성
     @POST("members/{memberSeq}/notice")
@@ -37,18 +44,5 @@ interface MemberManagerApi {
     @GET("members/my-account")
     suspend fun loginMemberDetail(): Response<MemberDetailResponse>
 
-
-
-
-//    //13 Test
-//    @Multipart
-//    @PUT("members/{memberSeq}")
-//    suspend fun modifyMember(
-//        @Path("memberSeq") memberSeq: Long,
-//        @Query("nickname") nickname: String,
-//        @Part profileFile: MultipartBody.Part?,
-//        @Part backgroundFile: MultipartBody.Part?,
-//        @Query("profileMessage") profileMessage: String?
-//    ) : Boolean
 
 }

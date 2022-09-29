@@ -9,9 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import retrofit2.Response
-import retrofit2.http.Part
-import retrofit2.http.Path
-import retrofit2.http.Query
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -35,11 +32,25 @@ class MemberManagerDataSource @Inject constructor(
         emit(memberManagerApi.memberDetail(memberSeq))
     }
 
-    fun modifyMember(memberSeq: Long): Flow<Response<Boolean>> = flow {
-        emit(memberManagerApi.memberModify(memberSeq))
+    fun modifyMember(
+        memberSeq: Long,
+        nickname: String,
+        profileFile: MultipartBody.Part?,
+        backgroundFile: MultipartBody.Part?,
+        profileMessage: String?
+    ): Flow<Response<Boolean>> = flow {
+        emit(
+            memberManagerApi.memberModify(
+                memberSeq,
+                nickname,
+                profileFile,
+                backgroundFile,
+                profileMessage
+            )
+        )
     }
 
-    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Boolean> = flow{
+    fun writeNotice(memberSeq: Long, notice: Notice): Flow<Boolean> = flow {
         emit(memberManagerApi.writeNotice(memberSeq, notice))
     }
 
