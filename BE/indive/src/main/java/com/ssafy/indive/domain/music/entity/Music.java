@@ -43,6 +43,7 @@ public class Music extends BaseEntity {
     @Column(name="music_description")
     private String description;
 
+    @Lob
     @Column(name="music_lyrics")
     private String lyrics;
 
