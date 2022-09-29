@@ -15,9 +15,9 @@ public class WebMemberModifyRequestDto {
 
     private String profileMessage;
 
-    private MultipartFile profileFile;
+    private MultipartFile image;
 
-    private MultipartFile backgroundFile;
+    private MultipartFile background;
 
 
     @Builder
@@ -25,17 +25,17 @@ public class WebMemberModifyRequestDto {
         return ServiceMemberModifyRequestDto.builder()
             .nickname(nickname)
             .profileMessage(profileMessage)
-            .profileFile(profileFile)
-            .backgroundFile(backgroundFile)
+            .image(image)
+            .background(background)
             .build();
     }
 
     @Builder
-    public WebMemberModifyRequestDto(String nickname, String profileMessage, MultipartFile profileFile, MultipartFile backgroundFile) {
+    public WebMemberModifyRequestDto(String nickname, String profileMessage, MultipartFile image, MultipartFile backgroundFile) {
         this.nickname = nickname;
         this.profileMessage = profileMessage;
-        this.profileFile = profileFile;
-        this.backgroundFile = backgroundFile;
+        this.image = image;
+        this.background = backgroundFile;
     }
 
     public void update(ServiceMemberModifyRequestDto dto){
