@@ -18,7 +18,14 @@ public class MemberModifyService {
 
     public boolean modifyMember(long seq, ServiceMemberModifyRequestDto dto) {
 
+
         Member findMember = memberRepository.findById(seq).orElseThrow(IllegalArgumentException::new);
+        if(dto.getImage().isEmpty()){
+            findMember.updateProfileImage();
+        }
+        if(dto.getBackground().isEmpty()) {
+            findMember.updateBackgroundImage();
+        }
 
         //파일 제외 필드 수정
         findMember.update(dto);
@@ -28,7 +35,9 @@ public class MemberModifyService {
         FileUtils.deleteFile(findMember.getImageUuid());
         FileUtils.deleteFile(findMember.getBackgroundUuid());
 
-        findMember.uploadFiles(dto.getImage(), dto.getBackground());
+        if(!dto.getImage().isEmpty() & !dto.getBackground().isEmpty()){
+            findMember.uploadFiles(dto.getImage(), dto.getBackground());
+        }
 
         memberRepository.save(findMember);
 
