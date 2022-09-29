@@ -37,6 +37,9 @@ class SongDetailViewModel @Inject constructor(
     private val _musicReplyList: MutableStateFlow<List<ReplyResponse>> = MutableStateFlow(listOf())
     val musicReplyList get() = _musicReplyList.asStateFlow()
 
+    private val _replyListCnt = MutableStateFlow("")
+    val replyListCnt get() = _replyListCnt.asStateFlow()
+
     private val _addReplySuccess = SingleLiveEvent<String>()
     val addReplySuccess get() = _addReplySuccess
 

@@ -43,7 +43,6 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
     }
 
     private fun initObserver() {
-
         songDetailViewModel.addReplySuccess.observe(viewLifecycleOwner) {
             if (it == "등록 성공") {
                 songDetailViewModel.getMusicReply(musicSeq)
@@ -58,7 +57,6 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
                 replyAdapter.submitList(it)
             }
         }
-
     }
 
     private fun initMusicDetails() {
@@ -66,7 +64,7 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
     }
 
     private fun initReplyList() {
-        Log.d("SongDetailFragment_", "musicSeq: ${musicSeq}")
+
         songDetailViewModel.getMusicReply(musicSeq)
         binding.rvComment.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)

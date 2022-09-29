@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="playerVM"
+            type="com.ssafy.indive.view.player.PlayerViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -151,7 +157,8 @@
                 android:id="@+id/iv_comment"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="8dp"
+
+                android:padding="12dp"
                 android:src="@drawable/img_comment"
                 app:layout_constraintEnd_toStartOf="@id/tv_comment_cnt"
                 app:layout_constraintTop_toBottomOf="@id/cv_cover_img" />
@@ -162,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="14"
+                android:text="@{playerVM.replyListCnt}"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toStartOf="@id/iv_song_like"
                 app:layout_constraintTop_toBottomOf="@id/cv_cover_img" />
@@ -171,7 +178,7 @@
                 android:id="@+id/iv_song_like"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:src="@drawable/img_blank_heart"
                 app:layout_constraintEnd_toStartOf="@id/tv_like_cnt"
                 app:layout_constraintTop_toBottomOf="@id/cv_cover_img" />
@@ -182,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="14"
+                android:text="@{playerVM.likeCnt}"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="@id/cv_cover_img"
                 app:layout_constraintTop_toBottomOf="@id/cv_cover_img" />

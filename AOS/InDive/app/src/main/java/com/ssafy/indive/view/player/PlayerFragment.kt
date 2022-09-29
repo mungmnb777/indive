@@ -11,6 +11,8 @@ import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -26,8 +28,10 @@ import com.ssafy.indive.model.dto.formatDuration
 import com.ssafy.indive.model.dto.setSongPosition
 import com.ssafy.indive.service.MusicService
 import com.ssafy.indive.service.ServiceTest
+import com.ssafy.indive.utils.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import kotlin.math.log
@@ -47,17 +51,41 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
     private lateinit var updateSeekRunnable: Runnable
     private var isWatchingPlayList = false
     private lateinit var playListAdapter: PlayListAdapter
+    private val playerViewModel: PlayerViewModel by viewModels()
 
     private var musicSeq = 0L
 
     override fun init() {
         mContext = context
-
+        playerBinding = binding
         songPosition = requireActivity().intent.getIntExtra("index", 0)
 
+        checkIntent()
+        initClickListener()
+        initSeekBarChangeListener()
+
+    }
+
+    private fun initSeekBarChangeListener() {
+
+        binding.playerSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+                musicService!!.exoPlayer!!.seekTo((p0!!.progress * 1000).toLong())
+            }
+
+        })
+    }
+
+    private fun checkIntent() {
         when (requireActivity().intent.getStringExtra("class")) {
             "NowPlaying" -> {
-
                 initViews()
                 if (isPlaying) {
                     binding.ivPlay.background =
@@ -100,29 +128,23 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                 }
             }
         }
-
-        initClickListener()
-
-        playerBinding = binding
-
-        binding.playerSeekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-                musicService!!.exoPlayer!!.seekTo((p0!!.progress * 1000).toLong())
-            }
-
-        })
-
-
     }
 
     private fun initClickListener() {
+
+        binding.ivSongLike.setOnClickListener {
+            lifecycleScope.launch {
+                playerViewModel.isLike.collectLatest { isLike ->
+                    if (isLike) {
+                        playerViewModel.deleteLike(musicSeq)
+                        initLike()
+                    } else {
+                        playerViewModel.likeMusic(musicSeq)
+                        initLike()
+                    }
+                }
+            }
+        }
 
         binding.btnPlayerList.setOnClickListener {
 
@@ -185,9 +207,29 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         }
     }
 
+    private fun initLike() {
+        playerViewModel.getLikeCnt(musicSeq)
+        playerViewModel.isLike(musicSeq)
+
+        lifecycleScope.launch {
+            playerViewModel.isLike.collectLatest { isLike ->
+                if (isLike) {
+                    binding.ivSongLike.background =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.img_filled_heart)
+                } else {
+                    binding.ivSongLike.background =
+                        ContextCompat.getDrawable(requireContext(), R.drawable.img_blank_heart)
+                }
+            }
+
+        }
+    }
+
     private fun initViews() {
         musicSeq = musicList[songPosition].musicSeq
+        playerViewModel.getMusicReply(musicSeq)
 
+        initLike()
         Glide.with(this).load(musicList[songPosition].coverUrl).centerCrop()
             .into(binding.ivCoverImg)
         Glide.with(this).load(musicList[songPosition].coverUrl).centerCrop()

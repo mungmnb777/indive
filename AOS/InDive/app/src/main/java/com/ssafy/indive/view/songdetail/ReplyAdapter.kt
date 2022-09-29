@@ -16,7 +16,10 @@ class ReplyAdapter(private val replyCLickListener: ReplyCLickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(reply: ReplyResponse) {
-            binding.reply = reply
+            binding.apply {
+                this.reply = reply
+
+            }
         }
 
         fun click(reply: ReplyResponse) {
