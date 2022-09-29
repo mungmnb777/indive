@@ -8,11 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ServiceNftResponseDto {
+public class ServiceNftAmountResponseDto {
 
-    private String cid;
+    private int amount;
 
-    public ServiceNftResponseDto(String cid) {
-        this.cid = cid;
+    public ServiceNftAmountResponseDto(int amount) {
+        this.amount = amount;
     }
 }

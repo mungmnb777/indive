@@ -6,9 +6,7 @@ import com.ssafy.indive.domain.nft.entity.Nft;
 import com.ssafy.indive.domain.nft.exception.NftNotFoundException;
 import com.ssafy.indive.domain.nft.exception.NotSatisfiedAmountException;
 import com.ssafy.indive.domain.nft.repository.NftQueryRepository;
-import com.ssafy.indive.domain.nft.repository.NftRepository;
 import com.ssafy.indive.domain.nft.service.dto.ServiceNftModifyRequestDto;
-import com.ssafy.indive.domain.nft.service.dto.ServiceNftResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,7 @@ public class NftModifyService {
 
     private final NftQueryRepository nftQueryRepository;
 
-    public ServiceNftResponseDto issueNft(ServiceNftModifyRequestDto dto) {
+    public boolean issueNft(ServiceNftModifyRequestDto dto) {
         Member artist = memberRepository.findById(dto.getArtistSeq()).orElseThrow(IllegalArgumentException::new);
 
         Nft nft = nftQueryRepository.findByArtist(artist).orElseThrow(() -> new NftNotFoundException("해당 아티스트의 NFT가 없습니다."));
@@ -31,6 +29,6 @@ public class NftModifyService {
 
         nft.minusStock();
 
-        return new ServiceNftResponseDto(nft.getCid());
+        return true;
     }
 }

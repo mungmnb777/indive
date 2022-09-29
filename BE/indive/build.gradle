@@ -42,7 +42,7 @@ dependencies {
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
 	// ipfs
-	implementation 'com.github.ipfs:java-ipfs-http-client:v1.3.2'
+	implementation 'com.github.ipfs:java-ipfs-http-client:v1.3.3'
 
 	// 스웨거 의존성
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'

@@ -7,6 +7,7 @@ import com.ssafy.indive.domain.nft.exception.NftNotFoundException;
 import com.ssafy.indive.domain.nft.repository.NftQueryRepository;
 import com.ssafy.indive.domain.nft.service.dto.ServiceCheckAmountGetRequestDto;
 import com.ssafy.indive.domain.nft.service.dto.ServiceCheckStockGetRequestDto;
+import com.ssafy.indive.domain.nft.service.dto.ServiceNftAmountResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +23,12 @@ public class NftReadService {
 
     private final NftQueryRepository nftQueryRepository;
 
-    public boolean checkStock(ServiceCheckStockGetRequestDto dto) {
+    public ServiceNftAmountResponseDto checkStock(ServiceCheckStockGetRequestDto dto) {
         Member artist = memberRepository.findById(dto.getArtistSeq()).orElseThrow(IllegalArgumentException::new);
 
-        Optional<Nft> optionalNft = nftQueryRepository.findByArtist(artist);
+        Nft nft = nftQueryRepository.findByArtist(artist).orElseThrow(() -> new NftNotFoundException("false"));
 
-        return optionalNft.isPresent();
+        return new ServiceNftAmountResponseDto(nft.getLowerDonationAmount());
     }
 
     public boolean checkAmount(ServiceCheckAmountGetRequestDto dto) {
