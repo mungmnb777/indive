@@ -69,7 +69,7 @@ public class MemberController {
     @GetMapping(value = "/{memberSeq}/backgroundimg-download", produces = "application/octet-stream")
     public ResponseEntity<?> downloadBackground(@PathVariable("memberSeq") long memberSeq) {
         try {
-            return new ResponseEntity<>(memberReadService.downloadProfileImage(memberSeq), HttpStatus.OK);
+            return new ResponseEntity<>(memberReadService.downloadBackgroundImage(memberSeq), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         }

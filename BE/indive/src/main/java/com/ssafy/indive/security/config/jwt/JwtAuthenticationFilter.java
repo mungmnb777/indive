@@ -81,7 +81,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		//RSA 아니고 Hash 방식임
 		String jwtToken = JWT.create()
 				.withSubject("INDIVE")
-				.withExpiresAt(new Date(System.currentTimeMillis()+120000*10))
+				.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60*24*14))
 				.withClaim("seq",principalDetails.getMember().getSeq())
 				.withClaim("username", principalDetails.getMember().getEmail())
 				.sign(Algorithm.HMAC512(JwtProperties.SECRET)); // 서버만 알고 있는 secret 값

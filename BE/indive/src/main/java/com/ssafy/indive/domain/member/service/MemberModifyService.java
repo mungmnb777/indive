@@ -28,7 +28,7 @@ public class MemberModifyService {
         FileUtils.deleteFile(findMember.getImageUuid());
         FileUtils.deleteFile(findMember.getBackgroundUuid());
 
-        findMember.uploadFiles(dto.getProfileFile(), dto.getBackgroundFile());
+        findMember.uploadFiles(dto.getImage(), dto.getBackground());
 
         memberRepository.save(findMember);
 
