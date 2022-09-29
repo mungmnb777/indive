@@ -20,8 +20,12 @@ class CreateWalletFragment: BaseFragment<FragmentCreateWalletBinding>(R.layout.f
         binding.apply {
             btnCreateWallet.setOnClickListener {
                 val password = etPasswd.text.toString()
-                val action = CreateWalletFragmentDirections.actionCreateWalletFragmentToWalletDetailFragment(password)
-                findNavController().navigate(action)
+                if(password.isEmpty()){
+                    showToast("비밀번호를 입력해주세요")
+                } else {
+                    val action = CreateWalletFragmentDirections.actionCreateWalletFragmentToWalletDetailFragment(password)
+                    findNavController().navigate(action)
+                }
             }
         }
     }
