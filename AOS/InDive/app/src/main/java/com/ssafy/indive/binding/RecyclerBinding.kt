@@ -8,15 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ssafy.indive.R
-import com.ssafy.indive.binding.RecyclerBinding.bindMusicImage
 import com.ssafy.indive.model.response.MusicDetailResponse
-import com.ssafy.indive.model.response.ReplyResponse
 import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.home.MusicChartAdapter
 import com.ssafy.indive.view.home.RecentMusicAdapter
 import com.ssafy.indive.view.home.search.SearchArtistAdapter
-import com.ssafy.indive.view.songdetail.ReplyAdapter
 import de.hdodenhof.circleimageview.CircleImageView
 
 object RecyclerBinding {
@@ -44,7 +41,10 @@ object RecyclerBinding {
                 }
 
                 is SearchArtistAdapter -> {
-                    (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<MusicDetailResponse>)
+                    val artistList = setArtist(result.data as List<MusicDetailResponse>)
+
+                    (view.adapter as ListAdapter<Any, *>).submitList(artistList)
+
                 }
 
                 else -> {

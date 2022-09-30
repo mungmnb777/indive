@@ -19,7 +19,6 @@ class RecentMusicAdapter(private val playListener : (MusicDetailResponse) -> (Un
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: MusicDetailResponse) {
 
-            Log.d(TAG, "bind: $music")
             binding.music = music
 
             binding.root.setOnClickListener {

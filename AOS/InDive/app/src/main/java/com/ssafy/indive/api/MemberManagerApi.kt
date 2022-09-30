@@ -36,6 +36,25 @@ interface MemberManagerApi {
         @Query("profileMessage") profileMessage: String?
     ): Response<Boolean>
 
+    // 멤버 정보 수정
+    @Multipart
+    @PUT("members/{memberSeq}")
+    suspend fun memberModify(
+        @Path("memberSeq") memberSeq: Long,
+        @Query("nickname") nickname: String,
+        @Part image: MultipartBody.Part?,
+        @Query("profileMessage") profileMessage: String?
+    ): Response<Boolean>
+
+    // 파일 둘 다 없을 때
+    @PUT("members/{memberSeq}")
+    suspend fun memberModify(
+        @Path("memberSeq") memberSeq: Long,
+        @Query("nickname") nickname: String,
+        @Query("profileMessage") profileMessage: String?
+    ): Response<Boolean>
+
+
     // 공지사항 작성
     @POST("members/{memberSeq}/notice")
     suspend fun writeNotice(@Path("memberSeq") memberSeq: Long, @Body notice: Notice): Boolean
