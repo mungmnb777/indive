@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="musicDetail"
-            type="com.ssafy.indive.model.response.MusicDetailResponse" />
+            name="searchArtist"
+            type="com.ssafy.indive.model.dto.SearchArtist" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:padding="10dp"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            setImageCircle="@{musicDetail.artist.memberSeq}"
+            setImageCircle="@{searchArtist.memberSeq}"
             android:id="@+id/iv_search_artist"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="@{musicDetail.artist.nickname}"
+            android:text="@{searchArtist.nickname}"
             app:layout_constraintEnd_toEndOf="@id/iv_search_artist"
             app:layout_constraintStart_toStartOf="@id/iv_search_artist"
             app:layout_constraintTop_toBottomOf="@id/iv_search_artist" />

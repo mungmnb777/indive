@@ -6,20 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.databinding.ItemSearchArtistBinding
+import com.ssafy.indive.model.dto.SearchArtist
 import com.ssafy.indive.model.response.MusicDetailResponse
 
-class SearchArtistAdapter(val clickListener: (MusicDetailResponse) -> (Unit)) :
-    ListAdapter<MusicDetailResponse, SearchArtistAdapter.SearchViewHolder>(diffUtil) {
+class SearchArtistAdapter(val clickListener: (SearchArtist) -> (Unit)) :
+    ListAdapter<SearchArtist, SearchArtistAdapter.SearchViewHolder>(diffUtil) {
 
     inner class SearchViewHolder(val binding: ItemSearchArtistBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(musicDetail: MusicDetailResponse) {
-            binding.musicDetail = musicDetail
+        fun bind(searchArtist: SearchArtist) {
+            binding.searchArtist = searchArtist
         }
 
-        fun click(musicDetail: MusicDetailResponse) {
-            clickListener(musicDetail)
+        fun click(searchArtist: SearchArtist) {
+            clickListener(searchArtist)
         }
     }
 
@@ -38,19 +39,19 @@ class SearchArtistAdapter(val clickListener: (MusicDetailResponse) -> (Unit)) :
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<MusicDetailResponse>() {
+        val diffUtil = object : DiffUtil.ItemCallback<SearchArtist>() {
             override fun areItemsTheSame(
-                oldItem: MusicDetailResponse,
-                newItem: MusicDetailResponse
+                oldItem: SearchArtist,
+                newItem: SearchArtist
             ): Boolean =
                 oldItem.hashCode() == newItem.hashCode()
 
 
             override fun areContentsTheSame(
-                oldItem: MusicDetailResponse,
-                newItem: MusicDetailResponse
+                oldItem: SearchArtist,
+                newItem: SearchArtist
             ): Boolean =
-                oldItem.musicSeq == newItem.musicSeq
+                oldItem.memberSeq == newItem.memberSeq
 
         }
     }

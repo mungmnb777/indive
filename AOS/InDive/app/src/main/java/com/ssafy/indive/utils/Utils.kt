@@ -16,8 +16,12 @@ import android.widget.ImageView
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.ssafy.indive.R
+import com.ssafy.indive.model.dto.Music
+import com.ssafy.indive.model.dto.SearchArtist
+import com.ssafy.indive.model.response.MusicDetailResponse
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashSet
 
 // 다이얼로그 사이즈 조절
 fun Context.dialogResize(dialogFragment: DialogFragment, width: Float, height: Float) {
@@ -37,6 +41,23 @@ fun Context.dialogResize(dialogFragment: DialogFragment, width: Float, height: F
     dialogFragment.dialog?.window?.attributes = params as WindowManager.LayoutParams
     dialogFragment.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+}
+
+fun setArtist(list: List<MusicDetailResponse>): List<SearchArtist> {
+
+    val hashSet = HashSet<Pair<Long, String>>()
+
+    list.forEach {
+        hashSet.add(Pair(it.artist.memberSeq,it.artist.nickname))
+    }
+
+    val mutableList = mutableListOf<SearchArtist>()
+
+    hashSet.forEach {
+        mutableList.add(SearchArtist(it.first,it.second))
+    }
+
+    return mutableList.toList()
 }
 
 // 서버 시간 포매터
