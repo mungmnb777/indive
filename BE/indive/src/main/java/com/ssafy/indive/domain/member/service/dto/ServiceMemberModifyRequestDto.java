@@ -27,4 +27,6 @@ public class ServiceMemberModifyRequestDto {
         this.image = image;
         this.background = background;
     }
+
+
 }
