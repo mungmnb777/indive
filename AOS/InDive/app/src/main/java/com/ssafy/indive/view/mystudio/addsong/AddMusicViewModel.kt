@@ -78,10 +78,7 @@ class AddMusicViewModel @Inject constructor(
         lyricist.value = ""
         lyrics.value = ""
         _startDate.value = ""
-        _startTime.value = ""
         _reservationDate.value = ""
-        _reservationTime.value = ""
-
     }
 
     fun addMusic() {
@@ -93,7 +90,7 @@ class AddMusicViewModel @Inject constructor(
             "발라드" -> {
                 genreName = "ballad"
             }
-            "뉴에이지/연주곡" -> {
+            "연주곡" -> {
                 genreName = "new-age"
             }
             "R&B/소울" -> {
@@ -130,8 +127,8 @@ class AddMusicViewModel @Inject constructor(
             val releaseDateTime = "${starDate.value} ${startTime.value}:00"
             val reservationDateTime = "${reservationDate.value} ${reservationTime.value}:00"
 
+            Log.d(TAG, "GENRE: ${genreName}")
 
-            Log.d("lyrics.value", "lyrics.value:${lyrics.value} ")
             Log.d(TAG, "releaseDateTime: $releaseDateTime")
             Log.d(TAG, "reservationDateTime: $reservationDateTime")
 

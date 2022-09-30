@@ -1,5 +1,7 @@
 package com.ssafy.indive.view.home.search
 
+import android.content.Intent
+import android.net.Uri
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -65,7 +67,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
             }
 
             override fun clickReport() {
-
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse("http://pf.kakao.com/_lxeAjxj")
+                startActivity(i)
             }
 
         }).show(requireActivity().supportFragmentManager, "MoreDialog")
