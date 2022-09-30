@@ -26,21 +26,19 @@ public class MemberModifyService {
 
         findMember.update(dto);
 
-        //image만 NULL
-        if((dto.getImage() != null & !dto.getImage().isEmpty()) & (dto.getBackground()!=null & !dto.getBackground().isEmpty())){
+        if((dto.getImage() != null && !dto.getImage().isEmpty()) && (dto.getBackground()!=null && !dto.getBackground().isEmpty())){
             log.info("modifyMember : 프로필, 배경사진 둘다있음");
             findMember.uploadFiles(dto.getImage(), dto.getBackground());
-        }else if((dto.getImage() == null | dto.getImage().isEmpty()) & (dto.getBackground()==null | dto.getBackground().isEmpty())) {
+        }else if((dto.getImage() == null || dto.getImage().isEmpty()) && (dto.getBackground()==null || dto.getBackground().isEmpty())) {
             log.info("modifyMember : 프로필, 배경사진 둘다없음");
         }
-        else if((dto.getImage() == null || dto.getImage().isEmpty()) & (dto.getBackground()!=null || !dto.getBackground().isEmpty())){
+        else if((dto.getImage() == null || dto.getImage().isEmpty()) && (dto.getBackground()!=null || !dto.getBackground().isEmpty())){
             log.info("modifyMember : 프로필 없음");
             //백그라운드 넣기
             FileUtils.deleteFile(findMember.getBackgroundUuid()); // 백그라운드 초기화
             findMember.uploadBackgroundFiles(dto.getBackground());
         }
-        //background만 NULL
-        else if((dto.getImage() != null || !dto.getImage().isEmpty()) & (dto.getBackground()==null || dto.getBackground().isEmpty())) {
+        else if((dto.getImage() != null || !dto.getImage().isEmpty()) && (dto.getBackground()==null || dto.getBackground().isEmpty())) {
             log.info("modifyMember : 배경사진없음");
             //프로필 넣기
             FileUtils.deleteFile(findMember.getImageUuid());
