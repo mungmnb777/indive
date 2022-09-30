@@ -1,5 +1,6 @@
 package com.ssafy.indive.view.login.join.wallet.create
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.ssafy.indive.utils.*
@@ -11,12 +12,15 @@ import org.web3j.crypto.Wallet
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.admin.Admin
 import java.math.BigInteger
+import java.security.KeyStore
+import javax.crypto.SecretKey
 import javax.inject.Inject
 
 @HiltViewModel
 class WalletDetailViewModel @Inject constructor(
     private val web3j: Web3j,
-    private val admin: Admin
+    private val admin: Admin,
+    private val sharedPref: SharedPreferences
 ) : ViewModel() {
     private val _privateKey: MutableStateFlow<String> =
         MutableStateFlow("")
@@ -46,5 +50,10 @@ class WalletDetailViewModel @Inject constructor(
         web3j.sendTransaction(ADMIN_ADDRESS, _address.value, BigInteger.valueOf(100000000000000), "init")
 
         _transactionSuccess.postValue("success")
+
+        // base64 + RSA 로 암호화한 Private Key 저장
+        val encryptedPrivateKey = encrypt(_privateKey.value)
+        Log.d(TAG, "createWallet: $encryptedPrivateKey")
+        sharedPref.edit().putString("PrivateKey", encryptedPrivateKey).apply()
     }
 }

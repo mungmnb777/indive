@@ -5,6 +5,8 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.ssafy.indive.R
+import com.ssafy.indive.utils.initKeyStore
 import dagger.hilt.android.HiltAndroidApp
 import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.security.Security
@@ -34,5 +36,8 @@ class ApplicationClass : Application() {
         // Provider 변경
         Security.removeProvider(BouncyCastleProvider.PROVIDER_NAME)
         Security.insertProviderAt(BouncyCastleProvider(), 1)
+
+        // 안드로이드 키스토어 초기화
+        initKeyStore(resources.getString(R.string.app_name))
     }
 }
