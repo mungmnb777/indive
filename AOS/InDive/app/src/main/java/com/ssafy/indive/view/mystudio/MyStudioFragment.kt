@@ -57,12 +57,6 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
         memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
             initViewModel()
         }
-
-        memberViewModel.noticeSuccess.observe(viewLifecycleOwner) {
-            if (it) {
-                memberViewModel.memberDetail(sharedPreferences.getLong(USER, 0))
-            }
-        }
     }
 
     private fun initClickListener() {
