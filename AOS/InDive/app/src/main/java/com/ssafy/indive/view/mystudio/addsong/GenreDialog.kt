@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.GridLayout
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ssafy.indive.databinding.DialogGenreBinding
@@ -78,8 +77,8 @@ class GenreDialog(var mcontext:Context): DialogFragment() {
     private fun genreList(){
         genreAdapter.genreList.add("랩/힙합")
         genreAdapter.genreList.add("발라드")
-        genreAdapter.genreList.add("연주곡")
-        genreAdapter.genreList.add("R&B")
+        genreAdapter.genreList.add("뉴에이지/연주곡")
+        genreAdapter.genreList.add("R&B/소울")
         genreAdapter.genreList.add("재즈")
         genreAdapter.genreList.add("댄스")
         genreAdapter.genreList.add("포크/블루스")

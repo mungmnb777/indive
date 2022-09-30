@@ -1,6 +1,8 @@
 package com.ssafy.indive.view.songdetail
 
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
@@ -105,7 +107,9 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
             }
 
             override fun clickReport(replySeq: Long) {
-                showToast("신고")
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse("http://pf.kakao.com/_lxeAjxj")
+                startActivity(i)
             }
 
         }
