@@ -65,6 +65,11 @@ public class MusicController {
         return new ResponseEntity<>(musicReadService.getMusic(condition, pageable), HttpStatus.OK);
     }
 
+    @GetMapping("/my-music")
+    public ResponseEntity<?> getMyMusic(Pageable pageable) {
+        return new ResponseEntity<>(musicReadService.getMyMusic(pageable), HttpStatus.OK);
+    }
+
     @GetMapping("/{musicSeq}")
     public ResponseEntity<?> getMusicDetails(@PathVariable("musicSeq") long musicSeq) {
         return new ResponseEntity<>(musicReadService.getMusicDetails(musicSeq), HttpStatus.OK);

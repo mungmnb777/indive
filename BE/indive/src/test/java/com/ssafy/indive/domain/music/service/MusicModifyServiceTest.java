@@ -1,8 +1,10 @@
 package com.ssafy.indive.domain.music.service;
 
+import com.ssafy.indive.domain.MockEntityFactory;
 import com.ssafy.indive.domain.music.entity.Music;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
 import com.ssafy.indive.domain.music.service.dto.ServiceMusicModifyRequestDto;
+import com.ssafy.indive.utils.security.factory.WithMockSecurityContextFactory;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,8 +50,12 @@ public class MusicModifyServiceTest {
         @BeforeEach
         void beforeEach() throws URISyntaxException, IOException {
             seq = 1L;
+
             image = new MockMultipartFile("file", "image.png", "image/png", Files.newInputStream(Paths.get(ClassLoader.getSystemResource("image.png").toURI())));
+
             musicFile = new MockMultipartFile("file", "musicFile.mp3", "audio/mpeg", Files.newInputStream(Paths.get(ClassLoader.getSystemResource("musicFile.mp3").toURI())));
+
+            WithMockSecurityContextFactory.createSecurityContext();
         }
 
         @AfterEach
@@ -63,7 +69,7 @@ public class MusicModifyServiceTest {
             // given
             given(musicRepository.findById(eq(seq))).will(
                     (Answer<Optional<Music>>) invocation -> {
-                        Music expected = getTestEntity();
+                        Music expected = MockEntityFactory.music();
 
                         ReflectionTestUtils.setField(expected, "seq", seq);
 

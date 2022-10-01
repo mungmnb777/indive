@@ -61,6 +61,40 @@ public class MusicReadService {
         return dtos;
     }
 
+    public List<ServiceMusicGetResponseDto> getMyMusic(Pageable pageable) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
+        Member loginMember = principal.getMember();
+
+        List<Music> findMusic = musicQueryRepository.findAllByAuthor(loginMember, pageable);
+
+        List<ServiceMusicGetResponseDto> dtos = new ArrayList<>();
+
+        for (Music m : findMusic) {
+            ServiceMusicGetResponseDto dto = ServiceMusicGetResponseDto.builder()
+                    .musicSeq(m.getSeq())
+                    .title(m.getTitle())
+                    .artist(m.getAuthor())
+                    .composer(m.getComposer())
+                    .lyricist(m.getLyricist())
+                    .description(m.getDescription())
+                    .genre(m.getGenre())
+                    .lyrics(m.getLyrics())
+                    .releaseDateTime(m.getReleaseDatetime())
+                    .reservationDateTime(m.getReservationDatetime())
+                    .createDate(m.getCreateDate())
+                    .updateDate(m.getUpdateDate())
+                    .likeCount(m.getLikeCount())
+                    .build();
+
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
+
     public ServiceMusicGetResponseDto getMusicDetails(long musicSeq) {
         Music m = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
 

@@ -9,6 +9,8 @@ import com.ssafy.indive.domain.nft.entity.Nft;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDateTime;
+
 public class MockEntityFactory {
 
     public static Member member() {
@@ -35,6 +37,8 @@ public class MockEntityFactory {
                 .genre("장르")
                 .description("설명")
                 .lyrics("가사")
+                .releaseDatetime(LocalDateTime.of(2022, 9, 20, 12, 0))
+                .reservationDatetime(LocalDateTime.of(2022, 9, 20, 12, 0).plusMinutes(10))
                 .build();
     }
 

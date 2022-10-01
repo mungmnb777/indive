@@ -1,5 +1,6 @@
 package com.ssafy.indive.domain.music.service;
 
+import com.ssafy.indive.domain.MockEntityFactory;
 import com.ssafy.indive.domain.music.entity.Music;
 import com.ssafy.indive.domain.music.repository.MusicQueryRepository;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
@@ -56,7 +57,7 @@ public class MusicReadServiceTest {
             // given
             given(musicRepository.findById(eq(seq))).will(
                     (Answer<Optional<Music>>) invocation -> {
-                        Music expected = getTestEntity();
+                        Music expected = MockEntityFactory.music();
 
                         ReflectionTestUtils.setField(expected, "seq", seq);
 
@@ -79,19 +80,5 @@ public class MusicReadServiceTest {
 
             verify(musicRepository, times(1)).findById(eq(seq));
         }
-
-        private Music getTestEntity() {
-            return Music.builder()
-                    .title("제목")
-                    .lyricist("작사가")
-                    .composer("작곡가")
-                    .genre("장르")
-                    .description("설명")
-                    .lyrics("가사")
-                    .releaseDatetime(LocalDateTime.of(2022, 9, 20, 12, 0))
-                    .reservationDatetime(LocalDateTime.of(2022, 9, 20, 12, 0).plusMinutes(10L))
-                    .build();
-        }
     }
-
 }

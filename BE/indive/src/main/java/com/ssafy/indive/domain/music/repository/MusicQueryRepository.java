@@ -4,6 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.music.controller.dto.WebMusicGetCondition;
 import com.ssafy.indive.domain.music.entity.Music;
 import org.springframework.data.domain.Pageable;
@@ -42,6 +43,19 @@ public class MusicQueryRepository {
                 .from(music)
                 .where(builder)
                 .orderBy(sort(sort))
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+    }
+
+    public List<Music> findAllByAuthor(Member author, Pageable pageable) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        builder.and(music.author.eq(author));
+
+        return query.select(music)
+                .from(music)
+                .where(builder)
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();

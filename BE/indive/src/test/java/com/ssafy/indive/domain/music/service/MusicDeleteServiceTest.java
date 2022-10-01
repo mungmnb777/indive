@@ -1,7 +1,9 @@
 package com.ssafy.indive.domain.music.service;
 
+import com.ssafy.indive.domain.MockEntityFactory;
 import com.ssafy.indive.domain.music.entity.Music;
 import com.ssafy.indive.domain.music.repository.MusicRepository;
+import com.ssafy.indive.utils.security.factory.WithMockSecurityContextFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -41,6 +43,8 @@ public class MusicDeleteServiceTest {
         @BeforeEach
         void beforeEach() {
             seq = 1L;
+
+            WithMockSecurityContextFactory.createSecurityContext();
         }
 
         @Test
@@ -49,7 +53,7 @@ public class MusicDeleteServiceTest {
             // given
             given(musicRepository.findById(eq(seq))).will(
                     (Answer<Optional<Music>>) invocation -> {
-                        Music expected = getTestEntity();
+                        Music expected = MockEntityFactory.music();
 
                         ReflectionTestUtils.setField(expected, "seq", seq);
 

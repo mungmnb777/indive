@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -43,7 +44,7 @@ public class MusicModifyService {
         findMusic.update(dto);
 
         // 이전 파일 삭제
-        FileUtils.deleteFile(findMusic.getImageUuid());
+        if (StringUtils.hasText(findMusic.getImageOrigin())) FileUtils.deleteFile(findMusic.getImageUuid());
         FileUtils.deleteFile(findMusic.getMusicFileUuid());
 
         // 새로운 파일 저장 및 파일 정보 입력
