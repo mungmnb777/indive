@@ -36,7 +36,7 @@ public class MemberAddService {
                     .role(Role.ROLE_USER)
                     //기본 이미지 추가
                     .imageOrigin("default_profile.png")
-                    .imageUuid("default_profile")
+                    .imageUuid("default_profile.png")
                     .backgroundOrigin("default_background.png")
                     .backgroundUuid("default_background.png")
                     .build();

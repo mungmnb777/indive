@@ -62,6 +62,20 @@ public class    Member extends BaseEntity {
         this.profileMessage = dto.getProfileMessage();
     }
 
+    public void updateNotProfileImage(String nickname, String profileMessage, String backgroundOrigin, String backgroundUuid) {
+        this.backgroundOrigin = backgroundOrigin;
+        this.backgroundUuid = backgroundUuid;
+        this.nickname = nickname;
+        this.profileMessage = profileMessage;
+    }
+
+    public void updateNotBackgroundImage(String nickname, String profileMessage, String imageOrigin, String imageUuid) {
+        this.imageOrigin = imageOrigin;
+        this.imageUuid = imageUuid;
+        this.nickname = nickname;
+        this.profileMessage = profileMessage;
+    }
+
     @Builder
     public Member(Long seq, String email, String password, String nickname, Role role, String wallet, String imageOrigin, String imageUuid, String backgroundOrigin, String backgroundUuid, String profileMessage, String notice) {
         this.seq = seq;
@@ -87,6 +101,22 @@ public class    Member extends BaseEntity {
         backgroundUuid = backgroundImage == null ? null : FileUtils.saveFile(backgroundImage);
 
     }
+
+    public void uploadProfileImage(MultipartFile image) {
+        // 앨범 커버
+        imageOrigin = image == null ? null : image.getOriginalFilename();
+        imageUuid = image == null ? null : FileUtils.saveFile(image);
+
+    }
+
+    public void uploadBackgroundFiles(MultipartFile backgroundImage) {
+        // 앨범 커버
+
+        backgroundOrigin = backgroundImage == null ? null : backgroundImage.getOriginalFilename();
+        backgroundUuid = backgroundImage == null ? null : FileUtils.saveFile(backgroundImage);
+
+    }
+
 
     public void update(ServiceMemberWriteNoticeRequestDto dto){
         this.notice = dto.getNotice();

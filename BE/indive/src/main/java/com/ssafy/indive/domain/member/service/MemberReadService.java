@@ -1,16 +1,20 @@
 package com.ssafy.indive.domain.member.service;
 
 import com.ssafy.indive.domain.member.entity.Member;
+//import com.ssafy.indive.domain.member.repository.MemberQueryRepository;
 import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.dto.ServiceDuplicatedEmail;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberAddRequestDto;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberGetResponseDto;
+import com.ssafy.indive.domain.member.service.dto.WebMemberGetCondition;
 import com.ssafy.indive.domain.music.entity.Music;
+import com.ssafy.indive.domain.music.service.dto.ServiceMusicGetResponseDto;
 import com.ssafy.indive.global.utils.FileUtils;
 import com.ssafy.indive.security.config.auth.PrincipalDetails;
 import com.ssafy.indive.security.dto.LoginResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Service
 @Transactional
@@ -28,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberReadService {
 
     private final MemberRepository memberRepository;
+    //private final MemberQueryRepository memberQueryRepository;
 
 
     public boolean isDuplicated(ServiceDuplicatedEmail dto) {
@@ -76,4 +82,9 @@ public class MemberReadService {
         Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
         return FileUtils.getUrlResource(findMember.getBackgroundUuid());
     }
+
+//    public List<ServiceMemberGetResponseDto> getMembers(WebMemberGetCondition condition) {
+//       // List<Member> member = memberQueryRepository.findAll(condition);
+//
+//    }
 }

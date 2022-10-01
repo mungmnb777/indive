@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ServiceMemberAddRequestDto {
 
-
     @NotBlank
     private String email;
 
