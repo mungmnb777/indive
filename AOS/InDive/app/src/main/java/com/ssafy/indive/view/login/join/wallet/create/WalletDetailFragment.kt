@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentWalletDetailBinding
+import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.utils.TAG
 import com.ssafy.indive.view.loading.LoadingDialog
 import com.ssafy.indive.view.login.MemberViewModel
@@ -50,15 +51,15 @@ class WalletDetailFragment: BaseFragment<FragmentWalletDetailBinding>(R.layout.f
 
     private fun initViewModelCallback(){
         walletDetailViewModel.walletSuccess.observe(viewLifecycleOwner){
-//            memberViewModel.memberJoin(
-//                MemberJoin(
-//                    memberViewModel.email.value,
-//                    memberViewModel.password.value,
-//                    memberViewModel.nickname.value,
-//                    walletDetailViewModel.address.value,
-//                    "안녕하세요"
-//                )
-//            )
+            memberViewModel.memberJoin(
+                MemberJoin(
+                    memberViewModel.email.value,
+                    memberViewModel.password.value,
+                    memberViewModel.nickname.value,
+                    walletDetailViewModel.address.value,
+                    "안녕하세요"
+                )
+            )
             loadingDialog.dismiss()
         }
     }
