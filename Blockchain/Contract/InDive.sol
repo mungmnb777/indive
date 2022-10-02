@@ -5,8 +5,11 @@ import "./token/ERC20/InDiveToken.sol";
 import "./token/ERC20/IERC20.sol";
 import "./token/ERC721/InDiveNFT.sol";
 import "./token/ERC721/IERC721.sol";
+import "./utils/Strings.sol";
 
 contract Indive {
+
+    using Strings for *;
 
     // 토큰 컨트랙트 주소
     address _InDiveTokenAddress;
@@ -23,7 +26,7 @@ contract Indive {
 
     struct DonationInfo{
         address addr;
-        uint256 value;
+        uint256 totalValue;
     }
 
     constructor () {}
@@ -49,7 +52,7 @@ contract Indive {
         if(isDonated[_to][msg.sender]){
             for(uint i ; i < donatorList[_to].length ; i++){
                 if(donatorList[_to][i].addr == msg.sender){
-                    donatorList[_to][i].value += _value;
+                    donatorList[_to][i].totalValue += _value;
                     break;
                 }
             }
@@ -64,7 +67,38 @@ contract Indive {
         return true;
     }
 
-    function getDonatiorList(address artist) public view returns (DonationInfo[] memory){
-        return donatorList[artist];
+    // function getDonatorList(address artist) public view returns (string[] memory){
+    //     uint256 size = donatorList[artist].length;
+    //     string[] memory result = new string[](size);
+
+    //     for(uint i = 0 ; i < donatorList[artist].length ; i++){
+    //         address addr = donatorList[artist][i].addr;
+    //         uint256 totalValue = donatorList[artist][i].totalValue;
+
+    //         string memory strAddr = Strings.toHexString(addr);
+    //         string memory strValue = Strings.toString(totalValue);
+
+    //         result[i] = string(abi.encodePacked(strAddr, "|", strValue));
+    //     }
+
+    //     return result;
+    // }
+
+    function getDonatorList(address artist) public view returns (string memory){
+        string memory result = "[";
+
+        for(uint i = 0 ; i < donatorList[artist].length ; i++){
+            address addr = donatorList[artist][i].addr;
+            uint256 totalValue = donatorList[artist][i].totalValue;
+
+            string memory strAddr = Strings.toHexString(addr);
+            string memory strValue = Strings.toString(totalValue);
+
+            result = string(abi.encodePacked(result, "{", "address:\"", strAddr, "\",totalValue:", strValue,"},"));
+        }
+
+        result = string(abi.encodePacked(result, "]"));
+
+        return result;
     }
 }
