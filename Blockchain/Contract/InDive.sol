@@ -41,11 +41,12 @@ contract Indive {
     // 사용자는 InDiveToken 컨트랙트에서 approve를 사용하여 InDive 컨트랙트에 출금할 권한을 준다.
     // InDive 컨트랙트는 토큰을 출금 후 to 에게 송금한다.
     function donate(address _to, uint256 _value, string memory _message) public returns (bool) {
+        require(_value >= 2, "donate value error!");
 
         _InDiveTokenContract.transferFrom(msg.sender, address(this), _value);
-        _InDiveTokenContract.approve(address(this), _value);
+        _InDiveTokenContract.approve(address(this), _value - 1);
         // 컨트랙트에 저장된 토큰을 to 에게 전송한다.
-        _InDiveTokenContract.transferFrom(address(this), _to, _value);
+        _InDiveTokenContract.transferFrom(address(this), _to, _value - 1);
 
         // 배열에 후원 값을 저장한다.
         // 후원한 적이 있다면 후원 내용을 갱신한다.
@@ -67,23 +68,6 @@ contract Indive {
         return true;
     }
 
-    // function getDonatorList(address artist) public view returns (string[] memory){
-    //     uint256 size = donatorList[artist].length;
-    //     string[] memory result = new string[](size);
-
-    //     for(uint i = 0 ; i < donatorList[artist].length ; i++){
-    //         address addr = donatorList[artist][i].addr;
-    //         uint256 totalValue = donatorList[artist][i].totalValue;
-
-    //         string memory strAddr = Strings.toHexString(addr);
-    //         string memory strValue = Strings.toString(totalValue);
-
-    //         result[i] = string(abi.encodePacked(strAddr, "|", strValue));
-    //     }
-
-    //     return result;
-    // }
-
     function getDonatorList(address artist) public view returns (string memory){
         string memory result = "[";
 
@@ -94,7 +78,11 @@ contract Indive {
             string memory strAddr = Strings.toHexString(addr);
             string memory strValue = Strings.toString(totalValue);
 
-            result = string(abi.encodePacked(result, "{", "address:\"", strAddr, "\",totalValue:", strValue,"},"));
+            result = string(abi.encodePacked(result, "{", "address:\"", strAddr, "\",totalValue:", strValue,"}"));
+
+            if(i < donatorList[artist].length - 1){
+                result = string(abi.encodePacked(result, ","));
+            }
         }
 
         result = string(abi.encodePacked(result, "]"));
