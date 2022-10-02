@@ -10,6 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WebMusicGetCondition {
 
+    private Long artistSeq;
+
     private String title;
 
     private String artist;

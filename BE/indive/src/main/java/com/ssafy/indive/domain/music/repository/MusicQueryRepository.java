@@ -9,6 +9,7 @@ import com.ssafy.indive.domain.music.controller.dto.WebMusicGetCondition;
 import com.ssafy.indive.domain.music.entity.Music;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
@@ -27,6 +28,7 @@ public class MusicQueryRepository {
     }
 
     public List<Music> findAll(WebMusicGetCondition condition, Pageable pageable) {
+        Long artistSeq = condition.getArtistSeq();
         String title = condition.getTitle();
         String artist = condition.getArtist();
         String genre = condition.getGenre();
@@ -35,6 +37,7 @@ public class MusicQueryRepository {
         BooleanBuilder builder = new BooleanBuilder();
         builder.and(music.reservationDatetime.before(LocalDateTime.now()));
 
+        if (!ObjectUtils.isEmpty(artistSeq)) builder.and(music.author.seq.eq(artistSeq));
         if (StringUtils.hasText(title)) builder.and(music.title.like("%" + title + "%"));
         if (StringUtils.hasText(artist)) builder.and(music.author.nickname.like("%" + artist + "%"));
         if (StringUtils.hasText(genre)) builder.and(music.genre.like("%" + genre + "%"));
