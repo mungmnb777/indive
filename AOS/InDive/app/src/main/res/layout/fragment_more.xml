@@ -246,37 +246,42 @@
             app:layout_constraintTop_toBottomOf="@id/btn_settring_shield"
             android:src="@drawable/btn_setting"/>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/img_setting_version"
+            app:layout_constraintEnd_toEndOf="@id/btn_settring_version"
+            android:layout_marginTop="20dp">
         <ImageView
             android:id="@+id/img_setting_logout"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/img_setting_version"
             android:src="@drawable/img_setting_logout"/>
 
         <TextView
             android:id="@+id/tv_setting_logout"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="8dp"
             android:text="로그아웃"
             android:textSize="18dp"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tv_setting_version"
-            app:layout_constraintStart_toEndOf="@id/img_setting_logout"
             />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                />
 
         <ImageView
             android:id="@+id/btn_setting_logout"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="@id/switch_setting_finger"
             app:layout_constraintTop_toBottomOf="@id/btn_settring_version"
             android:src="@drawable/btn_setting"/>
-
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

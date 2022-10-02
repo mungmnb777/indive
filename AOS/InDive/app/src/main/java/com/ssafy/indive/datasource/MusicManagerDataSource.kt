@@ -85,4 +85,8 @@ class MusicManagerDataSource @Inject constructor(
         emit(musicManagerApi.deleteMusicReply(musicSeq,replySeq))
     }
 
+    fun getMyMusics(): Flow<List<MusicDetailResponse>> = flow {
+        emit(musicManagerApi.getMyMusics())
+    }
+
 }
