@@ -32,7 +32,7 @@ class WalletDetailViewModel @Inject constructor(
     val transactionSuccess get() = _transactionSuccess
 
     // 지갑 생성
-    fun createWallet(password: String){
+    fun createWallet(password: String, email: String){
         val ecKeyPair = Keys.createEcKeyPair()
         val privateKeyInDec = ecKeyPair.privateKey
 
@@ -59,6 +59,6 @@ class WalletDetailViewModel @Inject constructor(
         val encryptedPrivateKey = encrypt(_privateKey.value)
         Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
 
-        sharedPref.edit().putString("PrivateKey", encryptedPrivateKey).apply()
+        sharedPref.edit().putString(email, encryptedPrivateKey).apply()
     }
 }
