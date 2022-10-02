@@ -7,6 +7,7 @@ import com.ssafy.indive.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import org.web3j.crypto.Credentials
 import org.web3j.crypto.Keys
 import org.web3j.crypto.Wallet
 import org.web3j.protocol.Web3j
@@ -28,8 +29,8 @@ class WalletDetailViewModel @Inject constructor(
         MutableStateFlow("")
     val address get() = _address.asStateFlow()
 
-    private val _transactionSuccess = SingleLiveEvent<String>()
-    val transactionSuccess get() = _transactionSuccess
+    private val _walletSuccess = SingleLiveEvent<String>()
+    val walletSuccess get() = _walletSuccess
 
     // 지갑 생성
     fun createWallet(password: String, email: String){
@@ -58,6 +59,23 @@ class WalletDetailViewModel @Inject constructor(
         Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
         sharedPref.edit().putString(email, encryptedPrivateKey).apply()
 
-        _transactionSuccess.postValue("success")
+        _walletSuccess.postValue("success")
+    }
+
+    // 지갑 복구
+    fun loadWallet(privateKey: String, email: String){
+        val credentials = Credentials.create(privateKey)
+
+        _privateKey.value = privateKey
+        _address.value = credentials.address
+
+        Log.d(TAG, "loadWallet: ${_address.value}")
+
+        // base64 + RSA 로 암호화한 Private Key 저장
+        val encryptedPrivateKey = encrypt(_privateKey.value)
+        Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
+        sharedPref.edit().putString(email, encryptedPrivateKey).apply()
+
+        _walletSuccess.postValue("success")
     }
 }
