@@ -29,4 +29,6 @@ const val FINGERPRINT_USE = "fingerprint_use"
 const val ABLE = 1
 const val DISABLE = 2
 
+const val TX_END_CHECK_DURATION = 3000L
+const val TX_END_CHECK_RETRY = 3
 

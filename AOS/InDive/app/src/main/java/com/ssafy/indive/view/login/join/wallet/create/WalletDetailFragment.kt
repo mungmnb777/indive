@@ -54,6 +54,6 @@ class WalletDetailFragment: BaseFragment<FragmentWalletDetailBinding>(R.layout.f
     }
 
     private fun createWallet(){
-        walletDetailViewModel.createWallet(args.password)
+        walletDetailViewModel.createWallet(args.password, memberViewModel.email.value)
     }
 }
