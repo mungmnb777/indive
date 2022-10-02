@@ -39,16 +39,37 @@ class MemberManagerDataSource @Inject constructor(
         backgroundFile: MultipartBody.Part?,
         profileMessage: String?
     ): Flow<Response<Boolean>> = flow {
-        emit(
-            memberManagerApi.memberModify(
-                memberSeq,
-                nickname,
-                profileFile,
-                backgroundFile,
-                profileMessage
+        if (backgroundFile == null && profileFile == null) {
+            emit(
+                memberManagerApi.memberModify(
+                    memberSeq,
+                    nickname,
+                    profileMessage
+                )
             )
-        )
+        } else if (backgroundFile == null) {
+            emit(
+                memberManagerApi.memberModify(
+                    memberSeq,
+                    nickname,
+                    profileFile,
+                    profileMessage
+                )
+            )
+        } else {
+            emit(
+                memberManagerApi.memberModify(
+                    memberSeq,
+                    nickname,
+                    profileFile,
+                    backgroundFile,
+                    profileMessage
+                )
+            )
+        }
+
     }
+
 
     fun writeNotice(memberSeq: Long, notice: Notice): Flow<Boolean> = flow {
         emit(memberManagerApi.writeNotice(memberSeq, notice))

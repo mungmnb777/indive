@@ -128,4 +128,12 @@ class MusicManagerRepository @Inject constructor(
         }
     }.catch { e -> emit(Result.Error(e)) }
 
+    fun getMyMusics(): Flow<Result<List<MusicDetailResponse>>> = flow {
+        emit(Result.Loading)
+        musicManagerDataSource.getMyMusics().collect {
+            emit(Result.Success(it))
+        }
+    }.catch { e ->
+        emit(Result.Error(e))
+    }
 }

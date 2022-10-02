@@ -86,8 +86,7 @@ class EditProfileFragment :
                 Log.d(TAG, "initClickListener: ${imgFile}")
                 Log.d(TAG, "initClickListener: ${backgroundFile}")
                 Log.d(TAG, "initClickListener: ${etIntroduce.text}")
-                if (etNickname.text.isNotEmpty() && etIntroduce.text.isNotEmpty()
-                    && imgFile != null && backgroundFile != null
+                if (etNickname.text.toString() != "" && etIntroduce.text.toString()!= ""
                 ) {
                     memberViewModel.memberModify(
                         sharedPreferences.getLong(USER, 0),

@@ -57,7 +57,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 findNavController().navigate(R.id.action_loginFragment_to_joinFragment)
             }
             btnLogin.setOnClickListener {
-                memberViewModel.memberLogin(MemberLogin("jdsaeyqi@naver.com", "1111"))
+                memberViewModel.memberLogin(MemberLogin("wkdrns3918@naver.com", "1"))
 
             }
         }

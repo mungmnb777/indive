@@ -3,6 +3,7 @@ package com.ssafy.indive.view.player
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -194,13 +195,14 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                 override fun clickDetail() {
                     val action =
                         PlayerFragmentDirections.actionPlayerFragmentToSongDetailFragment(musicSeq)
-
                     findNavController().navigate(action)
 
                 }
 
                 override fun clickReport() {
-
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.data = Uri.parse("http://pf.kakao.com/_lxeAjxj")
+                    startActivity(i)
                 }
 
             }).show(parentFragmentManager, "MoreDialog")

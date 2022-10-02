@@ -7,6 +7,9 @@
         <variable
             name="MemberVM"
             type="com.ssafy.indive.view.login.MemberViewModel" />
+        <variable
+            name="MyStudioVM"
+            type="com.ssafy.indive.view.mystudio.MyStudioViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -228,7 +231,10 @@
             app:layout_constraintTop_toBottomOf="@id/tv_song">
 
             <androidx.recyclerview.widget.RecyclerView
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:id="@+id/rv_my_music"
+                submitList="@{MyStudioVM.myMusicList}"
+                tools:listitem="@layout/item_music_chart"
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />
         </androidx.cardview.widget.CardView>

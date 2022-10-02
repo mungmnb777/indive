@@ -110,7 +110,7 @@ class MemberViewModel @Inject constructor(
                 if (it is Result.Success) {
                     _emailCheck.postValue(it.data.body())
                     Log.d(TAG, "memberEmailCheck body: ${it.data.body()}")
-                }else if(it is Result.Error){
+                } else if (it is Result.Error) {
                     Log.d(TAG, "memberEmailCheckError: ${it}")
                 }
             }
@@ -147,9 +147,12 @@ class MemberViewModel @Inject constructor(
                 profileMessage
             ).collectLatest {
                 Log.d(TAG, "memberModify: ${it}")
-                if(it is Result.Success){
+                if (it is Result.Success) {
                     Log.d(TAG, "memberModify: ${it.data.body()}")
                     _modifySuccess.postValue(it.data.body())
+                } else if (it is Result.Error) {
+                    Log.d(TAG, "memberModify: ${it}")
+
                 }
             }
         }

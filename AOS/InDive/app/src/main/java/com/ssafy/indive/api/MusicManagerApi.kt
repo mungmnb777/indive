@@ -70,5 +70,8 @@ interface MusicManagerApi {
     @DELETE("music/{musicSeq}/reply/{replySeq}")
     suspend fun deleteMusicReply(@Path("musicSeq") musicSeq: Long,@Path("replySeq") replySeq: Long): Response<Boolean>
 
+    @GET("music/my-music")
+    suspend fun getMyMusics(): List<MusicDetailResponse>
+
 
 }
