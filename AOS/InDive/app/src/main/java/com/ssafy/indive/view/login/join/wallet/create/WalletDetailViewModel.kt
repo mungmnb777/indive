@@ -12,8 +12,6 @@ import org.web3j.crypto.Wallet
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.admin.Admin
 import java.math.BigInteger
-import java.security.KeyStore
-import javax.crypto.SecretKey
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,16 +42,23 @@ class WalletDetailViewModel @Inject constructor(
         _address.value = "0x" + aWallet.address
         Log.d(TAG, "createWallet: ${_address.value}")
 
-        admin.unlockAccount(ADMIN_ADDRESS)
+        admin.unlockAccount(ADMIN_ADDRESS, ADMIN_PASSWORD)
 
         // 생성된 주소로 1이더 전송
-        web3j.sendTransaction(ADMIN_ADDRESS, _address.value, BigInteger.valueOf(100000000000000), "init")
-
+        web3j.sendTransaction(ADMIN_ADDRESS, _address.value, BigInteger("1000000000000000000"), "init")
         _transactionSuccess.postValue("success")
+
+        admin.unlockAccount(ADMIN_ADDRESS, ADMIN_PASSWORD)
+        // Admin 에서 사용자에게 토큰 1000개 출금 허용
+        web3j.setTokenApprove(ADMIN_PRIVATE_KEY, INDIVE_ADDRESS, 1000)
+        // 1000개 전송
+        web3j.donate(ADMIN_PRIVATE_KEY, _address.value, 1000, "adminToUser")
+        web3j.getTokenBalanceOf(_privateKey.value, _address.value)
 
         // base64 + RSA 로 암호화한 Private Key 저장
         val encryptedPrivateKey = encrypt(_privateKey.value)
-        Log.d(TAG, "createWallet: $encryptedPrivateKey")
+        Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
+
         sharedPref.edit().putString("PrivateKey", encryptedPrivateKey).apply()
     }
 }
