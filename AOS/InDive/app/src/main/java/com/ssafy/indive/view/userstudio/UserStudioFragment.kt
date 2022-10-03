@@ -38,7 +38,6 @@ class UserStudioFragment : BaseFragment<FragmentUserStudioBinding>(R.layout.frag
 
 
     override fun init() {
-        Log.d(TAG, "init: ${args.artistSeq}")
         binding.apply {
             memberVM = memberViewModel
             userStudioVM = userStudioViewModel
@@ -83,6 +82,9 @@ class UserStudioFragment : BaseFragment<FragmentUserStudioBinding>(R.layout.frag
 
     private fun initClickListener() {
         binding.apply {
+            btnDonate.setOnClickListener {
+                findNavController().navigate(UserStudioFragmentDirections.actionUserStudioFragmentToDonateFragment(args.artistSeq))
+            }
             btnRanking.setOnClickListener {
                 findNavController().navigate(R.id.action_userStudioFragment_to_rankingFragment)
             }
