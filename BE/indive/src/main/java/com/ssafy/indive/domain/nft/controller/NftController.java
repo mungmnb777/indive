@@ -35,7 +35,7 @@ public class NftController {
     }
 
     @GetMapping("/check-stock")
-    public ResponseEntity<?> checkStock(@Validated @RequestBody WebCheckStockGetRequestDto dto) {
+    public ResponseEntity<?> checkStock(@Validated @ModelAttribute WebCheckStockGetRequestDto dto) {
         try {
             return new ResponseEntity<>(nftReadService.checkStock(dto.convertToService()), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
@@ -46,7 +46,7 @@ public class NftController {
     }
 
     @GetMapping("/check-amount")
-    public ResponseEntity<?> checkAmount(@Validated @RequestBody WebCheckAmountGetRequestDto dto) {
+    public ResponseEntity<?> checkAmount(@Validated @ModelAttribute WebCheckAmountGetRequestDto dto) {
         try {
             return new ResponseEntity<>(nftReadService.checkAmount(dto.convertToService()), HttpStatus.OK);
         } catch (IllegalArgumentException e) {

@@ -91,7 +91,7 @@ public class MusicController {
         try {
             return new ResponseEntity<>(musicReadService.isLike(musicSeq), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(false, HttpStatus.OK);
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.OK);
         }
     }
 

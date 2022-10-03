@@ -1,9 +1,6 @@
 package com.ssafy.indive.domain.music.controller.dto;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -19,4 +16,13 @@ public class WebMusicGetCondition {
     private String sort;
 
     private String genre;
+
+    @Builder
+    public WebMusicGetCondition(Long artistSeq, String title, String artist, String sort, String genre) {
+        this.artistSeq = artistSeq;
+        this.title = title;
+        this.artist = artist;
+        this.sort = sort;
+        this.genre = genre;
+    }
 }

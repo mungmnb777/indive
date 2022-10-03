@@ -3,6 +3,7 @@ package com.ssafy.indive.domain.music.service;
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.music.controller.dto.WebMusicGetCondition;
 import com.ssafy.indive.domain.music.entity.Music;
+import com.ssafy.indive.domain.music.entity.MusicLike;
 import com.ssafy.indive.domain.music.entity.Reply;
 import com.ssafy.indive.domain.music.repository.MusicLikeRepository;
 import com.ssafy.indive.domain.music.repository.MusicQueryRepository;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -124,9 +126,9 @@ public class MusicReadService {
 
         Music findMusic = musicRepository.findById(musicSeq).orElseThrow(IllegalArgumentException::new);
 
-        musicLikeRepository.findByMusicAndLiker(findMusic, loginMember).orElseThrow(IllegalArgumentException::new);
+        Optional<MusicLike> optionalMusicLike = musicLikeRepository.findByMusicAndLiker(findMusic, loginMember);
 
-        return true;
+        return optionalMusicLike.isPresent();
     }
 
     public int getLikeCount(long musicSeq) {
