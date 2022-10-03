@@ -60,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 memberViewModel.memberLogin(MemberLogin(etId.text.toString(), etPass.text.toString()))
             }
             tvLogo.setOnClickListener {
-                memberViewModel.memberLogin(MemberLogin("wkdrns3918@naver.com", "1"))
+                memberViewModel.memberLogin(MemberLogin("jdsaeyqi@naver.com", "1111"))
             }
         }
     }
