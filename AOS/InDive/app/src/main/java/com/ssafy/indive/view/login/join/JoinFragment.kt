@@ -33,6 +33,7 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
 
     override fun init() {
         binding.apply {
+            memberVM = memberViewModel
             etEmail.addTextChangedListener(textChangeListener)
             etPassCheck.addTextChangedListener(passChangeListener)
         }
@@ -69,7 +70,7 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
 
                     // test용
                     etEmailCode.setText(key)
-                    
+
 
 //                    val email = etEmail.text.toString()
 //                    if (isEmail(email)) {
@@ -99,9 +100,9 @@ class JoinFragment : BaseFragment<FragmentJoinBinding>(R.layout.fragment_join) {
 
 
             btnJoin.setOnClickListener {
-                if(isEmailCheck && isEmailCodeCheck && isPassCheck){
+                if (isEmailCheck && isEmailCodeCheck && isPassCheck) {
                     findNavController().navigate(R.id.action_joinFragment_to_walletFragment)
-                } else{
+                } else {
                     Toast.makeText(context, "가입정보를 확인해주세요.", Toast.LENGTH_SHORT).show()
                 }
 

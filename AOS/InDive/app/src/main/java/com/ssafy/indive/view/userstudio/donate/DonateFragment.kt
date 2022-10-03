@@ -50,13 +50,15 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     override fun init() {
 
         loadingDialog = LoadingDialog(requireContext())
-
+        artistSeq = args.artistSeq
         initBioMetric()
         initFingerPrintAuth()
         initClickListener()
         initViewModelCallback()
 
-        artistSeq = args.artistSeq
+
+
+        Log.d("DonateFragment_", "init: $artistSeq")
 
     }
 
@@ -70,12 +72,14 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
         lifecycleScope.launch {
             donateViewModel.priceToGetNFT.collectLatest {
+
                 if(it <= 0){
                     binding.apply {
                         tvAlertNft.visibility = View.INVISIBLE
                     }
                 }else{
                     binding.apply {
+                        tvAlertNft.visibility = View.VISIBLE
                         tvAlertNft.text = "$it IVE 이상 후원 시 NFT를 받을 수 있습니다."
                     }
                 }
