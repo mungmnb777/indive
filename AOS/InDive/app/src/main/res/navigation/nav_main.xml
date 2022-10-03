@@ -14,7 +14,6 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
-
         <action
             android:id="@+id/action_homeFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
@@ -87,8 +86,14 @@
     </fragment>
     <fragment
         android:id="@+id/addRewardFragment"
+<<<<<<< HEAD
         android:name="com.ssafy.indive.view.mystudio.addreward.AddRewardFragment"
         android:label="AddRewardFragment" />
+=======
+        android:name="com.ssafy.indive.view.rewardstore.addreward.AddRewardFragment"
+        android:label="AddRewardFragment" >
+    </fragment>
+>>>>>>> feature/AOS_login
     <fragment
         android:id="@+id/addSongFirstFragment"
         android:name="com.ssafy.indive.view.mystudio.addsong.AddMusicFirstFragment"
