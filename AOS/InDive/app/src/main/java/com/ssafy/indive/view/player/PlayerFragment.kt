@@ -113,11 +113,14 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                     formatDuration(musicService!!.exoPlayer!!.duration)
 
                 updateSeekBar()
-                Log.d(
-                    "PlayerFragment_",
-                    "currentPosition: ${musicService!!.exoPlayer!!.currentPosition.toInt()}"
-                )
-                Log.d("PlayerFragment_", "duration: ${musicService!!.exoPlayer!!.duration.toInt()}")
+
+                if (requireActivity().intent.getStringExtra("type") == "box") {
+                    binding.groupPlayList.visibility = View.VISIBLE
+                    binding.groupSeekbar.visibility = View.GONE
+                    binding.groupPlayer.visibility = View.GONE
+                    isWatchingPlayList = true
+                }
+
 
             }
 

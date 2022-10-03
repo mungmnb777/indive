@@ -22,6 +22,8 @@ import com.ssafy.indive.utils.DISABLE
 import com.ssafy.indive.utils.FINGERPRINT_USE
 import com.ssafy.indive.utils.JWT
 import com.ssafy.indive.view.login.LoginActivity
+import com.ssafy.indive.view.player.PlayerActivity
+import com.ssafy.indive.view.player.PlayerFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -110,6 +112,14 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
                 val intent = Intent(requireActivity(), LoginActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
+            }
+
+            btnBox.setOnClickListener {
+                val intent = Intent(requireContext(), PlayerActivity::class.java)
+                intent.putExtra("index", PlayerFragment.songPosition)
+                intent.putExtra("class", "NowPlaying")
+                intent.putExtra("type","box")
+                startActivity(intent)
             }
         }
 
