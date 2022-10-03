@@ -111,8 +111,13 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                     formatDuration(musicService!!.exoPlayer!!.currentPosition)
                 binding.tvEndTime.text =
                     formatDuration(musicService!!.exoPlayer!!.duration)
-                binding.playerSeekbar.progress = musicService!!.exoPlayer!!.currentPosition.toInt()
-                binding.playerSeekbar.max = musicService!!.exoPlayer!!.duration.toInt()
+
+                updateSeekBar()
+                Log.d(
+                    "PlayerFragment_",
+                    "currentPosition: ${musicService!!.exoPlayer!!.currentPosition.toInt()}"
+                )
+                Log.d("PlayerFragment_", "duration: ${musicService!!.exoPlayer!!.duration.toInt()}")
 
             }
 
