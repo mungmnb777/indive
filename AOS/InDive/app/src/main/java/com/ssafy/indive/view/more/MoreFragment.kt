@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.hardware.fingerprint.FingerprintManager
+import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.util.Log
@@ -88,17 +89,27 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
 
     private fun initClickListener() {
         binding.apply {
-            tvSettingLogout.setOnClickListener {
-                sharedPreferences.edit().putString(JWT, "").apply()
-                val intent = Intent(requireActivity(), LoginActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
-            }
             btnMyWallet.setOnClickListener {
                 findNavController().navigate(R.id.action_moreFragment_to_myWalletFragment)
             }
             btnNftList.setOnClickListener {
                 findNavController().navigate(R.id.action_moreFragment_to_donateListFragment)
+            }
+            tvSettingMsg.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse("http://pf.kakao.com/_lxeAjxj")
+                startActivity(i)
+            }
+            tvSettingShield.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW)
+                i.data = Uri.parse("https://hanyeop.github.io/RunWithMe-terms/")
+                startActivity(i)
+            }
+            tvSettingLogout.setOnClickListener {
+                sharedPreferences.edit().putString(JWT, "").apply()
+                val intent = Intent(requireActivity(), LoginActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
 
