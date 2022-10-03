@@ -23,12 +23,13 @@ class MusicManagerDataSource @Inject constructor(
     fun getMusics(
         title: String?,
         artistName: String?,
+        artistSeq: Long?,
         sort: String?,
         genre: String?,
         page: Int?,
         size: Int?
     ): Flow<List<MusicDetailResponse>> = flow {
-        emit(musicManagerApi.getMusics(title, artistName, sort, genre, page, size))
+        emit(musicManagerApi.getMusics(title, artistName, artistSeq, sort, genre, page, size))
     }
 
     fun addMusic(

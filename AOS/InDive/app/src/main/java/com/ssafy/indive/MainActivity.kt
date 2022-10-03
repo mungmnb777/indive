@@ -64,6 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                         playList.add(it.mapper())
                     }
 
+                    Log.d(TAG, "initObserve@: ${mainViewModel.successGetEvent}")
                     if (mainViewModel.successGetEvent != 0L) {
                         val musicSeq = mainViewModel.successGetEvent
                         mainViewModel.successGetEvent = 0L

@@ -29,7 +29,7 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
     }
 
     private fun initPopularMusic() {
-        homeViewModel.getMusics(null, null, "popular", null,0,0)
+        homeViewModel.getMusics(null, null, null,"popular", null,0,0)
 
         val playListener: (MusicDetailResponse) -> (Unit) = {
             mainViewModel.insert(it.musicSeq)

@@ -31,7 +31,7 @@ class SearchViewModel @Inject constructor(
     fun getMusics(searchText: String) {
 
         viewModelScope.launch(Dispatchers.IO) {
-            musicManagerRepository.getMusics(searchText, null, null, null, null, null)
+            musicManagerRepository.getMusics(searchText, null, null,null, null, null, null)
                 .collectLatest {
                     if (it is Result.Success) {
                         _searchMusicList.value = it
@@ -43,7 +43,7 @@ class SearchViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO) {
-            musicManagerRepository.getMusics(null, searchText, null, null, null, null)
+            musicManagerRepository.getMusics(null, searchText, null,null, null, null, null)
                 .collectLatest {
                     if (it is Result.Success) {
                         _searchArtistList.value = it

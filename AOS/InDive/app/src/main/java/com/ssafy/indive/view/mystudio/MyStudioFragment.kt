@@ -3,6 +3,8 @@ package com.ssafy.indive.view.mystudio
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
+import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.indive.MainViewModel
@@ -16,6 +18,9 @@ import com.ssafy.indive.utils.USER
 import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.genre.genrelist.GenreListFragmentDirections
 import com.ssafy.indive.view.login.MemberViewModel
+import com.ssafy.indive.view.player.PlayerFragmentDirections
+import com.ssafy.indive.view.player.PlayerMoreDialogFragment
+import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -25,7 +30,7 @@ private const val TAG = "MyStudioFragment"
 class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment_my_studio) {
     private val memberViewModel: MemberViewModel by viewModels()
     private val myStudioViewModel: MyStudioViewModel by viewModels()
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -54,14 +59,13 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
         }
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
-            MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
+            PlayerMoreDialogFragment(object :
+                PlayerMoreDialogFragment.PlayerMoreDialogClickListener {
                 override fun clickDetail() {
-                    val action = GenreListFragmentDirections.actionGenreListFragmentToSongDetailFragment2(it.musicSeq)
+                    val action =
+                        MyStudioFragmentDirections.actionMyStudioFragmentToSongDetailFragment2(it.musicSeq)
                     findNavController().navigate(action)
-                }
 
-                override fun clickStudio() {
-                    findNavController().navigate(R.id.action_genreListFragment_to_userStudioFragment)
                 }
 
                 override fun clickReport() {
@@ -70,7 +74,7 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
                     startActivity(i)
                 }
 
-            }).show(requireActivity().supportFragmentManager, "MoreDialog")
+            }).show(parentFragmentManager, "MoreDialog")
         }
         binding.rvMyMusic.adapter = GenreListAdapter(playListener, moreListener)
     }
