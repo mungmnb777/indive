@@ -1,5 +1,9 @@
 package com.ssafy.indive
 
+import COVER_FOOTER
+import COVER_HEADER
+import MUSIC_FOOTER
+import MUSIC_HEADER
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -41,10 +45,14 @@ class MainViewModel @Inject constructor(
                 if (it is Result.Success) {
                     _musicDetails.value = it
                     val musicDetail = it.data.body()!!
+                    val memberSeq = musicDetail.artist.memberSeq
+                    val memberAddress = musicDetail.artist.wallet
                     val title = musicDetail.title
                     val artist = musicDetail.artist.nickname
                     val song = PlayListEntity(
                         0,
+                        memberSeq,
+                        memberAddress,
                         musicSeq,
                         title,
                         "$MUSIC_HEADER$musicSeq$MUSIC_FOOTER",
@@ -70,6 +78,7 @@ class MainViewModel @Inject constructor(
             playListRepository.getAllPlayList().collectLatest {
                 if (it is Result.Success) {
                     _playList.value = it.data
+                    Log.d("MainViewModel", "getAll: ${it.data}")
                 } else if (it is Result.Empty) {
                     _playList.value = listOf()
                 } else if (it is Result.Error) {

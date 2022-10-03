@@ -209,9 +209,17 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         }
 
         binding.btnDonate.setOnClickListener {
-            findNavController().navigate(R.id.action_playerFragment_to_donateFragment)
+
+            Log.d("PlayerFragment_", "initClickListener: ${musicList[songPosition].memberAddress}")
+            val memberAddress = musicList[songPosition].memberAddress
+
+            val action =
+                PlayerFragmentDirections.actionPlayerFragmentToDonateFragment(memberAddress)
+            findNavController().navigate(action)
         }
+
     }
+
 
     private fun initLike() {
         playerViewModel.getLikeCnt(musicSeq)

@@ -1,5 +1,9 @@
 package com.ssafy.indive.view.login.join.wallet.create
 
+import ADMIN_ADDRESS
+import ADMIN_PASSWORD
+import ADMIN_PRIVATE_KEY
+import INDIVE_ADDRESS
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel

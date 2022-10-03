@@ -3,6 +3,7 @@ package com.ssafy.indive.view.userstudio.donate
 import android.content.Intent
 import android.content.SharedPreferences
 import android.provider.Settings
+import android.util.Log
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
@@ -31,6 +32,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     private val args by navArgs<DonateFragmentArgs>()
+
     private var artistAddress = ""
 
 
@@ -40,7 +42,8 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         initFingerPrintAuth()
         initClickListener()
 
-        artistAddress = args.artistaddress
+        artistAddress = args.artistAddress
+        Log.d("DonateFragment_", "init: ")
         showToast(artistAddress)
     }
 

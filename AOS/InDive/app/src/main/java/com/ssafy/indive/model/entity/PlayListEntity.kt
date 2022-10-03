@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey
 data class PlayListEntity(
     @PrimaryKey(autoGenerate = true)
     var seq: Int = 0,
+    val memberSeq : Long,
+    val memberAddress : String,
     val musicSeq: Long,
     val title: String,
     val streamUrl: String,

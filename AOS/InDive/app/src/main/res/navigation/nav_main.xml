@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_songDetailFragment2"
             app:destination="@id/songDetailFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_myStudioFragment"
+            app:destination="@id/myStudioFragment" />
     </fragment>
     <fragment
         android:id="@+id/genreFragment"
@@ -188,14 +191,19 @@
         <action
             android:id="@+id/action_userStudioFragment_to_rankingFragment"
             app:destination="@id/rankingFragment" />
+        <argument
+            android:name="memberSeq"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
     <fragment
         android:id="@+id/donateFragment"
         android:name="com.ssafy.indive.view.userstudio.donate.DonateFragment"
         android:label="DonateFragment" >
         <argument
-            android:name="artistaddress"
-            app:argType="string" />
+            android:name="artistAddress"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/genreListFragment"
@@ -211,6 +219,9 @@
         <action
             android:id="@+id/action_genreListFragment_to_songDetailFragment2"
             app:destination="@id/songDetailFragment2" />
+        <action
+            android:id="@+id/action_genreListFragment_to_myStudioFragment"
+            app:destination="@id/myStudioFragment" />
     </fragment>
     <fragment
         android:id="@+id/songDetailFragment2"

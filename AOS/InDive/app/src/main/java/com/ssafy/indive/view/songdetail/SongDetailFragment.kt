@@ -77,7 +77,6 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
 
         lifecycleScope.launch {
             songDetailViewModel.musicReplyList.collectLatest {
-                Log.d(TAG, "initObserver: $it ")
                 replyAdapter.submitList(it)
             }
         }

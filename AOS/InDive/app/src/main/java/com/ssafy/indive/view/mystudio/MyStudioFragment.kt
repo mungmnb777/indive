@@ -3,26 +3,19 @@ package com.ssafy.indive.view.mystudio
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ssafy.indive.MainViewModel
 import com.ssafy.indive.MoreDialogFragment
-import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.R
-import com.ssafy.indive.binding.RecyclerBinding.bindImage
+import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentMyStudioBinding
 import com.ssafy.indive.model.dto.Notice
 import com.ssafy.indive.model.response.MusicDetailResponse
-import com.ssafy.indive.utils.MEMBER_FOOTER
-import com.ssafy.indive.utils.MEMBER_HEADER
 import com.ssafy.indive.utils.USER
 import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.genre.genrelist.GenreListFragmentDirections
 import com.ssafy.indive.view.login.MemberViewModel
-import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

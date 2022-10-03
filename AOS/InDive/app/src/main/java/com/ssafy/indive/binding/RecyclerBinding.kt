@@ -1,5 +1,11 @@
 package com.ssafy.indive.binding
 
+import BACKGROUND_FOOTER
+import BACKGROUND_HEADER
+import COVER_FOOTER
+import COVER_HEADER
+import MEMBER_FOOTER
+import MEMBER_HEADER
 import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -21,8 +27,6 @@ object RecyclerBinding {
     @BindingAdapter("submitList")
     @JvmStatic
     fun bindSubmitList(view: RecyclerView, result: Result<*>?) {
-        Log.d("d102", "res: $result")
-        Log.d("d102", "view: ${view.adapter}")
 
         if (result is Result.Success) {
             when (view.adapter) {

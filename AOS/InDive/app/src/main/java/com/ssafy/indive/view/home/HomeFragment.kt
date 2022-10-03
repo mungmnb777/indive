@@ -1,7 +1,9 @@
 package com.ssafy.indive.view.home
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
+import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,15 +16,21 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentHomeBinding
 import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.utils.USER
+import com.ssafy.indive.view.genre.genrelist.GenreListFragmentDirections
 import com.ssafy.indive.view.player.PlayerFragmentDirections
 import com.ssafy.indive.view.qrscan.QrScanActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private val mainViewModel: MainViewModel by activityViewModels()
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun init() {
         binding.apply {
@@ -63,14 +71,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecentMusic() {
 
-        homeViewModel.getMusics(null, null, "latest", null,null,null)
+        homeViewModel.getMusics(null, null, "latest", null, null, null)
         binding.rvRecentMusic.adapter = RecentMusicAdapter(playListener)
 
     }
 
     private fun initPopularMusic() {
 
-        homeViewModel.getMusics(null, null, "popular", null,0,4)
+        homeViewModel.getMusics(null, null, "popular", null, 0, 4)
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
@@ -82,7 +90,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
 
                 override fun clickStudio() {
-                    findNavController().navigate(R.id.action_homeFragment_to_userStudioFragment)
+                    val mySeq = sharedPreferences.getLong(USER, 0L)
+                    val memberSeq = it.artist.memberSeq
+
+                    Log.d("HomeFragment_", "mySeq : $mySeq")
+                    Log.d("HomeFragment_", "memberSeq : $memberSeq")
+
+                    if (mySeq == memberSeq) {
+
+                        findNavController().navigate(R.id.action_homeFragment_to_myStudioFragment)
+                    } else {
+                        val action =
+                            HomeFragmentDirections.actionHomeFragmentToUserStudioFragment(memberSeq)
+
+                        findNavController().navigate(action)
+                    }
                 }
 
                 override fun clickReport() {
@@ -100,17 +122,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val playListener: (MusicDetailResponse) -> (Unit) = {
         mainViewModel.insert(it.musicSeq)
-        mainViewModel.successGetEvent=it.musicSeq
+        mainViewModel.successGetEvent = it.musicSeq
     }
-    fun scanQRSuccess(){
-        val action = HomeFragmentDirections.actionHomeFragmentToDonateFragment(MainActivity.successQRScanMsg)
+
+    fun scanQRSuccess() {
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToDonateFragment(MainActivity.successQRScanMsg)
         MainActivity.successQRScanMsg = ""
         findNavController().navigate(action)
     }
 
     override fun onResume() {
         super.onResume()
-        if(MainActivity.successQRScanMsg != ""){
+        if (MainActivity.successQRScanMsg != "") {
             scanQRSuccess()
         }
 

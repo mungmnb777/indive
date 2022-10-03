@@ -18,7 +18,16 @@
     <fragment
         android:id="@+id/donateFragment"
         android:name="com.ssafy.indive.view.userstudio.donate.DonateFragment"
-        android:label="DonateFragment" />
+        android:label="DonateFragment" >
+        <argumenta
+            android:name="artistaddress"
+            app:argType="string"
+            android:defaultValue='""' />
+        <argument
+            android:name="artistAddress"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
     <fragment
         android:id="@+id/songDetailFragment"
         android:name="com.ssafy.indive.view.songdetail.SongDetailFragment"

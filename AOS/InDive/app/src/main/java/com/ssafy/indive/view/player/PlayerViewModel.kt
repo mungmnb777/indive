@@ -3,11 +3,12 @@ package com.ssafy.indive.view.player
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ssafy.indive.model.entity.PlayListEntity
+import com.ssafy.indive.model.response.MemberDetailResponse
 import com.ssafy.indive.model.response.ReplyResponse
+import com.ssafy.indive.repository.MemberManagerRepository
 import com.ssafy.indive.repository.MusicManagerRepository
-import com.ssafy.indive.utils.Result
-import com.ssafy.indive.utils.SingleLiveEvent
-import com.ssafy.indive.utils.TAG
+import com.ssafy.indive.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +19,12 @@ import retrofit2.Response
 import javax.inject.Inject
 
 const val TAG1 = "PlayerPlayer_"
+
 @HiltViewModel
-class PlayerViewModel @Inject constructor(private val musicManagerRepository: MusicManagerRepository) :
+class PlayerViewModel @Inject constructor(
+    private val musicManagerRepository: MusicManagerRepository,
+    private val memberManagerRepository: MemberManagerRepository
+) :
     ViewModel() {
 
     private val _likeSuccess = MutableStateFlow(false)
@@ -39,6 +44,11 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
     private val _likeCnt = MutableStateFlow("0")
     val likeCnt get() = _likeCnt.asStateFlow()
 
+    private val _getMusicDetailSuccess = MutableStateFlow("")
+    val getMusicDetailSuccess get() = _getMusicDetailSuccess
+
+    private val _memberWallet = SingleLiveEvent<String>()
+    val memberWallet get() = _memberWallet
 
     fun likeMusic(musicSeq: Long) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -117,5 +127,18 @@ class PlayerViewModel @Inject constructor(private val musicManagerRepository: Mu
 
         }
     }
+
+    fun getMemberDetail(memberSeq: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            memberManagerRepository.memberDetail(memberSeq).collectLatest {
+                if (it is Result.Success) {
+                    Log.d("PlayerViewModel_", "memberDetail: ${it.data.body()}")
+                    _memberWallet.value = it.data.body()!!.wallet
+
+                }
+            }
+        }
+    }
+
 
 }
