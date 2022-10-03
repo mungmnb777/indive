@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.utils.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val TAG = "UserStudioViewModel"
+@HiltViewModel
 class UserStudioViewModel @Inject constructor(
     private val musicManagerRepository: MusicManagerRepository
 ): ViewModel() {
