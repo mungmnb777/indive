@@ -1,8 +1,5 @@
 package com.ssafy.indive.utils
 
-import CHAIN_ID
-import INDIVETOKEN_ADDRESS
-import INDIVE_ADDRESS
 import android.util.Log
 import com.ssafy.indive.blockchain.InDive
 import com.ssafy.indive.blockchain.InDiveToken

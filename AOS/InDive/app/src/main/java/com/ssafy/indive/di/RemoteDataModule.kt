@@ -1,10 +1,10 @@
 package com.ssafy.indive.di
 
-import BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ssafy.indive.api.MemberManagerApi
 import com.ssafy.indive.api.MusicManagerApi
+import com.ssafy.indive.utils.BASE_URL
 import com.ssafy.indive.utils.XAccessTokenInterceptor
 import dagger.Module
 import dagger.Provides

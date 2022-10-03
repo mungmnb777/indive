@@ -1,11 +1,5 @@
 package com.ssafy.indive.binding
 
-import BACKGROUND_FOOTER
-import BACKGROUND_HEADER
-import COVER_FOOTER
-import COVER_HEADER
-import MEMBER_FOOTER
-import MEMBER_HEADER
 import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
