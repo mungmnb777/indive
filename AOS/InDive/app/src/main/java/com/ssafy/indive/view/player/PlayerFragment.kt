@@ -211,10 +211,10 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         binding.btnDonate.setOnClickListener {
 
             Log.d("PlayerFragment_", "initClickListener: ${musicList[songPosition].memberAddress}")
-            val memberAddress = musicList[songPosition].memberAddress
+            val artistSeq = musicList[songPosition].memberSeq
 
             val action =
-                PlayerFragmentDirections.actionPlayerFragmentToDonateFragment(memberAddress)
+                PlayerFragmentDirections.actionPlayerFragmentToDonateFragment(artistSeq)
             findNavController().navigate(action)
         }
 

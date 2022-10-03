@@ -24,9 +24,9 @@
             app:argType="string"
             android:defaultValue='""' />
         <argument
-            android:name="artistAddress"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:name="artistSeq"
+            app:argType="long"
+            android:defaultValue='0L' />
     </fragment>
     <fragment
         android:id="@+id/songDetailFragment"

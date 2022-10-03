@@ -1,10 +1,11 @@
 package com.ssafy.indive.di
 
-import BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ssafy.indive.api.MemberManagerApi
 import com.ssafy.indive.api.MusicManagerApi
+import com.ssafy.indive.api.NFTApi
+import com.ssafy.indive.utils.BASE_URL
 import com.ssafy.indive.utils.XAccessTokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -69,6 +70,12 @@ object RemoteDataModule {
     @Singleton
     fun provideMemberManagerApi(@Named("mainRetrofit") retrofit: Retrofit): MemberManagerApi {
         return retrofit.create(MemberManagerApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNFTApi(@Named("mainRetrofit") retrofit: Retrofit): NFTApi {
+        return retrofit.create(NFTApi::class.java)
     }
 
 }

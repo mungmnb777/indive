@@ -1,4 +1,4 @@
-package com.ssafy.indive.view.rewardstore.addreward
+package com.ssafy.indive.view.mystudio.addreward
 
 import android.app.Activity
 import android.content.Intent
@@ -7,11 +7,13 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentAddRewardBinding
 import com.ssafy.indive.utils.resizeBitmapFormUri
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -20,11 +22,11 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.Exception
 
+@AndroidEntryPoint
 class AddRewardFragment : BaseFragment<FragmentAddRewardBinding>(R.layout.fragment_add_reward) {
 
     lateinit var imgFile : MultipartBody.Part
     private val addRewardViewModel by viewModels<AddRewardViewModel>()
-    private val args by navArgs<AddRewardFragmentArgs>()
 
     override fun init() {
         initClickListener()
@@ -40,13 +42,14 @@ class AddRewardFragment : BaseFragment<FragmentAddRewardBinding>(R.layout.fragme
             getImage()
         }
         binding.btnAddReward.setOnClickListener {
-            addRewardViewModel.createNFT(imgFile)
+            addRewardViewModel.addNFT(imgFile)
         }
     }
 
     private fun initViewModelCallback(){
         addRewardViewModel.successMsgEvent.observe(viewLifecycleOwner){
             showToast(it)
+            findNavController().popBackStack()
         }
     }
 
@@ -90,7 +93,7 @@ class AddRewardFragment : BaseFragment<FragmentAddRewardBinding>(R.layout.fragme
         }
 
         val requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), imageFile!!)
-        imgFile = MultipartBody.Part.createFormData("imgFile", imageFile!!.name, requestFile)
+        imgFile = MultipartBody.Part.createFormData("image", imageFile!!.name, requestFile)
     }
 
     @Throws(IOException::class)

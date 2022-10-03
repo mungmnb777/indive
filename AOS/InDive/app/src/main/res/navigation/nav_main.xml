@@ -204,9 +204,9 @@
         android:name="com.ssafy.indive.view.userstudio.donate.DonateFragment"
         android:label="DonateFragment" >
         <argument
-            android:name="artistAddress"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:name="artistSeq"
+            app:argType="long"
+            android:defaultValue='0L' />
     </fragment>
     <fragment
         android:id="@+id/genreListFragment"
