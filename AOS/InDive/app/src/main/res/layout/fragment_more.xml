@@ -247,6 +247,7 @@
             android:src="@drawable/btn_setting"/>
 
         <LinearLayout
+            android:id="@+id/tv_setting_logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/tv_title"
@@ -260,7 +261,6 @@
             android:src="@drawable/img_setting_logout"/>
 
         <TextView
-            android:id="@+id/tv_setting_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"

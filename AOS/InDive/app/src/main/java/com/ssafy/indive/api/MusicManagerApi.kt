@@ -14,6 +14,7 @@ interface MusicManagerApi {
     suspend fun getMusics(
         @Query("title") title: String?,
         @Query("artist") artistName: String?,
+        @Query("artistSeq") artistSeq: Long?,
         @Query("sort") sort: String?,
         @Query("genre") genre: String?,
         @Query("page") page: Int?,

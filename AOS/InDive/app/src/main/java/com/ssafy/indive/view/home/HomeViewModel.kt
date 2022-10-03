@@ -45,9 +45,9 @@ class HomeViewModel @Inject constructor(
     val popularMusicList get() = _popularMusicList
 
 
-    fun getMusics(title: String?, artistName: String?, sort: String?, genre: String?, page : Int?, size : Int?) {
+    fun getMusics(title: String?, artistName: String?, artistSeq: Long?, sort: String?, genre: String?, page : Int?, size : Int?) {
         viewModelScope.launch(Dispatchers.IO) {
-            musicManagerRepository.getMusics(title, artistName, sort, genre,page, size).collectLatest {
+            musicManagerRepository.getMusics(title, artistName, artistSeq, sort, genre,page, size).collectLatest {
 
                 Log.d(TAG, "getMusics: ")
                 if (it is Result.Success) {

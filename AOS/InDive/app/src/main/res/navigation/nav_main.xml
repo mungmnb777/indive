@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_myStudioFragment_to_addRewardFragment"
             app:destination="@id/addRewardFragment" />
+        <action
+            android:id="@+id/action_myStudioFragment_to_songDetailFragment2"
+            app:destination="@id/songDetailFragment2" />
 
     </fragment>
     <fragment

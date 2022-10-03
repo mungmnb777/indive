@@ -3,6 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="MemberVM"
+            type="com.ssafy.indive.view.login.MemberViewModel" />
+        <variable
+            name="UserStudioVM"
+            type="com.ssafy.indive.view.userstudio.UserStudioViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,6 +46,7 @@
             android:id="@+id/img_background"
             android:layout_width="0dp"
             android:layout_height="160dp"
+            bindBackImage="@{MemberVM.profile.memberSeq}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -69,6 +79,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
+            setImageCircle="@{MemberVM.profile.memberSeq}"
             app:layout_constraintBottom_toBottomOf="@id/img_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,27 +90,32 @@
 
         <TextView
             android:id="@+id/tv_nickname"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/civ_profile"
             tools:text="닉네임"
-            android:layout_marginTop="10dp"
-            android:textSize="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:gravity="center"
+            android:text="@{MemberVM.profile.nickname}"/>
 
         <TextView
             android:id="@+id/tv_introduce"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="소개"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textSize="20dp"
             android:textColor="@color/main_grey"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+            android:textSize="16dp"
+            android:layout_marginHorizontal="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+            tools:text="소개란 입니다."
+            android:singleLine="true"
+            android:text="@{MemberVM.profile.profileMessage}"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/border_notice"
@@ -125,15 +141,16 @@
                 android:id="@+id/tv_notice"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
                 android:gravity="center"
                 android:singleLine="true"
                 android:textColor="@color/black"
-                android:layout_marginHorizontal="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_notice"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="공지사항" />
+                tools:text="공지사항"
+                android:text="@{MemberVM.profile.notice}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -188,8 +205,11 @@
             app:layout_constraintTop_toBottomOf="@id/tv_song">
 
             <androidx.recyclerview.widget.RecyclerView
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:id="@+id/rv_user_music"
                 android:layout_width="match_parent"
+                submitList="@{UserStudioVM.userMusicList}"
+                tools:listitem="@layout/item_music_chart"
                 android:layout_height="180dp"/>
         </androidx.cardview.widget.CardView>
 

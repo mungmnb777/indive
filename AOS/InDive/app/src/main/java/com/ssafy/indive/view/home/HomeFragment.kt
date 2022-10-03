@@ -63,14 +63,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun initRecentMusic() {
 
-        homeViewModel.getMusics(null, null, "latest", null,null,null)
+        homeViewModel.getMusics(null, null, null,"latest", null,null,null)
         binding.rvRecentMusic.adapter = RecentMusicAdapter(playListener)
 
     }
 
     private fun initPopularMusic() {
 
-        homeViewModel.getMusics(null, null, "popular", null,0,4)
+        homeViewModel.getMusics(null, null, null, "popular", null,0,4)
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {

@@ -25,7 +25,7 @@ class GenreListViewModel @Inject constructor(
 
     fun getGenreList(genre: String){
         viewModelScope.launch (Dispatchers.IO){
-            musicManagerRepository.getMusics(null, null, null, genre,null,null).collectLatest {
+            musicManagerRepository.getMusics(null, null, null, null, genre,null,null).collectLatest {
                 Log.d(TAG, "getGenreList: init")
                 if (it is Result.Success) {
                     Log.d(TAG, "getGenreList: ${it.data}")

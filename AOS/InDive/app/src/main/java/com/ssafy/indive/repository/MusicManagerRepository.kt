@@ -26,13 +26,14 @@ class MusicManagerRepository @Inject constructor(
     fun getMusics(
         title: String?,
         artistName: String?,
+        artistSeq: Long?,
         sort: String?,
         genre: String?,
         page: Int?,
         size: Int?
     ): Flow<Result<List<MusicDetailResponse>>> = flow {
         emit(Result.Loading)
-        musicManagerDataSource.getMusics(title, artistName, sort, genre, page, size).collect {
+        musicManagerDataSource.getMusics(title, artistName, artistSeq, sort, genre, page, size).collect {
             emit(Result.Success(it))
         }
     }.catch { e ->
