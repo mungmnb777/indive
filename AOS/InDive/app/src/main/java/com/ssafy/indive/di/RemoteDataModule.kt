@@ -1,5 +1,6 @@
 package com.ssafy.indive.di
 
+
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ssafy.indive.api.MemberManagerApi
