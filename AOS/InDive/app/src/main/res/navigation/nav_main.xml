@@ -15,10 +15,6 @@
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_QRFragment"
-            app:destination="@id/QRFragment" />
-
-        <action
             android:id="@+id/action_homeFragment_to_userStudioFragment"
             app:destination="@id/userStudioFragment" />
         <action
@@ -92,9 +88,6 @@
         android:id="@+id/addRewardFragment"
         android:name="com.ssafy.indive.view.rewardstore.addreward.AddRewardFragment"
         android:label="AddRewardFragment" >
-        <argument
-            android:name="memberSeq"
-            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/addSongFirstFragment"
@@ -178,10 +171,6 @@
             android:id="@+id/action_searchFragment_to_songDetailFragment2"
             app:destination="@id/songDetailFragment2" />
     </fragment>
-    <fragment
-        android:id="@+id/QRFragment"
-        android:name="com.ssafy.indive.view.home.qr.QRFragment"
-        android:label="QRFragment" />
 
     <fragment
         android:id="@+id/userStudioFragment"

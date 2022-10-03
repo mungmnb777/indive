@@ -108,7 +108,7 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
                 findNavController().navigate(R.id.action_myStudioFragment_to_rankingFragment)
             }
             ivAddNft.setOnClickListener {
-                val action = MyStudioFragmentDirections.actionMyStudioFragmentToAddRewardFragment(0)
+                val action = MyStudioFragmentDirections.actionMyStudioFragmentToAddRewardFragment()
                 findNavController().navigate(action)
             }
             ivEditNotice.setOnClickListener {
