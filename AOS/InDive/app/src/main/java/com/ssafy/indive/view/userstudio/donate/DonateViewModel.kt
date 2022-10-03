@@ -51,7 +51,7 @@ class DonateViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             nftRepository.checkIsGetNFT(artistSeq).collectLatest {
                 if(it is Result.Success){
-                    _priceToGetNFT.value = it.data
+                    _priceToGetNFT.value = it.data.amount
                 }
             }
         }

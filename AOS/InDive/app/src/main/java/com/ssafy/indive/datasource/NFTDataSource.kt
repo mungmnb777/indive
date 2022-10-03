@@ -4,6 +4,7 @@ import android.util.Log
 import com.ssafy.indive.api.NFTApi
 import com.ssafy.indive.model.dto.NFT
 import com.ssafy.indive.model.dto.NFTAmount
+import com.ssafy.indive.model.response.NFTStockResponse
 import com.ssafy.indive.utils.TAG
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -28,7 +29,7 @@ class NFTDataSource @Inject constructor(
         emit(nftApi.putRewardNFT(nftAmount))
     }
 
-    fun checkIsGetNFT(artistSeq: Long) : Flow<Int> = flow {
+    fun checkIsGetNFT(artistSeq: Long) : Flow<NFTStockResponse> = flow {
         emit(nftApi.checkIsGetNFT(artistSeq))
     }
 
