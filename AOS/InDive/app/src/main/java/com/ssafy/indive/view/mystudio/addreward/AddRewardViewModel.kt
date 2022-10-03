@@ -25,19 +25,20 @@ class AddRewardViewModel @Inject constructor(
     private val nftRepository: NFTRepository
 ) : ViewModel() {
 
-    private val _quantitiy: MutableStateFlow<Int> = MutableStateFlow(0)
-    val quantity get() = _quantitiy.asStateFlow()
+    val quantity: MutableStateFlow<String> = MutableStateFlow("0")
 
-    private val _cost: MutableStateFlow<Int> = MutableStateFlow(0)
-    val cost get() = _cost.asStateFlow()
+    val cost: MutableStateFlow<String> = MutableStateFlow("0")
 
     private val _successMsgEvent = SingleLiveEvent<String>()
     val successMsgEvent get() = _successMsgEvent
 
     fun addNFT(img: MultipartBody.Part) {
-        val lowerDonationAmount = RequestBody.create("text/plain".toMediaTypeOrNull(), cost.value.toString())
-        val stock = RequestBody.create("text/plain".toMediaTypeOrNull(), quantity.value.toString())
+        val lowerDonationAmount = RequestBody.create("text/plain".toMediaTypeOrNull(), cost.value)
+        val stock = RequestBody.create("text/plain".toMediaTypeOrNull(), quantity.value)
 
+        Log.d(TAG, "addNFT: quantity : ${quantity.value}")
+        Log.d(TAG, "addNFT: cost : ${cost.value}")
+        
         val map = HashMap<String, RequestBody>()
         map["lowerDonationAmount"] = lowerDonationAmount
         map["stock"] = stock

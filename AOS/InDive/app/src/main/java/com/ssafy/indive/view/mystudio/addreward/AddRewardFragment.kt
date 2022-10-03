@@ -8,7 +8,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentAddRewardBinding
@@ -29,6 +28,10 @@ class AddRewardFragment : BaseFragment<FragmentAddRewardBinding>(R.layout.fragme
     private val addRewardViewModel by viewModels<AddRewardViewModel>()
 
     override fun init() {
+        binding.apply {
+            addRewardVM = addRewardViewModel
+        }
+
         initClickListener()
 
         initViewModelCallback()
