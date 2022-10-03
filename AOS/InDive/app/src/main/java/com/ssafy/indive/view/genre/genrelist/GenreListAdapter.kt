@@ -15,7 +15,7 @@ class GenreListAdapter(
     private val playListener: (MusicDetailResponse) -> (Unit),
     private val moreListener: (MusicDetailResponse) -> (Unit)
 ) : ListAdapter<MusicDetailResponse, GenreListAdapter.GenreListViewHolder>(diffUtil) {
-    inner class GenreListViewHolder(val binding: ItemMusicChartBinding) :
+    inner class GenreListViewHolder(val binding: ItemMusicListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: MusicDetailResponse) {
             binding.music = music
@@ -35,7 +35,7 @@ class GenreListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreListViewHolder {
         val binding =
-            ItemMusicChartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemMusicListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return GenreListViewHolder(binding)
     }
 
