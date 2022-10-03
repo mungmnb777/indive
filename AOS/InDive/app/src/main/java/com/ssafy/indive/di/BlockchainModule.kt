@@ -1,7 +1,6 @@
 package com.ssafy.indive.di
 
-
-import BLOCKCHAIN_URL
+import com.ssafy.indive.utils.BLOCKCHAIN_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

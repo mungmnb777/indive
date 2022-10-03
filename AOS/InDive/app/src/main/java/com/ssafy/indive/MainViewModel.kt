@@ -1,9 +1,4 @@
 package com.ssafy.indive
-
-import COVER_FOOTER
-import COVER_HEADER
-import MUSIC_FOOTER
-import MUSIC_HEADER
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

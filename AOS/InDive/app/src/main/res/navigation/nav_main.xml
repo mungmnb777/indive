@@ -195,9 +195,12 @@
             android:id="@+id/action_userStudioFragment_to_rankingFragment"
             app:destination="@id/rankingFragment" />
         <argument
-            android:name="memberSeq"
+            android:name="artistSeq"
             app:argType="long"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_userStudioFragment_to_songDetailFragment2"
+            app:destination="@id/songDetailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/donateFragment"
