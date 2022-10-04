@@ -35,10 +35,9 @@ class NotificationReceiver : BroadcastReceiver() {
         PlayerFragment.musicService!!.exoPlayer!!.play()
         PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
         PlayerFragment.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerFragment.mContext!!,R.drawable.ic_baseline_pause_24)
-        NowPlayingFragment.nowPlayingBinding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
-        Glide.with(NowPlayingFragment.mContext!!).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl).centerCrop()
-            .into(NowPlayingFragment.nowPlayingBinding.ivNowPlayingCover)
+        NowPlayingFragment.nowPlayingBinding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_48)
         NowPlayingFragment.nowPlayingBinding.tvNowPlayingTitle.text = PlayerFragment.musicList[PlayerFragment.songPosition].track
+        NowPlayingFragment.nowPlayingBinding.tvNowPlayingArtist.text = PlayerFragment.musicList[PlayerFragment.songPosition].artist
 
 
     }
@@ -48,7 +47,7 @@ class NotificationReceiver : BroadcastReceiver() {
         PlayerFragment.musicService!!.exoPlayer!!.pause()
         PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_play_arrow_24)
         PlayerFragment.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerFragment.mContext!!,R.drawable.ic_baseline_play_arrow_24)
-        NowPlayingFragment.nowPlayingBinding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+        NowPlayingFragment.nowPlayingBinding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_48)
     }
 
     private fun prevNextMusic(increment: Boolean, context: Context) {
