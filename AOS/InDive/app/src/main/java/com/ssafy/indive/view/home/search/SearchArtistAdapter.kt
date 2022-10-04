@@ -20,7 +20,10 @@ class SearchArtistAdapter(val clickListener: (SearchArtist) -> (Unit)) :
         }
 
         fun click(searchArtist: SearchArtist) {
-            clickListener(searchArtist)
+            binding.root.setOnClickListener {
+                clickListener(searchArtist)
+            }
+
         }
     }
 

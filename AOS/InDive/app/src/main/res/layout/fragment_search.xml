@@ -8,7 +8,9 @@
             type="com.ssafy.indive.view.home.search.SearchViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,6 +62,7 @@
             android:layout_marginTop="15dp"
             android:text="아티스트"
             android:textSize="24dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_search_bar" />
 
@@ -71,6 +74,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@id/tv_search_artist"
             tools:listitem="@layout/item_search_artist" />
@@ -83,6 +87,7 @@
             android:layout_marginTop="15dp"
             android:text="음원"
             android:textSize="24dp"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_search_artist" />
 
@@ -93,6 +98,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             android:layout_marginHorizontal="10dp"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

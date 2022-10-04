@@ -169,6 +169,9 @@
         <action
             android:id="@+id/action_searchFragment_to_songDetailFragment2"
             app:destination="@id/songDetailFragment2" />
+        <action
+            android:id="@+id/action_searchFragment_to_myStudioFragment"
+            app:destination="@id/myStudioFragment" />
     </fragment>
 
     <fragment

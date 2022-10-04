@@ -90,7 +90,7 @@ class AddMusicViewModel @Inject constructor(
             "발라드" -> {
                 genreName = "ballad"
             }
-            "연주곡" -> {
+            "뉴에이지/연주곡" -> {
                 genreName = "new-age"
             }
             "R&B/소울" -> {
