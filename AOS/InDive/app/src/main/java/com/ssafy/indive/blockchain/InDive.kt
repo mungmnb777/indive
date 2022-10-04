@@ -1,25 +1,29 @@
 package com.ssafy.indive.blockchain
 
 import org.web3j.protocol.Web3j
-import com.ssafy.indive.blockchain.InDive
 import org.web3j.tx.gas.ContractGasProvider
 import org.web3j.tx.TransactionManager
 import org.web3j.protocol.core.RemoteFunctionCall
 import org.web3j.protocol.core.methods.response.TransactionReceipt
 import org.web3j.abi.datatypes.generated.Uint256
-import com.ssafy.indive.blockchain.InDive.DonationHistoryEventResponse
 import org.web3j.tx.Contract.EventValuesWithLog
 import io.reactivex.Flowable
-import io.reactivex.functions.Function
 import org.web3j.protocol.core.DefaultBlockParameter
 import org.web3j.abi.EventEncoder
+import org.web3j.tuples.generated.Tuple5
+import kotlin.Throws
+import org.web3j.tuples.generated.Tuple2
+import org.web3j.protocol.core.methods.response.BaseEventResponse
+import com.ssafy.indive.blockchain.InDiveNFT
+import com.ssafy.indive.blockchain.InDiveNFT.ApprovalForAllEventResponse
+import org.web3j.abi.datatypes.generated.Bytes4
+import com.ssafy.indive.blockchain.InDiveToken
+import io.reactivex.functions.Function
 import org.web3j.abi.TypeReference
 import org.web3j.abi.datatypes.*
+import org.web3j.abi.datatypes.generated.Uint8
 import org.web3j.crypto.Credentials
 import org.web3j.protocol.core.methods.request.EthFilter
-import org.web3j.tuples.generated.Tuple2
-import kotlin.Throws
-import org.web3j.protocol.core.methods.response.BaseEventResponse
 import org.web3j.protocol.core.methods.response.Log
 import org.web3j.tx.Contract
 import java.math.BigInteger
@@ -86,17 +90,61 @@ class InDive : Contract {
     fun donate(
         _to: String?,
         _value: BigInteger?,
-        _message: String?
+        _message: String?,
+        _time: BigInteger?
     ): RemoteFunctionCall<TransactionReceipt> {
         val function = Function(
             FUNC_DONATE,
             Arrays.asList<Type<*>>(
                 Address(160, _to),
                 Uint256(_value),
-                Utf8String(_message)
+                Utf8String(_message),
+                Uint256(_time)
             ), emptyList()
         )
         return executeRemoteCallTransaction(function)
+    }
+
+    fun getDonationEventEvents(transactionReceipt: TransactionReceipt?): List<DonationEventEventResponse> {
+        val valueList = extractEventParametersWithLog(DONATIONEVENT_EVENT, transactionReceipt)
+        val responses = ArrayList<DonationEventEventResponse>(valueList.size)
+        for (eventValues in valueList) {
+            val typedResponse = DonationEventEventResponse()
+            typedResponse.log = eventValues.log
+            typedResponse.artist = eventValues.indexedValues[0].value as String
+            typedResponse.donator = eventValues.indexedValues[1].value as String
+            typedResponse.value = eventValues.nonIndexedValues[0].value as BigInteger
+            typedResponse.message = eventValues.nonIndexedValues[1].value as String
+            typedResponse.time = eventValues.nonIndexedValues[2].value as BigInteger
+            responses.add(typedResponse)
+        }
+        return responses
+    }
+
+    fun donationEventEventFlowable(filter: EthFilter?): Flowable<DonationEventEventResponse> {
+        return web3j.ethLogFlowable(filter)
+            .map(object : Function<Log?, DonationEventEventResponse> {
+                override fun apply(t: Log): DonationEventEventResponse {
+                    val eventValues = extractEventParametersWithLog(DONATIONEVENT_EVENT, t)
+                    val typedResponse = DonationEventEventResponse()
+                    typedResponse.log = t
+                    typedResponse.artist = eventValues.indexedValues[0].value as String
+                    typedResponse.donator = eventValues.indexedValues[1].value as String
+                    typedResponse.value = eventValues.nonIndexedValues[0].value as BigInteger
+                    typedResponse.message = eventValues.nonIndexedValues[1].value as String
+                    typedResponse.time = eventValues.nonIndexedValues[2].value as BigInteger
+                    return typedResponse
+                }
+            })
+    }
+
+    fun donationEventEventFlowable(
+        startBlock: DefaultBlockParameter?,
+        endBlock: DefaultBlockParameter?
+    ): Flowable<DonationEventEventResponse> {
+        val filter = EthFilter(startBlock, endBlock, getContractAddress())
+        filter.addSingleTopic(EventEncoder.encode(DONATIONEVENT_EVENT))
+        return donationEventEventFlowable(filter)
     }
 
     fun setTokenContract(contractAddress: String?): RemoteFunctionCall<TransactionReceipt> {
@@ -107,45 +155,35 @@ class InDive : Contract {
         return executeRemoteCallTransaction(function)
     }
 
-    fun getDonationHistoryEvents(transactionReceipt: TransactionReceipt?): List<DonationHistoryEventResponse> {
-        val valueList = extractEventParametersWithLog(DONATIONHISTORY_EVENT, transactionReceipt)
-        val responses = ArrayList<DonationHistoryEventResponse>(valueList.size)
-        for (eventValues in valueList) {
-            val typedResponse = DonationHistoryEventResponse()
-            typedResponse.log = eventValues.log
-            typedResponse.artist = eventValues.nonIndexedValues[0].value as String
-            typedResponse.donator = eventValues.nonIndexedValues[1].value as String
-            typedResponse.value = eventValues.nonIndexedValues[2].value as BigInteger
-            typedResponse.message = eventValues.nonIndexedValues[3].value as String
-            responses.add(typedResponse)
+    fun donationHistory(
+        param0: String?,
+        param1: BigInteger?
+    ): RemoteFunctionCall<Tuple5<String, String, BigInteger, String, BigInteger>> {
+        val function = Function(
+            FUNC_DONATIONHISTORY,
+            Arrays.asList<Type<*>>(
+                Address(160, param0),
+                Uint256(param1)
+            ),
+            Arrays.asList<TypeReference<*>>(
+                object : TypeReference<Address?>() {},
+                object : TypeReference<Utf8String?>() {},
+                object : TypeReference<Uint256?>() {},
+                object : TypeReference<Utf8String?>() {},
+                object : TypeReference<Uint256?>() {})
+        )
+        return RemoteFunctionCall(
+            function
+        ) {
+            val results = executeCallMultipleValueReturn(function)
+            Tuple5(
+                results[0].value as String,
+                results[1].value as String,
+                results[2].value as BigInteger,
+                results[3].value as String,
+                results[4].value as BigInteger
+            )
         }
-        return responses
-    }
-
-    fun donationHistoryEventFlowable(filter: EthFilter?): Flowable<DonationHistoryEventResponse> {
-        return web3j.ethLogFlowable(filter)
-            .map(object : Function<Log?, DonationHistoryEventResponse> {
-                override fun apply(t: Log): DonationHistoryEventResponse {
-                    val eventValues = extractEventParametersWithLog(DONATIONHISTORY_EVENT, t)
-                    val typedResponse = DonationHistoryEventResponse()
-                    typedResponse.log = t
-                    typedResponse.artist = eventValues.nonIndexedValues[0].value as String
-                    typedResponse.donator = eventValues.nonIndexedValues[1].value as String
-                    typedResponse.value = eventValues.nonIndexedValues[2].value as BigInteger
-                    typedResponse.message = eventValues.nonIndexedValues[3].value as String
-                    return typedResponse
-                }
-
-            })
-    }
-
-    fun donationHistoryEventFlowable(
-        startBlock: DefaultBlockParameter?,
-        endBlock: DefaultBlockParameter?
-    ): Flowable<DonationHistoryEventResponse> {
-        val filter = EthFilter(startBlock, endBlock, getContractAddress())
-        filter.addSingleTopic(EventEncoder.encode(DONATIONHISTORY_EVENT))
-        return donationHistoryEventFlowable(filter)
     }
 
     fun donatorList(
@@ -173,6 +211,15 @@ class InDive : Contract {
         }
     }
 
+    fun getDonationHistoryList(artist: String?): RemoteFunctionCall<String> {
+        val function = Function(
+            FUNC_GETDONATIONHISTORYLIST,
+            Arrays.asList<Type<*>>(Address(160, artist)),
+            Arrays.asList<TypeReference<*>>(object : TypeReference<Utf8String?>() {})
+        )
+        return executeRemoteCallSingleValueReturn(function, String::class.java)
+    }
+
     fun getDonatorList(artist: String?): RemoteFunctionCall<String> {
         val function = Function(
             FUNC_GETDONATORLIST,
@@ -194,27 +241,31 @@ class InDive : Contract {
         return executeRemoteCallSingleValueReturn(function, Boolean::class.java)
     }
 
-    class DonationHistoryEventResponse : BaseEventResponse() {
+    class DonationEventEventResponse : BaseEventResponse() {
         var artist: String? = null
         var donator: String? = null
         var value: BigInteger? = null
         var message: String? = null
+        var time: BigInteger? = null
     }
 
     companion object {
         const val BINARY = "Bin file was not provided"
         const val FUNC_DONATE = "donate"
         const val FUNC_SETTOKENCONTRACT = "setTokenContract"
+        const val FUNC_DONATIONHISTORY = "donationHistory"
         const val FUNC_DONATORLIST = "donatorList"
+        const val FUNC_GETDONATIONHISTORYLIST = "getDonationHistoryList"
         const val FUNC_GETDONATORLIST = "getDonatorList"
         const val FUNC_ISDONATED = "isDonated"
-        val DONATIONHISTORY_EVENT = Event(
-            "DonationHistory",
+        val DONATIONEVENT_EVENT = Event(
+            "DonationEvent",
             Arrays.asList<TypeReference<*>>(
-                object : TypeReference<Address?>() {},
-                object : TypeReference<Address?>() {},
+                object : TypeReference<Address?>(true) {},
+                object : TypeReference<Address?>(true) {},
                 object : TypeReference<Uint256?>() {},
-                object : TypeReference<Utf8String?>() {})
+                object : TypeReference<Utf8String?>() {},
+                object : TypeReference<Uint256?>() {})
         )
 
         @Deprecated("")

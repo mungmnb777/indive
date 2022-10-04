@@ -57,7 +57,7 @@ fun Web3j.donate(privateKey: String, to: String, value: Int, message: String){
 
     val inDive = InDive.load(INDIVE_ADDRESS, this, manager, gasProvider)
 
-    val result = inDive.donate(to, BigInteger(value.toString()), message).sendAsync().get()
+    val result = inDive.donate(to, BigInteger(value.toString()), message, BigInteger.valueOf(System.currentTimeMillis())).sendAsync().get()
 
     Log.d(TAG, "donate: ${result.transactionHash}")
 }
@@ -103,7 +103,7 @@ fun Web3j.setTokenApprove(privateKey: String, spender: String, amount: Int){
 }
 
 // 토큰 개수 조회
-fun Web3j.getTokenBalanceOf(privateKey : String, owner: String){
+fun Web3j.getTokenBalanceOf(privateKey : String, owner: String) : Int{
     val credential = Credentials.create(privateKey)
     val gasProvider = DefaultGasProvider()
     val manager = FastRawTransactionManager(
@@ -117,6 +117,8 @@ fun Web3j.getTokenBalanceOf(privateKey : String, owner: String){
     val balance = inDiveToken.balanceOf(owner).sendAsync().get()
 
     Log.d(TAG, "getTokenBalanceOf: Address = $owner | Value = $balance")
+
+    return balance.toInt()
 }
 
 /**

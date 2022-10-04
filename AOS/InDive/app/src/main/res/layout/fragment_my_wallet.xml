@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="myWalletVM"
+            type="com.ssafy.indive.view.more.mywallet.MyWalletViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,6 +70,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@{myWalletVM.balance}"
             tools:text="1,000 SSF"
             android:textSize="24dp"
             android:textColor="@color/black"
