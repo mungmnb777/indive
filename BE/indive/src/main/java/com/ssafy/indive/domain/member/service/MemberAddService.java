@@ -50,12 +50,6 @@ public class MemberAddService {
     }
 
 
-    public boolean writeNotice(ServiceMemberWriteNoticeRequestDto dto, long memberSeq) {
 
-        Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
-        findMember.update(dto);
-
-        return true;
-    }
 
 }

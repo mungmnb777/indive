@@ -8,14 +8,9 @@ import com.ssafy.indive.domain.member.exception.NotMatchMemberException;
 import com.ssafy.indive.domain.member.service.MemberAddService;
 import com.ssafy.indive.domain.member.service.MemberModifyService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
-import com.ssafy.indive.domain.member.service.dto.WebMemberGetCondition;
-import com.ssafy.indive.domain.music.controller.dto.WebMusicGetCondition;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,7 +59,8 @@ public class MemberController {
 
     @PostMapping("{memberSeq}/notice")
     public ResponseEntity<?> writeNotice(@RequestBody WebMemberWriteNoticeRequestDto dto ,@PathVariable("memberSeq") long memberSeq) {
-        return new ResponseEntity<>(memberAddService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);
+
+        return new ResponseEntity<>(memberModifyService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{memberSeq}/profileimg-download", produces = "application/octet-stream")
@@ -84,13 +80,5 @@ public class MemberController {
             return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         }
     }
-
-    //TODO : pageable 은 왜 있는걸까?
-//    @GetMapping
-//    public ResponseEntity<?> getMembers(@ModelAttribute WebMemberGetCondition condition) {
-//        return new ResponseEntity<>(memberReadService.getMembers(condition), HttpStatus.OK);
-//    }
-
-
 
 }

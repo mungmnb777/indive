@@ -33,7 +33,6 @@ public class ServiceMemberGetResponseDto {
 
 
     @Builder
-
     public ServiceMemberGetResponseDto(long memberSeq, String email, String nickname, Role role, String wallet, String profileMessage, String notice) {
         this.memberSeq = memberSeq;
         this.email = email;
