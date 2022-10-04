@@ -42,22 +42,34 @@ class NowPlayingFragment : BaseFragment<FragmentNowPlayingBinding>(R.layout.frag
             true
         }
 
+        binding.ivPlayList.setOnClickListener {
+            val intent = Intent(requireContext(), PlayerActivity::class.java)
+            intent.putExtra("index", PlayerFragment.songPosition)
+            intent.putExtra("class", "NowPlaying")
+            intent.putExtra("type","homeBox")
+            startActivity(intent)
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
         if (PlayerFragment.musicService != null) {
-            binding.root.visibility = View.VISIBLE
-            binding.tvNowPlayingTitle.isSelected = true
 
-            Glide.with(this).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl)
-                .centerCrop()
-                .into(binding.ivNowPlayingCover)
-            binding.tvNowPlayingTitle.text =
-                PlayerFragment.musicList[PlayerFragment.songPosition].track
+            if(PlayerFragment.musicList.isNotEmpty()){
+                binding.root.visibility = View.VISIBLE
+                binding.tvNowPlayingTitle.isSelected = true
 
-            if (PlayerFragment.isPlaying) binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
-            else binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+                Glide.with(this).load(PlayerFragment.musicList[PlayerFragment.songPosition].coverUrl)
+                    .centerCrop()
+                    .into(binding.ivNowPlayingCover)
+                binding.tvNowPlayingTitle.text =
+                    PlayerFragment.musicList[PlayerFragment.songPosition].track
+
+                if (PlayerFragment.isPlaying) binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_pause_24)
+                else binding.ivNowPlayingPlay.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+            }
+
 
         }
     }

@@ -118,7 +118,7 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
                 val intent = Intent(requireContext(), PlayerActivity::class.java)
                 intent.putExtra("index", PlayerFragment.songPosition)
                 intent.putExtra("class", "NowPlaying")
-                intent.putExtra("type","box")
+                intent.putExtra("type","moreBox")
                 startActivity(intent)
             }
         }

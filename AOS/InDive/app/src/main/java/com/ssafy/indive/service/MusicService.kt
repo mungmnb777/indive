@@ -93,13 +93,15 @@ class MusicService : Service() {
                 }
             })
 
-            PlayerFragment.musicService!!.exoPlayer!!.setMediaItem(MediaItem.fromUri(PlayerFragment.musicList[PlayerFragment.songPosition].streamUrl))
-            PlayerFragment.musicService!!.exoPlayer!!.prepare()
-            PlayerFragment.musicService!!.exoPlayer!!.play()
-            PlayerFragment.musicList[PlayerFragment.songPosition].isPlaying = true
-            PlayerFragment.isPlaying = true
-            PlayerFragment.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerFragment.mContext!!,R.drawable.ic_baseline_pause_24)
-            PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
+            if(PlayerFragment.musicList.isNotEmpty()){
+                PlayerFragment.musicService!!.exoPlayer!!.setMediaItem(MediaItem.fromUri(PlayerFragment.musicList[PlayerFragment.songPosition].streamUrl))
+                PlayerFragment.musicService!!.exoPlayer!!.prepare()
+                PlayerFragment.musicService!!.exoPlayer!!.play()
+                PlayerFragment.musicList[PlayerFragment.songPosition].isPlaying = true
+                PlayerFragment.isPlaying = true
+                PlayerFragment.playerBinding.ivPlay.background = ContextCompat.getDrawable(PlayerFragment.mContext!!,R.drawable.ic_baseline_pause_24)
+                PlayerFragment.musicService!!.showNotification(R.drawable.ic_baseline_pause_24)
+            }
 
 
         }

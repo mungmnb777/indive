@@ -92,7 +92,35 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
     private fun checkIntent() {
         when (requireActivity().intent.getStringExtra("class")) {
             "NowPlaying" -> {
-                initViews()
+                when (requireActivity().intent.getStringExtra("type")) {
+                    "moreBox" -> {
+                        initService()
+                        initMusicList()
+                        showPlayList()
+
+                    }
+
+                    "homeBox" -> {
+                        showPlayList()
+                        initViews()
+                        binding.tvStartTime.text =
+                            formatDuration(musicService!!.exoPlayer!!.currentPosition)
+                        binding.tvEndTime.text =
+                            formatDuration(musicService!!.exoPlayer!!.duration)
+
+                        updateSeekBar()
+                    }
+                    else -> {
+                        initViews()
+                        binding.tvStartTime.text =
+                            formatDuration(musicService!!.exoPlayer!!.currentPosition)
+                        binding.tvEndTime.text =
+                            formatDuration(musicService!!.exoPlayer!!.duration)
+
+                        updateSeekBar()
+                    }
+                }
+
                 if (isPlaying) {
                     binding.ivPlay.background =
                         ContextCompat.getDrawable(
@@ -106,42 +134,34 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
                             R.drawable.ic_baseline_play_arrow_24
                         )
                 }
-
-                binding.tvStartTime.text =
-                    formatDuration(musicService!!.exoPlayer!!.currentPosition)
-                binding.tvEndTime.text =
-                    formatDuration(musicService!!.exoPlayer!!.duration)
-
-                updateSeekBar()
-
-                if (requireActivity().intent.getStringExtra("type") == "box") {
-                    binding.groupPlayList.visibility = View.VISIBLE
-                    binding.groupSeekbar.visibility = View.GONE
-                    binding.groupPlayer.visibility = View.GONE
-                    isWatchingPlayList = true
-                }
-
-
             }
 
             "HomeFragment" -> {
                 musicSeq = requireActivity().intent.getLongExtra("musicSeq", 0)
-
-                val intent = Intent(requireActivity(), MusicService::class.java)
-                requireActivity().bindService(
-                    intent,
-                    ServiceTest(),
-                    AppCompatActivity.BIND_AUTO_CREATE
-                )
-                requireActivity().startService(intent)
-                musicList = mutableListOf()
-                musicList.addAll(MainActivity.playList)
-
-                if (musicList.size != 0) {
-                    initViews()
-                }
+                initService()
+                initMusicList()
             }
         }
+    }
+
+
+    private fun initMusicList() {
+        musicList = mutableListOf()
+        musicList.addAll(MainActivity.playList)
+
+        if (musicList.size != 0) {
+            initViews()
+        }
+    }
+
+    private fun initService() {
+        val intent = Intent(requireActivity(), MusicService::class.java)
+        requireActivity().bindService(
+            intent,
+            ServiceTest(),
+            AppCompatActivity.BIND_AUTO_CREATE
+        )
+        requireActivity().startService(intent)
     }
 
     private fun initClickListener() {
@@ -162,15 +182,10 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
         binding.btnPlayerList.setOnClickListener {
 
             if (!isWatchingPlayList) {
-                binding.groupPlayList.visibility = View.VISIBLE
-                binding.groupSeekbar.visibility = View.GONE
-                binding.groupPlayer.visibility = View.GONE
-                isWatchingPlayList = true
+                showPlayList()
             } else {
-                binding.groupPlayList.visibility = View.GONE
-                binding.groupSeekbar.visibility = View.VISIBLE
-                binding.groupPlayer.visibility = View.VISIBLE
-                isWatchingPlayList = false
+                showPlayer()
+
             }
 
         }
@@ -224,6 +239,20 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
             findNavController().navigate(action)
         }
 
+    }
+
+    private fun showPlayer() {
+        binding.groupPlayList.visibility = View.GONE
+        binding.groupSeekbar.visibility = View.VISIBLE
+        binding.groupPlayer.visibility = View.VISIBLE
+        isWatchingPlayList = false
+    }
+
+    private fun showPlayList() {
+        binding.groupPlayList.visibility = View.VISIBLE
+        binding.groupSeekbar.visibility = View.GONE
+        binding.groupPlayer.visibility = View.GONE
+        isWatchingPlayList = true
     }
 
 
