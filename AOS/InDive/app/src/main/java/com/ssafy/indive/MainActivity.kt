@@ -2,6 +2,7 @@ package com.ssafy.indive
 
 import android.Manifest
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
@@ -15,6 +16,7 @@ import com.ssafy.indive.databinding.ActivityMainBinding
 import com.ssafy.indive.model.dto.PlayListMusic
 import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.TAG
+import com.ssafy.indive.utils.USER
 import com.ssafy.indive.utils.mapper
 import com.ssafy.indive.view.player.PlayerActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -30,6 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mainViewModel: MainViewModel by viewModels()
 
     lateinit var navController: NavController
+    @Inject
+    lateinit var sharePref : SharedPreferences
 
     companion object {
         lateinit var playList: MutableList<PlayListMusic>
@@ -40,7 +45,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         playList = mutableListOf()
         initNavigation()
         initObserve()
+        initViewModelCallback()
         checkMediaPermission()
+    }
+
+    private fun initViewModelCallback(){
+        val userSeq = sharePref.getLong(USER, 0L)
+        mainViewModel.memberDetail(userSeq)
     }
 
     private fun checkMediaPermission() {

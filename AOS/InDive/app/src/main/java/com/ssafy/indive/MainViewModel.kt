@@ -1,9 +1,12 @@
 package com.ssafy.indive
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ssafy.indive.model.entity.PlayListEntity
 import com.ssafy.indive.model.response.MusicDetailResponse
+import com.ssafy.indive.repository.MemberManagerRepository
 import com.ssafy.indive.repository.MusicManagerRepository
 import com.ssafy.indive.repository.PlayListRepository
 import com.ssafy.indive.utils.*
@@ -19,7 +22,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val playListRepository: PlayListRepository,
-    private val musicManagerRepository: MusicManagerRepository
+    private val musicManagerRepository: MusicManagerRepository,
+    private val memberManagerRepository: MemberManagerRepository,
+    private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
 
     private val _playList: MutableStateFlow<List<PlayListEntity>> = MutableStateFlow(listOf())
@@ -31,6 +36,16 @@ class MainViewModel @Inject constructor(
 
     var successGetEvent = 0L
 
+    @SuppressLint("CommitPrefEdits")
+    fun memberDetail(memberSeq: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            memberManagerRepository.memberDetail(memberSeq).collectLatest {
+                if (it is Result.Success) {
+                    sharedPreferences.edit().putString(USER_EMAIL, it.data.body()!!.email)
+                }
+            }
+        }
+    }
 
     fun insert(musicSeq: Long) {
         viewModelScope.launch(Dispatchers.IO) {

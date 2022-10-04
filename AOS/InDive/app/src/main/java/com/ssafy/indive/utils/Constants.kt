@@ -5,6 +5,7 @@ const val JWT = "Authorization"
 
 // 유저 정보
 const val USER = "user_seq"
+const val USER_EMAIL = "user_email"
 
 // 최초 퍼미션 화면 확인 여부
 const val PERMISSION_OK = "permission_ok"

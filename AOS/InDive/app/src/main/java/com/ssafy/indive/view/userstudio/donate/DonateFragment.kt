@@ -65,6 +65,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     private fun initViewModelCallback(){
 
         donateViewModel.checkIsGetNFT(artistSeq)
+        donateViewModel.memberDetail(artistSeq)
 
         donateViewModel.successMsgEvent.observe(viewLifecycleOwner){
             showToast(it)
@@ -94,6 +95,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
             }
             btnDonate.setOnClickListener {
                 donateViewModel.putRewardNFT(artistSeq)
+                donateViewModel.donate()
                 loading()
             }
         }
@@ -103,7 +105,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         loadingDialog.show()
         // 로딩이 진행되지 않았을 경우
         CoroutineScope(Dispatchers.Main).launch {
-            delay(1500)
+            delay(3000)
             if(loadingDialog.isShowing){
                 loadingDialog.dismiss()
             }
