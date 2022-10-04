@@ -63,9 +63,10 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/btn_edit"
-            android:layout_margin="10dp"
-            app:layout_constraintEnd_toEndOf="@id/img_background"
-            app:layout_constraintBottom_toBottomOf="@id/img_background"
+            android:layout_margin="8dp"
+            android:background="@drawable/btn_round_lightgrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_background"
             />
 
         <!-- 배경 투명화된 이미지가 입력됐을 때, 테두리 유지용 -->
@@ -95,8 +96,9 @@
             android:id="@+id/btn_edit_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_margin="4dp"
             android:src="@drawable/btn_edit"
-            android:layout_margin="10dp"
+            android:background="@drawable/btn_round_lightgrey"
             app:layout_constraintBottom_toBottomOf="@id/civ_profile"
             app:layout_constraintEnd_toEndOf="@id/civ_profile" />
 

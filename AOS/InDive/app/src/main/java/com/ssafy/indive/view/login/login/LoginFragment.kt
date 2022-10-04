@@ -50,9 +50,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun initClickListener() {
         binding.apply {
-            btnJoinSns.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_joinSnsFragment)
-            }
+//            btnJoinSns.setOnClickListener {
+//                findNavController().navigate(R.id.action_loginFragment_to_joinSnsFragment)
+//            }
             btnJoin.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_joinFragment)
             }
@@ -60,7 +60,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 memberViewModel.memberLogin(MemberLogin(etId.text.toString(), etPass.text.toString()))
             }
             tvLogo.setOnClickListener {
-                memberViewModel.memberLogin(MemberLogin("jdsaeyqi@naver.com", "1111"))
+                memberViewModel.memberLogin(MemberLogin("wkdrns3918@naver.com", "1"))
             }
         }
     }
