@@ -104,7 +104,7 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
             }
             tvSettingShield.setOnClickListener {
                 val i = Intent(Intent.ACTION_VIEW)
-                i.data = Uri.parse("https://hanyeop.github.io/RunWithMe-terms/")
+                i.data = Uri.parse("https://sites.google.com/view/indive-terms")
                 startActivity(i)
             }
             tvSettingLogout.setOnClickListener {
