@@ -16,7 +16,10 @@ contract Indive {
     // 토큰 컨트랙트
     IERC20 _InDiveTokenContract;
 
-    event DonationHistory(address artist, address donator, uint256 value, string message);
+    event DonationEvent(address indexed artist, address indexed donator, uint256 value, string message, uint256 time);
+
+    // donationHistory[주소] = 후원 및 후원 받은 기록 리스트
+    mapping(address => DonationHistory[]) public donationHistory;
 
     // donatorList[아티스트 주소] = 후원자 리스트
     mapping(address => DonationInfo[]) public donatorList;
@@ -24,9 +27,17 @@ contract Indive {
     // ranking[아티스트 주소][사용자 주소] = 후원
     mapping(address => mapping(address => bool)) public isDonated;
 
-    struct DonationInfo{
+    struct DonationInfo{ 
         address addr;
         uint256 totalValue;
+    }
+
+    struct DonationHistory{
+        address addr;
+        string state;
+        uint256 value;
+        string message;
+        uint256 time;
     }
 
     constructor () {}
@@ -40,7 +51,7 @@ contract Indive {
     // donate : 컨트랙트 호출자가 to 에게 토큰을 송금한다.
     // 사용자는 InDiveToken 컨트랙트에서 approve를 사용하여 InDive 컨트랙트에 출금할 권한을 준다.
     // InDive 컨트랙트는 토큰을 출금 후 to 에게 송금한다.
-    function donate(address _to, uint256 _value, string memory _message) public returns (bool) {
+    function donate(address _to, uint256 _value, string memory _message, uint256 _time) public returns (bool) {
         require(_value >= 2, "donate value error!");
 
         _InDiveTokenContract.transferFrom(msg.sender, address(this), _value);
@@ -62,8 +73,13 @@ contract Indive {
             isDonated[_to][msg.sender] = true;
         }
 
+        // _to 배열에 송금 받은 내용을 기록한다.
+        donationHistory[_to].push(DonationHistory(msg.sender, "Get", _value, _message, _time));
+        // 사용자 배열에 송금 내용을 기록한다.
+        donationHistory[msg.sender].push(DonationHistory(_to, "Send", _value, _message, _time));
+
         // 후원 내용을 블록에 기록한다.
-        emit DonationHistory(_to, msg.sender, _value, _message);
+        emit DonationEvent(_to, msg.sender, _value, _message, _time);
 
         return true;
     }
@@ -78,7 +94,33 @@ contract Indive {
             string memory strAddr = Strings.toHexString(addr);
             string memory strValue = Strings.toString(totalValue);
 
-            result = string(abi.encodePacked(result, "{", "address:\"", strAddr, "\",totalValue:", strValue,"}"));
+            result = string(abi.encodePacked(result, "{", "\"address:\"\"", strAddr, "\",\"totalValue:\"", strValue,"}"));
+
+            if(i < donatorList[artist].length - 1){
+                result = string(abi.encodePacked(result, ","));
+            }
+        }
+
+        result = string(abi.encodePacked(result, "]"));
+
+        return result;
+    }
+
+    function getDonationHistoryList(address artist) public view returns (string memory){
+        string memory result = "[";
+
+        for(uint i = 0 ; i < donationHistory[artist].length ; i++){
+            address addr = donationHistory[artist][i].addr;
+            string memory state = donationHistory[artist][i].state;
+            uint256 value = donationHistory[artist][i].value;
+            string memory message = donationHistory[artist][i].message;
+            uint256 time = donationHistory[artist][i].time;
+
+            string memory strAddr = Strings.toHexString(addr);
+            string memory strValue = Strings.toString(value);
+            string memory strTime = Strings.toString(time);
+
+            result = string(abi.encodePacked(result, "{", "\"address\":\"", strAddr, "\",\"state:\"\"", state,"\",\"value\":",strValue,",\"message\":\"",message,"\",\"time\":",strTime,"}"));
 
             if(i < donatorList[artist].length - 1){
                 result = string(abi.encodePacked(result, ","));
