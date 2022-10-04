@@ -1,13 +1,11 @@
 package com.ssafy.indive.domain.member.service;
 
-import com.ssafy.indive.domain.member.controller.dto.WebMemberModifyRequestDto;
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberModifyRequestDto;
+import com.ssafy.indive.domain.member.service.dto.ServiceMemberWriteNoticeRequestDto;
 import com.ssafy.indive.global.utils.FileUtils;
-import jdk.nashorn.internal.runtime.logging.Logger;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +44,14 @@ public class MemberModifyService {
         }
 
         memberRepository.save(findMember);
+
+        return true;
+    }
+
+    public boolean writeNotice(ServiceMemberWriteNoticeRequestDto dto, long memberSeq) {
+
+        Member findMember = memberRepository.findById(memberSeq).orElseThrow(IllegalArgumentException::new);
+        findMember.update(dto);
 
         return true;
     }

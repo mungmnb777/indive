@@ -15,7 +15,7 @@ public class WebMemberWriteNoticeRequestDto {
     private String notice;
 
 
-    @Builder
+
     public ServiceMemberWriteNoticeRequestDto convertToServiceDto() {
         return ServiceMemberWriteNoticeRequestDto.builder()
             .notice(notice)
