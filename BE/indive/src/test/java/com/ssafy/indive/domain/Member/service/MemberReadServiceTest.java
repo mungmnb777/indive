@@ -7,6 +7,7 @@ import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.MemberReadService;
 import com.ssafy.indive.domain.member.service.dto.ServiceDuplicatedEmail;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberGetResponseDto;
+import com.ssafy.indive.utils.security.factory.WithMockSecurityContextFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -18,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +39,6 @@ public class MemberReadServiceTest {
     @Mock
     private MemberRepository memberRepository;
 
-    //TODO : 이걸로 테스트가 되는지
 
     @Nested
     @DisplayName("[이메일 중복체크] 이메일 값이 중복인지 체크할 수 있다.")
@@ -131,7 +132,7 @@ public class MemberReadServiceTest {
 
             //then
             assertThatThrownBy(()-> memberReadService.getMemberDetails(1L)).isInstanceOf(IllegalArgumentException.class);
-            verify(memberRepository,times(1)).findById(eq(1L));
+            verify(memberRepository,times(1)).findBySeq(eq(1L));
         }
 
     }
@@ -139,6 +140,27 @@ public class MemberReadServiceTest {
     @Nested
     @DisplayName("[로그인한 멤버정보 조회] 로그인한 멤버의 세부정보를 조회할 수 있어야 한다.")
     class getLoginMemberDetails{
+
+
+        @BeforeEach
+        void beforeEach() throws IOException{
+            WithMockSecurityContextFactory.createSecurityContext();
+        }
+
+        @Test
+        @DisplayName("[성공 케이스]")
+        public void success() {
+            //then
+            ServiceMemberGetResponseDto memberdetail = memberReadService.getLoginMemberDetails();
+
+            assertThat(memberdetail.getEmail()).isEqualTo("mungmnb777@gmail.com");
+            assertThat(memberdetail.getNickname()).isEqualTo("명범짱");
+            assertThat(memberdetail.getNotice()).isEqualTo("공지사항");
+            assertThat(memberdetail.getProfileMessage()).isEqualTo("프로필 상태 메시지");
+            assertThat(memberdetail.getWallet()).isEqualTo("지갑");
+            assertThat(memberdetail.getRole()).isEqualTo(Role.ROLE_USER);
+        }
+
 
     }
 

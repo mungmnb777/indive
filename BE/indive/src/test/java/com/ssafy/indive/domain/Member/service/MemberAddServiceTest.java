@@ -4,6 +4,7 @@ import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.MemberAddService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
+import com.ssafy.indive.domain.member.service.dto.ServiceDuplicatedEmail;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberAddRequestDto;
 import com.ssafy.indive.utils.security.factory.WithMockSecurityContextFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,16 +43,13 @@ public class MemberAddServiceTest {
     @DisplayName("[멤버 추가] 사용자는 회원 가입을 할 수 있어야 한다.")
     class addMember{
 
-        @BeforeEach
-        void beforeEach() throws IOException {
-            WithMockSecurityContextFactory.createSecurityContext();
-        }
 
         @Test
-        @DisplayName("[성공 케이스]")
-        public void successCase(){
+        @DisplayName("[성공 케이스1] 중복 이메일이 아닌 경우 true 리턴")
+       public void success1(){
             //given
              given(memberRepository.save(any(Member.class))).willReturn(Member.builder().build());
+            given(memberReadService.isDuplicated(any(ServiceDuplicatedEmail.class))).willReturn(false);
 
             ServiceMemberAddRequestDto dto = getTestDto();
 
@@ -65,9 +63,21 @@ public class MemberAddServiceTest {
         }
 
         @Test
-        @DisplayName("[실패 케이스] 중복 이메일인 경우 false 리턴") 
-        public void failure1(){
-            //TODO : 작성필
+        @DisplayName("[성공 케이스2] 중복 이메일인 경우 false 리턴")
+        public void success2(){
+            //given
+            given(memberReadService.isDuplicated(any(ServiceDuplicatedEmail.class))).willReturn(true);
+
+            ServiceMemberAddRequestDto dto = getTestDto();
+
+            //when
+            //save 된거랑 dto랑 확인할 방법??
+            boolean isSuccess = memberAddService.addMember(dto);
+
+            //then
+            assertThat(isSuccess).isFalse();
+
+            verify(memberRepository, times(0)).save(any(Member.class));
         }
         
         public ServiceMemberAddRequestDto getTestDto() {
@@ -79,5 +89,6 @@ public class MemberAddServiceTest {
             .profileMessage("test-profile-message")
             .build();
         }
+
     }
 }
