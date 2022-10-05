@@ -48,6 +48,9 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
 
     override fun init() {
+        binding.apply {
+            donateVM = donateViewModel
+        }
 
         loadingDialog = LoadingDialog(requireContext())
         artistSeq = args.artistSeq
@@ -55,7 +58,6 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         initFingerPrintAuth()
         initClickListener()
         initViewModelCallback()
-
 
 
         Log.d("DonateFragment_", "init: $artistSeq")
@@ -66,6 +68,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
         donateViewModel.checkIsGetNFT(artistSeq)
         donateViewModel.memberDetail(artistSeq)
+        donateViewModel.getMyBalance()
 
         donateViewModel.successMsgEvent.observe(viewLifecycleOwner){
             showToast(it)

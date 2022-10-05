@@ -4,11 +4,14 @@ package com.ssafy.indive.binding
 import com.ssafy.indive.utils.*
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ssafy.indive.R
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 object ViewBindingAdapter {
 
@@ -46,5 +49,13 @@ object ViewBindingAdapter {
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(this)
 
+    }
+
+    @BindingAdapter("bindIVEText")
+    @JvmStatic
+    fun TextView.bindIVEText(quantity: String){
+        val formatter: NumberFormat = DecimalFormat("#,###")
+        val formattedNumber: String = formatter.format(quantity.toInt())
+        this.setText(formattedNumber)
     }
 }

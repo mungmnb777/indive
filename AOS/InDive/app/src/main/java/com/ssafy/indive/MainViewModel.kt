@@ -22,9 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val playListRepository: PlayListRepository,
-    private val musicManagerRepository: MusicManagerRepository,
-    private val memberManagerRepository: MemberManagerRepository,
-    private val sharedPreferences: SharedPreferences
+    private val musicManagerRepository: MusicManagerRepository
 ) : ViewModel() {
 
     private val _playList: MutableStateFlow<List<PlayListEntity>> = MutableStateFlow(listOf())
@@ -36,16 +34,6 @@ class MainViewModel @Inject constructor(
 
     var successGetEvent = 0L
 
-    @SuppressLint("CommitPrefEdits")
-    fun memberDetail(memberSeq: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            memberManagerRepository.memberDetail(memberSeq).collectLatest {
-                if (it is Result.Success) {
-                    sharedPreferences.edit().putString(USER_EMAIL, it.data.body()!!.email)
-                }
-            }
-        }
-    }
 
     fun insert(musicSeq: Long) {
         viewModelScope.launch(Dispatchers.IO) {
