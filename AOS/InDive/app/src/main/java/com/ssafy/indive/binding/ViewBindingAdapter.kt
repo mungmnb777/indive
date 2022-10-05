@@ -1,6 +1,7 @@
 package com.ssafy.indive.binding
 
 
+import android.graphics.Color
 import com.ssafy.indive.utils.*
 import android.util.Log
 import android.widget.ImageView
@@ -12,6 +13,8 @@ import com.ssafy.indive.R
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object ViewBindingAdapter {
 
@@ -53,9 +56,45 @@ object ViewBindingAdapter {
 
     @BindingAdapter("bindIVEText")
     @JvmStatic
-    fun TextView.bindIVEText(quantity: String){
+    fun TextView.bindIVEText(quantity: Int){
         val formatter: NumberFormat = DecimalFormat("#,###")
-        val formattedNumber: String = formatter.format(quantity.toInt())
+        val formattedNumber: String = formatter.format(quantity)
         this.setText(formattedNumber + " IVE")
+    }
+
+    @BindingAdapter("bindIVEText", "state")
+    @JvmStatic
+    fun TextView.bindIVEText(quantity: Int, state: String){
+        val formatter: NumberFormat = DecimalFormat("#,###")
+        val formattedNumber: String = formatter.format(quantity)
+        when(state){
+            "Send" ->  {
+                this.setText("-" + formattedNumber + " IVE")
+                this.setTextColor(resources.getColor(R.color.main_grey))
+            }
+            else -> {
+                this.setText(formattedNumber + " IVE")
+                this.setTextColor(resources.getColor(R.color.main_blue))
+            }
+        }
+    }
+
+    @BindingAdapter("bindStateText")
+    @JvmStatic
+    fun TextView.bindStateText(state: String) {
+        val convertedState = when(state){
+            "Send" -> "출금"
+            else -> "입금"
+        }
+        this.setText(convertedState)
+    }
+
+    @BindingAdapter("bindDateText")
+    @JvmStatic
+    fun TextView.bindDateText(time: Long){
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+        val formattedDate = formatter.format(Date(time))
+
+        this.setText(formattedDate)
     }
 }

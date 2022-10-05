@@ -19,11 +19,15 @@ class MyWalletFragment : BaseFragment<FragmentMyWalletBinding>(R.layout.fragment
         }
 
         initViewModelCallback()
+        initDonationHistory()
     }
 
     private fun initViewModelCallback(){
         myWalletViewModel.getTokenBalanceOf()
-        myWalletViewModel.getDonationHistory()
+        myWalletViewModel.getHistory()
     }
 
+    private fun initDonationHistory(){
+        binding.rvDonationList.adapter = MyWalletAdapter()
+    }
 }

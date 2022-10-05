@@ -13,6 +13,7 @@
     <color name="main_blue">#5CACF2</color>
     <color name="main_black">#040404</color>
     <color name="main_grey">#BABABA</color>
+    <color name="main_light_grey">#99E9ECEF</color>
     <color name="main_brown">#260F01</color>
 
 </resources>

@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken
 import com.ssafy.indive.blockchain.DonationHistory
 import com.ssafy.indive.blockchain.InDive
 import com.ssafy.indive.blockchain.InDiveToken
-import org.json.JSONObject
 import org.web3j.crypto.Credentials
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.admin.Admin
@@ -15,7 +14,6 @@ import org.web3j.tx.FastRawTransactionManager
 import org.web3j.tx.gas.DefaultGasProvider
 import org.web3j.tx.response.PollingTransactionReceiptProcessor
 import java.math.BigInteger
-import java.util.*
 
 fun Admin.unlockAccount(address: String, password: String) {
     val unlockAccount = personalUnlockAccount(address, password).sendAsync().get()
@@ -85,7 +83,7 @@ fun Web3j.getDonatorList(privateKey: String, artistAddress: String){
 }
 
 // 후원 기록
-fun Web3j.getDonationHistoryList(privateKey: String, artistAddress: String) : List<DonationHistory> {
+fun Web3j.getDonationHistoryList(privateKey: String, artistAddress: String): List<DonationHistory> {
     val credential = Credentials.create(privateKey)
     val gasProvider = DefaultGasProvider()
     val manager = FastRawTransactionManager(
@@ -100,9 +98,8 @@ fun Web3j.getDonationHistoryList(privateKey: String, artistAddress: String) : Li
     Log.d(TAG, "getDonationHistoryList: $result")
 
     val gson = Gson()
-    val donationHistory = gson.fromJson<List<DonationHistory>>(result, object : TypeToken<List<DonationHistory>>(){}.type)
 
-    return donationHistory
+    return gson.fromJson(result, object : TypeToken<List<DonationHistory>>() {}.type)
 }
 
 /**
