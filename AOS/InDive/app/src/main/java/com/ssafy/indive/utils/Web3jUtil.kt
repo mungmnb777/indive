@@ -1,8 +1,12 @@
 package com.ssafy.indive.utils
 
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.ssafy.indive.blockchain.DonationHistory
 import com.ssafy.indive.blockchain.InDive
 import com.ssafy.indive.blockchain.InDiveToken
+import org.json.JSONObject
 import org.web3j.crypto.Credentials
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.admin.Admin
@@ -11,6 +15,7 @@ import org.web3j.tx.FastRawTransactionManager
 import org.web3j.tx.gas.DefaultGasProvider
 import org.web3j.tx.response.PollingTransactionReceiptProcessor
 import java.math.BigInteger
+import java.util.*
 
 fun Admin.unlockAccount(address: String, password: String) {
     val unlockAccount = personalUnlockAccount(address, password).sendAsync().get()
@@ -57,7 +62,7 @@ fun Web3j.donate(privateKey: String, to: String, value: Int, message: String){
 
     val inDive = InDive.load(INDIVE_ADDRESS, this, manager, gasProvider)
 
-    val result = inDive.donate(to, BigInteger(value.toString()), message).sendAsync().get()
+    val result = inDive.donate(to, BigInteger(value.toString()), message, BigInteger.valueOf(System.currentTimeMillis())).sendAsync().get()
 
     Log.d(TAG, "donate: ${result.transactionHash}")
 }
@@ -77,6 +82,27 @@ fun Web3j.getDonatorList(privateKey: String, artistAddress: String){
     val result = inDive.getDonatorList(artistAddress).sendAsync().get()
 
     Log.d(TAG, "getDonatorList: $result")
+}
+
+// 후원 기록
+fun Web3j.getDonationHistoryList(privateKey: String, artistAddress: String) : List<DonationHistory> {
+    val credential = Credentials.create(privateKey)
+    val gasProvider = DefaultGasProvider()
+    val manager = FastRawTransactionManager(
+        this,
+        credential,
+        PollingTransactionReceiptProcessor(this, TX_END_CHECK_DURATION, TX_END_CHECK_RETRY)
+    )
+
+    val inDive = InDive.load(INDIVE_ADDRESS, this, manager, gasProvider)
+
+    val result = inDive.getDonationHistoryList(artistAddress).sendAsync().get()
+    Log.d(TAG, "getDonationHistoryList: $result")
+
+    val gson = Gson()
+    val donationHistory = gson.fromJson<List<DonationHistory>>(result, object : TypeToken<List<DonationHistory>>(){}.type)
+
+    return donationHistory
 }
 
 /**
@@ -103,7 +129,7 @@ fun Web3j.setTokenApprove(privateKey: String, spender: String, amount: Int){
 }
 
 // 토큰 개수 조회
-fun Web3j.getTokenBalanceOf(privateKey : String, owner: String){
+fun Web3j.getTokenBalanceOf(privateKey : String, owner: String) : Int{
     val credential = Credentials.create(privateKey)
     val gasProvider = DefaultGasProvider()
     val manager = FastRawTransactionManager(
@@ -117,6 +143,8 @@ fun Web3j.getTokenBalanceOf(privateKey : String, owner: String){
     val balance = inDiveToken.balanceOf(owner).sendAsync().get()
 
     Log.d(TAG, "getTokenBalanceOf: Address = $owner | Value = $balance")
+
+    return balance.toInt()
 }
 
 /**

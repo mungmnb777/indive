@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.*
 import androidx.core.hardware.fingerprint.FingerprintManagerCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.R
@@ -30,13 +31,19 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
 
+    private val moreViewModel by viewModels<MoreViewModel>()
+
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun init() {
+        binding.apply {
+            moreVM = moreViewModel
+        }
         initClickListener()
         initSwitch()
+        getTokenBalanceOf()
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -134,4 +141,8 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
                 Log.d("MoreFragment_", ": ")
             }
         }
+
+    private fun getTokenBalanceOf(){
+        moreViewModel.getTokenBalanceOf()
+    }
 }

@@ -56,6 +56,6 @@ object ViewBindingAdapter {
     fun TextView.bindIVEText(quantity: String){
         val formatter: NumberFormat = DecimalFormat("#,###")
         val formattedNumber: String = formatter.format(quantity.toInt())
-        this.setText(formattedNumber)
+        this.setText(formattedNumber + " IVE")
     }
 }
