@@ -2,6 +2,8 @@ package com.ssafy.indive.security.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.repository.MemberRepository;
@@ -17,9 +19,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -57,7 +61,38 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 		String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
 		//서명
 		//*토큰 주인의 유저네임이 뭔지 판별
-		String username = JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(jwtToken).getClaim("username").asString();
+		String username = null;
+		try {
+			username = JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(jwtToken).getClaim("username").asString();
+		} catch (TokenExpiredException e) {
+			//1. 리프레시가 기간 남았는지 확인한다
+			Cookie[] cookies = request.getCookies();
+
+			for (Cookie cookie : cookies) {
+				if ("refreshToken".equals(cookie.getName())) {
+					String refreshToken = cookie.getValue().replace("Bearer ","");
+					try {
+						Date date = JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(refreshToken).getExpiresAt();
+					}  catch (TokenExpiredException ex) {
+						return;
+					}
+					//토큰을 재발급한다.
+					String neqAccessToken = JWT.create()
+							.withSubject("INDIVE")
+							.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60*24*14))
+							.withClaim("seq",JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(refreshToken).getClaim("seq").asString())
+							.withClaim("username",JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(refreshToken).getClaim("username").asString())
+							.sign(Algorithm.HMAC512(JwtProperties.SECRET)); // 서버만 알고 있는 secret 값
+
+					response.addHeader("Authorization","Bearer "+neqAccessToken);
+					username = JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(refreshToken).getClaim("username").asString();
+				}
+			}
+			//2. 엑세스 새로 발급해준다
+		}
+
+		//엑세스가 만료되었는지
+
 
 		//*유저네임이 있다면 아래 메소드를 실행시킴
 		//서명이 정상적으로 됨
