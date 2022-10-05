@@ -51,16 +51,14 @@ public class PrincipalDetails implements UserDetails{
     }
 
     //TODO : 이게 뭘까..
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-//	@Override
+//    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
-//		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-//        member.getRole(r -> {
-//
-//        	authorities.add(member.getRole);
-//        return authorities;
+//        return null;
 //    }
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(() -> String.valueOf(member.getRole()));
+        return authorities;
+    }
 }

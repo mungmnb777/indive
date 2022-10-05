@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -86,8 +87,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.withClaim("username", principalDetails.getMember().getEmail())
 				.sign(Algorithm.HMAC512(JwtProperties.SECRET)); // 서버만 알고 있는 secret 값
 
+
+		String refreshToken = JWT.create()
+				.withSubject("INDIVE")
+				.withExpiresAt(new Date(System.currentTimeMillis()+1000*60*60*24*14))
+				.withClaim("seq",principalDetails.getMember().getSeq())
+				.withClaim("username", principalDetails.getMember().getEmail())
+				.sign(Algorithm.HMAC512(JwtProperties.SECRET)); // 서버만 알고 있는 secret 값
+
 		response.addHeader("Authorization","Bearer "+jwtToken);
 		response.getWriter().write("true");
+		Cookie cookie = new Cookie("refreshToken",refreshToken);
+		response.addCookie(cookie);
 
 
 	}
