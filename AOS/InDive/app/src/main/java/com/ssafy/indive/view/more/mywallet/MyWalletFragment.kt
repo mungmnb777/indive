@@ -6,16 +6,24 @@ import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentMyWalletBinding
 import com.ssafy.indive.view.login.MemberViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyWalletFragment : BaseFragment<FragmentMyWalletBinding>(R.layout.fragment_my_wallet) {
 
     private val myWalletViewModel by viewModels<MyWalletViewModel>()
-    private val memberViewModel by activityViewModels<MemberViewModel>()
 
     override fun init() {
         binding.apply {
             myWalletVM = myWalletViewModel
         }
+
+        initViewModelCallback()
+    }
+
+    private fun initViewModelCallback(){
+        myWalletViewModel.getTokenBalanceOf()
+        myWalletViewModel.getDonationHistory()
     }
 
 }
