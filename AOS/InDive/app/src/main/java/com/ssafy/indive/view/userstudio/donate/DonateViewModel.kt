@@ -30,6 +30,8 @@ class DonateViewModel @Inject constructor(
 
     val memo: MutableStateFlow<String> = MutableStateFlow("")
 
+    val balance: MutableStateFlow<String> = MutableStateFlow("0")
+
     private val _successMsgEvent: SingleLiveEvent<String> = SingleLiveEvent()
     val successMsgEvent get() = _successMsgEvent
 
@@ -79,6 +81,16 @@ class DonateViewModel @Inject constructor(
         }
     }
 
+    fun getMyBalance(){
+        val myAddress = sharedPreferences.getString(USER_ADDRESS, "")
+        val email = sharedPreferences.getString(USER_EMAIL, "")
+        val encryptedPrivateKey = sharedPreferences.getString(email, "")
+        val decryptePrivateKey = decrypt(encryptedPrivateKey!!)
+
+        //balance.value =
+        web3j.getTokenBalanceOf(decryptePrivateKey, myAddress!!)
+
+    }
 
     fun memberDetail(memberSeq: Long) {
         viewModelScope.launch(Dispatchers.IO) {

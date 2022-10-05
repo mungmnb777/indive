@@ -9,10 +9,7 @@ import com.ssafy.indive.model.dto.MemberLogin
 import com.ssafy.indive.model.dto.Notice
 import com.ssafy.indive.model.response.MemberDetailResponse
 import com.ssafy.indive.repository.MemberManagerRepository
-import com.ssafy.indive.utils.JWT
-import com.ssafy.indive.utils.Result
-import com.ssafy.indive.utils.SingleLiveEvent
-import com.ssafy.indive.utils.USER
+import com.ssafy.indive.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -177,6 +174,9 @@ class MemberViewModel @Inject constructor(
                     sharedPreferences.edit()
                         .putLong(USER, res.memberSeq)
                         .apply()
+                    sharedPreferences.edit().putString(USER_EMAIL, it.data.body()!!.email)
+                    sharedPreferences.edit().putString(USER_ADDRESS, it.data.body()!!.wallet)
+
                 }
             }
         }

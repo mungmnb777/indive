@@ -45,13 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         playList = mutableListOf()
         initNavigation()
         initObserve()
-        initViewModelCallback()
         checkMediaPermission()
-    }
-
-    private fun initViewModelCallback(){
-        val userSeq = sharePref.getLong(USER, 0L)
-        mainViewModel.memberDetail(userSeq)
     }
 
     private fun checkMediaPermission() {
