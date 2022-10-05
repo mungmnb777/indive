@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             tools:text="1,000 IVE"
-            bindIVEText="@{donateVM.balance.toString()}"
+            bindIVEText="@{donateVM.balance}"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:textStyle="bold"

@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            bindIVEText="@{moreVM.balance.toString()}"
+            bindIVEText="@{moreVM.balance}"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:textStyle="bold"
