@@ -1,29 +1,26 @@
 package com.ssafy.indive.blockchain
 
 import org.web3j.protocol.Web3j
+import com.ssafy.indive.blockchain.InDive
 import org.web3j.tx.gas.ContractGasProvider
 import org.web3j.tx.TransactionManager
 import org.web3j.protocol.core.RemoteFunctionCall
 import org.web3j.protocol.core.methods.response.TransactionReceipt
 import org.web3j.abi.datatypes.generated.Uint256
+import com.ssafy.indive.blockchain.InDive.DonationEventEventResponse
 import org.web3j.tx.Contract.EventValuesWithLog
 import io.reactivex.Flowable
+import io.reactivex.functions.Function
 import org.web3j.protocol.core.DefaultBlockParameter
 import org.web3j.abi.EventEncoder
+import org.web3j.abi.TypeReference
+import org.web3j.abi.datatypes.*
+import org.web3j.crypto.Credentials
+import org.web3j.protocol.core.methods.request.EthFilter
 import org.web3j.tuples.generated.Tuple5
 import kotlin.Throws
 import org.web3j.tuples.generated.Tuple2
 import org.web3j.protocol.core.methods.response.BaseEventResponse
-import com.ssafy.indive.blockchain.InDiveNFT
-import com.ssafy.indive.blockchain.InDiveNFT.ApprovalForAllEventResponse
-import org.web3j.abi.datatypes.generated.Bytes4
-import com.ssafy.indive.blockchain.InDiveToken
-import io.reactivex.functions.Function
-import org.web3j.abi.TypeReference
-import org.web3j.abi.datatypes.*
-import org.web3j.abi.datatypes.generated.Uint8
-import org.web3j.crypto.Credentials
-import org.web3j.protocol.core.methods.request.EthFilter
 import org.web3j.protocol.core.methods.response.Log
 import org.web3j.tx.Contract
 import java.math.BigInteger
@@ -124,10 +121,10 @@ class InDive : Contract {
     fun donationEventEventFlowable(filter: EthFilter?): Flowable<DonationEventEventResponse> {
         return web3j.ethLogFlowable(filter)
             .map(object : Function<Log?, DonationEventEventResponse> {
-                override fun apply(t: Log): DonationEventEventResponse {
-                    val eventValues = extractEventParametersWithLog(DONATIONEVENT_EVENT, t)
+                override fun apply(log: Log): DonationEventEventResponse {
+                    val eventValues = extractEventParametersWithLog(DONATIONEVENT_EVENT, log)
                     val typedResponse = DonationEventEventResponse()
-                    typedResponse.log = t
+                    typedResponse.log = log
                     typedResponse.artist = eventValues.indexedValues[0].value as String
                     typedResponse.donator = eventValues.indexedValues[1].value as String
                     typedResponse.value = eventValues.nonIndexedValues[0].value as BigInteger

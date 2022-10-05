@@ -1,13 +1,13 @@
 package com.ssafy.indive.blockchain
 
 import org.web3j.protocol.Web3j
-import com.ssafy.indive.InDive
+import com.ssafy.indive.blockchain.InDive
 import org.web3j.tx.gas.ContractGasProvider
 import org.web3j.tx.TransactionManager
 import org.web3j.protocol.core.RemoteFunctionCall
 import org.web3j.protocol.core.methods.response.TransactionReceipt
 import org.web3j.abi.datatypes.generated.Uint256
-import com.ssafy.indive.InDive.DonationEventEventResponse
+import com.ssafy.indive.blockchain.InDive.DonationEventEventResponse
 import org.web3j.tx.Contract.EventValuesWithLog
 import io.reactivex.Flowable
 import org.web3j.protocol.core.DefaultBlockParameter
@@ -105,7 +105,7 @@ class InDiveNFT : Contract {
 
     fun approvalEventFlowable(filter: EthFilter?): Flowable<ApprovalEventResponse> {
         return web3j.ethLogFlowable(filter).map(object : Function<Log?, ApprovalEventResponse> {
-            override fun apply(log: Log?): ApprovalEventResponse {
+            override fun apply(log: Log): ApprovalEventResponse {
                 val eventValues = extractEventParametersWithLog(APPROVAL_EVENT, log)
                 val typedResponse = ApprovalEventResponse()
                 typedResponse.log = log
@@ -143,7 +143,7 @@ class InDiveNFT : Contract {
     fun approvalForAllEventFlowable(filter: EthFilter?): Flowable<ApprovalForAllEventResponse> {
         return web3j.ethLogFlowable(filter)
             .map(object : Function<Log?, ApprovalForAllEventResponse> {
-                override fun apply(log: Log?): ApprovalForAllEventResponse {
+                override fun apply(log: Log): ApprovalForAllEventResponse {
                     val eventValues = extractEventParametersWithLog(APPROVALFORALL_EVENT, log)
                     val typedResponse = ApprovalForAllEventResponse()
                     typedResponse.log = log
@@ -180,7 +180,7 @@ class InDiveNFT : Contract {
 
     fun transferEventFlowable(filter: EthFilter?): Flowable<TransferEventResponse> {
         return web3j.ethLogFlowable(filter).map(object : Function<Log?, TransferEventResponse> {
-            override fun apply(log: Log?): TransferEventResponse {
+            override fun apply(log: Log): TransferEventResponse {
                 val eventValues = extractEventParametersWithLog(TRANSFER_EVENT, log)
                 val typedResponse = TransferEventResponse()
                 typedResponse.log = log
@@ -241,7 +241,7 @@ class InDiveNFT : Contract {
         ) {
             val result = executeCallSingleValueReturn<Type<*>, List<*>>(
                 function,
-                MutableList::class.java
+                List::class.java
             ) as List<Type<*>>
             convertToNative<Type<*>, Any>(result)
         }
