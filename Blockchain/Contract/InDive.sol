@@ -94,7 +94,7 @@ contract Indive {
             string memory strAddr = Strings.toHexString(addr);
             string memory strValue = Strings.toString(totalValue);
 
-            result = string(abi.encodePacked(result, "{", "\"address:\"\"", strAddr, "\",\"totalValue:\"", strValue,"}"));
+            result = string(abi.encodePacked(result, "{", "\"address\":\"", strAddr, "\",\"totalValue\":", strValue,"}"));
 
             if(i < donatorList[artist].length - 1){
                 result = string(abi.encodePacked(result, ","));
@@ -120,9 +120,9 @@ contract Indive {
             string memory strValue = Strings.toString(value);
             string memory strTime = Strings.toString(time);
 
-            result = string(abi.encodePacked(result, "{", "\"address\":\"", strAddr, "\",\"state:\"\"", state,"\",\"value\":",strValue,",\"message\":\"",message,"\",\"time\":",strTime,"}"));
+            result = string(abi.encodePacked(result, "{", "\"address\":\"", strAddr, "\",\"state\":\"", state,"\",\"value\":",strValue,",\"message\":\"",message,"\",\"time\":",strTime,"}"));
 
-            if(i < donatorList[artist].length - 1){
+            if(i < donationHistory[artist].length - 1){
                 result = string(abi.encodePacked(result, ","));
             }
         }
