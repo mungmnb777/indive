@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="donateVM"
             type="com.ssafy.indive.view.userstudio.donate.DonateViewModel" />
@@ -43,38 +44,37 @@
             android:id="@+id/tv_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
             android:text="보유 토큰"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.1"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1" />
 
         <TextView
             android:id="@+id/tv_token"
+            bindIVEText="@{donateVM.balance}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="1,000 IVE"
-            bindIVEText="@{donateVM.balance}"
-            android:textSize="24dp"
             android:textColor="@color/black"
+            android:textSize="24dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toStartOf="@id/tv_title"
-            />
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="1,000 IVE" />
 
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/main_grey"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
+            android:background="@color/main_grey"
             app:layout_constraintTop_toBottomOf="@id/tv_token" />
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -83,69 +83,59 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            tools:src="@drawable/ic_launcher_foreground"
             app:layout_constraintStart_toStartOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_token"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_token"
+            tools:src="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/tv_nickname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            tools:text="닉네임"
-            android:textSize="24dp"
             android:textColor="@color/black"
+            android:textSize="24dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/civ_profile"
             app:layout_constraintBottom_toBottomOf="@id/civ_profile"
             app:layout_constraintStart_toEndOf="@id/civ_profile"
-            />
+            app:layout_constraintTop_toTopOf="@id/civ_profile"
+            tools:text="닉네임" />
 
         <TextView
             android:id="@+id/tv_donate_coin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="보낼 수량"
             android:layout_marginTop="20dp"
+            android:text="보낼 수량"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/civ_profile"
             app:layout_constraintStart_toStartOf="@id/tv_title"
-            />
+            app:layout_constraintTop_toBottomOf="@id/civ_profile" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_donate_coin"
+
+        <EditText
+
+            android:id="@+id/et_introduce"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_marginTop="10dp"
-            app:cardCornerRadius="10dp"
-            android:layout_marginRight="20dp"
-            app:layout_constraintStart_toStartOf="@id/tv_title"
+            android:hint="0"
+            android:singleLine="true"
+            android:text="@={donateVM.quantity}"
+            android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@id/btn_max"
-            app:layout_constraintTop_toBottomOf="@id/tv_donate_coin">
-
-            <EditText
-                android:id="@+id/et_introduce"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:layout_margin="10dp"
-                android:background="@null"
-                android:hint="0"
-                android:singleLine="true"
-                android:textSize="14dp"
-                android:text="@={donateVM.quantity}"/>
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_donate_coin" />
 
         <Button
             android:id="@+id/btn_max"
             android:layout_width="80dp"
             android:layout_height="35dp"
-            android:text="최대"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_round_main_color"
-            android:textColor="@color/white"
             android:layout_marginRight="20dp"
+            android:background="@drawable/btn_round_main_color"
+            android:text="최대"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_donate_coin" />
 
@@ -155,58 +145,47 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="2,000 IVE 이상 후원 시 NFT를 받을 수 있습니다."
-            app:layout_constraintTop_toBottomOf="@id/btn_max"
-            app:layout_constraintEnd_toEndOf="@id/btn_max"/>
+            app:layout_constraintEnd_toEndOf="@id/btn_max"
+            app:layout_constraintTop_toBottomOf="@id/btn_max" />
 
 
         <TextView
             android:id="@+id/tv_memo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="메모"
             android:layout_marginTop="20dp"
+            android:text="메모"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tv_alert_nft"
             app:layout_constraintStart_toStartOf="@id/tv_title"
-            />
+            app:layout_constraintTop_toBottomOf="@id/tv_alert_nft" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cv_memo"
+
+        <EditText
+            android:id="@+id/et_memo"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_marginTop="10dp"
-            app:cardCornerRadius="10dp"
-            android:layout_marginRight="20dp"
+            android:hint="메모를 입력해주세요."
+            android:text="@={donateVM.memo}"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_memo"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <EditText
-                android:id="@+id/et_memo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="left"
-                android:layout_margin="10dp"
-                android:background="@null"
-                android:hint="메모를 입력해주세요."
-                android:textSize="14dp"
-                android:text="@={donateVM.memo}"/>
-        </androidx.cardview.widget.CardView>
-
+            app:layout_constraintTop_toBottomOf="@id/tv_memo" />
 
         <Button
             android:id="@+id/btn_donate"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="보내기"
             android:background="@drawable/btn_round_main_color"
+            android:text="보내기"
             android:textColor="@color/white"
-            app:layout_constraintVertical_bias="0.9"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
