@@ -16,6 +16,8 @@ contract Indive {
     // 토큰 컨트랙트
     IERC20 _InDiveTokenContract;
 
+    uint donationSeq;
+
     event DonationEvent(address indexed artist, address indexed donator, uint256 value, string message, uint256 time);
 
     // donationHistory[주소] = 후원 및 후원 받은 기록 리스트
@@ -33,6 +35,7 @@ contract Indive {
     }
 
     struct DonationHistory{
+        uint seq;
         address addr;
         string state;
         uint256 value;
@@ -40,7 +43,9 @@ contract Indive {
         uint256 time;
     }
 
-    constructor () {}
+    constructor () {
+        donationSeq = 0;
+    }
 
     // IVE 토큰 컨트랙트 연결
     function setTokenContract(address contractAddress) public {
@@ -74,9 +79,11 @@ contract Indive {
         }
 
         // _to 배열에 송금 받은 내용을 기록한다.
-        donationHistory[_to].push(DonationHistory(msg.sender, "Get", _value, _message, _time));
+        donationHistory[_to].push(DonationHistory(donationSeq, msg.sender, "Get", _value, _message, _time));
         // 사용자 배열에 송금 내용을 기록한다.
-        donationHistory[msg.sender].push(DonationHistory(_to, "Send", _value, _message, _time));
+        donationHistory[msg.sender].push(DonationHistory(donationSeq, _to, "Send", _value, _message, _time));
+
+        donationSeq += 1;
 
         // 후원 내용을 블록에 기록한다.
         emit DonationEvent(_to, msg.sender, _value, _message, _time);
@@ -110,17 +117,14 @@ contract Indive {
         string memory result = "[";
 
         for(uint i = 0 ; i < donationHistory[artist].length ; i++){
+            uint256 seq = donationHistory[artist][i].seq;
             address addr = donationHistory[artist][i].addr;
             string memory state = donationHistory[artist][i].state;
             uint256 value = donationHistory[artist][i].value;
             string memory message = donationHistory[artist][i].message;
             uint256 time = donationHistory[artist][i].time;
 
-            string memory strAddr = Strings.toHexString(addr);
-            string memory strValue = Strings.toString(value);
-            string memory strTime = Strings.toString(time);
-
-            result = string(abi.encodePacked(result, "{", "\"address\":\"", strAddr, "\",\"state\":\"", state,"\",\"value\":",strValue,",\"message\":\"",message,"\",\"time\":",strTime,"}"));
+            result = string(abi.encodePacked(result, "{\"seq\":", Strings.toString(seq), ",\"address\":\"", Strings.toHexString(addr), "\",\"state\":\"", state,"\",\"value\":",Strings.toString(value),",\"message\":\"",message,"\",\"time\":",Strings.toString(time),"}"));
 
             if(i < donationHistory[artist].length - 1){
                 result = string(abi.encodePacked(result, ","));
