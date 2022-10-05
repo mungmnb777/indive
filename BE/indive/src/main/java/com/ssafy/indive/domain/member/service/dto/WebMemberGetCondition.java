@@ -1,9 +1,6 @@
 package com.ssafy.indive.domain.member.service.dto;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -12,5 +9,12 @@ public class WebMemberGetCondition {
 
     private String nickname;
 
+    @Builder WebMemberGetCondition(String nickname){
+        this.nickname = nickname;
+    }
+
+    public String convertToString(){
+        return this.nickname;
+    }
 
 }

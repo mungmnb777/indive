@@ -33,9 +33,23 @@ public class SecurityConfig {
     private MemberRepository memberRepository;
 
 
-    public SecurityConfig() {
-    }
+    private final String[] PERMIT_ALL_SWAGGER = {
+            /* swagger v2 */
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            /* swagger v3 */
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
 
+    private final String[] PERMIT_ALL_USER = {
+
+    };
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -46,7 +60,6 @@ public class SecurityConfig {
 
         http
                 .addFilter(corsConfig.corsFilter())
-                //.addFilterBefore(new MyFilter3(), SecurityContextHolderFilter.class)
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -58,15 +71,9 @@ public class SecurityConfig {
                 .addFilter(new JwtAuthenticationFilter(authenticationManagerObject))
                 .addFilter(new JwtAuthorizationFilter(authenticationManagerObject, memberRepository))
 
-                //TODO : 수정필
                 .authorizeRequests()
-                .antMatchers("/api/v1/user/**")
-                .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/api/v1/manager/**")
-                .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/api/v1/admin/**")
-                .access("hasRole('ROLE_ADMIN')")
-                //////////////////////////////////////
+                .antMatchers(PERMIT_ALL_SWAGGER)
+                .permitAll()
                 .anyRequest().permitAll();
 
         return http.build();
