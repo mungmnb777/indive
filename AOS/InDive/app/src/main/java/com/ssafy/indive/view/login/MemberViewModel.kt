@@ -174,8 +174,8 @@ class MemberViewModel @Inject constructor(
                     sharedPreferences.edit()
                         .putLong(USER, res.memberSeq)
                         .apply()
-                    sharedPreferences.edit().putString(USER_EMAIL, it.data.body()!!.email)
-                    sharedPreferences.edit().putString(USER_ADDRESS, it.data.body()!!.wallet)
+                    sharedPreferences.edit().putString(USER_EMAIL, it.data.body()!!.email).apply()
+                    sharedPreferences.edit().putString(USER_ADDRESS, it.data.body()!!.wallet).apply()
 
                 }
             }
