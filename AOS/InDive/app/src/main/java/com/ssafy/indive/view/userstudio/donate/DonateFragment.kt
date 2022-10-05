@@ -100,6 +100,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
                 donateViewModel.putRewardNFT(artistSeq)
                 donateViewModel.donate()
                 loading()
+                findNavController().popBackStack()
             }
         }
     }

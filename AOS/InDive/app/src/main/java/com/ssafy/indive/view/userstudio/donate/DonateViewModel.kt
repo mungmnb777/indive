@@ -17,11 +17,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlinx.coroutines.flow.asStateFlow
 import org.web3j.protocol.Web3j
+import org.web3j.protocol.admin.Admin
 
 @HiltViewModel
 class DonateViewModel @Inject constructor(
     private val nftRepository: NFTRepository,
     private val web3j: Web3j,
+    private val admin: Admin,
     private val sharedPreferences: SharedPreferences,
     private val memberManagerRepository: MemberManagerRepository
 ) : ViewModel() {
@@ -30,7 +32,7 @@ class DonateViewModel @Inject constructor(
 
     val memo: MutableStateFlow<String> = MutableStateFlow("")
 
-    val balance: MutableStateFlow<String> = MutableStateFlow("0")
+    val balance: MutableStateFlow<Int> = MutableStateFlow(0)
 
     private val _successMsgEvent: SingleLiveEvent<String> = SingleLiveEvent()
     val successMsgEvent get() = _successMsgEvent
@@ -65,7 +67,10 @@ class DonateViewModel @Inject constructor(
         val encryptedPrivateKey = sharedPreferences.getString(email, "")
         val decryptePrivateKey = decrypt(encryptedPrivateKey!!)
 
+        admin.unlockAccount(ADMIN_ADDRESS, ADMIN_PASSWORD)
+        web3j.setTokenApprove(decryptePrivateKey, INDIVE_ADDRESS, quantity.value.toInt())
         web3j.donate(decryptePrivateKey, artistAddress.value, quantity.value.toInt(), memo.value)
+
         _successMsgEvent.postValue("후원 완료했습니다.")
     }
 
@@ -87,8 +92,7 @@ class DonateViewModel @Inject constructor(
         val encryptedPrivateKey = sharedPreferences.getString(email, "")
         val decryptePrivateKey = decrypt(encryptedPrivateKey!!)
 
-        //balance.value =
-        web3j.getTokenBalanceOf(decryptePrivateKey, myAddress!!)
+        balance.value = web3j.getTokenBalanceOf(decryptePrivateKey, myAddress!!)
 
     }
 
