@@ -9,6 +9,7 @@ import com.ssafy.indive.domain.nft.exception.NotSatisfiedAmountException;
 import com.ssafy.indive.domain.nft.service.NftAddService;
 import com.ssafy.indive.domain.nft.service.NftModifyService;
 import com.ssafy.indive.domain.nft.service.NftReadService;
+import com.ssafy.indive.domain.nft.service.facade.NftModifyServiceRedisFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,7 +26,7 @@ public class NftController {
 
     private final NftAddService nftAddService;
 
-    private final NftModifyService nftModifyService;
+    private final NftModifyServiceRedisFacade nftModifyService;
 
     private final NftReadService nftReadService;
 
