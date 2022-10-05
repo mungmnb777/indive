@@ -17,4 +17,8 @@ public class ServiceDuplicatedEmail {
     public ServiceDuplicatedEmail(String email) {
         this.email = email;
     }
+
+    public String convertToString(){
+        return email;
+    }
 }

@@ -11,6 +11,7 @@ import com.ssafy.indive.domain.member.service.MemberReadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,7 @@ public class MemberController {
     }
 
     @PutMapping("/{memberSeq}")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> modifyMember(@Validated @ModelAttribute WebMemberModifyRequestDto dto, @PathVariable("memberSeq") long memberSeq) {
         try {
         return new ResponseEntity<>(memberModifyService.modifyMember(memberSeq, dto.convertToServiceDto()), HttpStatus.OK);
@@ -53,11 +55,13 @@ public class MemberController {
     }
 
     @GetMapping("/my-account")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> getLoginMemberDetails() {
         return new ResponseEntity<>(memberReadService.getLoginMemberDetails(), HttpStatus.OK);
     }
 
     @PostMapping("{memberSeq}/notice")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> writeNotice(@RequestBody WebMemberWriteNoticeRequestDto dto ,@PathVariable("memberSeq") long memberSeq) {
 
         return new ResponseEntity<>(memberModifyService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);

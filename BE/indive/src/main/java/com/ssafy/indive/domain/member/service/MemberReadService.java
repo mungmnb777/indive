@@ -22,8 +22,6 @@ public class MemberReadService {
 
 
     public boolean isDuplicated(ServiceDuplicatedEmail dto) {
-        System.out.println("isDuplicated S : "+dto.getEmail());
-        System.out.println("isDuplicated S : "+ memberRepository.existsByEmail(dto.getEmail()));
         if(memberRepository.existsByEmail(dto.getEmail())) return true;
         else return false;
     }

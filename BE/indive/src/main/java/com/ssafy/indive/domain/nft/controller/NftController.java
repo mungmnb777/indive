@@ -9,10 +9,12 @@ import com.ssafy.indive.domain.nft.exception.NotSatisfiedAmountException;
 import com.ssafy.indive.domain.nft.service.NftAddService;
 import com.ssafy.indive.domain.nft.service.NftModifyService;
 import com.ssafy.indive.domain.nft.service.NftReadService;
+import com.ssafy.indive.domain.nft.service.facade.NftModifyServiceRedisFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,16 +27,18 @@ public class NftController {
 
     private final NftAddService nftAddService;
 
-    private final NftModifyService nftModifyService;
+    private final NftModifyServiceRedisFacade nftModifyService;
 
     private final NftReadService nftReadService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Secured("ROLE_USER")
     public ResponseEntity<?> addImageToIpfs(@Validated @ModelAttribute WebNftAddRequestDto dto) throws IOException {
         return new ResponseEntity<>(nftAddService.addImageToIpfs(dto.convertToServiceDto()), HttpStatus.OK);
     }
 
     @GetMapping("/check-stock")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> checkStock(@Validated @ModelAttribute WebCheckStockGetRequestDto dto) {
         try {
             return new ResponseEntity<>(nftReadService.checkStock(dto.convertToService()), HttpStatus.OK);
@@ -46,6 +50,7 @@ public class NftController {
     }
 
     @GetMapping("/check-amount")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> checkAmount(@Validated @ModelAttribute WebCheckAmountGetRequestDto dto) {
         try {
             return new ResponseEntity<>(nftReadService.checkAmount(dto.convertToService()), HttpStatus.OK);
@@ -57,6 +62,7 @@ public class NftController {
     }
 
     @PutMapping
+    @Secured("ROLE_USER")
     public ResponseEntity<?> issueNft(@RequestBody WebNftModifyRequestDto dto) {
         try {
             return new ResponseEntity<>(nftModifyService.issueNft(dto.convertToService()), HttpStatus.OK);

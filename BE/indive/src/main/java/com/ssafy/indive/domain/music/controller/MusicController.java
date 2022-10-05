@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class MusicController {
     private final MusicReadService musicReadService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Secured("ROLE_USER")
     public ResponseEntity<?> addMusic(@Validated @ModelAttribute WebMusicAddRequestDto dto) {
         try {
             return new ResponseEntity<>(musicAddService.addMusic(dto.convertToServiceDto()), HttpStatus.OK);
@@ -38,6 +40,7 @@ public class MusicController {
     }
 
     @PutMapping(value = "/{musicSeq}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Secured("ROLE_USER")
     public ResponseEntity<?> modifyMusic(@Validated @ModelAttribute WebMusicModifyRequestDto dto, @PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicModifyService.modifyMusic(musicSeq, dto.convertToServiceDto()), HttpStatus.OK);
@@ -49,6 +52,7 @@ public class MusicController {
     }
 
     @DeleteMapping("/{musicSeq}")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> deleteMusic(@PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicDeleteService.deleteMusic(musicSeq), HttpStatus.OK);
@@ -66,6 +70,7 @@ public class MusicController {
     }
 
     @GetMapping("/my-music")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> getMyMusic(Pageable pageable) {
         return new ResponseEntity<>(musicReadService.getMyMusic(pageable), HttpStatus.OK);
     }
@@ -76,6 +81,7 @@ public class MusicController {
     }
 
     @PostMapping("/{musicSeq}/like")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> likeMusic(@PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicAddService.likeMusic(musicSeq), HttpStatus.OK);
@@ -87,15 +93,17 @@ public class MusicController {
     }
 
     @GetMapping("/{musicSeq}/like")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> isLike(@PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicReadService.isLike(musicSeq), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.OK);
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/{musicSeq}/like")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> deleteLike(@PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicDeleteService.deleteLike(musicSeq), HttpStatus.OK);
@@ -125,6 +133,7 @@ public class MusicController {
     }
 
     @GetMapping("/{musicSeq}/reply")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> getMusicReply(@PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicReadService.getMusicReply(musicSeq), HttpStatus.OK);
@@ -134,6 +143,7 @@ public class MusicController {
     }
 
     @PutMapping("/{musicSeq}/reply/{replySeq}")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> modifyMusicReply(@PathVariable("replySeq") long replySeq,
                                               @RequestBody WebReplyModifyRequestDto dto) {
         try {
@@ -146,6 +156,7 @@ public class MusicController {
     }
 
     @DeleteMapping("/{musicSeq}/reply/{replySeq}")
+    @Secured("ROLE_USER")
     public ResponseEntity<?> deleteMusicReply(@PathVariable("replySeq") long replySeq) {
         try {
             return new ResponseEntity<>(musicDeleteService.deleteMusicReply(replySeq), HttpStatus.OK);
@@ -166,6 +177,7 @@ public class MusicController {
     }
 
     @GetMapping(value = "/{musicSeq}/image-download", produces = "application/octet-stream")
+    @Secured({"ROLE_USER", "ROLE_ANONYMOUS"})
     public ResponseEntity<?> downloadImage(@PathVariable("musicSeq") long musicSeq) {
         try {
             return new ResponseEntity<>(musicReadService.downloadImage(musicSeq), HttpStatus.OK);

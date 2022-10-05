@@ -65,7 +65,8 @@ tasks.named('test') {
 		destinationFile = file("$buildDir/jacoco/jacoco.exec")
 		includes = ["*.domain.*"]
 		excludes = ["*.domain.*.dto.*",
-					"*.domain.*.exception.*"]
+					"*.domain.*.exception.*",
+					"*.domain.*.Q*"]
 	}
 
 	useJUnitPlatform()
@@ -83,7 +84,8 @@ jacocoTestReport {
 			fileTree(dir: it,
 					include: 'com/ssafy/indive/domain/**',
 					exclude: ['com/ssafy/indive/domain/**/dto/**',
-							  'com/ssafy/indive/domain/**/exception/**'])
+							  'com/ssafy/indive/domain/**/exception/**',
+							  'com/ssafy/indive/domain/**/entity/Q*'])
 		}))
 	}
 }

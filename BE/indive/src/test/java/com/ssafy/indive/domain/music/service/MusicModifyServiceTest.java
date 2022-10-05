@@ -125,7 +125,15 @@ public class MusicModifyServiceTest {
 
             context.setAuthentication(authentication);
 
-            given(musicRepository.findById(eq(1L))).willReturn(Optional.of(MockEntityFactory.music()));
+            given(musicRepository.findById(eq(1L))).will(
+                    (Answer<Optional<Music>>) invocation -> {
+                        Music expected = MockEntityFactory.music();
+
+                        ReflectionTestUtils.setField(expected, "seq", seq);
+
+                        return Optional.of(expected);
+                    }
+            );
 
             // when
 
