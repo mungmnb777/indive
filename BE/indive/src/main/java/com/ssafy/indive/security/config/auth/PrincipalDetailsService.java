@@ -17,10 +17,8 @@ public class PrincipalDetailsService implements UserDetailsService{
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("PrincipalDetailsService : 진입");
 		Member member = memberRepository.findByEmail(username).orElseThrow(IllegalArgumentException::new);
 
-		// session.setAttribute("loginUser", user);
 		return new PrincipalDetails(member);
 	}
 }
