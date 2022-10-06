@@ -11,11 +11,12 @@ import lombok.Setter;
 public class ServiceCheckAmountGetRequestDto {
 
     private Long artistSeq;
-
+    private String userWallet;
     private int amount;
 
-    public ServiceCheckAmountGetRequestDto(Long artistSeq, int amount) {
+    public ServiceCheckAmountGetRequestDto(Long artistSeq, String userWallet, int amount) {
         this.artistSeq = artistSeq;
+        this.userWallet = userWallet;
         this.amount = amount;
     }
 }

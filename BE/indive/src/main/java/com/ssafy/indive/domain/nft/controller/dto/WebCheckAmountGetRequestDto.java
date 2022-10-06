@@ -12,15 +12,16 @@ import lombok.Setter;
 public class WebCheckAmountGetRequestDto {
 
     private Long artistSeq;
-
+    private String userWallet;
     private int amount;
 
-    public WebCheckAmountGetRequestDto(Long artistSeq, int amount) {
+    public WebCheckAmountGetRequestDto(Long artistSeq, String userWallet, int amount) {
         this.artistSeq = artistSeq;
+        this.userWallet = userWallet;
         this.amount = amount;
     }
 
     public ServiceCheckAmountGetRequestDto convertToService() {
-        return new ServiceCheckAmountGetRequestDto(artistSeq, amount);
+        return new ServiceCheckAmountGetRequestDto(artistSeq, userWallet, amount);
     }
 }
