@@ -22,8 +22,12 @@ public class MemberModifyService {
 
         Member findMember = memberRepository.findById(seq).orElseThrow(IllegalArgumentException::new);
 
-        findMember.update(dto);
+        String originProfile = findMember.getImageOrigin();
+        String backgroundProfile =findMember.getBackgroundOrigin();
+        System.out.println("backgroundProfile : "+backgroundProfile);
+        System.out.println("originProfile : "+ originProfile);
 
+        findMember.update(dto);
         if((dto.getImage() != null && !dto.getImage().isEmpty()) && (dto.getBackground()!=null && !dto.getBackground().isEmpty())){
             log.info("modifyMember : 프로필, 배경사진 둘다있음");
             findMember.uploadFiles(dto.getImage(), dto.getBackground());
@@ -31,15 +35,20 @@ public class MemberModifyService {
             log.info("modifyMember : 프로필, 배경사진 둘다없음");
         }
         else if((dto.getImage() == null || dto.getImage().isEmpty()) && (dto.getBackground()!=null || !dto.getBackground().isEmpty())){
-            log.info("modifyMember : 프로필 없음");
+            log.info("modifyMember : 백그라운드만 있음");
             //백그라운드 넣기
-            FileUtils.deleteFile(findMember.getBackgroundUuid()); // 백그라운드 초기화
+            if(!backgroundProfile.equals("default_background.png")){
+                FileUtils.deleteFile(findMember.getBackgroundUuid()); // 백그라운드 초기화
+            }
             findMember.uploadBackgroundFiles(dto.getBackground());
+
         }
         else if((dto.getImage() != null || !dto.getImage().isEmpty()) && (dto.getBackground()==null || dto.getBackground().isEmpty())) {
-            log.info("modifyMember : 배경사진없음");
+            log.info("modifyMember : 프로필만 있음");
             //프로필 넣기
-            FileUtils.deleteFile(findMember.getImageUuid());
+            if(!originProfile.equals("default_profile.png")) {
+                FileUtils.deleteFile(findMember.getImageUuid());
+            }
             findMember.uploadProfileImage(dto.getImage());
         }
 
