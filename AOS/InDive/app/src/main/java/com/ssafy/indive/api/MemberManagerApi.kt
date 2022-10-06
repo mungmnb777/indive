@@ -1,5 +1,6 @@
 package com.ssafy.indive.api
 
+import com.ssafy.indive.model.response.DonationRankResponse
 import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.model.dto.MemberLogin
 import com.ssafy.indive.model.dto.Notice
@@ -63,5 +64,7 @@ interface MemberManagerApi {
     @GET("members/my-account")
     suspend fun loginMemberDetail(): Response<MemberDetailResponse>
 
-
+    // 해당 사용자의 후원 랭킹
+    @GET("members/donation-rank/{address}")
+    suspend fun donationRankingByAddress(@Path("address") address: String) : Response<List<DonationRankResponse>>
 }
