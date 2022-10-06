@@ -5,6 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.indive.blockchain.DonationHistory
+import com.ssafy.indive.model.response.DonationRankResponse
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.utils.Result
 import com.ssafy.indive.utils.setArtist
@@ -14,6 +15,7 @@ import com.ssafy.indive.view.home.RecentMusicAdapter
 import com.ssafy.indive.view.home.search.SearchArtistAdapter
 import com.ssafy.indive.view.more.box.BoxAdapter
 import com.ssafy.indive.view.more.mywallet.MyWalletAdapter
+import com.ssafy.indive.view.mystudio.ranking.RankingAdapter
 
 object RecyclerBinding {
 
@@ -49,6 +51,10 @@ object RecyclerBinding {
 
                 is BoxAdapter -> {
                     (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<String>)
+                }
+
+                is RankingAdapter -> {
+                    (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<DonationRankResponse>)
                 }
 
                 else -> {
