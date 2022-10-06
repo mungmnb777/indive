@@ -6,6 +6,7 @@ import com.ssafy.indive.domain.member.controller.dto.WebMemberModifyRequestDto;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberWriteNoticeRequestDto;
 import com.ssafy.indive.domain.member.exception.NotMatchMemberException;
 import com.ssafy.indive.domain.member.service.MemberAddService;
+import com.ssafy.indive.domain.member.service.MemberBlockchainService;
 import com.ssafy.indive.domain.member.service.MemberModifyService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ public class MemberController {
     private final MemberReadService memberReadService;
 
     private final MemberModifyService memberModifyService;
+
+    private final MemberBlockchainService memberBlockchainService;
 
     @PostMapping("join")
     public ResponseEntity<?> addMember(@RequestBody WebMemberAddRequestDto dto) {
@@ -83,6 +86,11 @@ public class MemberController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/donation-rank/{address}")
+    public ResponseEntity<?> getDonationRanking(@PathVariable("address") String address){
+        return new ResponseEntity<>(memberBlockchainService.getDonationRanking(address), HttpStatus.OK);
     }
 
 }
