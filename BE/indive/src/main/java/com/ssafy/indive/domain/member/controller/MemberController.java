@@ -39,7 +39,11 @@ public class MemberController {
 
     @GetMapping("/{memberSeq}")
     public ResponseEntity<?> getMemberDetails(@PathVariable("memberSeq") long Seq) {
-        return new ResponseEntity<>(memberReadService.getMemberDetails(Seq), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(memberReadService.getMemberDetails(Seq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/{memberSeq}")
@@ -64,7 +68,11 @@ public class MemberController {
     @Secured("ROLE_USER")
     public ResponseEntity<?> writeNotice(@RequestBody WebMemberWriteNoticeRequestDto dto ,@PathVariable("memberSeq") long memberSeq) {
 
-        return new ResponseEntity<>(memberModifyService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(memberModifyService.writeNotice( dto.convertToServiceDto(),memberSeq), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(value = "/{memberSeq}/profileimg-download", produces = "application/octet-stream")
