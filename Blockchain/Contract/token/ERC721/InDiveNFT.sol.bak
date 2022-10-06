@@ -79,8 +79,4 @@ contract InDiveNFT is ERC721, ERC721URIStorage, ERC721Enumerable {
   function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
     return super.supportsInterface(interfaceId);
   }
-
-  function curruntTokenId() public view returns (uint256){
-      return _tokenIds.current();
-  }
 }
