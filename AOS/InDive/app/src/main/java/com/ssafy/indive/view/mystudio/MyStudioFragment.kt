@@ -15,6 +15,7 @@ import com.ssafy.indive.databinding.FragmentMyStudioBinding
 import com.ssafy.indive.model.dto.Notice
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.utils.USER
+import com.ssafy.indive.utils.USER_ADDRESS
 import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.genre.genrelist.GenreListFragmentDirections
 import com.ssafy.indive.view.login.MemberViewModel
@@ -105,7 +106,9 @@ class MyStudioFragment : BaseFragment<FragmentMyStudioBinding>(R.layout.fragment
                 findNavController().navigate(R.id.action_myStudioFragment_to_addSongFirstFragment)
             }
             btnRanking.setOnClickListener {
-                findNavController().navigate(R.id.action_myStudioFragment_to_rankingFragment)
+                val address = sharedPreferences.getString(USER_ADDRESS, "")
+                val action = MyStudioFragmentDirections.actionMyStudioFragmentToRankingFragment(address!!)
+                findNavController().navigate(action)
             }
             ivAddNft.setOnClickListener {
                 findNavController().navigate(R.id.action_myStudioFragment_to_addRewardFragment)
