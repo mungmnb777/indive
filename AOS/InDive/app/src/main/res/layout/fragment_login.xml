@@ -33,6 +33,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <EditText
+                android:text="jdsaeyqi@naver.com"
                 android:id="@+id/et_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <EditText
+                android:text="123123"
                 android:id="@+id/et_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

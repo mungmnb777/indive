@@ -53,7 +53,7 @@ class AddMusicFirstFragment :
             }
         }
 
-//        addMusicViewModel.initData()
+        addMusicViewModel.initData()
         initClickListener()
         checkMediaPermission()
 

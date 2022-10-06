@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="MemberVM"
             type="com.ssafy.indive.view.login.MemberViewModel" />
+
         <variable
             name="UserStudioVM"
             type="com.ssafy.indive.view.userstudio.UserStudioViewModel" />
@@ -15,213 +17,202 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="InDive"
-                android:textStyle="bold"
-                android:textColor="@color/main_blue"
-                android:textSize="@dimen/toolbar_title" />
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-        <View
-            android:id="@+id/toolbar_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/main_grey"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-        <ImageView
-            android:id="@+id/img_background"
-            android:layout_width="0dp"
-            android:layout_height="160dp"
-            bindBackImage="@{MemberVM.profile.memberSeq}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            tools:layout_editor_absoluteX="0dp"
-            android:background="@color/main_grey"
-            tools:src="@drawable/ic_launcher_foreground" />
-
-        <View
-            android:id="@+id/img_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/main_grey"
-            app:layout_constraintTop_toBottomOf="@id/img_background" />
-
-
-
-        <!-- 배경 투명화된 이미지가 입력됐을 때, 테두리 유지용 -->
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            app:layout_constraintBottom_toBottomOf="@id/img_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_background"
-            android:src="@color/white" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_profile"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            setImageCircle="@{MemberVM.profile.memberSeq}"
-            app:layout_constraintBottom_toBottomOf="@id/img_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_background"
-            tools:src="@drawable/ic_empty_image" />
-
-
-
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/civ_profile"
-            tools:text="닉네임"
-            android:gravity="center"
-            android:text="@{MemberVM.profile.nickname}"/>
-
-        <TextView
-            android:id="@+id/tv_introduce"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:textColor="@color/main_grey"
-            android:textSize="16dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
-            tools:text="소개란 입니다."
-            android:singleLine="true"
-            android:text="@{MemberVM.profile.profileMessage}"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/border_notice"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="16dp"
-            android:background="@drawable/btn_round_white_black_border"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/tv_introduce">
-
-            <ImageView
-                android:id="@+id/iv_notice"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/btn_notice"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_notice"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="10dp"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/iv_notice"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="공지사항"
-                android:text="@{MemberVM.profile.notice}"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/btn_donate"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="후원하기"
-            android:textSize="14dp"
-            android:layout_margin="16dp"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_round_main_color"
-            app:layout_constraintStart_toStartOf="@id/border_notice"
-            app:layout_constraintTop_toBottomOf="@id/border_notice"
-            app:layout_constraintEnd_toStartOf="@id/btn_ranking"
-            />
-
-        <Button
-            android:id="@+id/btn_ranking"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:text="후원 랭킹 보기"
-            android:textSize="14dp"
-            android:layout_margin="16dp"
-            android:textColor="@color/main_grey"
-            android:background="@drawable/btn_round_white_grey_border"
-            app:layout_constraintEnd_toEndOf="@id/border_notice"
-            app:layout_constraintTop_toBottomOf="@id/border_notice"
-            app:layout_constraintStart_toEndOf="@id/btn_donate"
-            />
-
-        <TextView
-            android:id="@+id/tv_song"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="노래"
-            android:textSize="24dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="@id/tv_introduce"
-            app:layout_constraintTop_toBottomOf="@id/btn_donate"/>
-
-        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/white"
-            android:elevation="20dp"
-            app:cardCornerRadius="15dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_song"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:background="@color/white">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="InDive"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/toolbar_title"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <View
+                android:id="@+id/toolbar_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_grey"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <ImageView
+                android:id="@+id/img_background"
+                bindBackImage="@{MemberVM.profile.memberSeq}"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@color/main_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                tools:layout_editor_absoluteX="0dp"
+                tools:src="@drawable/ic_launcher_foreground" />
+
+            <View
+                android:id="@+id/img_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_grey"
+                app:layout_constraintTop_toBottomOf="@id/img_background" />
+
+
+            <!-- 배경 투명화된 이미지가 입력됐을 때, 테두리 유지용 -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/img_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_background" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile"
+                setImageCircle="@{MemberVM.profile.memberSeq}"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/img_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_background"
+                tools:src="@drawable/ic_empty_image" />
+
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@{MemberVM.profile.nickname}"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/civ_profile"
+                tools:text="닉네임" />
+
+            <TextView
+                android:id="@+id/tv_introduce"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@{MemberVM.profile.profileMessage}"
+                android:textColor="@color/main_grey"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+                tools:text="소개란 입니다." />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/border_notice"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_round_white_black_border"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_introduce">
+
+                <ImageView
+                    android:id="@+id/iv_notice"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/btn_notice"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@{MemberVM.profile.notice}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_notice"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="공지사항" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_donate"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_round_main_color"
+                android:gravity="center"
+                android:text="후원하기"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toStartOf="@id/btn_ranking"
+                app:layout_constraintStart_toStartOf="@id/border_notice"
+                app:layout_constraintTop_toBottomOf="@id/border_notice" />
+
+            <Button
+                android:id="@+id/btn_ranking"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_round_white_grey_border"
+                android:gravity="center"
+                android:text="후원 랭킹 보기"
+                android:textColor="@color/main_grey"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="@id/border_notice"
+                app:layout_constraintStart_toEndOf="@id/btn_donate"
+                app:layout_constraintTop_toBottomOf="@id/border_notice" />
+
+            <TextView
+                android:id="@+id/tv_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="노래"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_introduce"
+                app:layout_constraintTop_toBottomOf="@id/btn_donate" />
 
             <androidx.recyclerview.widget.RecyclerView
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/tv_song"
                 android:id="@+id/rv_user_music"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 submitList="@{UserStudioVM.userMusicList}"
-                tools:listitem="@layout/item_music_chart"
-                />
-        </androidx.cardview.widget.CardView>
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_song"
+                tools:listitem="@layout/item_music_list" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
