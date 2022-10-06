@@ -1,25 +1,15 @@
 package com.ssafy.indive.blockchain
 
 import org.web3j.protocol.Web3j
-import com.ssafy.indive.blockchain.InDive
 import org.web3j.tx.gas.ContractGasProvider
 import org.web3j.tx.TransactionManager
 import org.web3j.protocol.core.RemoteFunctionCall
 import org.web3j.protocol.core.methods.response.TransactionReceipt
 import org.web3j.abi.datatypes.generated.Uint256
-import com.ssafy.indive.blockchain.InDive.DonationEventEventResponse
-import org.web3j.tx.Contract.EventValuesWithLog
 import io.reactivex.Flowable
 import org.web3j.protocol.core.DefaultBlockParameter
 import org.web3j.abi.EventEncoder
-import org.web3j.tuples.generated.Tuple5
-import kotlin.Throws
-import org.web3j.tuples.generated.Tuple2
 import org.web3j.protocol.core.methods.response.BaseEventResponse
-import com.ssafy.indive.blockchain.InDiveNFT
-import com.ssafy.indive.blockchain.InDiveNFT.ApprovalForAllEventResponse
-import org.web3j.abi.datatypes.generated.Bytes4
-import com.ssafy.indive.blockchain.InDiveToken
 import io.reactivex.functions.Function
 import org.web3j.abi.TypeReference
 import org.web3j.abi.datatypes.*
