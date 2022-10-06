@@ -24,7 +24,7 @@ class RecentMusicAdapter(private val playListener : (MusicDetailResponse) -> (Un
             binding.root.setOnClickListener {
                 playListener(music)
             }
-
+            binding.executePendingBindings()
         }
     }
 
@@ -40,7 +40,11 @@ class RecentMusicAdapter(private val playListener : (MusicDetailResponse) -> (Un
     }
 
     override fun onBindViewHolder(holder: RecentMusicViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val currentItem = getItem(position)
+
+        if(currentItem != null){
+            holder.bind(currentItem)
+        }
     }
 
 

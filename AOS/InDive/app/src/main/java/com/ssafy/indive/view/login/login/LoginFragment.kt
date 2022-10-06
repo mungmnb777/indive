@@ -50,17 +50,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     private fun initClickListener() {
         binding.apply {
-//            btnJoinSns.setOnClickListener {
-//                findNavController().navigate(R.id.action_loginFragment_to_joinSnsFragment)
-//            }
             btnJoin.setOnClickListener {
                 findNavController().navigate(R.id.action_loginFragment_to_joinFragment)
             }
             btnLogin.setOnClickListener {
                 memberViewModel.memberLogin(MemberLogin(etId.text.toString(), etPass.text.toString()))
-            }
-            tvLogo.setOnClickListener {
-                memberViewModel.memberLogin(MemberLogin("wkdrns3918@naver.com", "1"))
             }
         }
     }
