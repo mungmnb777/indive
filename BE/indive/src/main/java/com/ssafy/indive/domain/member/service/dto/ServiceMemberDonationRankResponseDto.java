@@ -11,12 +11,15 @@ public class ServiceMemberDonationRankResponseDto {
 
     private String nickname;
 
+    private String address;
+
     private int totalValue;
 
     @Builder
-    public ServiceMemberDonationRankResponseDto(long memberSeq, String nickname, int totalValue){
+    public ServiceMemberDonationRankResponseDto(long memberSeq, String nickname, String address, int totalValue){
         this.memberSeq = memberSeq;
         this.nickname = nickname;
+        this.address = address;
         this.totalValue = totalValue;
     }
 }

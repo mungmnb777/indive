@@ -2,6 +2,8 @@ package com.ssafy.indive.domain.member.service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.ssafy.indive.domain.member.entity.Member;
+import com.ssafy.indive.domain.member.repository.MemberQueryRepository;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberDonationInfoResponseDto;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberDonationRankResponseDto;
 import com.ssafy.indive.global.blockchain.InDive;
@@ -17,7 +19,8 @@ import org.web3j.tx.FastRawTransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
 import org.web3j.tx.response.PollingTransactionReceiptProcessor;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.ssafy.indive.global.constant.BlockchainConst.*;
 
@@ -25,7 +28,9 @@ import static com.ssafy.indive.global.constant.BlockchainConst.*;
 @Transactional
 @RequiredArgsConstructor
 public class MemberBlockchainService {
-    public ServiceMemberDonationRankResponseDto getDonationRanking(String address) {
+
+    private final MemberQueryRepository memberQueryRepository;
+    public List<ServiceMemberDonationRankResponseDto> getDonationRanking(String address) {
         Web3j web3j = Web3j.build(new HttpService(BLOCKCHAIN_URL));
         Credentials credentials = Credentials.create(ADMIN_PRIVATE_KEY);
         DefaultGasProvider gasProvider = new DefaultGasProvider();
@@ -51,12 +56,30 @@ public class MemberBlockchainService {
         List<ServiceMemberDonationInfoResponseDto> infoList = gson.fromJson(result, new TypeToken<List<ServiceMemberDonationInfoResponseDto>>() {
         }.getType());
 
-        System.out.println(infoList);
 
-        // TODO: 2022-10-05 infoList 의 address 를 이용하여 DB 데이터와 조인
+        Collections.sort(infoList, new Comparator<ServiceMemberDonationInfoResponseDto>(){
+            @Override
+            public int compare(ServiceMemberDonationInfoResponseDto o1, ServiceMemberDonationInfoResponseDto o2) {
+                return o2.getTotalValue() - o1.getTotalValue();
+            }
+        });
 
-        // TODO: 2022-10-05
+        List<String> walletLists = infoList.stream().map(o -> o.getAddress()).collect(Collectors.toList());
 
-        return null;
+        List<Member> byWallet = memberQueryRepository.findByWallet(walletLists);
+
+        List<ServiceMemberDonationRankResponseDto> rankList = new ArrayList<>();
+
+        for (int i = 0 ; i < byWallet.size() ; i++){
+            ServiceMemberDonationRankResponseDto dto = ServiceMemberDonationRankResponseDto.builder()
+                    .memberSeq(byWallet.get(i).getSeq())
+                    .nickname(byWallet.get(i).getNickname())
+                    .address(byWallet.get(i).getWallet())
+                    .totalValue(infoList.get(i).getTotalValue()).build();
+
+            rankList.add(dto);
+        }
+
+        return rankList;
     }
 }
