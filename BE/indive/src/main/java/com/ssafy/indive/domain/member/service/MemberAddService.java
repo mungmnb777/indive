@@ -44,7 +44,6 @@ public class MemberAddService {
             memberRepository.save(member);
 
             return true;
-
         }
         return false;
     }
