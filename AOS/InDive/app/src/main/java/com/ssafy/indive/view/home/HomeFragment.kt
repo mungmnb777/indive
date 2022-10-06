@@ -16,11 +16,11 @@ import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentHomeBinding
 import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.model.response.MusicDetailResponse
-import com.ssafy.indive.utils.USER
-import com.ssafy.indive.utils.USER_EMAIL
+import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.genre.genrelist.GenreListFragmentDirections
 import com.ssafy.indive.view.player.PlayerFragmentDirections
 import com.ssafy.indive.view.qrscan.QrScanActivity
+import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -43,6 +43,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initPopularMusic()
         initClickListener()
         privateKeyCheck()
+        showFingerPrintDialog()
+    }
+
+    private fun showFingerPrintDialog() {
+        if (sharedPreferences.getInt(FINGERPRINT_USE, DISABLE) != 1) {
+//            FingerPrintDialog().show(parentFragmentManager, "FingerPrintDialog")
+            showToast("지문 인증 설정해주세요")
+        }
     }
 
     private fun initBanner() {
@@ -128,9 +136,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     fun scanQRSuccess() {
-        val action =
-            HomeFragmentDirections.actionHomeFragmentToDonateFragment(MainActivity.successQRScanMsg.toLong())
+        Log.d(TAG, "scanQRSuccess: ")
+        val artistSeq = MainActivity.successQRScanMsg
         MainActivity.successQRScanMsg = ""
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToDonateFragment(artistSeq.toLong())
         findNavController().navigate(action)
     }
 

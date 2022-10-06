@@ -1,14 +1,13 @@
 package com.ssafy.indive.view.qrscan
 
-import android.app.Activity
-import android.content.Intent
-import android.widget.Toast
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.zxing.integration.android.IntentIntegrator
 import com.ssafy.indive.MainActivity
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityQrScanBinding
+import com.ssafy.indive.utils.TAG
 
 class QrScanActivity : BaseActivity<ActivityQrScanBinding>(R.layout.activity_qr_scan) {
 
@@ -17,7 +16,7 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding>(R.layout.activity_qr_
     }
 
     private fun initQrScan(){
-        val intentIntegrator = IntentIntegrator(this)
+        val intentIntegrator = IntentIntegrator(this@QrScanActivity)
         intentIntegrator.setPrompt("안내선 안에 QR코드를 맞추면 자동으로 인식됩니다.") //QR코드 스캔 액티비티 하단에 띄울 텍스트 설정
         intentIntegrator.setOrientationLocked(false)                       //화면회전을 막을 것인지 설정 (default 세로모드)
         intentIntegrator.setBeepEnabled(false)                             //QR코드 스캔 시 소리를 낼 지 설정

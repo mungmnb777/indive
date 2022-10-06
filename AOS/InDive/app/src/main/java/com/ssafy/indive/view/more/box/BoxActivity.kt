@@ -6,6 +6,7 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.ssafy.indive.R
 import com.ssafy.indive.databinding.ActivityBoxBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +32,7 @@ class BoxActivity : AppCompatActivity() {
         binding.apply {
             boxVM = boxViewModel
             rvBoxList.adapter = adapter
+            rvBoxList.layoutManager = GridLayoutManager(this@BoxActivity, 2)
         }
 
         initViewModelCallback()

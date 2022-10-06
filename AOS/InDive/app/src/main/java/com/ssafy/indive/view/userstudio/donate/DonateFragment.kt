@@ -144,7 +144,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     private fun initBioMetric() {
         executor = ContextCompat.getMainExecutor(requireActivity())
         biometricPrompt = BiometricPrompt(
-            requireActivity(),
+            this,
             executor,
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
