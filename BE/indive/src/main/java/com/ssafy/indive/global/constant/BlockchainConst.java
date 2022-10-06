@@ -7,8 +7,8 @@ public class BlockchainConst {
     public static final long CHAIN_ID = 102L;
 
     //어드민 정보
-    public static final String ADMIN_PRIVATE_KEY = "fcecb322ad7e18d14570b4fdadc11210f8c5118525b47993d3254c219d237645";
-    public static final String ADMIN_ADDRESS = "0xbbfbdab165949bdd64f39ef179bb47859bc074a2";
+    public static final String ADMIN_PRIVATE_KEY = "f5a6424b8fe4a1bcae3cd81bb60ac4c0304d759fda8c6afd527ab4ba3c389014";
+    public static final String ADMIN_ADDRESS = "0x30f382372923eb431E809e78D9dE6A1A384FBc43";
     public static final String ADMIN_PASSWORD = "ssafy102";
 
     //컨트랙트 주소
