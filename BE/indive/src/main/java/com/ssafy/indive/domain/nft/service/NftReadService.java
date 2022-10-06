@@ -8,10 +8,16 @@ import com.ssafy.indive.domain.nft.repository.NftQueryRepository;
 import com.ssafy.indive.domain.nft.service.dto.ServiceCheckAmountGetRequestDto;
 import com.ssafy.indive.domain.nft.service.dto.ServiceCheckStockGetRequestDto;
 import com.ssafy.indive.domain.nft.service.dto.ServiceNftAmountResponseDto;
+import com.ssafy.indive.domain.nft.service.dto.ServiceNftImageGetRequestDto;
+import io.ipfs.api.IPFS;
+import io.ipfs.multihash.Multihash;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -37,5 +43,15 @@ public class NftReadService {
         Nft nft = nftQueryRepository.findByArtist(artist).orElseThrow(() -> new NftNotFoundException("해당 아티스트의 NFT가 없습니다."));
 
         return dto.getAmount() >= nft.getLowerDonationAmount();
+    }
+
+    public Resource getImage(ServiceNftImageGetRequestDto dto) throws IOException {
+        IPFS ipfs = new IPFS("/ip4/3.34.252.202/tcp/5001");
+
+        Multihash filePointer = Multihash.fromBase58(dto.getCid());
+
+        byte[] content = ipfs.cat(filePointer);
+
+        return new ByteArrayResource(content);
     }
 }

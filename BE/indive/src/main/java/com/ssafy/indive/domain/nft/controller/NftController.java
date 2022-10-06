@@ -1,9 +1,6 @@
 package com.ssafy.indive.domain.nft.controller;
 
-import com.ssafy.indive.domain.nft.controller.dto.WebCheckAmountGetRequestDto;
-import com.ssafy.indive.domain.nft.controller.dto.WebCheckStockGetRequestDto;
-import com.ssafy.indive.domain.nft.controller.dto.WebNftAddRequestDto;
-import com.ssafy.indive.domain.nft.controller.dto.WebNftModifyRequestDto;
+import com.ssafy.indive.domain.nft.controller.dto.*;
 import com.ssafy.indive.domain.nft.exception.NftNotFoundException;
 import com.ssafy.indive.domain.nft.exception.NotSatisfiedAmountException;
 import com.ssafy.indive.domain.nft.service.NftAddService;
@@ -19,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 @RestController
 @RequiredArgsConstructor
@@ -70,6 +68,15 @@ public class NftController {
             return new ResponseEntity<>("요청 값을 다시 확인해주세요.", HttpStatus.BAD_REQUEST);
         } catch (NftNotFoundException | NotSatisfiedAmountException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/{cid}", produces = "image/png")
+    public ResponseEntity<?> getImage(@ModelAttribute WebNftImageGetRequestDto dto) {
+        try {
+            return new ResponseEntity<>(nftReadService.getImage(dto.convertToService()), HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
