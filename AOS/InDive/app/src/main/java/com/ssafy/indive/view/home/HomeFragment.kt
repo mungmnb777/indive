@@ -17,6 +17,7 @@ import com.ssafy.indive.databinding.FragmentHomeBinding
 import com.ssafy.indive.model.dto.Banner
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.utils.USER
+import com.ssafy.indive.utils.USER_EMAIL
 import com.ssafy.indive.view.genre.genrelist.GenreListFragmentDirections
 import com.ssafy.indive.view.player.PlayerFragmentDirections
 import com.ssafy.indive.view.qrscan.QrScanActivity
@@ -41,6 +42,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initRecentMusic()
         initPopularMusic()
         initClickListener()
+        privateKeyCheck()
     }
 
     private fun initBanner() {
@@ -130,6 +132,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             HomeFragmentDirections.actionHomeFragmentToDonateFragment(MainActivity.successQRScanMsg.toLong())
         MainActivity.successQRScanMsg = ""
         findNavController().navigate(action)
+    }
+
+    private fun privateKeyCheck(){
+        val userEmail = sharedPreferences.getString(USER_EMAIL, "")!!
+        val encryptedPrivateKey = sharedPreferences.getString(userEmail, "")!!
+        // 개인키가 없을 때
+        if(encryptedPrivateKey.isEmpty()){
+            SetPrivateKeyDialogFragment().apply {
+                show(this@HomeFragment.requireActivity().supportFragmentManager, "SetPrivateKeyDialogFragment")
+            }
+        }
     }
 
     override fun onResume() {
