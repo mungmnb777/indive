@@ -23,6 +23,7 @@ import com.ssafy.indive.utils.DISABLE
 import com.ssafy.indive.utils.FINGERPRINT_USE
 import com.ssafy.indive.utils.JWT
 import com.ssafy.indive.view.login.LoginActivity
+import com.ssafy.indive.view.more.box.BoxActivity
 import com.ssafy.indive.view.player.PlayerActivity
 import com.ssafy.indive.view.player.PlayerFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -102,7 +103,8 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>(R.layout.fragment_more) {
                 findNavController().navigate(R.id.action_moreFragment_to_myWalletFragment)
             }
             btnNftList.setOnClickListener {
-                findNavController().navigate(R.id.action_moreFragment_to_donateListFragment)
+                val intent = Intent(requireContext(), BoxActivity::class.java)
+                startActivity(intent)
             }
             tvSettingMsg.setOnClickListener {
                 val i = Intent(Intent.ACTION_VIEW)

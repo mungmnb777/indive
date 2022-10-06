@@ -4,7 +4,7 @@
     package="com.ssafy.indive">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
@@ -19,12 +19,11 @@
         android:theme="@style/Theme.InDive"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.more.box.BoxActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
-
-
+            android:exported="false"></activity>
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="true">
@@ -34,20 +33,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.songdetail.SongDetailActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.player.PlayerActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.qrscan.QrScanActivity"
             android:exported="false"
             android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" />
 
         <service android:name=".service.MusicService" />
 
@@ -55,4 +51,5 @@
             android:name=".NotificationReceiver"
             android:enabled="true" />
     </application>
+
 </manifest>
