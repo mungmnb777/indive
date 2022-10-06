@@ -7,14 +7,14 @@ public class BlockchainConst {
     public static final long CHAIN_ID = 102L;
 
     //어드민 정보
-    public static final String ADMIN_PRIVATE_KEY = "55306712e22fff116da7ef2002478d2bfe71d91f88d50cc8e66ca9d9bc5f55bb";
-    public static final String ADMIN_ADDRESS = "0x4DFb299B49764e891dD68a9c6E237FAE725C78f3";
-    public static final String ADMIN_PASSWORD = "102";
+    public static final String ADMIN_PRIVATE_KEY = "999b371e4f52d8c362752f745ecda82984bde6230f8e1d4e52c7bb565500d3d8";
+    public static final String ADMIN_ADDRESS = "0x947D88949256942a6ef904E0C8b324AA6948c167";
+    public static final String ADMIN_PASSWORD = "ssafy102";
 
     //컨트랙트 주소
-    public static final String INDIVENFT_ADDRESS = "0x1f0D803d693fC0B153f2f26456dD09c10BD3c09e";
-    public static final String INDIVETOKEN_ADDRESS = "0x75205DE0205c4fcbF5d0c373Bd357E1cB44D985B";
-    public static final String INDIVE_ADDRESS = "0x3f5E1354dC7caD73A24C68238AaBa7909b27B61F";
+    public static final String INDIVENFT_ADDRESS = "0x18814C29781607302c15426628F2c0E7c0Ca7EDB";
+    public static final String INDIVETOKEN_ADDRESS = "0x3C520aAb4B51a6e9bf0EF34c9c6a9f84c09f4530";
+    public static final String INDIVE_ADDRESS = "0x947D88949256942a6ef904E0C8b324AA6948c167";
 
     public static final long TX_END_CHECK_DURATION = 3000L;
     public static final int TX_END_CHECK_RETRY = 3;
