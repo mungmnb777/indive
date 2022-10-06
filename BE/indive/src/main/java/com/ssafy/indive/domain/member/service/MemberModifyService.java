@@ -24,8 +24,6 @@ public class MemberModifyService {
 
         String originProfile = findMember.getImageOrigin();
         String backgroundProfile =findMember.getBackgroundOrigin();
-        System.out.println("backgroundProfile : "+backgroundProfile);
-        System.out.println("originProfile : "+ originProfile);
 
         findMember.update(dto);
         if((dto.getImage() != null && !dto.getImage().isEmpty()) && (dto.getBackground()!=null && !dto.getBackground().isEmpty())){
