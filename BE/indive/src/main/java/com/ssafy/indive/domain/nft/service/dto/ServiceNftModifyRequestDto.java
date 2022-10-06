@@ -11,11 +11,12 @@ import lombok.Setter;
 public class ServiceNftModifyRequestDto {
 
     private Long artistSeq;
-
+    private String wallet;
     private int amount;
 
-    public ServiceNftModifyRequestDto(Long artistSeq, int amount) {
+    public ServiceNftModifyRequestDto(Long artistSeq, String wallet, int amount) {
         this.artistSeq = artistSeq;
+        this.wallet = wallet;
         this.amount = amount;
     }
 }
