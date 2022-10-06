@@ -4,6 +4,7 @@ import com.ssafy.indive.datasource.MemberManagerDataSource
 import com.ssafy.indive.model.dto.MemberJoin
 import com.ssafy.indive.model.dto.MemberLogin
 import com.ssafy.indive.model.dto.Notice
+import com.ssafy.indive.model.response.DonationRankResponse
 import com.ssafy.indive.model.response.MemberDetailResponse
 import com.ssafy.indive.utils.Result
 import kotlinx.coroutines.flow.Flow
@@ -95,4 +96,12 @@ class MemberManagerRepository @Inject constructor(
         emit(Result.Error(e))
     }
 
+    fun donationRankingByAddress(address: String): Flow<Result<List<DonationRankResponse>>> = flow {
+        emit(Result.Loading)
+        memberManagerDataSource.donationRankingByAddress(address).collect {
+            emit(Result.Success(it))
+        }
+    }.catch { e ->
+        emit(Result.Error(e))
+    }
 }
