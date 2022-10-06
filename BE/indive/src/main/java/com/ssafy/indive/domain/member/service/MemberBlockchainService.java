@@ -57,7 +57,7 @@ public class MemberBlockchainService {
         }.getType());
 
         for (int i = 0 ; i < infoList.size() ; i++){
-            if(infoList.get(i).getAddress().equals(ADMIN_ADDRESS)){
+            if(infoList.get(i).getAddress().toLowerCase().equals(ADMIN_ADDRESS.toLowerCase())){
                 infoList.remove(i);
                 break;
             }
