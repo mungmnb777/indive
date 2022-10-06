@@ -14,7 +14,7 @@ public class BlockchainConst {
     //컨트랙트 주소
     public static final String INDIVENFT_ADDRESS = "0x18814C29781607302c15426628F2c0E7c0Ca7EDB";
     public static final String INDIVETOKEN_ADDRESS = "0x3C520aAb4B51a6e9bf0EF34c9c6a9f84c09f4530";
-    public static final String INDIVE_ADDRESS = "0x947D88949256942a6ef904E0C8b324AA6948c167";
+    public static final String INDIVE_ADDRESS = "0x411b15a40dcd465Eaf05F240c293f9c63e393d2d";
 
     public static final long TX_END_CHECK_DURATION = 3000L;
     public static final int TX_END_CHECK_RETRY = 3;
