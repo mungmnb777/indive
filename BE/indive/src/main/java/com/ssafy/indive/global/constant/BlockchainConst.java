@@ -12,9 +12,9 @@ public class BlockchainConst {
     public static final String ADMIN_PASSWORD = "ssafy102";
 
     //컨트랙트 주소
-    public static final String INDIVENFT_ADDRESS = "0x3CCc77fca952f9A8Eff86226d30927a43F87939a";
-    public static final String INDIVETOKEN_ADDRESS = "0xE41EDa1eC37ed84AC607ee5f6BC999918c39e028";
-    public static final String INDIVE_ADDRESS = "0x6565Bed7cdA813Ff9B4cA5ebe490CE605d5eC415";
+    public static final String INDIVENFT_ADDRESS = "0xEdA17C3DdAa7BCa3e1BDaB8Be51299f140E77a11";
+    public static final String INDIVETOKEN_ADDRESS = "0xa2C15Ec81b75B3bcC9467df23B8aE9396D874786";
+    public static final String INDIVE_ADDRESS = "0x0ed3998e696B585CA86b396F008f8d908A81eEa5";
 
     public static final long TX_END_CHECK_DURATION = 3000L;
     public static final int TX_END_CHECK_RETRY = 3;
