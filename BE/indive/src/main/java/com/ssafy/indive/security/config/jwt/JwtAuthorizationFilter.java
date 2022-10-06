@@ -29,9 +29,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
-// 인가
+
 public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
-	//TODO : 이건왜있는걸까
 
 	private MemberRepository memberRepository;
 	public JwtAuthorizationFilter(AuthenticationManager authenticationManager, MemberRepository memberRepository) {
@@ -43,11 +42,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		//super.doFilterInternal(request, response, chain);
-		System.out.println("인증이나 권한이 필요한 주소 요청");
 
 		//사용자에게서 토큰을 받고
 		String jwtHeader = request.getHeader("Authorization");
-		System.out.println("jwtheader : "+jwtHeader);
 		//JSW 토큰을 검증해서 정상적인 사용자인지 확인
 
 		//header 가 있는지 확인
@@ -88,16 +85,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 					username = JWT.require(Algorithm.HMAC512("INDIVE")).build().verify(refreshToken).getClaim("username").asString();
 				}
 			}
-			//2. 엑세스 새로 발급해준다
 		}
 
-		//엑세스가 만료되었는지
-
-
 		//*유저네임이 있다면 아래 메소드를 실행시킴
-		//서명이 정상적으로 됨
 		if(username!=null){
-			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"+username);
 			Member member  = memberRepository.findByEmail(username).orElseThrow(IllegalArgumentException::new);
 
 			//*유저 정보 들어 있음
@@ -112,8 +103,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 			//강제로 시큐리티의 세션에 접근하여 Authentication 객체를 저장 -> 로그인한 정보를 확인해야 할 필요가 있기 때문에.
 			SecurityContextHolder.getContext().setAuthentication(authentication);
-
-
 		}
 		chain.doFilter(request,response);
 	}
