@@ -3,6 +3,7 @@ package com.ssafy.indive.domain.Member.service;
 import com.ssafy.indive.domain.member.entity.Member;
 import com.ssafy.indive.domain.member.repository.MemberRepository;
 import com.ssafy.indive.domain.member.service.MemberAddService;
+import com.ssafy.indive.domain.member.service.MemberBlockchainService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
 import com.ssafy.indive.domain.member.service.dto.ServiceDuplicatedEmail;
 import com.ssafy.indive.domain.member.service.dto.ServiceMemberAddRequestDto;

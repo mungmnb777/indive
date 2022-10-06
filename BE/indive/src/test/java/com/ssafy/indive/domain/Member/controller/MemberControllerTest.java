@@ -4,11 +4,13 @@ import com.ssafy.indive.domain.member.controller.MemberController;
 import com.ssafy.indive.domain.member.controller.dto.WebMemberWriteNoticeRequestDto;
 import com.ssafy.indive.domain.member.entity.enumeration.Role;
 import com.ssafy.indive.domain.member.service.MemberAddService;
+import com.ssafy.indive.domain.member.service.MemberBlockchainService;
 import com.ssafy.indive.domain.member.service.MemberModifyService;
 import com.ssafy.indive.domain.member.service.MemberReadService;
 import com.ssafy.indive.domain.member.service.dto.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -51,6 +53,10 @@ class MemberControllerTest {
 
     @MockBean
     private MemberModifyService memberModifyService;
+
+    @MockBean
+    private MemberBlockchainService memberBlockchainService;
+
 
     @Test
     @WithMockUser
