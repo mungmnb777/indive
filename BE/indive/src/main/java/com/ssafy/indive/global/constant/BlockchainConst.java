@@ -12,7 +12,7 @@ public class BlockchainConst {
     public static final String ADMIN_PASSWORD = "102";
 
     //컨트랙트 주소
-    public static final String INDIVENFT_ADDRESS = "0x75205DE0205c4fcbF5d0c373Bd357E1cB44D985B";
+    public static final String INDIVENFT_ADDRESS = "0x1f0D803d693fC0B153f2f26456dD09c10BD3c09e";
     public static final String INDIVETOKEN_ADDRESS = "0x75205DE0205c4fcbF5d0c373Bd357E1cB44D985B";
     public static final String INDIVE_ADDRESS = "0x3f5E1354dC7caD73A24C68238AaBa7909b27B61F";
 

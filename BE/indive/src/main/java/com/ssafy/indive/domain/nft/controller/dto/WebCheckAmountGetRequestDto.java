@@ -12,7 +12,6 @@ import lombok.Setter;
 public class WebCheckAmountGetRequestDto {
 
     private Long artistSeq;
-
     private int amount;
 
     public WebCheckAmountGetRequestDto(Long artistSeq, int amount) {

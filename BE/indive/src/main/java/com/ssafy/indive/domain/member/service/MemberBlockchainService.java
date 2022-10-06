@@ -73,6 +73,7 @@ public class MemberBlockchainService {
         for (int i = 0 ; i < byWallet.size() ; i++){
             ServiceMemberDonationRankResponseDto dto = ServiceMemberDonationRankResponseDto.builder()
                     .memberSeq(byWallet.get(i).getSeq())
+                    .imageUuid(byWallet.get(i).getImageUuid())
                     .nickname(byWallet.get(i).getNickname())
                     .address(byWallet.get(i).getWallet())
                     .totalValue(infoList.get(i).getTotalValue()).build();

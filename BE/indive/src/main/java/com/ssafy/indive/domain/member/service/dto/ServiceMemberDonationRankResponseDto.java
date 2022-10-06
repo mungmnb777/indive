@@ -8,16 +8,15 @@ import lombok.*;
 public class ServiceMemberDonationRankResponseDto {
 
     private long memberSeq;
-
+    private String imageUuid;
     private String nickname;
-
     private String address;
-
     private int totalValue;
 
     @Builder
-    public ServiceMemberDonationRankResponseDto(long memberSeq, String nickname, String address, int totalValue){
+    public ServiceMemberDonationRankResponseDto(long memberSeq, String imageUuid, String nickname, String address, int totalValue){
         this.memberSeq = memberSeq;
+        this.imageUuid = imageUuid;
         this.nickname = nickname;
         this.address = address;
         this.totalValue = totalValue;

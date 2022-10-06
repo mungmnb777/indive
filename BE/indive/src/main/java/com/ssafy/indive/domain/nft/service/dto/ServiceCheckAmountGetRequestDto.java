@@ -11,7 +11,6 @@ import lombok.Setter;
 public class ServiceCheckAmountGetRequestDto {
 
     private Long artistSeq;
-
     private int amount;
 
     public ServiceCheckAmountGetRequestDto(Long artistSeq, int amount) {

@@ -46,6 +46,8 @@ public class InDiveNFT extends Contract {
 
     public static final String FUNC_BALANCEOF = "balanceOf";
 
+    public static final String FUNC_CURRUNTTOKENID = "curruntTokenId";
+
     public static final String FUNC_GETAPPROVED = "getApproved";
 
     public static final String FUNC_GETNFTTOKENS = "getNFTTokens";
@@ -225,6 +227,13 @@ public class InDiveNFT extends Contract {
     public RemoteFunctionCall<BigInteger> balanceOf(String owner) {
         final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_BALANCEOF, 
                 Arrays.<Type>asList(new org.web3j.abi.datatypes.Address(160, owner)), 
+                Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
+        return executeRemoteCallSingleValueReturn(function, BigInteger.class);
+    }
+
+    public RemoteFunctionCall<BigInteger> curruntTokenId() {
+        final org.web3j.abi.datatypes.Function function = new org.web3j.abi.datatypes.Function(FUNC_CURRUNTTOKENID, 
+                Arrays.<Type>asList(), 
                 Arrays.<TypeReference<?>>asList(new TypeReference<Uint256>() {}));
         return executeRemoteCallSingleValueReturn(function, BigInteger.class);
     }
