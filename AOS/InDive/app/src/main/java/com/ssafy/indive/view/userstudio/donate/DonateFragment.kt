@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
@@ -63,7 +64,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
                 .into(civProfile)
         }
 
-        loadingDialog = LoadingDialog(requireContext())
+        loadingDialog = LoadingDialog(requireContext(), "후원 중입니다...")
 
 
         initBioMetric()
@@ -83,7 +84,9 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         donateViewModel.getMyBalance()
 
         donateViewModel.successMsgEvent.observe(viewLifecycleOwner) {
+            loadingDialog.dismiss()
             showToast(it)
+            findNavController().popBackStack()
         }
 
         lifecycleScope.launch {
@@ -109,10 +112,11 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
                 findNavController().popBackStack()
             }
             btnDonate.setOnClickListener {
-                donateViewModel.putRewardNFT(artistSeq)
-                donateViewModel.donate()
                 loading()
-                findNavController().popBackStack()
+                CoroutineScope(Dispatchers.IO).launch {
+                    donateViewModel.donate()
+                }
+                donateViewModel.putRewardNFT(artistSeq)
             }
         }
     }
@@ -121,7 +125,7 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         loadingDialog.show()
         // 로딩이 진행되지 않았을 경우
         CoroutineScope(Dispatchers.Main).launch {
-            delay(3000)
+            delay(10000)
             if (loadingDialog.isShowing) {
                 loadingDialog.dismiss()
             }

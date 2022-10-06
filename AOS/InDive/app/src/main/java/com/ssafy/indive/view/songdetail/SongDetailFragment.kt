@@ -41,7 +41,7 @@ class SongDetailFragment : BaseFragment<FragmentSongDetailBinding>(R.layout.frag
             songdetailVM = songDetailViewModel
         }
         musicSeq = args.musicSeq
-        loadingDialog = LoadingDialog(requireContext())
+        loadingDialog = LoadingDialog(requireContext(), "댓글을 등록하는 중입니다...")
 
         initMusicDetails()
         initReplyList()

@@ -40,7 +40,7 @@ class WalletDetailFragment: BaseFragment<FragmentWalletDetailBinding>(R.layout.f
         initClickListener()
         initViewModelCallback()
 
-        loadingDialog = LoadingDialog(requireContext())
+        loadingDialog = LoadingDialog(requireContext(), "지갑을 생성 중입니다...")
         loading()
         
         when(args.action){
@@ -60,6 +60,7 @@ class WalletDetailFragment: BaseFragment<FragmentWalletDetailBinding>(R.layout.f
                     "안녕하세요"
                 )
             )
+            showToast(it)
             loadingDialog.dismiss()
         }
     }

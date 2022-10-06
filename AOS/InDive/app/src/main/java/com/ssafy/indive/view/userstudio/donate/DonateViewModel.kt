@@ -74,7 +74,7 @@ class DonateViewModel @Inject constructor(
         web3j.setTokenApprove(decryptePrivateKey, INDIVE_ADDRESS, quantity.value.toInt())
         web3j.donate(decryptePrivateKey, artistAddress.value, quantity.value.toInt(), memo.value)
 
-        _successMsgEvent.postValue("후원 완료했습니다.")
+        _successMsgEvent.postValue("후원이 완료되었습니다!")
     }
 
     fun checkIsGetNFT(artistSeq: Long) {

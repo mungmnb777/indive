@@ -59,7 +59,7 @@ class WalletDetailViewModel @Inject constructor(
         Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
         sharedPref.edit().putString(email, encryptedPrivateKey).apply()
 
-        _walletSuccess.postValue("success")
+        _walletSuccess.postValue("지갑 생성이 완료되었습니다!")
     }
 
     // 지갑 복구
@@ -76,6 +76,6 @@ class WalletDetailViewModel @Inject constructor(
         Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
         sharedPref.edit().putString(email, encryptedPrivateKey).apply()
 
-        _walletSuccess.postValue("success")
+        _walletSuccess.postValue("지갑을 불러왔습니다!")
     }
 }

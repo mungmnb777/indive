@@ -5,9 +5,12 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.TextView
 import com.ssafy.indive.R
 
-class LoadingDialog(context: Context) : Dialog(context) {
+class LoadingDialog(context: Context, message: String) : Dialog(context) {
+
+    val message = message
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +23,9 @@ class LoadingDialog(context: Context) : Dialog(context) {
         // 배경 투명하게 바꿔줌
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        findViewById<TextView>(R.id.tv_message).apply {
+            text = message
+        }
     }
 
 }

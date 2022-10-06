@@ -35,7 +35,7 @@ class AddMusicThirdFragment :
             addMusicVM = addMusicViewModel
         }
 
-        loadingDialog = LoadingDialog(requireContext())
+        loadingDialog = LoadingDialog(requireContext(), "음원을 등록하는 중입니다...")
 
         initViewModelCallback()
         clickListener()
