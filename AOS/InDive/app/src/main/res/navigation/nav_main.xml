@@ -187,8 +187,7 @@
             app:destination="@id/rankingFragment" />
         <argument
             android:name="artistSeq"
-            app:argType="long"
-            android:defaultValue="0L" />
+            app:argType="long"/>
         <action
             android:id="@+id/action_userStudioFragment_to_songDetailFragment2"
             app:destination="@id/songDetailFragment2" />
@@ -199,8 +198,7 @@
         android:label="DonateFragment" >
         <argument
             android:name="artistSeq"
-            app:argType="long"
-            android:defaultValue='0L' />
+            app:argType="long"/>
     </fragment>
     <fragment
         android:id="@+id/genreListFragment"
@@ -226,7 +224,6 @@
         android:label="SongDetailFragment" >
         <argument
             android:name="musicSeq"
-            app:argType="long"
-            android:defaultValue="0L" />
+            app:argType="long"/>
     </fragment>
 </navigation>
