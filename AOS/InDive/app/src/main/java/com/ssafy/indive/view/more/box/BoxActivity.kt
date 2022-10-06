@@ -33,5 +33,10 @@ class BoxActivity : AppCompatActivity() {
             rvBoxList.adapter = adapter
         }
 
+        initViewModelCallback()
+    }
+
+    private fun initViewModelCallback(){
+        boxViewModel.getNFTTokenList()
     }
 }

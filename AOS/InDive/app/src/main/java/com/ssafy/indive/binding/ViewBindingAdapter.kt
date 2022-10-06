@@ -97,4 +97,17 @@ object ViewBindingAdapter {
 
         this.setText(formattedDate)
     }
+
+    @BindingAdapter("bindTokenImage")
+    @JvmStatic
+    fun ImageView.bindTokenImage(uri: String) {
+        Glide.with(this.context).load("$BASE_URL/$uri")
+            .placeholder(
+                R.drawable.album_default_image
+            )
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .into(this)
+
+    }
 }

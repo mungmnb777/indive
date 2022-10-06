@@ -11,11 +11,9 @@ class BoxAdapter(): ListAdapter<String, BoxAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(var binding: ItemBoxListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-//        fun bind(music: MusicDetailResponse) {
-//            binding.music = music
-//            binding.tvMusicRanking.text = "${position + 1}"
-//
-//        }
+        fun bind(tokenURI: String) {
+            binding.tokenURI = tokenURI
+        }
 //
 //        fun click(music: MusicDetailResponse) {
 //            binding.ivPlay.setOnClickListener {
