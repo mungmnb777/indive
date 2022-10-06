@@ -23,6 +23,7 @@ import com.ssafy.indive.binding.ViewBindingAdapter.bindBackImage
 import com.ssafy.indive.databinding.FragmentDonateBinding
 import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.loading.LoadingDialog
+import com.ssafy.indive.view.userstudio.UserStudioFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +87,8 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         donateViewModel.successMsgEvent.observe(viewLifecycleOwner) {
             loadingDialog.dismiss()
             showToast(it)
-            findNavController().popBackStack()
+            val action = DonateFragmentDirections.actionDonateFragmentToHomeFragment()
+            findNavController().navigate(action)
         }
 
         lifecycleScope.launch {
@@ -109,7 +111,8 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     private fun initClickListener() {
         binding.apply {
             toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack()
+                val action = DonateFragmentDirections.actionDonateFragmentToHomeFragment()
+                findNavController().navigate(action)
             }
             btnDonate.setOnClickListener {
                 loading()

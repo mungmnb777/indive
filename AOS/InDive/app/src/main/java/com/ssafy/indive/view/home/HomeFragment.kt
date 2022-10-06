@@ -41,8 +41,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onStart() {
         super.onStart()
-        initRecentMusic()
-        initPopularMusic()
 
     }
 
@@ -52,6 +50,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
         initBanner()
+        initRecentMusic()
+        initPopularMusic()
         initClickListener()
         privateKeyCheck()
         showFingerPrintDialog()
