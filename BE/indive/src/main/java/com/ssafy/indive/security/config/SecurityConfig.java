@@ -22,7 +22,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(securedEnabled = true , prePostEnabled = true) // secured 어노테이션 활성화,
 public class SecurityConfig {
 
-
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
 
@@ -31,7 +30,6 @@ public class SecurityConfig {
 
     @Autowired
     private MemberRepository memberRepository;
-
 
     private final String[] PERMIT_ALL_SWAGGER = {
             /* swagger v2 */
