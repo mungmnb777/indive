@@ -43,6 +43,9 @@ class DonateViewModel @Inject constructor(
     private val _artistAddress : MutableStateFlow<String> = MutableStateFlow("")
     val artistAddress get() = _artistAddress.asStateFlow()
 
+    private val _artistName : MutableStateFlow<String> = MutableStateFlow("")
+    val artistName get() = _artistName.asStateFlow()
+
     fun putRewardNFT(artistSeq: Long) {
         if(priceToGetNFT.value <= quantity.value.toInt()) {
 
@@ -96,11 +99,12 @@ class DonateViewModel @Inject constructor(
 
     }
 
-    fun memberDetail(memberSeq: Long) {
+    fun memberDetail(artistSeq: Long) {
         viewModelScope.launch(Dispatchers.IO) {
-            memberManagerRepository.memberDetail(memberSeq).collectLatest {
+            memberManagerRepository.memberDetail(artistSeq).collectLatest {
                 if (it is Result.Success) {
                     _artistAddress.value = it.data.body()!!.wallet
+                    _artistName.value = it.data.body()!!.nickname
                 }
             }
         }

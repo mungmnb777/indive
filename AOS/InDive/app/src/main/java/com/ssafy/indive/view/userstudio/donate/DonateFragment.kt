@@ -14,12 +14,13 @@ import androidx.lifecycle.lifecycleScope
 
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
+import com.ssafy.indive.binding.ViewBindingAdapter.bindBackImage
 import com.ssafy.indive.databinding.FragmentDonateBinding
-import com.ssafy.indive.utils.ABLE
-import com.ssafy.indive.utils.DISABLE
-import com.ssafy.indive.utils.FINGERPRINT_USE
+import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.loading.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -50,6 +51,13 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
     override fun init() {
         binding.apply {
             donateVM = donateViewModel
+            Glide.with(this@DonateFragment).load("$MEMBER_HEADER$artistSeq$MEMBER_FOOTER").centerCrop()
+                .placeholder(
+                    R.drawable.album_default_image
+                )
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(civProfile)
         }
 
         loadingDialog = LoadingDialog(requireContext())
