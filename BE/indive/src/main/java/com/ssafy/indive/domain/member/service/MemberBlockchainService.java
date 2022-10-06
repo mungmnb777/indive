@@ -56,6 +56,13 @@ public class MemberBlockchainService {
         List<ServiceMemberDonationInfoResponseDto> infoList = gson.fromJson(result, new TypeToken<List<ServiceMemberDonationInfoResponseDto>>() {
         }.getType());
 
+        for (int i = 0 ; i < infoList.size() ; i++){
+            if(infoList.get(i).getAddress().toLowerCase().equals(ADMIN_ADDRESS.toLowerCase())){
+                infoList.remove(i);
+                break;
+            }
+        }
+
 
         Collections.sort(infoList, new Comparator<ServiceMemberDonationInfoResponseDto>(){
             @Override
