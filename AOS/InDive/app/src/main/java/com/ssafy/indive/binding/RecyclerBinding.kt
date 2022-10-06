@@ -12,6 +12,7 @@ import com.ssafy.indive.view.genre.genrelist.GenreListAdapter
 import com.ssafy.indive.view.home.MusicChartAdapter
 import com.ssafy.indive.view.home.RecentMusicAdapter
 import com.ssafy.indive.view.home.search.SearchArtistAdapter
+import com.ssafy.indive.view.more.box.BoxAdapter
 import com.ssafy.indive.view.more.mywallet.MyWalletAdapter
 
 object RecyclerBinding {
@@ -44,6 +45,10 @@ object RecyclerBinding {
 
                 is MyWalletAdapter -> {
                     (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<DonationHistory>)
+                }
+
+                is BoxAdapter -> {
+                    (view.adapter as ListAdapter<Any, *>).submitList(result.data as List<String>)
                 }
 
                 else -> {
