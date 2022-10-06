@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="MemberVM"
+            type="com.ssafy.indive.view.login.MemberViewModel" />
+
+        <variable
+            name="MyStudioVM"
+            type="com.ssafy.indive.view.mystudio.MyStudioViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="InDive"
+                    android:textColor="@color/main_blue"
+                    android:textSize="@dimen/toolbar_title"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_add_nft"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/nft" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <View
+                android:id="@+id/toolbar_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_grey"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <ImageView
+                android:id="@+id/img_background"
+                bindBackImage="@{MemberVM.profile.memberSeq}"
+                android:layout_width="0dp"
+                android:layout_height="160dp"
+                android:background="@color/main_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                tools:layout_editor_absoluteX="0dp"
+                tools:src="@drawable/ic_launcher_foreground" />
+
+            <View
+                android:id="@+id/img_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_grey"
+                app:layout_constraintTop_toBottomOf="@id/img_background" />
+
+            <Button
+                android:id="@+id/btn_edit_profile"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_round_white_grey_border"
+                android:gravity="center"
+                android:text="프로필 설정"
+                android:textColor="@color/main_grey"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@id/img_background"
+                app:layout_constraintEnd_toEndOf="@id/img_background"
+                app:layout_constraintStart_toEndOf="@id/civ_profile" />
+
+            <!-- 배경 투명화된 이미지가 입력됐을 때, 테두리 유지용 -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/img_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_background" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile"
+                setImageCircle="@{MemberVM.profile.memberSeq}"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/img_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_background"
+                tools:src="@drawable/ic_empty_image" />
+
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@{MemberVM.profile.nickname}"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/civ_profile"
+                tools:text="닉네임" />
+
+            <TextView
+                android:id="@+id/tv_introduce"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@{MemberVM.profile.profileMessage}"
+                android:textColor="@color/main_grey"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nickname"
+                tools:text="소개란 입니다." />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/border_notice"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_round_white_black_border"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_introduce">
+
+                <ImageView
+                    android:id="@+id/iv_notice"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/btn_notice"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="@{MemberVM.profile.notice}"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/iv_edit_notice"
+                    app:layout_constraintStart_toEndOf="@id/iv_notice"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="공지사항" />
+
+                <ImageView
+                    android:id="@+id/iv_edit_notice"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/btn_edit"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btn_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/btn_round_white_grey_border"
+                android:gravity="center"
+                android:text="후원 랭킹 보기"
+                android:textColor="@color/main_grey"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/border_notice" />
+
+            <TextView
+                android:id="@+id/tv_song"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="노래"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/btn_ranking"
+                app:layout_constraintTop_toBottomOf="@id/btn_ranking" />
+
+            <ImageView
+                android:id="@+id/btn_addsong"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="24dp"
+                android:foregroundGravity="center"
+                android:src="@drawable/btn_addsong"
+                app:layout_constraintEnd_toEndOf="@id/btn_ranking"
+                app:layout_constraintTop_toBottomOf="@id/btn_ranking" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_my_music"
+                app:layout_constraintStart_toStartOf="@id/tv_song"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="20dp"
+                submitList="@{MyStudioVM.myMusicList}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_song"
+                tools:listitem="@layout/item_music_chart" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

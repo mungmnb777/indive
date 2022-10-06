@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="reply"
+            type="com.ssafy.indive.model.response.ReplyResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_comment_profile_img"
+            setImageCircle="@{reply.member.memberSeq}"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_ive_cover" />
+
+        <TextView
+            android:id="@+id/tv_comment_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{reply.member.nickname}"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_comment_profile_img"
+            app:layout_constraintTop_toTopOf="@id/iv_comment_profile_img"
+            tools:text="닉네임" />
+
+
+        <ImageView
+            android:id="@+id/iv_comment_remove"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:padding="6dp"
+            android:src="@drawable/img_cancel"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comment_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_comment_nickname" />
+
+        <ImageView
+            android:id="@+id/iv_comment_report"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:padding="5dp"
+            android:src="@drawable/img_alert"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comment_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_comment_nickname" />
+
+
+        <ImageView
+            android:id="@+id/iv_comment_edit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_edit_24"
+            app:layout_constraintBottom_toBottomOf="@id/tv_comment_nickname"
+            app:layout_constraintEnd_toStartOf="@id/iv_comment_remove"
+            app:layout_constraintTop_toTopOf="@id/tv_comment_nickname" />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{reply.content}"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_comment_nickname"
+            app:layout_constraintTop_toBottomOf="@id/tv_comment_nickname"
+            tools:text="댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
