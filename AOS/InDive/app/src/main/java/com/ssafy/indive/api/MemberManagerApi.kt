@@ -66,5 +66,5 @@ interface MemberManagerApi {
 
     // 해당 사용자의 후원 랭킹
     @GET("members/donation-rank/{address}")
-    suspend fun donationRankingByAddress(@Path("address") address: String) : Response<List<DonationRankResponse>>
+    suspend fun donationRankingByAddress(@Path("address") address: String) : List<DonationRankResponse>
 }

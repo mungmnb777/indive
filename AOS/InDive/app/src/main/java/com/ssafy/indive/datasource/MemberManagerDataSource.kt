@@ -80,7 +80,7 @@ class MemberManagerDataSource @Inject constructor(
         emit(memberManagerApi.loginMemberDetail())
     }
 
-    fun donationRankingByAddress(address: String) : Flow<Response<List<DonationRankResponse>>> = flow {
+    fun donationRankingByAddress(address: String) : Flow<List<DonationRankResponse>> = flow {
         emit(memberManagerApi.donationRankingByAddress(address))
     }
 

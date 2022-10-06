@@ -96,7 +96,7 @@ class MemberManagerRepository @Inject constructor(
         emit(Result.Error(e))
     }
 
-    fun donationRankingByAddress(address: String): Flow<Result<Response<List<DonationRankResponse>>>> = flow {
+    fun donationRankingByAddress(address: String): Flow<Result<List<DonationRankResponse>>> = flow {
         emit(Result.Loading)
         memberManagerDataSource.donationRankingByAddress(address).collect {
             emit(Result.Success(it))
