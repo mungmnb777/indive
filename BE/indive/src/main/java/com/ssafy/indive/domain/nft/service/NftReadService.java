@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.admin.Admin;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.FastRawTransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
@@ -54,6 +55,7 @@ public class NftReadService {
 
         if(dto.getAmount() >= nft.getLowerDonationAmount()){
             Web3j web3j = Web3j.build(new HttpService(BLOCKCHAIN_URL));
+            Admin admin = Admin.build(new HttpService(BLOCKCHAIN_URL));
             Credentials credentials = Credentials.create(ADMIN_PRIVATE_KEY);
             DefaultGasProvider gasProvider = new DefaultGasProvider();
 
@@ -69,6 +71,7 @@ public class NftReadService {
             String transactionHash = null;
 
             try {
+                admin.personalUnlockAccount(ADMIN_ADDRESS, ADMIN_PASSWORD).sendAsync().get();
                 transactionHash = inDiveNFT.safeMint(dto.getUserWallet(), nft.getCid()).sendAsync().get().getTransactionHash();
             } catch (Exception e) {
                 e.printStackTrace();
