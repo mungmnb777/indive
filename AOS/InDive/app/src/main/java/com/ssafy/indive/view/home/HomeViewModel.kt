@@ -50,8 +50,10 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             musicManagerRepository.getMusics(title, artistName, artistSeq, sort, genre,page, size).collectLatest {
 
-                Log.d(TAG, "getMusics: ")
+                Log.d(TAG, "getMusics: ${it}")
                 if (it is Result.Success) {
+                    Log.d(TAG, "getMusics: ${it.data}")
+
                     when (sort) {
                         "popular" -> {
                             _popularMusicList.value = it
