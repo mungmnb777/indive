@@ -63,30 +63,34 @@ public class MemberBlockchainService {
             }
         }
 
-
-        Collections.sort(infoList, new Comparator<ServiceMemberDonationInfoResponseDto>(){
-            @Override
-            public int compare(ServiceMemberDonationInfoResponseDto o1, ServiceMemberDonationInfoResponseDto o2) {
-                return o2.getTotalValue() - o1.getTotalValue();
-            }
-        });
-
         List<String> walletLists = infoList.stream().map(o -> o.getAddress()).collect(Collectors.toList());
 
         List<Member> byWallet = memberQueryRepository.findByWallet(walletLists);
 
         List<ServiceMemberDonationRankResponseDto> rankList = new ArrayList<>();
 
-        for (int i = 0 ; i < byWallet.size() ; i++){
-            ServiceMemberDonationRankResponseDto dto = ServiceMemberDonationRankResponseDto.builder()
-                    .memberSeq(byWallet.get(i).getSeq())
-                    .imageUuid(byWallet.get(i).getImageUuid())
-                    .nickname(byWallet.get(i).getNickname())
-                    .address(byWallet.get(i).getWallet())
-                    .totalValue(infoList.get(i).getTotalValue()).build();
+        for (int i = 0 ; i < walletLists.size() ; i++){
+            for (int j = 0 ; j < byWallet.size() ; j++){
+                if(walletLists.get(i).toLowerCase().equals(byWallet.get(j).getWallet().toLowerCase())) {
+                    ServiceMemberDonationRankResponseDto dto = ServiceMemberDonationRankResponseDto.builder()
+                            .memberSeq(byWallet.get(j).getSeq())
+                            .imageUuid(byWallet.get(j).getImageUuid())
+                            .nickname(byWallet.get(j).getNickname())
+                            .address(byWallet.get(j).getWallet())
+                            .totalValue(infoList.get(i).getTotalValue()).build();
 
-            rankList.add(dto);
+                    rankList.add(dto);
+                    break;
+                }
+            }
         }
+
+        Collections.sort(rankList, new Comparator<ServiceMemberDonationRankResponseDto>(){
+            @Override
+            public int compare(ServiceMemberDonationRankResponseDto o1, ServiceMemberDonationRankResponseDto o2) {
+                return o2.getTotalValue() - o1.getTotalValue();
+            }
+        });
 
         return rankList;
     }
