@@ -38,6 +38,3 @@ out/
 
 ### QueryDSL ###
 src/main/generated
-
-### BlockChainConst ###
-src/main/java/com/ssafy/indive/global/constant/BlockchainConst.java
