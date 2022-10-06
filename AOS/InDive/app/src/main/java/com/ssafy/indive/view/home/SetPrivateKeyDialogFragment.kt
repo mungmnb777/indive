@@ -18,9 +18,11 @@ import com.ssafy.indive.R
 import com.ssafy.indive.databinding.FragmentMoreDialogBindingImpl
 import com.ssafy.indive.databinding.FragmentSetPrivateKeyDialogBinding
 import com.ssafy.indive.utils.getDeviceSize
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SetPrivateKeyDialogFragment : DialogFragment() {
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels<HomeViewModel>()
 
     private lateinit var binding : FragmentSetPrivateKeyDialogBinding
 
