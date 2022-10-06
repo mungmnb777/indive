@@ -47,7 +47,7 @@ class MusicChartFragment : BaseFragment<FragmentMusicchartBinding>(R.layout.frag
                 }
 
                 override fun clickStudio() {
-                    findNavController().navigate(R.id.action_musicChartFragment_to_userStudioFragment)
+                    findNavController().navigate(MusicChartFragmentDirections.actionMusicChartFragmentToUserStudioFragment(it.artist.memberSeq))
                 }
 
                 override fun clickReport() {
