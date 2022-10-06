@@ -13,15 +13,16 @@ import lombok.Setter;
 public class WebNftModifyRequestDto {
 
     private Long artistSeq;
-
+    private String wallet;
     private int amount;
 
-    public WebNftModifyRequestDto(Long artistSeq, int amount) {
+    public WebNftModifyRequestDto(Long artistSeq, String wallet, int amount) {
         this.artistSeq = artistSeq;
+        this.wallet = wallet;
         this.amount = amount;
     }
 
     public ServiceNftModifyRequestDto convertToService() {
-        return new ServiceNftModifyRequestDto(artistSeq, amount);
+        return new ServiceNftModifyRequestDto(artistSeq, wallet, amount);
     }
 }

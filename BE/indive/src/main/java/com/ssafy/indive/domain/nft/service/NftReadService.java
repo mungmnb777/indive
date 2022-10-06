@@ -53,31 +53,6 @@ public class NftReadService {
 
         Nft nft = nftQueryRepository.findByArtist(artist).orElseThrow(() -> new NftNotFoundException("해당 아티스트의 NFT가 없습니다."));
 
-        if(dto.getAmount() >= nft.getLowerDonationAmount()){
-            Web3j web3j = Web3j.build(new HttpService(BLOCKCHAIN_URL));
-            Admin admin = Admin.build(new HttpService(BLOCKCHAIN_URL));
-            Credentials credentials = Credentials.create(ADMIN_PRIVATE_KEY);
-            DefaultGasProvider gasProvider = new DefaultGasProvider();
-
-            FastRawTransactionManager manager = new FastRawTransactionManager(
-                    web3j,
-                    credentials,
-                    CHAIN_ID,
-                    new PollingTransactionReceiptProcessor(web3j, TX_END_CHECK_DURATION, TX_END_CHECK_RETRY)
-            );
-
-            InDiveNFT inDiveNFT = InDiveNFT.load(INDIVENFT_ADDRESS, web3j, manager, gasProvider);
-
-            String transactionHash = null;
-
-            try {
-                admin.personalUnlockAccount(ADMIN_ADDRESS, ADMIN_PASSWORD).sendAsync().get();
-                transactionHash = inDiveNFT.safeMint(dto.getUserWallet(), nft.getCid()).sendAsync().get().getTransactionHash();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
         return dto.getAmount() >= nft.getLowerDonationAmount();
     }
 
