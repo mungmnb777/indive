@@ -38,7 +38,7 @@ class BoxAdapter(): ListAdapter<String, BoxAdapter.ViewHolder>(diffUtil) {
     }
 
     override fun onBindViewHolder(holder: BoxAdapter.ViewHolder, position: Int) {
-//        holder.bind(getItem(position))
+        holder.bind(getItem(position))
 //        holder.click(getItem(position))
     }
 
