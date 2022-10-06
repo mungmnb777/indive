@@ -1,5 +1,6 @@
 package com.ssafy.indive.view.home
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,21 +10,21 @@ import com.ssafy.indive.model.dto.Music
 import com.ssafy.indive.model.response.MusicDetailResponse
 import com.ssafy.indive.repository.MemberManagerRepository
 import com.ssafy.indive.repository.MusicManagerRepository
-import com.ssafy.indive.utils.Result
-import com.ssafy.indive.utils.SingleLiveEvent
-import com.ssafy.indive.utils.TAG
+import com.ssafy.indive.utils.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.web3j.crypto.Credentials
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val memberManagerRepository: MemberManagerRepository,
-    private val musicManagerRepository: MusicManagerRepository
+    private val musicManagerRepository: MusicManagerRepository,
+    private val sharedPref: SharedPreferences
 ) : ViewModel() {
 
     private val _musicList: MutableStateFlow<Result<List<Music>>> =
@@ -69,5 +70,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun savePrivateKey(privateKey: String){
+        val email = sharedPref.getString(USER_EMAIL, "")!!
+        val credentials = Credentials.create(privateKey)
 
+        // base64 + RSA 로 암호화한 Private Key 저장
+        val encryptedPrivateKey = encrypt(privateKey)
+        Log.d(TAG, "EncryptedPrivateKey: $encryptedPrivateKey")
+        sharedPref.edit().putString(email, encryptedPrivateKey).apply()
+    }
 }
