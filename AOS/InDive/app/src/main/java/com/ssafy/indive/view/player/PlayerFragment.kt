@@ -166,6 +166,12 @@ class PlayerFragment : BaseFragment<FragmentPlayerBinding>(R.layout.fragment_pla
 
     private fun initClickListener() {
 
+        binding.ivComment.setOnClickListener {
+            val action =
+                PlayerFragmentDirections.actionPlayerFragmentToSongDetailFragment(musicSeq)
+            findNavController().navigate(action)
+        }
+
         binding.ivSongLike.setOnClickListener {
 
             if (playerViewModel.likeFlag) {
