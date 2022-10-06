@@ -44,14 +44,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initNavigation()
         initObserve()
         checkMediaPermission()
-        showFingerPrintDialog()
+//        showFingerPrintDialog()
     }
 
-    private fun showFingerPrintDialog() {
-        if (sharePref.getInt(FINGERPRINT_USE, DISABLE) != 1) {
-            FingerPrintDialog().show(supportFragmentManager, "FingerPrintDialog")
-        }
-    }
+//    private fun showFingerPrintDialog() {
+//        if (sharePref.getInt(FINGERPRINT_USE, DISABLE) != 1) {
+//            FingerPrintDialog().show(supportFragmentManager, "FingerPrintDialog")
+//        }
+//    }
 
     private fun checkMediaPermission() {
 
