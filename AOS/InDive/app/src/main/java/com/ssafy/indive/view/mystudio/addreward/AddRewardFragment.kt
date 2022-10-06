@@ -30,6 +30,9 @@ class AddRewardFragment : BaseFragment<FragmentAddRewardBinding>(R.layout.fragme
     override fun init() {
         binding.apply {
             addRewardVM = addRewardViewModel
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
         initClickListener()

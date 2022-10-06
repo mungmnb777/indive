@@ -86,6 +86,7 @@ class UserStudioFragment : BaseFragment<FragmentUserStudioBinding>(R.layout.frag
                 findNavController().navigate(UserStudioFragmentDirections.actionUserStudioFragmentToDonateFragment(args.artistSeq))
             }
             btnRanking.setOnClickListener {
+
                 findNavController().navigate(R.id.action_userStudioFragment_to_rankingFragment)
             }
         }

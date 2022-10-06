@@ -14,11 +14,9 @@ import com.gun0912.tedpermission.coroutine.TedPermission
 import com.ssafy.indive.base.BaseActivity
 import com.ssafy.indive.databinding.ActivityMainBinding
 import com.ssafy.indive.model.dto.PlayListMusic
-import com.ssafy.indive.utils.Result
-import com.ssafy.indive.utils.TAG
-import com.ssafy.indive.utils.USER
-import com.ssafy.indive.utils.mapper
+import com.ssafy.indive.utils.*
 import com.ssafy.indive.view.player.PlayerActivity
+import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -46,6 +44,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initNavigation()
         initObserve()
         checkMediaPermission()
+        showFingerPrintDialog()
+    }
+
+    private fun showFingerPrintDialog() {
+        if (sharePref.getInt(FINGERPRINT_USE, DISABLE) != 1) {
+            FingerPrintDialog().show(supportFragmentManager, "FingerPrintDialog")
+        }
     }
 
     private fun checkMediaPermission() {

@@ -49,9 +49,12 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
 
     override fun init() {
+        artistSeq = args.artistSeq
+
         binding.apply {
             donateVM = donateViewModel
-            Glide.with(this@DonateFragment).load("$MEMBER_HEADER$artistSeq$MEMBER_FOOTER").centerCrop()
+            Glide.with(this@DonateFragment).load("$MEMBER_HEADER$artistSeq$MEMBER_FOOTER")
+                .centerCrop()
                 .placeholder(
                     R.drawable.album_default_image
                 )
@@ -61,7 +64,8 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         }
 
         loadingDialog = LoadingDialog(requireContext())
-        artistSeq = args.artistSeq
+
+
         initBioMetric()
         initFingerPrintAuth()
         initClickListener()
@@ -72,24 +76,24 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
 
     }
 
-    private fun initViewModelCallback(){
+    private fun initViewModelCallback() {
 
         donateViewModel.checkIsGetNFT(artistSeq)
         donateViewModel.memberDetail(artistSeq)
         donateViewModel.getMyBalance()
 
-        donateViewModel.successMsgEvent.observe(viewLifecycleOwner){
+        donateViewModel.successMsgEvent.observe(viewLifecycleOwner) {
             showToast(it)
         }
 
         lifecycleScope.launch {
             donateViewModel.priceToGetNFT.collectLatest {
 
-                if(it <= 0){
+                if (it <= 0) {
                     binding.apply {
                         tvAlertNft.visibility = View.INVISIBLE
                     }
-                }else{
+                } else {
                     binding.apply {
                         tvAlertNft.visibility = View.VISIBLE
                         tvAlertNft.text = "$it IVE 이상 후원 시 NFT를 받을 수 있습니다."
@@ -113,12 +117,12 @@ class DonateFragment : BaseFragment<FragmentDonateBinding>(R.layout.fragment_don
         }
     }
 
-    private fun loading(){
+    private fun loading() {
         loadingDialog.show()
         // 로딩이 진행되지 않았을 경우
         CoroutineScope(Dispatchers.Main).launch {
             delay(3000)
-            if(loadingDialog.isShowing){
+            if (loadingDialog.isShowing) {
                 loadingDialog.dismiss()
             }
         }

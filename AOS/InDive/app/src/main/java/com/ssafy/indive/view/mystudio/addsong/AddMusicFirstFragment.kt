@@ -48,8 +48,12 @@ class AddMusicFirstFragment :
         binding.apply {
 
             addMusicVM = addMusicViewModel
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
+//        addMusicViewModel.initData()
         initClickListener()
         checkMediaPermission()
 

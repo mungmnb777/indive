@@ -2,6 +2,7 @@ package com.ssafy.indive.view.more.mywallet
 
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ssafy.indive.R
 import com.ssafy.indive.base.BaseFragment
 import com.ssafy.indive.databinding.FragmentMyWalletBinding
@@ -16,6 +17,9 @@ class MyWalletFragment : BaseFragment<FragmentMyWalletBinding>(R.layout.fragment
     override fun init() {
         binding.apply {
             myWalletVM = myWalletViewModel
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
         initViewModelCallback()
