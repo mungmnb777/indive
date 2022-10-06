@@ -88,8 +88,8 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/donation-rank")
-    public ResponseEntity<?> getDonationRanking(@ModelAttribute String address){
+    @GetMapping("/donation-rank/{address}")
+    public ResponseEntity<?> getDonationRanking(@PathVariable("address") String address){
         return new ResponseEntity<>(memberBlockchainService.getDonationRanking(address), HttpStatus.OK);
     }
 
