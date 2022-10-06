@@ -190,3 +190,21 @@ fun Web3j.getTokenURI(privateKey: String, tokenId: Int) : String{
 
     return tokenURI
 }
+
+fun Web3j.getNFTTokens(privateKey: String, ownerAddress: String) : List<String> {
+    val credential = Credentials.create(privateKey)
+    val gasProvider = DefaultGasProvider()
+    val manager = FastRawTransactionManager(
+        this,
+        credential,
+        PollingTransactionReceiptProcessor(this, TX_END_CHECK_DURATION, TX_END_CHECK_RETRY)
+    )
+
+    val inDiveNFT = InDiveNFT.load(INDIVENFT_ADDRESS, this, manager, gasProvider)
+
+    val nftTokenList = inDiveNFT.getNFTTokens(ownerAddress).sendAsync().get() as List<String>
+
+    Log.d(TAG, "getNFTTokens: $nftTokenList")
+
+    return nftTokenList
+}

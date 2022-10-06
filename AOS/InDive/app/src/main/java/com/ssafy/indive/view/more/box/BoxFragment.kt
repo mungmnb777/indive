@@ -18,5 +18,11 @@ class BoxFragment : BaseFragment<FragmentBoxBinding>(R.layout.fragment_box) {
             boxVM = boxViewModel
             rvBoxList.adapter = adapter
         }
+
+        initViewModelCallback()
+    }
+
+    private fun initViewModelCallback(){
+        boxViewModel.getNFTTokenList()
     }
 }
