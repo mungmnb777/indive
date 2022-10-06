@@ -25,6 +25,10 @@ public class MockEntityFactory {
                 .profileMessage("프로필 상태 메시지")
                 .role(Role.ROLE_USER)
                 .wallet("지갑")
+                .backgroundUuid("default_background.png")
+                .backgroundOrigin("default_background.png")
+                .imageUuid("default_profile.png")
+                .imageOrigin("default_profile.png")
                 .build();
     }
 
