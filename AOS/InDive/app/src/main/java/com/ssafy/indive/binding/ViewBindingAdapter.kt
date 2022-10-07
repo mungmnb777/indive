@@ -101,7 +101,7 @@ object ViewBindingAdapter {
     @BindingAdapter("bindTokenImage")
     @JvmStatic
     fun ImageView.bindTokenImage(uri: String) {
-        Glide.with(this.context).load("$BASE_URL/$uri")
+        Glide.with(this.context).load("$BASE_URL/nft/$uri")
             .placeholder(
                 R.drawable.album_default_image
             )

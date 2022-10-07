@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.indive.MainActivity
@@ -22,6 +23,8 @@ import com.ssafy.indive.view.player.PlayerFragmentDirections
 import com.ssafy.indive.view.qrscan.QrScanActivity
 import com.ssafy.indive.view.userstudio.donate.FingerPrintDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +35,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
+
+    private lateinit var popularAdapter : MusicChartAdapter
+    private lateinit var recentAdapter : RecentMusicAdapter
+
+    override fun onStart() {
+        super.onStart()
+
+    }
 
     override fun init() {
         binding.apply {
@@ -44,6 +55,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initClickListener()
         privateKeyCheck()
         showFingerPrintDialog()
+        initViewModelCallback()
+    }
+
+    private fun initViewModelCallback(){
+        lifecycleScope.launch {
+            homeViewModel.popularMusicList.collectLatest {
+                if(it is Result.Success) {
+                    popularAdapter.submitList(listOf())
+
+                    popularAdapter.submitList(it.data)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            homeViewModel.latestMusicList.collectLatest {
+                if(it is Result.Success) {
+                    recentAdapter.submitList(listOf())
+
+                    recentAdapter.submitList(it.data)
+                }
+            }
+        }
     }
 
     private fun showFingerPrintDialog() {
@@ -82,13 +116,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun initRecentMusic() {
 
         homeViewModel.getMusics(null, null, null, "latest", null, null, null)
-        binding.rvRecentMusic.adapter = RecentMusicAdapter(playListener)
+        recentAdapter = RecentMusicAdapter(playListener)
+        binding.rvRecentMusic.adapter = recentAdapter
 
     }
 
     private fun initPopularMusic() {
 
-        homeViewModel.getMusics(null, null, null, "popular", null, 0, 4)
+        homeViewModel.getMusics(null, null, null, "popular", null, null, null)
 
         val moreListener: (MusicDetailResponse) -> (Unit) = {
             MoreDialogFragment(object : MoreDialogFragment.MoreDialogClickListener {
@@ -125,8 +160,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             }).show(requireActivity().supportFragmentManager, "MoreDialog")
         }
-
-        binding.rvMusicChart.adapter = MusicChartAdapter(playListener, moreListener)
+        popularAdapter = MusicChartAdapter(playListener, moreListener)
+        binding.rvMusicChart.adapter = popularAdapter
 
     }
 
@@ -162,4 +197,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
     }
+
+
 }

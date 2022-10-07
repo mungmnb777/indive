@@ -48,9 +48,9 @@ class DonateViewModel @Inject constructor(
 
     fun putRewardNFT(artistSeq: Long) {
         if(priceToGetNFT.value <= quantity.value.toInt()) {
-
+            val address = sharedPreferences.getString(USER_ADDRESS, "")
             viewModelScope.launch(Dispatchers.IO) {
-                nftRepository.putRewardNFT(NFTAmount(quantity.value.toInt(), artistSeq))
+                nftRepository.putRewardNFT(NFTAmount(quantity.value.toInt(), artistSeq, address!!))
                     .collectLatest {
                         if (it is Result.Success) {
                             if (it.data) {

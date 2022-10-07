@@ -30,13 +30,13 @@ class MemberViewModel @Inject constructor(
 ) : ViewModel() {
 
     val email: MutableStateFlow<String> =
-        MutableStateFlow("jdsaeyqi@naver.com")
+        MutableStateFlow("")
 
     val password: MutableStateFlow<String> =
-        MutableStateFlow("123123")
+        MutableStateFlow("")
 
     val nickname: MutableStateFlow<String> =
-        MutableStateFlow("이상욱")
+        MutableStateFlow("")
 
     private val _login: MutableStateFlow<Result<Response<String>>> =
         MutableStateFlow(Result.Unintialized)

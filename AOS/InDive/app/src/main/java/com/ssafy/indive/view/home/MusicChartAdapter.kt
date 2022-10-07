@@ -18,8 +18,8 @@ class MusicChartAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(music: MusicDetailResponse) {
             binding.music = music
-            binding.tvMusicRanking.text = "${position + 1}"
-
+            binding.tvMusicRanking.text = "${adapterPosition + 1}"
+            binding.executePendingBindings()
         }
 
         fun click(music: MusicDetailResponse) {
@@ -45,8 +45,13 @@ class MusicChartAdapter(
     }
 
     override fun onBindViewHolder(holder: MusicChartViewHolder, position: Int) {
-        holder.bind(getItem(position))
-        holder.click(getItem(position))
+        val currentItem = getItem(position)
+
+        if(currentItem != null){
+            holder.bind(currentItem)
+            holder.click(currentItem)
+        }
+
     }
 
 
