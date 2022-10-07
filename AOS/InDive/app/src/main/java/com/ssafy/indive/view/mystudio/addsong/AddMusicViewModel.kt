@@ -68,15 +68,6 @@ class AddMusicViewModel @Inject constructor(
     private val _failedAddMusic = SingleLiveEvent<String>()
     val failedAddMusic get() = _failedAddMusic
 
-    fun initData(){
-        title.value = "저메추"
-        description.value = "저녁 메뉴를 고르지 못하는 상황에서 누군가에게 저녁 메뉴를 추천받았지만 막상 그 음식은 안 떙기는 애환을 담은 노래"
-        composer.value = "서경원"
-        lyricist.value = "서경원"
-        lyrics.value = "저녁 메뉴를 추천해주세요\n뭘 먹을지 모르겠어요\n추천해주셔서 감사합니다\n근데 이 음식은 안 땡기네요"
-
-    }
-
     fun refreshInit() {
         title.value = ""
         music = null
